@@ -30,7 +30,7 @@ public class PetSitterFilter implements Filter {
 		User u=(User)((HttpServletRequest)request).getSession().getAttribute("loginUser");
 		if(u == null) {
 			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-			request.setAttribute("loc", ""); // 메인으로 이동
+			request.setAttribute("loc", "/log-in"); // 로그인 화면으로 이동
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {

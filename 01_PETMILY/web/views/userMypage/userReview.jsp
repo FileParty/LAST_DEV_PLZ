@@ -131,7 +131,7 @@ pageEncoding="UTF-8"%>
         
                             <li class="title">펫 프로필</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 펫 프로필</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/petprofile?userId=<%=loginUser.getUserId()%>"> - 펫 프로필</a></li>
                             <br/>
                             
                             <li class="title">예약</li>
@@ -158,7 +158,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">회원 정보</li>
-                    <li class="breadcrumb-item active">회원 탈퇴</li>
+                    <li class="breadcrumb-item active">작성 후기</li>
                 </ul>
                    <!-- 콘텐츠 영역 -->
                    <table id="enrollTB">
@@ -180,7 +180,8 @@ pageEncoding="UTF-8"%>
                    		<td><%=ur.getPetsitterName() %></td>
                    		<td><%=ur.getCheckIn() %></td>
                    		<td><%=ur.getCheckOut() %></td>
-                   		<td><a href="">작성글 보기</a></td>
+                   		<td><a href="javascript:void(0);" 
+                   		onclick="location.replace('<%=request.getContextPath()%>/user/reviewDetail?userId=<%=loginUser.getUserId()%>&PetsitterId=<%=ur.getPetsitterId()%>')" style="color: gray;" >작성글 보기</a></td>
                    	</tr>
                    <%} %>
 						
@@ -210,7 +211,7 @@ pageEncoding="UTF-8"%>
 </style>
 
 <script>
-
+	
 </script>
 
 

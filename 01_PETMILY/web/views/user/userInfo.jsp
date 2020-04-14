@@ -296,7 +296,7 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button style="width: 200px;">펫 프로필 등록</button>
+                        <button onclick="location.replace('')" style="width: 200px;">펫 프로필 등록</button>
                     </div>
                     <table>
                         <tr>

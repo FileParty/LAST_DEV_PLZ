@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/adminMypage.css" type = "text/css">
 <section id="adminMainMenu">
 <%@ include file="/views/admin/adminSideBar.jsp" %>
+
+	<!-- 로그인한 유저가 '관리자' 등급이면 해당 화면을 보여라 -->
+	<% if(loginUser.getUserType().equals("관리자")) { %>
 	<section id="adminMypage">
 		<img alt="" src="<%=request.getContextPath()%>/img/common/main.jpg"
 			width="1016px" height="400px">
@@ -35,6 +38,13 @@
 			</div>
 		</div>
 	</section>
+	<% } else {%>
+	<!-- 로그인한 유저가 '관리자' 등급이 아니면 해당 화면을 보여라(msg 화면) -->
+		<script>
+		alert("<%=request.getAttribute("msg")%>");
+		location.replace("<%=request.getContextPath()%><%=request.getAttribute("loc")%>");
+		</script>
+	<% } %>
 </section>
 <script>
 	$(function(){

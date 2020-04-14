@@ -121,7 +121,7 @@ pageEncoding="UTF-8"%>
             <div class="col-2 menu">
                     <div id="menu">
                         <ul type="none">
-                            <li class="title"><a href="<%=request.getContextPath()%>/user/Info">회원정보</a></li>
+                            <li class="title">회원정보</li>
                             <hr class="hr-line"/>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>

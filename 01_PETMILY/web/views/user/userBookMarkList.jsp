@@ -127,7 +127,7 @@
             <div class="col-2 menu">
                     <div id="menu">
                         <ul type="none">
-                            <li class="title"><a href="<%=request.getContextPath()%>/user/Info">회원정보</a></li>
+                            <li class="title">회원정보</li>
                             <hr class="hr-line"/>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
@@ -192,8 +192,8 @@
 						<td><p style="text-align: center;"><%= ubmb.getOnedayMprice() %>원</p></td> <!-- m -->
 						<td><p style="text-align: center;"><%= ubmb.getOnedayBprice() %>원</p></td> <!-- b -->
 						<!-- 게시글 링크 -->
-						<td><a id="detailViewBTN" href="javascript:void(0);"
-						onclick="location.replace('<%=request.getContextPath()%>/boardList.do?userId=<%=loginUser.getUserId()%>&boardCode=<%=ubmb.getBoardCode()%>')">상세 내역 보기</a></td> 
+						<td><a id="detailViewBTN" href="javascript:void(0);" style="margin-left: 10px;"
+						onclick="location.replace('<%=request.getContextPath()%>/BoardList.do?userId=<%=loginUser.getUserId()%>&boardCode=<%=ubmb.getBoardCode()%>')">상세 내역 보기</a></td> 
                     </tr>
 	                 <% } %>
     

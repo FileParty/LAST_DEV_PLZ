@@ -38,12 +38,12 @@
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
 
         }
     #menu{
         width: 230px;
-        position : fixed;
+        /* position : fixed; */
     }
     ul{
         padding-inline-start:0;
@@ -250,7 +250,7 @@ label.custom-file-label::after{
 <body>
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath()%>/" method="post" onsubmit="return test();">
+            <form action="<%=request.getContextPath()%>/user/petprofile/upload" method="post" onsubmit="return test();">
             <div class="row">
             <div class="col-2 menu">
                     <div id="menu">
@@ -296,7 +296,7 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button onclick="location.replace('')" style="width: 200px;">펫 프로필 등록</button>
+                        <button tylpe="submit" onclick="location.replace('<%=request.getContextPath()%>/user/petprofile/upload')" style="width: 200px; cursor: pointer;">펫 프로필 등록</button>
                     </div>
                     <table>
                         <tr>

@@ -173,7 +173,7 @@ pageEncoding="UTF-8"%>
                         <th>작성 후기</th>
                     </tr>
                    <%for(UserReview ur:list){ %>
-                   	<tr>
+                   	<tr style="font-size: 12px;">
                    		<td><%=count++ %></td>
                    		<td class="starR on"><%for(int i=0;i<ur.getReviewStar();i++){%><i class="far fa-star"></i><%}%></td>
                    		<td><%=ur.getReviewText() %></td>

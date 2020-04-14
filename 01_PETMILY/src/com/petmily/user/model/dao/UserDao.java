@@ -380,11 +380,10 @@ public class UserDao {
 				ubm.setBoardCode(rs.getInt("BCODE"));
 				ubm.setPetSitterId(rs.getString("PSI"));
 				ubm.setBoardTitle(rs.getString("BT"));
-				ubm.setOnedaySprice(rs.getInt("BS"));
-				ubm.setOnedayMprice(rs.getInt("BM"));
-				ubm.setOnedayBprice(rs.getInt("BB"));
+				ubm.setOnedaySprice(rs.getInt("OS"));
+				ubm.setOnedayMprice(rs.getInt("OM"));
+				ubm.setOnedayBprice(rs.getInt("OB"));
 				ubm.setUserName(rs.getString("NA"));
-				ubm.setRnum(rs.getInt("RNUM"));
 				list.add(ubm);
 			}
 			

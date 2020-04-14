@@ -3,7 +3,7 @@
 
 
 	<!-- 내가 적용한 CSS : 회원가입 -->
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/joinForm.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/yskCss/joinForm.css">
 	<!-- 내가 적용한 jQuery -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 	<!-- Daum 우편번호 서비스 API  -->

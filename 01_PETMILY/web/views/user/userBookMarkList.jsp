@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="java.util.List,com.petmily.user.model.vo.UserBookMark,com.petmily.user.model.vo.User" %>
+<%@ page import="java.util.List,com.petmily.user.model.vo.UserBookMarkBoard,com.petmily.user.model.vo.User" %>
 <%
-	List<UserBookMark> list = (List)request.getAttribute("list");
-%>    
+	List<UserBookMarkBoard> list = (List)request.getAttribute("list");
+	for(UserBookMarkBoard ubmb : list) {
+		System.out.println("화면에 갖고오나?"+ubmb);
+	}
+%>     
     
 <%@ include file="/views/common/header.jsp" %>
 <style>
@@ -107,7 +110,12 @@
         color: grey;
         border-right: 1px solid white;
     }
-
+	a#detailViewBTN {
+	    color: gray;
+	}
+	a#detailViewBTN:hover {
+	    color: black;
+	}
 </style>
 
 
@@ -156,7 +164,7 @@
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">회원 정보</li>
-                    <li class="breadcrumb-item active">회원 탈퇴</li>
+                    <li class="breadcrumb-item active">북마크</li>
                 </ul>
                    <!-- 콘텐츠 영역 -->
                    <table id="enrollTB">
@@ -165,27 +173,36 @@
                         <th>no</th>
             			<th>제목</th>
             			<th>펫 시터 이름</th>
-                        <th>일박 케어 요금</th>
+                        <th>일박 케어 요금(소형)</th>
+                        <th>일박 케어 요금(중형)</th>
+                        <th>일박 케어 요금(대형)</th>
                         <th>게시글 링크</th>
                     </tr>
                     
-                    <% for(UserBookMark ubm : list) { %>
-	                    <tr>
-	                    	<!-- no -->
-							<td><%= ubm %></td>
-							<!-- 제목 -->
-							<td><%=  %></td>
-							<!-- 펫 시터 이름 --> 
-							<td><%=  %></td> 
-							<!-- 일박 케어 요금 -->
-							<td><%=  %></td> 
-							<!-- 게시글 링크 -->
-							<td><%=  %></td> 
-	                    </tr>
+                    <% for(UserBookMarkBoard ubmb : list) { %>
+	                 <tr>
+                    	<!-- no -->
+						<td><p style="text-align: center;"><%= ubmb.getBoardCode() %></p></td>
+						<!-- 제목 -->
+						<td><p style="text-align: center;"><%= ubmb.getBoardTitle() %></p></td>
+						<!-- 펫 시터 이름 --> 
+						<td><p style="text-align: center;"><%= ubmb.getUserName() %></p></td> 
+						<!-- 일박 케어 요금 s,m,b-->
+						<td><p style="text-align: center;"><%= ubmb.getOnedaySprice() %>원</p></td> <!-- s --> 
+						<td><p style="text-align: center;"><%= ubmb.getOnedayMprice() %>원</p></td> <!-- m -->
+						<td><p style="text-align: center;"><%= ubmb.getOnedayBprice() %>원</p></td> <!-- b -->
+						<!-- 게시글 링크 -->
+						<td><a id="detailViewBTN" href="javascript:void(0);"
+						onclick="location.replace('<%=request.getContextPath()%>/boardList.do?userId=<%=loginUser.getUserId()%>&boardCode=<%=ubmb.getBoardCode()%>')">상세 내역 보기</a></td> 
+                    </tr>
 	                 <% } %>
     
                     
                 </table>
+                
+                <br><br><br>
+				
+				<div style="padding-left: 370px;"><%=request.getAttribute("pageBar") %></div>
 
                     </div>
                 </div>

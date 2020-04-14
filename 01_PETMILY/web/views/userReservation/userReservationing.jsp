@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="java.util.List,com.petmily.reservation.model.vo.PetReservation" %>
+<%@ include file="/views/common/header.jsp" %>
 <%
-	List<PetReservation> list = (List)request.getAttribute("list");
-	int count = 1;
-%>    
-    
+List<PetReservation> list = (List)request.getAttribute("list");
+ 	
+%>
+
 
 <style>
    *{   
@@ -135,8 +136,8 @@
                             
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
                             <li class="content"><a href=""> - 종료된 예약</a></li>
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
@@ -162,43 +163,95 @@
                   
                    
                    <!-- 콘텐츠 영역 -->
-                  <table border=1>
-                  	<tr style="width:500px;">
-                  		<td rowspan="2">1</td>
-                  		<td colspan="3">2</td>
-                  		
-                  	</tr>
-                  	<tr>
-                  		<td colspan="3">1</td>
-                  		
-                  		
-                  	</tr>
-                  	<tr>
-                  		<td>1</td>
-                  		<td >8</td>
-                  		<td>9</td>
-                  	</tr>
-                  </table>
+                   <% for(PetReservation p : list) { %>
+                <table border="1">
+				<tr >
+					<td style="width300px; height:200px;" rowspan="2" colspan="2">
+						<div style="width: 200px;">
+							<%-- <img src="<%=request.getContextPath()%>/views/img/<%=p.getPetImg()%>"> --%>
+							<img style="border:1px solid;width:200px;height:150px;"src="<%=request.getContextPath()%>/upload/board/매일산책.png">
+						</div>
+					</td>
+					<td style="height: 10px;"colspan="3">
+						<input class="form-control form-control-sm" type="text" style="text-align:center;display:inline;" value="<%=p.getBoardTitle()%>">
+		
+						<input class="btn-danger" style="color:yellow;border-radius:15px;font-size:13px;margin-left:500px;" type="button" value="추가 요금 결제" onclick="window.open('<%=request.getContextPath()%>/user/addPay?revNo=<%=p.getReservationCode()%>','_blank','width=300px,height=350px');">
+					</td>
+		
+				</tr>
+				<tr style="width: 200px;">
+					<td colspan="3">
+						<div class="row">
+							<div class="col-lg-6">
+								<input class="form-control form-control-sm" type="text" value="'<%=p.getPetName() %>'를 맡겼습니다."></p>
+								<p style="margin:0px;font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;체크 인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 체크아웃</p>
+								<input class="form-control form-control-sm" style="width:90px;height:20px;display:inline;"type="text" value="<%=p.getCheckIn().substring(0,11)%>">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input class="form-control form-control-sm" style="width:90px;height:20px;display:inline;"type="text" value="<%=p.getCheckOut().substring(0,11)%>">
+								<br>
+								<textarea class="form-control" cols="20" rows="2">안녕하세요</textarea>
+							</div>
+							<div class="col-lg-6 align-self-end">
+								<%if(p.getPlusType().contains("목욕가능")==true) { %>
+								<input style="margin:0px;"type="checkbox" value="목욕가능" checked disabled>목욕
+								<%} else { %>
+								<input type="checkbox" value="">목욕
+								<%} %>
+								<%if(p.getPlusType().contains("집앞픽업")==true) { %>
+								<input type="checkbox" checked disabled>픽업
+								<%} else { %>
+								<input type="checkbox">픽업
+								<%} %>
+								<%if(p.getPlusType().contains("약물복용")==true) { %>
+								<input type="checkbox" value="약물복용" checked disabled>약물복용<br>
+								<%} else { %>
+								<input type="checkbox">약물복용
+								<%} %>
+								<%if(p.getPlusType().contains("노견케어")==true) { %>
+								<input type="checkbox" checked disabled>노견케어
+								<%} else { %>
+								<input type="checkbox">노견케어
+								<%} %>
+								<%if(p.getPlusType().contains("추가할인")==true) { %>
+								<input style="margin:0px;"type="checkbox" checked disabled>추가할인
+								<%} else { %>
+								<input style="margin:0px;"type="checkbox">추가할인
+								<%} %>
+								<input class="btn-light" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail();">
+								</div>
+							</div>
+					
+					</td>
+		
+				</tr>
+				<tr>
+					<td colspan="5">
+						<input class="btn-warning" style="font-size:13px;border-radius:20px;margin-left:670px;"type="button" value="펫 시팅 종료">
+						</td>
+		
+				</tr>
+				</table>
+				<%} %>
                     </div>
                 </div>
             </div>
         
-        </div>
+        
     </section>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-
-
     
-
-
-</script>
+    <script>
+    
+    	function requestDetail() {
+    		
+    		window.open("<%=request.getContextPath()%>/user/requestDetails","_blank","width=300px,height=350px");
+    	}
+    	
+    	
+    </script>
+</body>
 </html>

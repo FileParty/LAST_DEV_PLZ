@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="/views/common/header.jsp" %>
 
 
 
@@ -270,7 +270,7 @@ label.custom-file-label::after{
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
                             <li class="content"><a href=""> - 종료된 예약</a></li>
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>

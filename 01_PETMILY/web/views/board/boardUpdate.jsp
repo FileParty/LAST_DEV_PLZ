@@ -5,11 +5,15 @@
     PetSitterBoard pb = (PetSitterBoard)request.getAttribute("pb");
     String plus ="";
     String basic ="";
+    String img = "";
       for(int i=0;i<pb.getPlus().size();i++) {
          plus+=pb.getPlus().get(i);
       }
       for(int i=0;i<pb.getServiceTypes().size();i++) {
          basic+=pb.getServiceTypes().get(i);
+      }
+      for(int i=0;i<pb.getBoardImages().size();i++) {
+    	  img=pb.getBoardImages().get(i);
       }
     %>
 <!DOCTYPE html>
@@ -28,6 +32,15 @@
 
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/boardWrite.css">
+<style>
+	span.imgs {
+		position:absolute;
+		left:79px;
+		top:7px;
+		width:258px;
+		background-color:lightgray;
+	}
+</style>
 </head>
 <body>
     <section>
@@ -90,20 +103,21 @@
                             </td>
                         </tr>
                         <tr>
+                        
                             <td class="sub-title" style="width: 100px;">파일 첨부</td>
                             <!-- <td class="sub-title" style="width: 100px;">파일 첨부</td> -->
                             <td colspan="1">
                                 <div class="input-group mb-3" style="width: 500px; height: 25px; margin-top: 10px;">
                                     <div class="files">
-                                       <input style="height:40px;" type="button" value="파일첨부" class="addFlie"onclick="addFile();">
-                                      <input type="text" value="매일산책.png" name="filefuck"  class="filefuckk">
-                                      <input type="text" value="매일산책.png" name="filefuck"  class="filefuck">
+                                       <input style="height:40px;" type="button" value="파일첨부" class="addFlie_"onclick="addFile();">
+                                     
                                     </div>
-                                    <div class="selectFile">
+                                    <div class="selectFile" style="position:absolute">
+                                      
                                      <input type="hidden"class="fileNo" name="count">
                                     </div>
                                     </div>
-                              
+                                      
                             </td>
                               
                         </tr>
@@ -189,7 +203,7 @@
                                             ?
                                           </button>
                                            <%}else{ %>
-                                        <input onclick="toggle1();"  name="plusOption" class="chkbox" id="myCheckbox2" type="checkbox" value="" >
+                                        <input onclick="toggle1();"  name="plusOption" class="chkbox" id="myCheckbox2" type="checkbox" value="추가할인" >
                                         <label class="lab" for="myCheckbox2">반려동물 추가비 할인 </label>
                                         <span></span>
                                         <button type="button" class="btn btn-secondary" data-container="body"
@@ -315,7 +329,7 @@
                                     <label for="myCheckbox5">노견 케어</label>
                                     <span></span>
                                     <%} else { %>
-                                    <input name="plusOption"id="myCheckbox5" type="checkbox" value="" >
+                                    <input name="plusOption"id="myCheckbox5" type="checkbox" value="노견케어" >
                                     <label for="myCheckbox5">노견 케어</label>
                                     <span></span>
                                     <%} %>
@@ -331,7 +345,7 @@
                                     <label for="myCheckbox6">목욕 가능</label>
                                     <span></span>
                                     <%}else {  %>
-                                     <input name="plusOption"id="myCheckbox6" onclick="toggle2();" type="checkbox" value="">
+                                     <input name="plusOption"id="myCheckbox6" onclick="toggle2();" type="checkbox" value="목욕가능">
                                     <label for="myCheckbox6">목욕 가능</label>
                                     <span></span>
                                     <%} %>
@@ -382,7 +396,7 @@
                                     <label for="myCheckbox7">약물 복용</label>
                                     <span></span>
                                     <%}else {  %>
-                                    <input name="plusOption" id="myCheckbox7" type="checkbox" value="" >
+                                    <input name="plusOption" id="myCheckbox7" type="checkbox" value="약물복용" >
                                     <label for="myCheckbox7">약물 복용</label>
                                     <span></span>
                                     <%} %>
@@ -397,7 +411,7 @@
                                     <label for="myCheckbox8">집 앞 픽업</label>
                                     <span></span>
                                     <%} else { %>
-                                     <input name="plusOption" onclick="toggle3();" id="myCheckbox8" type="checkbox" value="" >
+                                     <input name="plusOption" onclick="toggle3();" id="myCheckbox8" type="checkbox" value="집앞픽업" >
                                     <label for="myCheckbox8">집 앞 픽업</label>
                                     <span></span>
                                     <%} %>
@@ -454,6 +468,7 @@
 
 $(function () {
 	searchMap();
+	/* addFile().trigger('click'); */
 	})
 	if(document.getElementById("myCheckbox8").checked==true) {
 		$(".row3").show();
@@ -569,7 +584,7 @@ $(function(){
          
          var num =1;
          function addFile() {
-             $(".filefuckk").remove();
+             
              let file =$("<input>").attr({
                  "type":"file",
                  "name": "file"+num,
@@ -592,7 +607,64 @@ $(function(){
              s.append("<br>");
                num++;
          }
+	
+		<%for(int i=0;i<pb.getBoardImages().size();i++) {%>
+		
+         var files =$("<input>").attr({
+             "type":"file",
+             "name": "file"+num,
+             "id":"file"+num
+             
+         }).css({
+        	 "height":"40px",
+        	 "width":"200px"
+        	 
+        	 });
+         var labels = $("<label>").attr({
+             'for':'file'+num
+         
+         });
+         $(".fileNo").attr({
+             "value":num
+         })
+         <%if(i>0) {%>
+          var span = $("<span>").attr({
+        	 "class":"imgs img"+<%=i+1%>
+         }). css({
+        	 "top":"55px",
+        	 "left":"80px",
+        	 "height":"20px",
+        	 "width":"100px"
+         }).html("<%=pb.getBoardImages().get(i)%>");
+          
+         <%} else { %>
+         var span = $("<span>").attr({
+        	 "class":"imgs img"+<%=i+1%>
+         }).css({
+        	 "top":"15px",
+        	 "left":"80px",
+        	 "height":"20px",
+        	 "width":"100px"
+         }).html("<%=pb.getBoardImages().get(i)%>");
+         <%}%>
+          
+         var s = $(".selectFile").append(files);
+         s.append(labels);
+         s.append(span);
+         s.append("<br>");
+           
+           $("#file"+<%=i+1%>).change(function() {
+        	  $(".img"+<%=i+1%>).hide();
+           })
+          num++;
+		<%}%>
+		
+		
 
+         
+         
+         
+         
          function searchMap(draggable) { 
         	
         	 var search= $(".address").val();

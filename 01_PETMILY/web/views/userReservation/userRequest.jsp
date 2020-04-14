@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ include file="/views/common/header.jsp" %>
 <%@ page import="java.util.List,com.petmily.reservation.model.vo.PetReservation" %>
 <%
 	List<PetReservation> list = (List)request.getAttribute("list");
@@ -135,8 +135,8 @@
                             
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
                             <li class="content"><a href=""> - 종료된 예약</a></li>
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
@@ -231,7 +231,7 @@
 
 function requestCheck() {
 	
-	window.open("","_blank","width=800px,height=800px")
+ 	window.open("<%=request.getContextPath()%>/user/requestDetail","_blank","width=300px,height=350px");
 }
     
     
@@ -239,3 +239,5 @@ function requestCheck() {
 
 </script>
 </html>
+
+<%@ include file="/views/common/footer.jsp" %>

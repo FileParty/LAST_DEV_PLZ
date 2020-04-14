@@ -34,13 +34,13 @@ public class PetSitterFilter implements Filter {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {
-			if(u.getUserType().equals("펫시터")) {
-				chain.doFilter(request, response);				
-			}
-			else {
+			if(!u.getUserType().equals("펫시터")) {
 				request.setAttribute("msg", "펫시터 사용자만 접근이 가능한 서비스입니다.");
 				request.setAttribute("loc", ""); // 메인으로 이동
-				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);			
+			}
+			else {
+				chain.doFilter(request, response);		
 			}
 		}
 	}

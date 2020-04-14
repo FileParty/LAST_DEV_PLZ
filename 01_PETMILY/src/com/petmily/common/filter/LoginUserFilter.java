@@ -32,10 +32,13 @@ public class LoginUserFilter implements Filter {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {
-			if(u.getUserType().equals("일반")) {
+			if(!u.getUserType().equals("일반")) {
 				request.setAttribute("msg", "일반 사용자만 접근이 가능한 서비스입니다.");
 				request.setAttribute("loc", ""); // 메인으로 이동
 				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			}
+			else {
+				chain.doFilter(request, response);		
 			}
 		}
 		

@@ -33,10 +33,13 @@ public class AdminFilter implements Filter {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {
-			if(u.getUserType().equals("관리자")) {
+			if(!u.getUserType().equals("관리자")) {
 				request.setAttribute("msg", "관리자만 접근이 가능한 서비스입니다.");
 				request.setAttribute("loc", ""); // 메인으로 이동
 				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			}
+			else {
+				chain.doFilter(request, response);		
 			}
 		}
 	}

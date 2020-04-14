@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.petmily.admin.model.vo.AdminQuestion" %>
 <%@ include file="/views/common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/adminSideBar.css" type = "text/css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/adminQuestion.css" type = "text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin/adminQuestion.css" type = "text/css">
 <% 
 	ArrayList<AdminQuestion> list = new ArrayList();
 	if(request.getAttribute("questionList")!=null){

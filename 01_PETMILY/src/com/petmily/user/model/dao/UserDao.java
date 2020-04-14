@@ -423,4 +423,42 @@ public class UserDao {
 		}
 		return count;
 	}
+
+
+	public User userApiLogin(Connection conn, String userEmail) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		String sql = prop.getProperty("apiUserSelect");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userEmail);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("USER_ID")); // �쑀�� �븘�씠�뵒
+				user.setPassword(rs.getString("PASSWORD")); // �쑀�� �뙣�뒪�썙�뱶
+				user.setUserName(rs.getString("USER_NAME")); // �쑀�� �씠由�
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // �쑀�� �깮�뀈�썡�씪
+				user.setPhone(rs.getString("PHONE")); // �쑀�� �쑕��踰덊샇
+				user.setZipCode(rs.getString("ZIP_CODE")); // �쑀�� �슦�렪踰덊샇
+				user.setAddress(rs.getString("ADDRESS")); // �쑀�� 二쇱냼
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // �쑀�� �긽�꽭二쇱냼
+				user.setEmail(rs.getString("EMAIL")); // �쑀�� �씠硫붿씪
+				user.setGender(rs.getString("GENDER")); // �쑀�� �꽦蹂�
+				user.setStatus(rs.getString("STATUS")); // �쑀�� �쉶�썝�깉�눜�뿬遺�
+				user.setUserType(rs.getString("USER_TYPE")); // �쑀�� ���엯(�씪諛�, �렖�떆�꽣, 愿�由ъ옄)
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return user;
+	}
 }

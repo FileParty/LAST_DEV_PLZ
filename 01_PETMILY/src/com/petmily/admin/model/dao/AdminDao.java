@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.petmily.admin.model.vo.AdminPetsitter;
+import com.petmily.admin.model.vo.AdminQuestion;
 import com.petmily.admin.model.vo.AdminUser;
 import com.petmily.admin.model.vo.ApplyUser;
 import com.petmily.admin.model.vo.ApplyUserData;
@@ -421,6 +422,56 @@ public class AdminDao {
 		
 		
 		return list;
+	}
+
+	public ArrayList<AdminQuestion> question(Connection conn, int cPage, int numPerPage, String type) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<AdminQuestion> list = new ArrayList<AdminQuestion>();
+		String sql = prop.getProperty("questionList");
+		sql = sql.replaceAll("ORTYPERO",type);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AdminQuestion aq = new AdminQuestion();
+				aq.setUserId(rs.getString("USER_ID"));
+				aq.setSendEmail(rs.getString("ANSWER_EMAIL"));
+				aq.setEmailTitle(rs.getString("ANSWER_CONTENT"));
+				aq.setEmailDate(rs.getString("ANSWER_DATE"));
+				aq.setQueYN("ANSWER_YN");
+				list.add(aq);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+
+	public int questionCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = prop.getProperty("questionCount");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			count = Integer.parseInt(rs.getString(1));
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return count;
 	}
 	
 

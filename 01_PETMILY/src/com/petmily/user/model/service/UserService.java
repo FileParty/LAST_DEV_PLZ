@@ -145,6 +145,14 @@ public class UserService {
 		close(conn);
 		return count;
 	}
+
+	// API 이메일을 받아서 로그인
+	public User apiLogin(String userEmail) {
+		Connection conn = getConnection();
+		User user = dao.userApiLogin(conn, userEmail);
+		close(conn);
+		return user;
+	}
 	
 	
 	

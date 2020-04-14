@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.petmily.admin.model.dao.AdminDao;
 import com.petmily.admin.model.vo.AdminPetsitter;
+import com.petmily.admin.model.vo.AdminQuestion;
 import com.petmily.admin.model.vo.AdminUser;
 import com.petmily.admin.model.vo.ApplyUser;
 import com.petmily.admin.model.vo.ApplyUserData;
@@ -118,6 +119,20 @@ public class AdminService {
 		ArrayList<AdminPetsitter> list = dao.petsitterCer(conn, userId);
 		close(conn);
 		return list;
+	}
+
+	public ArrayList<AdminQuestion> question(int cPage, int numPerPage, String type) {
+		Connection conn = getConnection();
+		ArrayList<AdminQuestion> list = dao.question(conn, cPage, numPerPage, type);
+		close(conn);
+		return list;
+	}
+
+	public int questionCount() {
+		Connection conn = getConnection();
+		int count = dao.questionCount(conn);
+		close(conn);
+		return count;
 	}
 
 }

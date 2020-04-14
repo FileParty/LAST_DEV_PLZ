@@ -13,7 +13,7 @@ import com.petmily.user.model.service.UserService;
 import com.petmily.user.model.vo.User;
 
 
-@WebServlet("/userInfo")
+@WebServlet("/user/Info")
 public class UserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

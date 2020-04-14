@@ -234,7 +234,7 @@ label.custom-file-label::after{
 
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath()%>/sitter/write" method="post" onsubmit="return test();">
+            <form action="<%=request.getContextPath()%>/user/UpdateEnd" method="post" onsubmit="return test();">
             
             <!-- form을 넘기기 위해 hidden 처리한 input을 만듦. -->
             <input type="hidden" id="userId" name="userId" value="<%= u.getUserId() %>" >
@@ -246,10 +246,10 @@ label.custom-file-label::after{
                         <ul type="none">
                             <li class="title"><a href="<%=request.getContextPath()%>/userInfo">회원정보</a></li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userUpdate?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userDelete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userBookMarkList?userId=<%=loginUser.getUserId()%>"> - 북마크</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userReview?userId=<%=loginUser.getUserId()%>"> - 작성 후기</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/BookMarkList?userId=<%=loginUser.getUserId()%>"> - 북마크</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review?userId=<%=loginUser.getUserId()%>"> - 작성 후기</a></li>
                             <br/>
         
                             <li class="title">펫 프로필</li>

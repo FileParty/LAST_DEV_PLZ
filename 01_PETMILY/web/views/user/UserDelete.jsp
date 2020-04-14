@@ -116,7 +116,7 @@
 <!-- 회원탈퇴 화면 -->
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath()%>/userDeleteEnd" method="post" onsubmit="return test();">
+            <form action="<%=request.getContextPath()%>/user/DeleteEnd" method="post" onsubmit="return test();">
             
             <!-- form을 넘기기 위해 hidden 처리한 input을 만듦. -->
             <input type="hidden" id="userId" name="userId" value="<%= u.getUserId() %>" >

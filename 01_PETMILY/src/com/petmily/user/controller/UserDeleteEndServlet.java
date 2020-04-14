@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.petmily.user.model.service.UserService;
 
 
-@WebServlet("/userDeleteEnd")
+@WebServlet("/user/DeleteEnd")
 public class UserDeleteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

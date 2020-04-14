@@ -116,17 +116,17 @@ pageEncoding="UTF-8"%>
 
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath()%>/sitter/write?userId=sebin" method="post" onsubmit="return test();" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath()%>" method="post" onsubmit="return test();" enctype="multipart/form-data">
             <div class="row">
             <div class="col-2 menu">
                     <div id="menu">
                         <ul type="none">
-                            <li class="title">회원정보</li>
+                            <li class="title"><a href="<%=request.getContextPath()%>/user/Info">회원정보</a></li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 회원정보 수정</a></li>
-                            <li class="content"><a href=""> - 회원 탈퇴</a></li>
-                            <li class="content"><a href=""> - 북마크</a></li>
-                            <li class="content"><a href=""> - 작성 후기</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/BookMarkList?userId=<%=loginUser.getUserId()%>"> - 북마크</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review?userId=<%=loginUser.getUserId()%>"> - 작성 후기</a></li>
                             <br/>
         
                             <li class="title">펫 프로필</li>

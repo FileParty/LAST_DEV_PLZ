@@ -39,4 +39,38 @@ public class ReservationService {
 		  return result;
 	  }
 	  
+	  public List<PetReservation> reservation(String id) {
+		  Connection conn = getConnection();
+		  List<PetReservation> list = dao.reservation(conn,id);
+		  for(int i=0;i<list.size();i++) {
+			  list.set(i,dao.reservations(conn, id,list.get(i)));
+		  }
+		  System.out.println("플러스"+list);
+		  
+		  close(conn);
+		 
+		  return list;
+	  }
+	  
+	  public PetReservation requestDetail(String id) {
+		  Connection conn = getConnection();
+		  PetReservation pr = dao.requestDetail(conn,id);
+		  close(conn);
+		  return pr;
+	  }
+	  
+	  public PetReservation requestDetails(String id) {
+		  Connection conn = getConnection();
+		  PetReservation pr = dao.requestDetails(conn,id);
+		  close(conn);
+		  return pr;
+	  }
+	  
+	  public PetReservation addPay(int revNo) {
+		  Connection conn = getConnection();
+		  PetReservation pr = dao.addPay(conn,revNo);
+		  close(conn);
+		  return pr;
+	  }
+	  
 }

@@ -80,8 +80,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		String comment = mr.getParameter("comment");
 		String[] pType = mr.getParameterValues("plusOption");
 		String[] dType = mr.getParameterValues("defaultOption");
-		System.out.println(title);
-		System.out.println(intro);
+	
 		String str = "";
 		String file="";
 		List<String> list = new ArrayList();
@@ -101,6 +100,25 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		for(String d : dType) {
 			defaultO.add(d);
 		}
+		System.out.println("수정 완료 데이터 출력");
+		System.out.println(title);
+		System.out.println(intro);
+		System.out.println(address);
+		System.out.println(comment);
+		System.out.println(plusO);
+		System.out.println(defaultO);
+		System.out.println(list);
+		System.out.println(small);
+		System.out.println(middle);
+		System.out.println(big);
+		System.out.println(small1);
+		System.out.println(middle1);
+		System.out.println(big1);
+		System.out.println(oneWay);
+		System.out.println(allWay);
+		System.out.println(sale);
+		System.out.println(count);
+		
 		
 		int boardNo = Integer.parseInt(mr.getParameter("no"));
 		String id = mr.getParameter("id");

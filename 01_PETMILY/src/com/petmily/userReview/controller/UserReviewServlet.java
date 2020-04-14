@@ -15,7 +15,7 @@ import com.petmily.userReview.service.UserReviewService;
 /**
  * Servlet implementation class UserReview
  */
-@WebServlet("/userReview")
+@WebServlet("/user/Review")
 public class UserReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

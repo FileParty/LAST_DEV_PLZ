@@ -246,22 +246,22 @@ public class UserDao {
 	
 	
 //	�쉶�썝媛��엯 濡쒖쭅
-	public int userJoin(Connection conn, User u) {
+	public int userJoin(Connection conn, String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		PreparedStatement pstmt=null;
 		int result = 0;
 		String sql = prop.getProperty("userJoin");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, u.getUserId()); // �쑀�� �븘�씠�뵒
-			pstmt.setString(2, u.getPassword()); // �쑀�� 鍮꾨�踰덊샇
-			pstmt.setString(3, u.getUserName()); // �쑀�� �씠由�
-			pstmt.setString(4, u.getUserBirth()); // �쑀�� �깮�뀈�썡�씪
-			pstmt.setString(5, u.getPhone()); // �쑀�� �쑕���룿 踰덊샇
-			pstmt.setString(6, u.getZipCode()); // �쑀�� �슦�렪踰덊샇
-			pstmt.setString(7, u.getAddress()); // �쑀�� 二쇱냼
-			pstmt.setString(8, u.getDetailAddress()); // �쑀�� �긽�꽭二쇱냼
-			pstmt.setString(9, u.getEmail()); // �쑀�� �씠硫붿씪
-			pstmt.setString(10, u.getGender()); // �쑀�� �꽦蹂�
+			pstmt.setString(1, id); 
+			pstmt.setString(2, password); 
+			pstmt.setString(3, name);
+			pstmt.setString(4, bday); 
+			pstmt.setString(5, phone); 
+			pstmt.setString(6, post);
+			pstmt.setString(7, address);
+			pstmt.setString(8, detailedAddress);
+			pstmt.setString(9, email);
+			pstmt.setString(10, gender); 
 			result=pstmt.executeUpdate();			
 			
 		}catch(SQLException e) {
@@ -380,11 +380,10 @@ public class UserDao {
 				ubm.setBoardCode(rs.getInt("BCODE"));
 				ubm.setPetSitterId(rs.getString("PSI"));
 				ubm.setBoardTitle(rs.getString("BT"));
-				ubm.setOnedaySprice(rs.getInt("BS"));
-				ubm.setOnedayMprice(rs.getInt("BM"));
-				ubm.setOnedayBprice(rs.getInt("BB"));
+				ubm.setOnedaySprice(rs.getInt("OS"));
+				ubm.setOnedayMprice(rs.getInt("OM"));
+				ubm.setOnedayBprice(rs.getInt("OB"));
 				ubm.setUserName(rs.getString("NA"));
-				ubm.setRnum(rs.getInt("RNUM"));
 				list.add(ubm);
 			}
 			

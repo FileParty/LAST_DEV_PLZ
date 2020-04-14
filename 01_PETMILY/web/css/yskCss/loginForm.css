@@ -168,10 +168,10 @@ div.SNS_BG:hover {
 div#facebook:hover {
     background-color: rgb(27,73,148);
 }
-div#google:hover {
+div#naver:hover {
     background-color: rgb(62,199,39);
 }
-div#kakao:hover {
+div#google:hover {
     background-color: #ffcc33;
 }
 

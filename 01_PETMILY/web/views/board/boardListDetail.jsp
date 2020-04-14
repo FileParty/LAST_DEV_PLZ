@@ -36,7 +36,10 @@
 	List<ReservationPetCode> rPetCodeT = new ArrayList<ReservationPetCode>();
 	
 	
-
+	/* ---- 슬기 ↓ 연관 jsp : userInfo.jsp */
+	
+	String pstId = request.getParameter("PetsitterId");
+	
 
 %>
       
@@ -44,6 +47,7 @@
 
 
 <link href="<%=request.getContextPath() %>/css/PST.css" rel="stylesheet">
+
 
     <section>
     
@@ -828,6 +832,9 @@
 
     
         </div>
+        
+       
+        
 
 <script>
 

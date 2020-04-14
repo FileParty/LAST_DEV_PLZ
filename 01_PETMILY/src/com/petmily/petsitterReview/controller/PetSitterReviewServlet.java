@@ -1,4 +1,4 @@
-package com.petmily.pet.controller;
+package com.petmily.petsitterReview.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.pet.model.vo.Pet;
-import com.petmily.pet.service.PetService;
+import com.petmily.petsitterReview.model.vo.PetSitterReview;
+import com.petmily.petsitterReview.service.PetSitterReviewService;
+import com.petmily.userReview.model.vo.UserReview;
+import com.petmily.userReview.service.UserReviewService;
 
 /**
- * Servlet implementation class PetProfileDetailServlet
+ * Servlet implementation class PetSitterReviewServlet
  */
-@WebServlet("/user/petprofile/detail")
-public class PetProfileDetailServlet extends HttpServlet {
+@WebServlet("/sitter/review")
+public class PetSitterReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PetProfileDetailServlet() {
+    public PetSitterReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +35,11 @@ public class PetProfileDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int no = Integer.parseInt(request.getParameter("no"));
 		String id = request.getParameter("userId");
-		id = "sebin";
-		
-		
-		Pet p = new PetService().petProfileDetail(id,no);
-		request.setAttribute("p", p);
-		request.getRequestDispatcher("/views/user/petProfileDetail.jsp").forward(request, response);
+		id = "petsitter1";
+		List<PetSitterReview> list=new PetSitterReviewService().selectPetSitterReviewList(id);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/views/sitter/sitterReview.jsp").forward(request, response);
 	}
 
 	/**

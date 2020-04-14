@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <title>Document</title>
+    <title>펫 프로필 등록</title>
 </head>
 <style>
    *{   

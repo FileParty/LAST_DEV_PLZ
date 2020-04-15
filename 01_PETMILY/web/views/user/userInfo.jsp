@@ -247,7 +247,7 @@ label.custom-file-label::after{
 }
 </style>
 
-<body>
+
     <section>
         <div class="container">
             <form action="<%=request.getContextPath()%>/user/petprofile/upload" method="post" onsubmit="return test();">
@@ -296,7 +296,7 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button tylpe="submit" onclick="location.replace('<%=request.getContextPath()%>/user/petprofile/upload')" style="width: 200px; cursor: pointer;">펫 프로필 등록</button>
+                        <button type="submit" onclick="location.replace('<%=request.getContextPath()%>/user/petprofile/upload')" style="width: 200px; cursor: pointer;">펫 프로필 등록</button>
                     </div>
                     <table>
                         <tr>
@@ -361,7 +361,7 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
+
 <script>
 
     

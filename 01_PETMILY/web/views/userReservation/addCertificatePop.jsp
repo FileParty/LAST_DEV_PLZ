@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body align="center">
 
-	<form action="<%=request.getContextPath() %>/petsitter/AddCertificate?id=petsitter1" method="post" enctype="multipart/form-data">
+	<form action="<%=request.getContextPath() %>/sitter/AddCertificateEnd"  method="post" enctype="multipart/form-data">
 	<p>자격증 명</p>
 	<input type="text" name="certificateName">
 	<p>인증 기관</p>
@@ -17,8 +18,8 @@
 	<p>취득 일시</p>
 	<input type="date" name="date">
 	<p>만료 일시</p>
-	<input type="radio" name="radio" value="있음" id="radio">있음
-	<input type="radio" name="radio" value="없음" id="radio1">없음
+	<input type="radio" name="radio"  id="radio" onclick="onOff();">있음
+	<input type="radio" name="radio"  id="radio1"  onclick="onOff();">없음
 	<br>
 	<input type="date" name="date1" id="date1">
 	<p>이미지 첨부</p>
@@ -29,15 +30,24 @@
 	<br>
 	<br>
 	<br>
-		<button type="submit">추가 요청</button>
+		<button type="submit" onclick="close();">추가 요청</button>
 	</form>
 	
 	<script>
-
-		if($("#radio").checked==true) {
+		
+		$("#date1").hide();
+		function onOff() {
+		if(document.getElementById("radio").checked==true) {
 			$("#date1").show();
-		}else{
+			
+		}else if(document.getElementById("radio1").checked==true){
 			$("#date1").hide();
+			
+		}
+		}
+		
+		function close() { 
+			window.close();
 		}
 	</script>
 </body>

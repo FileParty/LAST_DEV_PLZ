@@ -1,10 +1,11 @@
-<%@page import="com.petmily.petsitter.model.vo.PetSitterCertificate"%>
+<%@page import="com.petmily.petsitter.model.vo.PetSitterCertificate,java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-    	PetSitterCertificate pc = (PetSitterCertificate)request.getAttribute("pc");
-    %>
+	List<PetSitterCertificate> list = (List)request.getAttribute("pc");
+	System.out.print("ㅎㅎ"+list.get(0).getCertificateFilename());
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,46 +58,7 @@ th {
 
 		<div class="container">
 			<div class="row">
-				<div class="col-2 menu">
-					<div id="menu">
-						<ul type="none">
-							<li class="title">회원정보</li>
-							<hr class="hr-line" />
-							<li class="content"><a href=""> - 회원정보 수정</a></li>
-							<li class="content"><a href=""> - 회원 탈퇴</a></li>
-							<br />
-
-							<li class="title">작성글</li>
-							<hr class="hr-line" />
-							<li class="content"><a
-								href="<%=request.getContextPath()%>/sitter/Detail"> - 작성글 보기</a></li>
-							<li class="content"><a href=""> - 작성한 비밀후기 보기</a></li>
-							<br />
-
-							<li class="title">예약</li>
-							<hr class="hr-line" />
-							<li class="content"><a href=""> - 예약 현황</a></li>
-							<li class="content"><a href=""> - 요청중인 예약</a></li>
-							<li class="content"><a href=""> - 진행중인 예약</a></li>
-							<li class="content"><a href=""> - 완료된 예약</a></li>
-							<li class="content"><a href=""> - 채팅</a></li>
-							<br />
-
-							<li class="title">정산</li>
-							<hr class="hr-line" />
-							<li class="content"><a href=""> - 이번 달 정산 현황</a></li>
-							<li class="content"><a href=""> - 이번 정산 보기</a></li>
-							<br />
-
-							<li class="title">자격증</li>
-							<hr class="hr-line" />
-							<li class="content"><a
-								href="<%=request.getContextPath()%>/sitter/certificate"> -
-									보유 자격증 목록</a></li>
-							<li class="content"><a href="<%=request.getContextPath()%>/sitter/addCertificate"> - 자격증 추가</a></li>
-						</ul>
-					</div>
-				</div>
+			<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp"%> 
 				<div class="vl"></div>
 				<div class="col-9" style="padding: 0;">
 					<div class="row top-div" style="height: 200px; overflow: hidden;">
@@ -112,6 +74,7 @@ th {
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">
 							<table id="inner" border="1">
+							<%for(PetSitterCertificate pc : list) {%>
 								<tr>
 									<th>no</th>
 									<th>자격증 명</th>
@@ -125,25 +88,19 @@ th {
 
 								<tr>
 									<td>NO</td>
-									<%-- <td><%=pc.getCertificateName()%></td>
+									 <td><%=pc.getCertificateName()%></td>
 									<td><%=pc.getCertificationNmae() %></td>
-									<td><%=pc.getDateOfAcquisition() %></td>
-									<td><%=pc.getExpirationDate() %></td>
- --%><%-- 
-									<%if(pc.getCertificateFilename()!=null) { %>
-									<td><img
-										src="<%=request.getContextPath()%>/upload/board/<%=pc.getCertificateFilename() %>"></td>
-									<%}else {  %>
-									<td><%=pc.getCertificateFilename() %></td>
-									<%} %> --%>
-
-
-
-
-
-
+									<td><%=pc.getDateOfAcquisition().substring(0,11) %></td>
+									<%if(pc.getExpirationDate()!=null) {%>
+									<td><%=pc.getExpirationDate().substring(0,11) %></td>
+									<%}else { %>
+									<td>- </td>
+									<%} %>						
+									<td><input type="button" value="이미지 보기" onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')"></td>
+									
 
 								</tr>
+								<%} %>
 							</table>
 						</div>
 					</div>
@@ -171,7 +128,7 @@ th {
 </body>
 
 <script>
-
+	
 </script>
 </body>
 </html>

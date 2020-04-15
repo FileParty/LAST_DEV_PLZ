@@ -42,8 +42,8 @@ hr{
 			<br/>
 			<li class="title">자격증</li>
 			<hr class="hr-line"/>
-			<li class="content"><a href=""> - 보유 자격증 목록</a></li>
-			<li class="content"><a href=""> - 자격증 추가</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/certificate"> - 보유 자격증 목록</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/AddCertificate"> - 자격증 추가</a></li>
 			<br/>
 		</ul>
 	</div>

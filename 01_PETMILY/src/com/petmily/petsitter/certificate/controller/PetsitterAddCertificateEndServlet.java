@@ -1,8 +1,6 @@
 package com.petmily.petsitter.certificate.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,16 +15,16 @@ import com.petmily.petsitter.model.vo.PetSitterCertificate;
 import com.petmily.user.model.vo.User;
 
 /**
- * Servlet implementation class PetsitterAddCertificateServlet
+ * Servlet implementation class PetsitterAddCertificateEndServlet
  */
-@WebServlet("/sitter/AddCertificate")
-public class PetsitterAddCertificateServlet extends HttpServlet {
+@WebServlet("/sitter/AddCertificateEnd")
+public class PetsitterAddCertificateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PetsitterAddCertificateServlet() {
+    public PetsitterAddCertificateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +33,36 @@ public class PetsitterAddCertificateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
+		String path = getServletContext().getRealPath("/upload/board");
+		int maxSize = 1024*1024*10;
+		MultipartRequest mr = new MultipartRequest(request, path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		 HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-	    
-	     List<PetSitterCertificate> list = new  SitterCertificateService().selectCertificate2(userId);
-		request.setAttribute("pc", list);
-		request.getRequestDispatcher("/views/userReservation/addCertificate.jsp").forward(request, response);
+		
+		
+		
+		String certificateName = mr.getParameter("certificateName");
+		String certificationName = mr.getParameter("certificationName");
+		String date = mr.getParameter("date");
+		String date1 = mr.getParameter("date1");
+		String file = mr.getFilesystemName("file");
+			
+		PetSitterCertificate pc = new PetSitterCertificate(userId,certificateName,certificationName,date,date1,file,"");
+		int result = new  SitterCertificateService().insertCertificate(pc);
+		
+		String msg = "";
+		String loc = "";
+		if(result > 0) {
+			msg = "자격증이 추가 되었습니다.";
+			loc = "/views/petsitterMypage/petSitterInfo.jsp";
+		}else {
+			msg = "자격증 추가를 실패했습니다.";
+			loc = "/views/userReservation/addCertificate.jsp";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

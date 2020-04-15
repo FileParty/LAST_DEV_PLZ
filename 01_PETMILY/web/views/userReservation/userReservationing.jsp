@@ -168,8 +168,11 @@ List<PetReservation> list = (List)request.getAttribute("list");
 				<tr >
 					<td style="width300px; height:200px;" rowspan="2" colspan="2">
 						<div style="width: 200px;">
-							<%-- <img src="<%=request.getContextPath()%>/views/img/<%=p.getPetImg()%>"> --%>
-							<img style="border:1px solid;width:200px;height:150px;"src="<%=request.getContextPath()%>/upload/board/매일산책.png">
+							<%if(p.getPetImg()==null) {%>
+							<p>등록 된 이미지가 없습니다.</p>
+							<%}else {%>
+							<img style="border:1px solid;width:200px;height:150px;"src="<%=request.getContextPath()%>/upload/board/<%=p.getPetImg()%>">
+							<%} %>
 						</div>
 					</td>
 					<td style="height: 10px;"colspan="3">
@@ -194,29 +197,29 @@ List<PetReservation> list = (List)request.getAttribute("list");
 							</div>
 							<div class="col-lg-6 align-self-end">
 								<%if(p.getPlusType().contains("목욕가능")==true) { %>
-								<input style="margin:0px;"type="checkbox" value="목욕가능" checked disabled>목욕
+								<input style="display:inline;font-size:13px;margin:0px;"type="checkbox" value="목욕가능" checked disabled><p style="font-size:13px;display:inline;">목욕</p>
 								<%} else { %>
-								<input type="checkbox" value="">목욕
+								<input style="font-size:13px;display:inline;"type="checkbox" value=""><p style="font-size:13px;display:inline;">목욕</p>
 								<%} %>
 								<%if(p.getPlusType().contains("집앞픽업")==true) { %>
-								<input type="checkbox" checked disabled>픽업
+								<input style="display:inline;" type="checkbox" checked disabled><p style="font-size:13px;display:inline;">집앞픽업</p><br>
 								<%} else { %>
-								<input type="checkbox">픽업
+								<input style="display:inline;" type="checkbox"><p style="font-size:13px;display:inline;">집앞픽업</p><br>
 								<%} %>
 								<%if(p.getPlusType().contains("약물복용")==true) { %>
-								<input type="checkbox" value="약물복용" checked disabled>약물복용<br>
+								<input style="display:inline;" type="checkbox" value="약물복용" checked disabled><p style="font-size:13px;display:inline;">약물복용</p>
 								<%} else { %>
-								<input type="checkbox">약물복용
+								<input style="display:inline;" type="checkbox"><p style="font-size:13px;display:inline;">약물복용</p>
 								<%} %>
 								<%if(p.getPlusType().contains("노견케어")==true) { %>
-								<input type="checkbox" checked disabled>노견케어
+								<input style="display:inline;" type="checkbox" checked disabled><p style="font-size:13px;display:inline;">노견케어</p>
 								<%} else { %>
-								<input type="checkbox">노견케어
+								<input style="display:inline;" type="checkbox"><p style="font-size:13px;display:inline;">노견케어</p>
 								<%} %>
 								<%if(p.getPlusType().contains("추가할인")==true) { %>
-								<input style="margin:0px;"type="checkbox" checked disabled>추가할인
+								<input style="display:inline;margin:0px;"type="checkbox" checked disabled><p style="font-size:13px;display:inline;">추가 할인</p>
 								<%} else { %>
-								<input style="margin:0px;"type="checkbox">추가할인
+								<input style="display:inline;margin:0px;"type="checkbox"><p style="font-size:13px;display:inline;">추가 할인</p>
 								<%} %>
 								<input class="btn-light" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail();">
 								</div>

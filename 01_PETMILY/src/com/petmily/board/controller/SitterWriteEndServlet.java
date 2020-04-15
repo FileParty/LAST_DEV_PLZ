@@ -9,23 +9,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.petmily.board.model.vo.PetSitterBoard;
 import com.petmily.board.service.BoardService2;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class SitterWriterServlet
  */
-@WebServlet("/sitter/write")
-public class SitterWriterServlet extends HttpServlet {
+@WebServlet("/sitter/writeEnd")
+public class SitterWriteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SitterWriterServlet() {
+    public SitterWriteEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,6 +37,8 @@ public class SitterWriterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+	    String userId = ((User)session.getAttribute("loginUser")).getUserId();
 		String path = getServletContext().getRealPath("/upload/board/");
 		int maxSize = 1024*1024*10;
 		MultipartRequest mr = new MultipartRequest(request, path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
@@ -106,12 +110,19 @@ public class SitterWriterServlet extends HttpServlet {
 		
 	
 		
-	PetSitterBoard pb = new PetSitterBoard(0,"petsitter4",title,intro,small,middle,big,address,comment,"N","Y",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
+	PetSitterBoard pb = new PetSitterBoard(0,userId,title,intro,small,middle,big,address,comment,"N","Y",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
 	
 		
 		int result = new BoardService2().boardInsert(pb);
-
-		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+		msg="게시글 등록 성공하였습니다.";
+		request.getRequestDispatcher("/views/petsitterMypage/petSitterInfo.jsp").forward(request, response);
+		}else {
+			msg="게시글 등록을 실패 하였습니다.";
+			loc="/views/common/msg.jsp";
+		}
 
 		
 	}

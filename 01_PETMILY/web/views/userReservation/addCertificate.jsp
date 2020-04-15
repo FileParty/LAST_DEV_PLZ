@@ -1,9 +1,10 @@
-<%@page import="com.petmily.petsitter.model.vo.PetSitterCertificate"%>
+<%@page import="com.petmily.petsitter.model.vo.PetSitterCertificate,java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-    	PetSitterCertificate pc = (PetSitterCertificate)request.getAttribute("pc");
+    	List<PetSitterCertificate> list = (List)request.getAttribute("pc");
+		System.out.println("추가목록:"+list);
     %>
 <!DOCTYPE html>
 <html>
@@ -111,7 +112,9 @@ th {
 
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">
-							<table id="inner" border="1">
+							<table id="inner">
+							
+							<%for(PetSitterCertificate pc : list) {%>
 								<tr>
 									<th>no</th>
 									<th>자격증 명</th>
@@ -122,18 +125,20 @@ th {
 									<th>상태</th>
 								</tr>
 								<tr>
-									<td>NO</td>
 									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-									
-									<td></td>
-			
-									<td></td>									
+									<td><%=pc.getCertificateName() %></td>
+									<td><%=pc.getCertificationNmae() %></td>
+									<td><%=pc.getDateOfAcquisition().substring(0,11) %></td>
+									<%if(pc.getExpirationDate()!=null) {%>
+									<td><%=pc.getExpirationDate().substring(0,11) %></td>
+									<%}else { %>
+									<td>- </td>
+									<%} %>
+									<td><input type="button" value="이미지 보기" onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')"></td>
+									<td><%=pc.getResType() %></td>									
 								</tr>
-								
+								<%} %>
+							
 							</table>
 							
 						</div>

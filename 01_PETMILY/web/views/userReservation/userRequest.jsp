@@ -4,7 +4,6 @@
 <%@ page import="java.util.List,com.petmily.reservation.model.vo.PetReservation" %>
 <%
 	List<PetReservation> list = (List)request.getAttribute("list");
-	int count = 1;
 %>    
     
 
@@ -161,7 +160,15 @@
                 </ul>
               
                   
-                   
+                  
+                   		<input type="button" value="예약번호 순↑" style="border-radius: 15px;" id="btn" name="btn">
+						<input type="button" value="예약번호 순↓" style="border-radius: 15px;" id="btn1" name="btn1">
+						<input type="button" value="체크인 순↑" style="border-radius: 15px;" id="btn2" name="btn2">
+						<input type="button" value="체크인 순↓" style="border-radius: 15px;" id="btn3" name="btn3">
+						<input type="button" value="금액 순↑" style="border-radius: 15px;" id="btn4" name="btn4">
+						<input type="button" value="금액 순↓" style="border-radius: 15px;" id="btn5" name="btn5">
+						
+                
                    <!-- 콘텐츠 영역 -->
                    <table id="enrollTB">
 
@@ -177,8 +184,8 @@
                         <th>총 금액</th>
                         <th>채팅</th>
                     </tr>
-                    
-                   	<%for(PetReservation pr : list) {%>
+                    <%for(PetReservation pr : list) {%>
+                   	
 	                    <tr align="center">
 	                    
 	                    	
@@ -206,6 +213,7 @@
     					
                     
                 </table>
+                
                 <br>
                 <br>
                 <br>
@@ -236,7 +244,41 @@ function requestCheck() {
 	
 	window.open('<%=request.getContextPath()%>/user/requestDetail','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 }
-    
+
+$("#btn").click(function(){//위
+	$("#btn1").show();
+	$("#btn").hide(); 
+	location.replace('<%=request.getContextPath()%>/user/request?type=btn')
+})
+
+$("#btn1").click(function(){//아래
+	$("#btn1").hide();
+	$("#btn").show();
+	location.replace('<%=request.getContextPath()%>/user/request?type=btn1')
+})
+<%-- $("#btn2").click(function(){
+	$("#btn2").hide();
+	$("#btn3").show();
+	location.replace('<%=request.getContextPath()%>/user/request?type=btn2')
+})
+
+$("#btn3").click(function(){
+	$("#btn3").hide();
+	$("#btn2").show();
+	location.replace('<%=request.getContextPath()%>/user/request?type=btn3')
+})
+$("#btn4").click(function(){
+	$("#btn4").hide();
+	$("#btn5").show();
+	location.replace('<%=request.getContextPath()%>/user/request?type=btn4')
+})
+
+$("#btn5").click(function(){
+	$("#btn5").hide();
+	$("#btn4").show();
+	location.replace('<%=request.getContextPath()%>/user/request?type=btn5')
+}) --%>
+
     
 
 

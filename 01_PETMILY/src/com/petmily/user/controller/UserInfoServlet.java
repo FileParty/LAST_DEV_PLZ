@@ -46,6 +46,8 @@ public class UserInfoServlet extends HttpServlet {
 //			가져온 데이터 저장
 			request.setAttribute("user", u);
 			
+			System.out.println("user의 타입(마이페이지) : "+ u.getUserType());
+			
 //			화면 전환
 			// 분기처리 추가
 			switch(u.getUserType()) {

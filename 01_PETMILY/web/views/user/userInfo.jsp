@@ -352,8 +352,6 @@ label.custom-file-label::after{
         </form>
         </div>
     </section>
-    
-    <br><br><br><br><br><br><br><br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

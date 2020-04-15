@@ -44,13 +44,13 @@ pageEncoding="UTF-8"%>
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 50px;
+            margin-top: 150px;
             height: 100%;
             
         }
     #menu{
         width: 230px;
-        /* position : fixed; */
+        position : fixed;
         height: 100%;
     }
     ul{
@@ -193,9 +193,6 @@ pageEncoding="UTF-8"%>
         </form>
         </div>
     </section>
-    
-    <br><br><br>
-    
 <style>
 	.no{
 		width:40px;
@@ -212,5 +209,10 @@ pageEncoding="UTF-8"%>
 
 
 </style>
+
+<script>
+	
+</script>
+
 
 <%@ include file="/views/common/footer.jsp" %>

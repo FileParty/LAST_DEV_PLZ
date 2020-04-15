@@ -166,12 +166,12 @@ div.SNS_BG:hover {
 }
 /* sns별 포인트 컬러 표시하기(마우스 올렸을 때) */
 div#facebook:hover {
-    background-color: rgb(27,73,148);
-}
-div#naver:hover {
     background-color: rgb(62,199,39);
 }
 div#google:hover {
+    background-color: rgb(27,73,148);
+}
+div#kakao:hover {
     background-color: #ffcc33;
 }
 

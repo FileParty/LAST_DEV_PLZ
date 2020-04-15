@@ -247,8 +247,11 @@ List<PetReservation> list = (List)request.getAttribute("list");
     <script>
     
     	function requestDetail() {
+    		var popupX = (window.screen.width / 2) - (300 / 2);
+    		var popupY= (window.screen.height /2) - (350 / 2);
+
     		
-    		window.open("<%=request.getContextPath()%>/user/requestDetails","_blank","width=300px,height=350px");
+    		window.open('<%=request.getContextPath()%>/user/requestDetails','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
     	}
     	
     	

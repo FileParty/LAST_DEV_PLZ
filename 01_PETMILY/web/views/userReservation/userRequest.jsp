@@ -230,8 +230,11 @@
 <script>
 
 function requestCheck() {
+
+	var popupX = (window.screen.width / 2) - (200 / 2);
+	var popupY= (window.screen.height /2) - (350 / 2);
 	
- 	window.open("<%=request.getContextPath()%>/user/requestDetail","_blank","width=300px,height=350px");
+	window.open('<%=request.getContextPath()%>/user/requestDetail','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 }
     
     

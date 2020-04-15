@@ -42,12 +42,12 @@
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
 
         }
     #menu{
         width: 230px;
-        position : fixed;
+        /* position : fixed; */
     }
     ul{
         padding-inline-start:0;
@@ -230,7 +230,6 @@ label.custom-file-label::after{
 
 
 </style>
-<body>
 
     <section>
         <div class="container">
@@ -390,6 +389,8 @@ label.custom-file-label::after{
         </form>
         </div>
     </section>
+	
+	<br><br><br><br><br><br><br><br><br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -397,8 +398,8 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 // 토글 버튼
@@ -483,13 +484,7 @@ $('.row4').slideToggle(100); //시간 부여
 	    }
 		/* window.close(); */
 	}).open();
-		
-	
-		
 	}
-    
-    
-
-
 </script>
-</html>
+
+<%@ include file="/views/common/footer.jsp" %>

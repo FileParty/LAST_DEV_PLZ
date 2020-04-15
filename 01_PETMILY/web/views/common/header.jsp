@@ -50,7 +50,7 @@
 		        	<li><a href="#"><img alt="유저" src="<%=request.getContextPath()%>/img/common/Profile.png" width="30px" height="30px"></a></li>
 		            <li><p><%=loginUser.getUserName()%>님 <br><span style="font-size: 15px;">(<%=loginUser.getUserType() %>)</span></p></li>
 		            <li><a style="margin-top:8px;" href="<%=request.getContextPath()%>/log-out">로그아웃</a></li>
-		            <li style="margin-top: 8px;"><a href="<%=request.getContextPath()%>/user/Info?userId=<%=loginUser.getUserId()%>">마이페이지</a></li>
+		            <li style="margin-top: 8px;"><a href="<%=request.getContextPath()%>/common/Info?userId=<%=loginUser.getUserId()%>">마이페이지</a></li>
 		            <li style="margin-top: 8px;"><a href="#"><img alt="종소리" src="<%=request.getContextPath()%>/img/common/Bell.png" width="30px" height="30px"></a></li>
 		        </ul>
 	        <% } %>

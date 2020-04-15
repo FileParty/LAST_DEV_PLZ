@@ -8,7 +8,7 @@
 <%@ include file="/views/common/header.jsp" %>
 
 <!-- 내가 적용한 CSS : 로그인 -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/loginForm.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/yskCss/loginForm.css">
 <!-- 내가 적용한 Jquery 파일 -->
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script> 
 

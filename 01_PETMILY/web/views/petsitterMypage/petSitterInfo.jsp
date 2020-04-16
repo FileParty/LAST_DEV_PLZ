@@ -248,14 +248,12 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write)" style="width: 200px; cursor: pointer;">글 작성하기</button>
+                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">글 작성하기</button>
                     </div>
                     <table>
                         <tr>
-                            <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td> 
-                            
-                            <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                             
-                            
+                            <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td>                            
+                            <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                                                       
                         </tr>
                         <tr>
                             <td style="padding-left: 20px;"></td>

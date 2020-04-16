@@ -1,4 +1,4 @@
-package com.petmily.reservation.controller;
+package com.petmily.petsitter.certificate.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.petmily.reservation.model.vo.PetReservation;
-import com.petmily.reservation.service.ReservationService;
+import com.petmily.petsitter.certificate.service.SitterCertificateService;
+import com.petmily.petsitter.model.vo.PetSitterCertificate;
 import com.petmily.user.model.vo.User;
 
 /**
- * Servlet implementation class UserReservationingServlet
+ * Servlet implementation class PetsitterCertificateServlet
  */
-@WebServlet("/user/reservationing")
-public class UserReservationingServlet extends HttpServlet {
+@WebServlet("/sitter/certificate")
+public class PetsitterCertificateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserReservationingServlet() {
+    public PetsitterCertificateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +35,12 @@ public class UserReservationingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		HttpSession session = request.getSession();
+		 HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-	     System.out.println("진행예약 : " + userId);
-		List<PetReservation> list = new ReservationService().reservation(userId);
-		
-		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/userReservation/userReservationing.jsp").forward(request, response);
+	    
+		List<PetSitterCertificate> list = new  SitterCertificateService().selectCertificate(userId);
+		request.setAttribute("pc", list);
+		request.getRequestDispatcher("/views/userReservation/certificate.jsp").forward(request, response);
 	}
 
 	/**

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.petmily.petsitter.settled.model.service.sitterService;
+import com.petmily.petsitter.settled.model.vo.PetReservation;
 import com.petmily.user.model.vo.User;
 
 
@@ -33,7 +34,17 @@ public class PetSitterSettledEndServlet extends HttpServlet {
 		if(flag) {
 //			사용자 타입이 '펫시터'인 유저가 맞다면, dao에 접근하여 리스트를 가져오라.
 			String id = loginUser.getUserId();
-			List<> = new sitterService().settledList(id);
+			List<PetReservation> list = new sitterService().settledList(id);
+			
+//			가져온 데이터를 저장하라.
+			request.setAttribute("list", list);
+//			응답페이지를 구성하라.
+			request.getRequestDispatcher("/views/").forward(request, response);
+		}
+		else {
+//			사용자 타입이 '펫시터'인 유저가 아니라면, 해당 로직을 구현하라.
+			System.out.println("현재 사용자 타입이 '펫시터'가 아닙니다. -> "+loginUser.getUserType());
+			return; // 이게 맞나?
 		}
 		
 	}

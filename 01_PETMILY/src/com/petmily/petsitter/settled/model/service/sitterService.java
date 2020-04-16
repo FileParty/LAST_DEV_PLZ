@@ -6,11 +6,12 @@ import static com.petmily.common.JDBCTemplate.close;
 import java.sql.Connection;
 import java.util.List;
 
+import com.petmily.petsitter.settled.model.dao.SitterDao;
 import com.petmily.petsitter.settled.model.vo.PetReservation;
 
 public class sitterService {
 	
-	private sitterDao dao = new sitterDao();
+	private SitterDao dao = new SitterDao();
 	
 //	
 	public List<PetReservation> settledList(String id) {

@@ -296,7 +296,9 @@ label.custom-file-label::after{
                         <div>
                         <tr class="row1" style="display: none;">
                             <td></td>
-                            <td style="line-height:40px; padding-left:50px;"><input type="email" id="email" name="email" style="height:25px; width: 230px;"/> </td> 
+                            <td style="line-height:40px; padding-left:50px;">
+                            	<input type="email" id="email" name="email" style="height:25px; width: 230px;"/> 
+                           	</td> 
                             <td><button class="duplicate" type="button" style="height:25px;">중복확인</button></td>
                             <p></p>
                         </tr>

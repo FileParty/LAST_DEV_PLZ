@@ -35,10 +35,8 @@ public class PetSitterSettledServlet extends HttpServlet {
 //			사용자 타입이 '펫시터'인 유저가 맞다면, dao에 접근하여 리스트를 가져오라.
 			String id = loginUser.getUserId();
 			List<PetReservation> list = new sitterService().settledList(id); // 서비스 1
-			int count = new sitterService().settledCount(id); // 서비스 2
 			
 			System.out.println("이전 정산보기 리스트 내용 :"+list);
-			System.out.println("이전 정산보기 건수 :" +count);
 			
 //			가져온 데이터를 저장하라.
 			request.setAttribute("list", list);

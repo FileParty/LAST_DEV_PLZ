@@ -48,10 +48,10 @@ public class SitterDao {
 			
 			while(rs.next()) {
 				pr = new PetReservation();
-				pr.setReservationCode(rs.getInt("prcode")); // 예약 테이블코드
-				pr.setCheckOutDate(rs.getString("prdate")); // 체크아웃 날짜
-				pr.setPrice(rs.getInt("prprice")); // 최종 정산금액
-				pr.setFees(rs.getInt("prceil")); // 수수료
+				pr.setCheckOutDate(rs.getString("PRDATE")); // 체크아웃 날짜
+				pr.setNumAll(rs.getInt("NUMALL"));; // 결제 건수
+				pr.setPrice(rs.getInt("PRPRICE")); // 최종 정산금액
+				pr.setFees(rs.getInt("PRCEIL")); // 수수료
 				list.add(pr);
 			}
 			System.out.println("dao에서 잘 담아졌는가(dao) : "+list);
@@ -64,29 +64,5 @@ public class SitterDao {
 			close(pstmt);
 		}
 		return list;
-	}
-	
-//	펫시터 마이페이지 - 이전 정산보기 로직(건수)
-	public int settledCount(Connection conn, String id) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int count = 0;
-		String sql = prop.getProperty("settledCount");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs.next();
-			count= rs.getInt(1);
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(rs);
-			close(pstmt);
-		}
-		return count;
-		
 	}
 }

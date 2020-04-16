@@ -22,13 +22,4 @@ public class sitterService {
 		close(conn);
 		return list;
 	}
-	
-//	펫시터 마이페이지 - 이전 정산보기 결제건수 확인
-	public int settledCount(String id) {
-		Connection conn = getConnection();
-		int count = dao.settledCount(conn, id);
-		System.out.println("펫시터 서비스에서 count를 가져오는가(sitterService) : "+count);
-		close(conn);
-		return count;
-	}
 }

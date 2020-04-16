@@ -191,7 +191,7 @@
 
 	                    <tr class="tr-blank">
 	                        <th>no</th>
-	            			<th>정산</th>
+	            			<th>정산(월)</th>
 	            			<th>결제 건수</th>
 	                        <th>최종 정산 금액</th>
 	                        <th>수수료</th>
@@ -204,34 +204,27 @@
 								<p style="text-align: center;"><%= count++ %></p>
 							</td>
 							
-							<%-- <!-- 특정 문자열 찾기 선언 -->
-							<% String idx = (Date)indexOf(pr.getCheckOutDate()) %> --%>
-							<!-- 정산(월) -->
-							<%-- <% switch(idx.substring(6, 7)) { %>
-							<% case "01" : %> --%>
 							<td>
 								<p style="text-align: center;"><%= pr.getCheckOutDate() %></p>
 							</td>
-							<%-- <% break; %>
-							<% } %> --%>
 							
 							<!-- 결제 건수 --> 
 							<td>
-								<p style="text-align: center;"><%= count++ %></p>
+								<p style="text-align: center;"><%= pr.getNumAll()+"건" %></p>
 							</td> 
 							
 							<!-- 최종 정산 금액-->
 							<td>
-								<p style="text-align: center;"><%= !(pr.getPrice()==0)? pr.getPrice()+"원" : "최종 정산 금액" %></p>
+								<p style="text-align: center;"><%= pr.getPrice()+"원" %></p>
 							</td> 
 							
 							<!-- 수수료 -->
 							<td>
-								<p style="text-align: center;"><%= !((pr.getPrice()/9)==0)? (pr.getPrice()/9)+"원" : "수수료" %></p>
+								<p style="text-align: center;"><%= pr.getFees()+"원" %></p>
 							</td> 
 							
 	                    </tr>
-                    	<% } %>
+	                    <% } %>
                		</table>
                 
               		<br><br><br>

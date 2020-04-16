@@ -478,7 +478,7 @@
 		}
 		
 		/* 휴대번호 숫자 길이 조건 */
-		if(!(phone.value.length<11 && phone.value.length>11)) {
+		if((phone.value.length<11 || phone.value.length>11)) {
 			spanPhone.innerHTML="휴대번호는 숫자 11개로 입력해야 합니다.";
 			spanPhone.style.color="red";
 			spanPhone.style.fontWeight='bolder';

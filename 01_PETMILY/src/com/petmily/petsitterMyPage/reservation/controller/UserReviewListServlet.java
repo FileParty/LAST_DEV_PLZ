@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
+import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageUserReview;
 import com.petmily.petsitterMyPage.reservation.service.PetsitterMypageReservationService;
 
 /**
- * Servlet implementation class PetsitterMypageBeforePaymentReservationServlet
+ * Servlet implementation class UserReviewListServlet
  */
-@WebServlet("/petsitter/mypage/beforePaymentReservation")
-public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet {
+@WebServlet("/petsitter/mypage/userReviewList")
+public class UserReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PetsitterMypageBeforePaymentReservationServlet() {
+    public UserReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +31,16 @@ public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		String userId=request.getParameter("userId");
 		
-		// 로그인 되어있는 펫시터 아이디(임시)
-		String petsitterId=request.getParameter("petsitterId");
+		System.out.println("유저아이디 확인"+userId);
 		
-		System.out.println(petsitterId);
-		
-		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(petsitterId);
+		List<PetsitterMypageUserReview> list=new PetsitterMypageReservationService().selectPetsitterMypageUserReview();
 		
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/views/petsitterMypage/beforePaymentReservation.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/petsitterMypage/secretReviewList.jsp").forward(request, response);
 		
 	}
 

@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
-<%@page import="java.util.List,com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation" %>
-
 <%@ include file="/views/common/header.jsp" %>
-
-
-<%
-	int count=1;
-	List<PetsitterMypageReservation> list=(List)request.getAttribute("list");
-%>
 
 <style>
    *{   
@@ -186,13 +178,13 @@ pageEncoding="UTF-8"%>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
 			                    <tr>
 			                    	<td class="no"><%=count++ %></td>
-			                    	<td class="cho"><form><input type="checkbox" name="" value=""></form></td>
+			                    	<td class="cho"><form><input type="checkbox" name="" value="" /></form></form></td>
 			                    	<td class="ckDate"><%=pmr.getCheckInDate() %></td>
 			                    	<td class="ckDate"><%=pmr.getCheckOutDate() %></td>
 			                    	<td class="name"><%=pmr.getUserName() %></td>
 			                    	<td class="read"><div class="p-1"><button type="button" class="btn" >열람</button></div></td>
 			                    	<td><div class="p-1"><button id="secretReview" type="button" class="btn" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
-			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></div></td>
+			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></td>
 			                    	<td class="state"><%=pmr.getResType() %></td>
 			                    	<td><div class="p-1"><button type="button" class="btn">채팅</button></div></td>
 			                    </tr>
@@ -292,45 +284,5 @@ pageEncoding="UTF-8"%>
 	
 </style>
 
-<script>
-	$(function(){
-		
-		$("#secretReview").click((e)=>{
-			//console.log($(this).val());
-			$.ajax({
-				url:"<%=request.getContextPath()%>/petsitter/mypage/userReviewList",
-				data:{userId:$(e.target).val()},
-				error:function(){
-	  				alert("실패");
-	  				console.log($(this).val());
-	  			},
-	  			success:data=>{
-	  				$("#secretReviewModalBody").html(data);
-	  			}
-			});
-		});
-	});
-	
-	$(function(){
-		
-		$("#requestDetail").click(()=>{
-		
-			$.ajax({
-				url:"<%=request.getContextPath()%>/petsitter/mypage/requestDetail",
-				data:{userId:$(this).val()},
-				error:function(){
-	  				alert("실패");
-	  				console.log($(this).val());
-	  			},
-	  			success:data=>{
-	  				$("#requestDetailModal").html(data);
-	  			}
-			});
-			
-		});
-	});
-	
-	
-</script>
 
 <%@ include file="/views/common/footer.jsp" %>

@@ -46,7 +46,7 @@
 					width="20px" height="20px"></p>
 		</div>
 		<div class="adminUserInfo">
-			<table>
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>No</th>
@@ -73,7 +73,7 @@
 								<p> N </p>
 							<% } %>
 							</td>
-							<td><%=aps.getUserType().substring(0,3)%></td>
+							<td><%=aps.getUserType()!=null?aps.getUserType().substring(0,3):"없음"%></td>
 						</tr>
 					<% } %>
 				</tbody>

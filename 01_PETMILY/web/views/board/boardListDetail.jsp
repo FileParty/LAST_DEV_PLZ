@@ -395,11 +395,11 @@
 		                        	<%} %>
 	                        	</td>
 	                        	
-	                        	<%if(userId.equals(sitterT.getPetSitterId())){%>
+<%-- 	                        	<%if(userId.equals(sitterT.getPetSitterId())){%>
 	                            	<td style="text-align: right;"><button id="bline_request" style="width:150px; height:30px; margin-bottom: 50px;">블라인드 요청</button></td>
 	                            <%} else{%>
 	                            	<td style="text-align: right;"><button id="bline_request" style="display:none; width:150px; height:30px; margin-bottom: 50px;">블라인드 요청</button></td>
-	                            <%} %>
+	                            <%} %> --%>
 	                            
 	                        </tr>
 	                        <tr>
@@ -433,10 +433,10 @@
 		       			<%if(userId.equals(sitterT.getPetSitterId())) {%>
 		                	
 		                	<div class="col-lg-10">
-		                		<textarea  cols="87" rows="4" style=" margin-top: 20px; margin-left: 20px;"></textarea>
+		                		<textarea id="reply_con_<%=review.getUserReviewNo()%>" cols="87" rows="4" style=" margin-top: 20px; margin-left: 20px;"></textarea>
 		                	</div>
 		                	
-							<div class="col-lg-2"><button style=" margin-top: 20px;">답글 입력</button></div>		                	
+							<div class="col-lg-2"><button id="reply" style="margin-top: 20px;" onclick="replyUpdate('<%=review.getUserReviewNo()%>');">답글 입력</button></div>		                	
 		                <%} %>
 		       		
 		       		<%} %>
@@ -500,7 +500,7 @@
             <div>체크 인 - 체크 아웃</div>
             <hr>
             <!-- 달력 api 완성 이후 작업 -->
-            <div><input name="checkIn" style="width:40%; margin-right: 13px; margin-left: 13px;" type="date" onchange="checkInC();" id="checkIn"> ~ <input name="checkOut" style="width:40%; margin-right: 13px; margin-left: 13px;" type="date" id="checkOut" onchange="checkOutC();"></div>
+            <div><input name="checkIn" style="width:40%; margin-right: 12px; margin-left: 12px;" type="date" onchange="checkInC();" id="checkIn"> ~ <input name="checkOut" style="width:40%; margin-right: 12px; margin-left: 12px;" type="date" id="checkOut" onchange="checkOutC();"></div>
             
             <br>
             
@@ -1397,6 +1397,34 @@ function resulvation_complete(){
 		}
 	});
  	
+}
+
+function replyUpdate(reviewNo){
+	console.log(document.getElementById("reply_con_" + reviewNo).value);
+	
+	$.ajax({
+		type: "POST",
+		url: "<%=request.getContextPath()%>/replyUpdate.do",
+		data: {"reply_con": document.getElementById("reply_con_" + reviewNo).value,
+				"review_no": reviewNo},
+		success: function(data){
+			
+			if(data=="t"){
+				$("#reply").parent().attr("display", "none");
+				document.getElementById("reply_con_" + reviewNo).value = reply_con;
+			}else{
+				alert("답글입력에 실패하였습니다.");
+			}
+			
+			
+		},
+		error: function(){
+	        
+			alert("답글입력에 실패하였습니다.");
+	        
+		}
+		
+	});
 }
 
 </script>

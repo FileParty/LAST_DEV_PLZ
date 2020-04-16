@@ -426,7 +426,6 @@ public class ReservationDao {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
-				
 				p.setBoardNo(rs.getInt("BCODE"));
 				p.setBoardTitle(rs.getString("BTITLE"));
 				p.setSitterName(rs.getString("UNAME"));
@@ -439,6 +438,73 @@ public class ReservationDao {
 		close(pstmt);
 	}
 		return p;
+}
+	
+	public PetReservation endRev(Connection conn,int code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PetReservation pr = null;
+		String sql = prop.getProperty("endRev");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pr = new PetReservation();
+				pr.setReservationCode(rs.getInt("RESERVATION_CODE"));
+				pr.setCheckIn(rs.getString("CHECKIN_DATE"));
+				pr.setCheckOut(rs.getString("CHECKOUT_DATE"));
+				pr.setPrice(rs.getInt("PRICE"));
+				pr.setResType(rs.getString("RES_TYPE"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pr;
+	}
+	
+	public int endSitting(Connection conn,int code) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int result = 0;
+			String sql = prop.getProperty("endSitting");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, code);
+				rs=pstmt.executeQuery();
+				
+				rs.next();
+				result = rs.getInt(1);
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+	}
+	public int endSitting2(Connection conn,int code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("endSitting2");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+		}
+		return result;
 }
 }
 

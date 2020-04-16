@@ -158,17 +158,7 @@
                   
                     <li class="breadcrumb-item active" style="font-size:15px;">요청 중인 예약 >></li>
                 </ul>
-              
-                  
-                  
-                   		<input type="button" value="예약번호 순↑" style="border-radius: 15px;" id="btn" name="btn">
-						<input type="button" value="예약번호 순↓" style="border-radius: 15px;" id="btn1" name="btn1">
-						<input type="button" value="체크인 순↑" style="border-radius: 15px;" id="btn2" name="btn2">
-						<input type="button" value="체크인 순↓" style="border-radius: 15px;" id="btn3" name="btn3">
-						<input type="button" value="금액 순↑" style="border-radius: 15px;" id="btn4" name="btn4">
-						<input type="button" value="금액 순↓" style="border-radius: 15px;" id="btn5" name="btn5">
-						
-                
+     
                    <!-- 콘텐츠 영역 -->
                    <table id="enrollTB">
 	
@@ -180,7 +170,6 @@
                         <th>펫 시터 명</th>
                         <th>요청 상세</th>
                         <th>최종 결제 금액</th>
-                        <th>종료 일자</th>
                         <th>채팅 기록</th>
                     </tr>
                     
@@ -195,15 +184,13 @@
 	                    	
 	                    	<td style="font-size:12px;"><%=pr.getCheckOut().substring(0,11) %></td>
 	                    	
-	                    	<td><%=pr.getBoardTitle()%></td>
+	                    	<td style="font-size:12px;"><%=pr.getBoardTitle()%></td>
 	                    	
-							<td><%=pr.getSitterName() %></td>
+							<td style="font-size:12px;"><%=pr.getSitterName() %></td>
 							
-							<td style="font-size:12px;"><input onclick="requestCheck()" type="button" id="request" value="상세 요청 확인"></td>
+							<td style="font-size:12px;"><input onclick="requestCheck(<%=pr.getReservationCode() %>)" type="button" id="request" value="상세 요청 확인"></td>
 							
 							<td style="font-size:12px;"><%=pr.getPrice() %></td> 
-							
-							<td style="font-size:12px;">종료 일자</td> 
 							
 							<td style="font-size:12px;"><input type="button" id="chat" value="채팅"></td>
 	                    </tr>
@@ -236,12 +223,12 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-function requestCheck() {
+function requestCheck(code) {
 
-	var popupX = (window.screen.width / 2) - (200 / 2);
-	var popupY= (window.screen.height /2) - (350 / 2);
+	var popupX = (window.screen.width / 2) - (300 / 2);
+	var popupY= (window.screen.height /2) - (200 / 2);
 	
-	window.open('<%=request.getContextPath()%>/user/requestDetail','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+	window.open('<%=request.getContextPath()%>/user/endRev?no='+code,'_blank','height=200,width=280,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 }
 
 

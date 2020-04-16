@@ -114,7 +114,7 @@ th {
 						<div class="in-table d-flex justify-content-center">
 							<table id="inner">
 							
-							<%for(PetSitterCertificate pc : list) {%>
+						
 								<tr>
 									<th>no</th>
 									<th>자격증 명</th>
@@ -125,6 +125,7 @@ th {
 									<th>상태</th>
 								</tr>
 								<tr>
+								<%for(PetSitterCertificate pc : list) {%>
 									<td></td>
 									<td><%=pc.getCertificateName() %></td>
 									<td><%=pc.getCertificationNmae() %></td>

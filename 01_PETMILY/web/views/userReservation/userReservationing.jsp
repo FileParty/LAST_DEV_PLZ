@@ -5,7 +5,6 @@
 <%@ include file="/views/common/header.jsp" %>
 <%
 List<PetReservation> list = (List)request.getAttribute("list");
- 	
 %>
 
 
@@ -230,7 +229,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 				</tr>
 				<tr>
 					<td colspan="5">
-						<input class="btn-warning" style="font-size:13px;border-radius:20px;margin-left:670px;"type="button" value="펫 시팅 종료">
+						<input onclick="endSitting(<%=p.getReservationCode() %>)" class="btn-warning" style="font-size:13px;border-radius:20px;margin-left:670px;"type="button" value="펫 시팅 종료">
 						</td>
 		
 				</tr>
@@ -255,6 +254,10 @@ List<PetReservation> list = (List)request.getAttribute("list");
 
     		
     		window.open('<%=request.getContextPath()%>/user/requestDetails','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+    	}
+    	
+    	function endSitting(code) { 
+    		location.replace('<%=request.getContextPath()%>/user/endSitting?code='+code);
     	}
     	
     	

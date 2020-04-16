@@ -56,28 +56,28 @@ public class UserReservationRequestServlet extends HttpServlet {
 						request.setAttribute("list", list);
 						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
 							break;
-//		case "btn2" : 
-//						Collections.sort(list,(i,j)->i.getCheckIn().compareTo(j.getCheckIn()));
-//						request.setAttribute("list", list);
-//						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
-//							break;
-//		case "btn3" : 
-//						Collections.sort(list,(i,j)->j.getCheckIn().compareTo(i.getCheckIn()));
-//						request.setAttribute("list", list);
-//						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
-//							break;
-//		case "btn4" : 
-//						Collections.sort(list,(i,j)->j.getPrice()-i.getPrice());
-//						request.setAttribute("list", list);
-//						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
-//						break;
-//		case "btn5" :
-//						Collections.sort(list,(i,j)->i.getPrice()-j.getPrice());
-//						request.setAttribute("list", list);
-//						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
-//						break;
-//		}
+		case "btn2" : 
+						Collections.sort(list,(i,j)->i.getCheckIn().compareTo(j.getCheckIn()));
+						request.setAttribute("list", list);
+						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
+							break;
+		case "btn3" : 
+						Collections.sort(list,(i,j)->j.getCheckIn().compareTo(i.getCheckIn()));
+						request.setAttribute("list", list);
+						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
+							break;
+		case "btn4" : 
+						Collections.sort(list,(i,j)->j.getPrice()-i.getPrice());
+						request.setAttribute("list", list);
+						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
+						break;
+		case "btn5" :
+						Collections.sort(list,(i,j)->i.getPrice()-j.getPrice());
+						request.setAttribute("list", list);
+						request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);
+						break;
 		}
+		
 		}else { 
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/views/userReservation/userRequest.jsp").forward(request, response);

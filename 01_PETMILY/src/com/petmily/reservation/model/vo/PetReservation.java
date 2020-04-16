@@ -40,7 +40,8 @@ public class PetReservation {
 	//추가요금
 	private int finalyPrice;
 	private String surchargeText;
-	
+	//기타 카운트
+	private int count;
 
 	
 	
@@ -48,12 +49,14 @@ public class PetReservation {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public PetReservation(int reservationCode, String sitterName, String petSitterId, String userId, int boardNo,
 			String checkIn, String checkOut, String careType, String petType, int petBath, String petMedication,
 			String petPickup, String plusQuestion, String priceEndDate, int price, String resType, String boardTitle,
 			int small, int middle, int big, String address, String comment, String boardBlind, int petCode,
-			String petImg, String petName, List<String> plusType, String petSize, int finalyPrice,
-			String surchargeText) {
+			String petImg, String petName, List<String> plusType, String petSize, int finalyPrice, String surchargeText,
+			int count) {
 		super();
 		this.reservationCode = reservationCode;
 		this.sitterName = sitterName;
@@ -85,7 +88,22 @@ public class PetReservation {
 		this.petSize = petSize;
 		this.finalyPrice = finalyPrice;
 		this.surchargeText = surchargeText;
+		this.count = count;
 	}
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
 
 	public int getFinalyPrice() {
 		return finalyPrice;

@@ -5,7 +5,6 @@
 
 <%
 	User loginUser = (User)session.getAttribute("loginUser");
-	System.out.println("header에 있는 session - loginUser 정보 : "+loginUser);
 %>
   
 <!DOCTYPE html>
@@ -17,7 +16,6 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="google-signin-client_id" content="306171897820-rnu74sp5127hhcvfqqdd3qu06sc2n5d3.apps.googleusercontent.com">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Bootstrap CSS -->

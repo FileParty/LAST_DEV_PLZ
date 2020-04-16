@@ -29,37 +29,37 @@ public class SitterUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String img=request.getParameter("profileImg");
-		String id = request.getParameter("userId"); // �븘�씠�뵒
-		String email = request.getParameter("email"); // �씠硫붿씪
-		String phone = request.getParameter("phone"); // �쑕��踰덊샇
-		String postNum = request.getParameter("postNum"); // �슦�렪踰덊샇
-		String address = request.getParameter("address"); //  �룄濡쒕챸 二쇱냼
-		String detailAddress = request.getParameter("detail"); // �긽�꽭二쇱냼
+		String id = request.getParameter("userId"); // 占쎈�占쎌��占쎈�
+		String email = request.getParameter("email"); // 占쎌��筌�遺우��
+		String phone = request.getParameter("phone"); // 占쎌��占쏙옙甕곕����
+		String postNum = request.getParameter("postNum"); // 占쎌��占쎈�よ린����
+		String address = request.getParameter("address"); //  占쎈�嚥≪��梨� 雅��깅��
+		String detailAddress = request.getParameter("detail"); // 占쎄맒占쎄쉭雅��깅��
 		String bankName = request.getParameter("bankName");
 		String accountNo=request.getParameter("accountNo");
 		String accountName=request.getParameter("accountName");
-		String pw = request.getParameter("nowpw"); // �쁽�옱 鍮꾨�踰덊샇
-		String newPw = request.getParameter("newpw"); // �깉 鍮꾨�踰덊샇
+		String pw = request.getParameter("nowpw"); // 占쎌�쏙옙�� ��袁⑨옙甕곕����
+		String newPw = request.getParameter("newpw"); // 占쎄� ��袁⑨옙甕곕����
 		
 		
 		
-//		�젙蹂� �닔�젙�븯湲� �쐞�빐 service濡� �뜲�씠�꽣瑜� 蹂대궦�떎(�븘�씠�뵒, �깉 鍮꾨�踰덊샇, �씠硫붿씪, �쑕���룿, �슦�렪踰덊샇, �룄濡쒕챸二쇱냼, �긽�꽭二쇱냼
+//		占쎌��癰�占� 占쎈��占쎌��占쎈릭疫뀐옙 占쎌��占쎈� service嚥∽옙 占쎈�뀐옙��占쎄숲��占� 癰���沅�占쎈��(占쎈�占쎌��占쎈�, 占쎄� ��袁⑨옙甕곕����, 占쎌��筌�遺우��, 占쎌��占쏙옙占쎈？, 占쎌��占쎈�よ린����, 占쎈�嚥≪��梨멧��깅��, 占쎄맒占쎄쉭雅��깅��
 		int result= new UserService().sitterUpdateEnd(id, newPw, email, phone, postNum, address, detailAddress, bankName,accountNo,accountName,img);
 		
-//		�쓳�떟�럹�씠吏�
+//		占쎌�놂옙��占쎈�뱄옙��筌�占�
 		String msg = "";
 		String loc = "";
 		
-//		���옣�씠 �옒 �릺�뿀�뒗吏��뿉 ���븳 �븞�궡湲� 濡쒖쭅
+//		占쏙옙占쎌�ｏ옙�� 占쎌�� 占쎈┷占쎈�占쎈��筌�占쏙옙肉� 占쏙옙占쎈립 占쎈�占쎄땀疫뀐옙 嚥≪��彛�
 		if(result>0) {
-			msg = "�쉶�썝�젙蹂닿� �닔�젙�릺�뿀�뒿�땲�떎";
-			// �씪諛� �궗�슜�옄 留덉씠�럹�씠吏� - ���떆蹂대뱶 �솕硫댁쑝濡� �쟾�솚�븯�뒗 湲곕뒫�쓣 媛�吏� �꽌釉붾┸�쑝濡� �씠�룞�븯�뒗 留ㅽ븨媛�
-			loc = "/userInfo?userId="+id; 
+			msg = "������蹂� ������ �깃났�����듬����.";
+			// 占쎌�よ�占� 占쎄�占쎌��占쎌�� 筌�����占쎈�뱄옙��筌�占� - 占쏙옙占쎈��癰���諭� 占쎌��筌�����嚥∽옙 占쎌�억옙��占쎈릭占쎈�� 疫꿸��ワ옙�� 揶�占쏙�占� 占쎄���遺얄�몌옙��嚥∽옙 占쎌��占쎈�占쎈릭占쎈�� 筌��쎈릅揶�占�
+			loc = "/sitterInfo?userId="+id; 
 		}
 		else {
-			msg = "�쉶�썝�젙蹂� �닔�젙�씠 �떎�뙣�릺�뿀�뒿�땲�떎. �떎�떆 吏꾪뻾�빐二쇱꽭�슂.";
-			// �씪諛� �궗�슜�옄 留덉씠�럹�씠吏� - �쉶�썝�젙蹂� - �쉶�썝�젙蹂� �닔�젙 �솕硫댁쑝濡� �쟾�솚�븯�뒗 湲곕뒫�쓣 媛�吏� �꽌釉붾┸�쑝濡� �씠�룞�븯�뒗 留ㅽ븨媛�
-			loc = "/userUpdate?userId="+id; 
+			msg = "������蹂� ������ �ㅽ�⑦�����듬����.";
+			// 占쎌�よ�占� 占쎄�占쎌��占쎌�� 筌�����占쎈�뱄옙��筌�占� - 占쎌�띰옙��占쎌��癰�占� - 占쎌�띰옙��占쎌��癰�占� 占쎈��占쎌�� 占쎌��筌�����嚥∽옙 占쎌�억옙��占쎈릭占쎈�� 疫꿸��ワ옙�� 揶�占쏙�占� 占쎄���遺얄�몌옙��嚥∽옙 占쎌��占쎈�占쎈릭占쎈�� 筌��쎈릅揶�占�
+			loc = "/sitterUpdateInfo?userId="+id; 
 		}
 		
 		request.setAttribute("msg", msg);

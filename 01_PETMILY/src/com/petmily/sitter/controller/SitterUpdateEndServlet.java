@@ -44,7 +44,8 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		
 		
 //		�젙蹂� �닔�젙�븯湲� �쐞�빐 service濡� �뜲�씠�꽣瑜� 蹂대궦�떎(�븘�씠�뵒, �깉 鍮꾨�踰덊샇, �씠硫붿씪, �쑕���룿, �슦�렪踰덊샇, �룄濡쒕챸二쇱냼, �긽�꽭二쇱냼
-		int result= new UserService().sitterUpdateEnd(id, newPw, email, phone, postNum, address, detailAddress, bankName,accountNo,accountName,img);
+		int result = 0;
+		//result= new UserService().sitterUpdateEnd(id, newPw, email, phone, postNum, address, detailAddress, bankName,accountNo,accountName,img);
 		
 //		�쓳�떟�럹�씠吏�
 		String msg = "";

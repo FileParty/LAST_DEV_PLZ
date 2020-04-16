@@ -253,14 +253,14 @@ label.custom-file-label::after{
         
                             <li class="title">펫 프로필</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 펫 프로필</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/petprofile?userId=<%=loginUser.getUserId()%>"> - 펫 프로필</a></li>
                             <br/>
                             
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 종료된 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review"> - 종료된 예약</a></li>
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             
@@ -290,7 +290,7 @@ label.custom-file-label::after{
                 	<table style="margin-left: auto; margin-right:auto">
                      <tr>
                          <td class="sub-title" style="width: 150px;">이름</td> 
-                         <td colspan="2" class="second-td" style="width: 400px;">고세빈</td>
+                         <td colspan="2" class="second-td" style="width: 400px;"><%= loginUser.getUserName() %></td>
                      </tr>
                      <tr>  
                          <td class="sub-title">이메일</td> 
@@ -309,12 +309,13 @@ label.custom-file-label::after{
                      </div>
 
                      <tr>
+                     	<% String birth = loginUser.getUserBirth(); %>
                          <td class="sub-title">생년월일</td> 
-                         <td colspan="2" class="second-td">고세빈</td>
+                         <td colspan="2" class="second-td"><%= birth.substring(0,11) %></td>
                      </tr>
                      <tr>
                          <td class="sub-title">성별</td> 
-                         <td colspan="2" class="second-td">고세빈</td>
+                         <td colspan="2" class="second-td"><%= loginUser.getGender() %></td>
                      </tr>
                      <tr>
                          <td class="sub-title">휴대폰 번호</td> 

@@ -132,6 +132,10 @@ function resulvation_cancel(){
         reservation_end_modal.style.display = "none";
         $('body').css("overflow", "scroll");
         
+        $('#section_end1').attr("style", "display:flex");
+        $('#section_end2').attr("style", "display:none");
+        
+        
     }
 
 }

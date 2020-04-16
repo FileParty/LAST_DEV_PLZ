@@ -36,10 +36,12 @@ public class PetSitterSettledEndServlet extends HttpServlet {
 			String id = loginUser.getUserId();
 			List<PetReservation> list = new sitterService().settledList(id);
 			
+			System.out.println("이전 정산보기 리스트 내용 :"+list);
+			
 //			가져온 데이터를 저장하라.
 			request.setAttribute("list", list);
 //			응답페이지를 구성하라.
-			request.getRequestDispatcher("/views/").forward(request, response);
+			request.getRequestDispatcher("/views/petsitterMypage/petSitterQuealifylist.jsp").forward(request, response);
 		}
 		else {
 //			사용자 타입이 '펫시터'인 유저가 아니라면, 해당 로직을 구현하라.

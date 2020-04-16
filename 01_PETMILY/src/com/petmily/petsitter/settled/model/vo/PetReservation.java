@@ -12,6 +12,7 @@ public class PetReservation {
 	private Date checkOutDate; // CHECKOUT_DATE(체크아웃 날짜)
 	private String careType; // CARE_TYPE(케어 타입)
 	private int price; // PRICE(합계금액)
+	private Date priceEndDate; // PRICE_END_DATE(입금일자)
 	private int fees; // 수수료
 	private String resType; // RES_TYPE(예약상태타입)
 	
@@ -20,7 +21,7 @@ public class PetReservation {
 	}
 
 	public PetReservation(int reservationCode, int petCode, String petSitterId, int boardCode, Date checkInDate,
-			Date checkOutDate, String careType, int price, int fees, String resType) {
+			Date checkOutDate, String careType, int price, Date priceEndDate, int fees, String resType) {
 		super();
 		this.reservationCode = reservationCode;
 		this.petCode = petCode;
@@ -30,6 +31,7 @@ public class PetReservation {
 		this.checkOutDate = checkOutDate;
 		this.careType = careType;
 		this.price = price;
+		this.priceEndDate = priceEndDate;
 		this.fees = fees;
 		this.resType = resType;
 	}
@@ -98,6 +100,14 @@ public class PetReservation {
 		this.price = price;
 	}
 
+	public Date getPriceEndDate() {
+		return priceEndDate;
+	}
+
+	public void setPriceEndDate(Date priceEndDate) {
+		this.priceEndDate = priceEndDate;
+	}
+
 	public int getFees() {
 		return fees;
 	}
@@ -118,7 +128,9 @@ public class PetReservation {
 	public String toString() {
 		return "PetReservation [reservationCode=" + reservationCode + ", petCode=" + petCode + ", petSitterId="
 				+ petSitterId + ", boardCode=" + boardCode + ", checkInDate=" + checkInDate + ", checkOutDate="
-				+ checkOutDate + ", careType=" + careType + ", price=" + price + ", fees=" + fees + ", resType="
-				+ resType + "]";
+				+ checkOutDate + ", careType=" + careType + ", price=" + price + ", priceEndDate=" + priceEndDate
+				+ ", fees=" + fees + ", resType=" + resType + "]";
 	}
+
+	
 }

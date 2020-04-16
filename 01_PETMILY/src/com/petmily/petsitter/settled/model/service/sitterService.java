@@ -17,6 +17,7 @@ public class sitterService {
 	public List<PetReservation> settledList(String id) {
 		Connection conn = getConnection();
 		List<PetReservation> list = dao.settledList(conn, id);
+		System.out.println("펫시터 서비스에서 리스트를 가져오는가(sitterService) : "+list);
 		close(conn);
 		return list;
 	}

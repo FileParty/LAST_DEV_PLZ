@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.petmily.petsitter.settled.model.vo.PetReservation;
 import com.petmily.user.model.dao.UserDao;
-import com.petmily.user.model.vo.UserBookMarkBoard;
 
 public class SitterDao {
 	private Properties prop = new Properties();
@@ -37,25 +36,24 @@ public class SitterDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetReservation pr = null;
-		List<UserBookMarkBoard> list = new ArrayList();
+		List<PetReservation> list = new ArrayList();
 		String sql = prop.getProperty("sitterSettledList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			
+//			<!-- 여기서는 페이징처리 할 예정^^ -->
 			System.out.println("dao의 id :"+id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				pr = new PetReservation();
-				pr.setReservationCode(rs.getInt("reservation_code")); // 예약 테이블코드
-				pr.setCheckOutDate(rs.getDate("checkout_date")); // 체크아웃 날짜
-				pr.setPrice(rs.getInt("price")); // 최종 정산금액
-				pr.setFees(rs.getInt(""));
-				
+				pr.setReservationCode(rs.getInt("prcode")); // 예약 테이블코드
+				pr.setCheckOutDate(rs.getDate("prdate")); // 체크아웃 날짜
+				pr.setPrice(rs.getInt("prprice")); // 최종 정산금액
+				pr.setFees(rs.getInt("prceil")); // 수수료
+				list.add(pr);
 			}
-			
 			System.out.println("dao에서 잘 담아졌는가(dao) : "+list);
 		}
 		catch(SQLException e) {

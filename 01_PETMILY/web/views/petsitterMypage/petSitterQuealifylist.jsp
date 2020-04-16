@@ -3,7 +3,10 @@
 <%@ include file="/views/common/header.jsp" %>
 
 <!-- 슬기 작업 -->
-
+<%@ page import="com.petmily.petsitter.settled.model.vo.*, java.util.List"%>
+<%
+	List<PetReservation> list = (List)request.getAttribute("list");
+%>
 
 <style>
 	*{   
@@ -190,15 +193,15 @@
 	                        <th>수수료</th>
 	                    </tr>
 	                    
-	                    
+	                    <% for(PetReservation pr : list) { %>
 		                 <tr>
 	                    	<!-- no -->
 							<td>
-								<p style="text-align: center;"></p>
+								<p style="text-align: center;"><%= !(pr.getReservationCode()==0)? pr.getReservationCode() : "no" %></p>
 							</td>
 							<!-- 정산(월) -->
 							<td>
-								<p style="text-align: center;"></p>
+								<p style="text-align: center;"><%= !(pr.getPriceEndDate()==null)? pr.getPriceEndDate() : "정산(월)" %></p>
 							</td>
 							<!-- 결제 건수 --> 
 							<td>
@@ -206,14 +209,14 @@
 							</td> 
 							<!-- 최종 정산 금액-->
 							<td>
-								<p style="text-align: center;"></p>
+								<p style="text-align: center;"><%= !(pr.getPrice()==0)? pr.getPrice() : "최종 정산 금액" %></p>
 							</td> 
 							<!-- 수수료 -->
 							<td>
-								<p style="text-align: center;"></p>
+								<p style="text-align: center;"><%= !((pr.getPrice()/9)==0)? (pr.getPrice()/9) : "수수료" %></p>
 							</td> 
 	                    </tr>
-                    
+                    	<% } %>
                		</table>
                 
               		<br><br><br>

@@ -27,6 +27,13 @@
 	    .top-div{
 	    	overflow: hidden;
 	    }
+	    
+	    .vl {   width: 1px;
+            margin-top: 0px;
+            border-left: 1px solid lightgrey;
+            /* height: 100%; */
+        }
+	    
 	    .row{
 	        padding: 0;
 	        margin: 0;
@@ -41,6 +48,20 @@
 	        width: 230px;
 	        /* position : fixed; */
 	    }
+	    
+	    hr{
+            margin-left: 0;
+            width: 10%;
+        }
+        
+        .hr-line {
+		    height: 2px;
+		    color: #ffcc33;
+		    background-color: #ffcc33;
+		    border: none;
+		}
+	    
+	    
 	    ul{
 	        padding-inline-start:0;
 	    }
@@ -51,6 +72,28 @@
 	        font-size: 12px;
 	        margin-bottom: 5px;
 	    }
+	    
+	    table{
+	        border-radius: 5px;
+	        margin-left: auto;
+	        margin-right: auto;
+	        border-collapse: collapse;
+	 	}
+	    td{
+	        border-top: 1px solid grey;
+	        border-bottom: 1px solid grey;
+	
+	    }
+
+	    th{
+	        width: 150px;
+	        font-size: 12px;
+	        text-align: center;
+	        background-color: rgb(189, 188, 188);
+	        color: grey;
+	        border-right: 1px solid white;
+	    }
+	    
 	    
 	    /* ---------- 슬기 작업 css ----------- */
 	    a.menu_a {
@@ -87,7 +130,7 @@
         <div class="container">
             
             <div class="row">
-	            <div class="col-1 menu">
+	            <div class="col-2 menu">
 	                    <div id="menu">
 	                        <ul type="none">
 								<li class="title">회원정보</li>
@@ -133,12 +176,44 @@
 	                    <li class="breadcrumb-item active">이전 정산 보기</li>
 	                </ul>
 	                
-	                
+	                <!-- 컨텐츠 내 테이블 영역 -->
+	                <table id="enrollTB">
+
+	                    <tr class="tr-blank">
+	                        <th>no</th>
+	            			<th>정산(월)</th>
+	            			<th>결제 건수</th>
+	                        <th>최종 정산 금액</th>
+	                        <th>수수료</th>
+	                    </tr>
+	                    
+	                    
+		                 <tr>
+	                    	<!-- no -->
+							<td><p style="text-align: center;"></p></td>
+							<!-- 정산(월) -->
+							<td><p style="text-align: center;"></p></td>
+							<!-- 결제 건수 --> 
+							<td><p style="text-align: center;"></p></td> 
+							<!-- 최종 정산 금액-->
+							<td><p style="text-align: center;"></p></td> 
+							<!-- 수수료 -->
+							<td><p style="text-align: center;"></p></td> 
+	                    </tr>
+                    
+               		</table>
+                
+              		<br><br><br>
+				
+					<!-- 페이징처리(일단 주석처리) -->
+					<div style="padding-left: 370px;"><%=request.getAttribute("pageBar") %></div>
 	            </div>
             
 			</div>
 		
 	</div>
-</section>            
+</section>         
+
+<br><br><br><br>   
 
 <%@ include file="/views/common/footer.jsp" %>

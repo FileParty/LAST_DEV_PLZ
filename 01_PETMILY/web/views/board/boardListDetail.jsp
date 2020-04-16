@@ -1,3 +1,4 @@
+<%@page import="com.petmily.common.filter.LoginUserFilter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import=" com.petmily.reservation.model.vo.ReservationPetCode"%>
 <%@page import=" com.petmily.reservation.model.vo.PetReservation"%>
@@ -15,12 +16,14 @@
 
 <%@ page import="com.petmily.board.model.vo.PetSitterBoard" %>
       
+<%@include file="/views/common/header.jsp" %>
+      
 <%
 
 	/* String bFlag = ""; */
 	
 	
-	String userId = (String)request.getAttribute("userId");
+	String userId = loginUser.getUserId();
 	List<String> dsList = (List)request.getAttribute("dsList");
 	PetSitterBoard boardT = (PetSitterBoard)request.getAttribute("boardT");
 	boolean certificateFlag = (boolean)request.getAttribute("certificateFlag");
@@ -45,7 +48,7 @@
 
 %>
 
-<%@include file="/views/common/header.jsp" %>
+
 
 <link href="<%=request.getContextPath() %>/css/PST.css" rel="stylesheet">
 

@@ -6,6 +6,10 @@
 <%@ page import="com.petmily.petsitter.settled.model.vo.*, java.util.List"%>
 <%
 	List<PetReservation> list = (List)request.getAttribute("list");
+	System.out.println("이전 정산 보기를 가져오는가... -> "+list);
+	
+	int count=1;
+	
 %>
 
 <style>
@@ -187,7 +191,7 @@
 
 	                    <tr class="tr-blank">
 	                        <th>no</th>
-	            			<th>정산(월)</th>
+	            			<th>정산</th>
 	            			<th>결제 건수</th>
 	                        <th>최종 정산 금액</th>
 	                        <th>수수료</th>
@@ -197,11 +201,11 @@
 		                 <tr>
 	                    	<!-- no -->
 							<td>
-								<p style="text-align: center;"><%= !(pr.getReservationCode()==0)? pr.getReservationCode() : "no" %></p>
+								<p style="text-align: center;"><%= count++ %></p>
 							</td>
 							<!-- 정산(월) -->
 							<td>
-								<p style="text-align: center;"><%= !(pr.getPriceEndDate()==null)? pr.getPriceEndDate() : "정산(월)" %></p>
+								<p style="text-align: center;"><%= !(pr.getCheckOutDate()==null)? pr.getCheckOutDate(),2 : "정산(월)" %></p>
 							</td>
 							<!-- 결제 건수 --> 
 							<td>
@@ -209,11 +213,11 @@
 							</td> 
 							<!-- 최종 정산 금액-->
 							<td>
-								<p style="text-align: center;"><%= !(pr.getPrice()==0)? pr.getPrice() : "최종 정산 금액" %></p>
+								<p style="text-align: center;"><%= !(pr.getPrice()==0)? pr.getPrice()+"원" : "최종 정산 금액" %></p>
 							</td> 
 							<!-- 수수료 -->
 							<td>
-								<p style="text-align: center;"><%= !((pr.getPrice()/9)==0)? (pr.getPrice()/9) : "수수료" %></p>
+								<p style="text-align: center;"><%= !((pr.getPrice()/9)==0)? (pr.getPrice()/9)+"원" : "수수료" %></p>
 							</td> 
 	                    </tr>
                     	<% } %>
@@ -222,7 +226,7 @@
               		<br><br><br>
 				
 					<!-- 페이징처리(일단 주석처리) -->
-					<div style="padding-left: 370px;"><%=request.getAttribute("pageBar") %></div>
+					<%-- <div style="padding-left: 370px;"><%=request.getAttribute("pageBar") %></div> --%>
 	            </div>
             
 			</div>

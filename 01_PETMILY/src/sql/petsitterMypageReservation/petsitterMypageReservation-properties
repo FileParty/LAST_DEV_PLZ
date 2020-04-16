@@ -1,3 +1,3 @@
 selectBeforePaymentRerservation=SELECT * FROM PET_RESERVATION P JOIN USER_TABLE U ON(P.USER_ID=U.USER_ID) where pet_sItter_id=?
 selectPetsitterMypageUserReview=SELECT * FROM USER_TABLE U JOIN REVIEW_USER R ON(U.USER_ID=R.USER_ID) JOIN PET_RESERVATION P ON(R.RESERVATION_CODE=P.RESERVATION_CODE)
-sitterSettledList = SELECT PR.RESERVATION_CODE PRCODE, PR.PRICE_END_DATE PRDATE, PR.PRICE PRPRICE, CEIL(PR.PRICE/9) PRCEIL FROM PET_RESERVAION PR JOIN USER_TABLE UT ON(PR.PET_SETTER_ID=UT.USER_ID) WHERE UT.USER_ID=?
+sitterSettledList = select pr.reservation_code prcode, pr.checkout_date prdate, pr.price prprice, ceil(pr.price/9) prceil from pet_reservation pr join user_table ut ON(pr.pet_setter_id=ut.user_id) where ut.user_id=?

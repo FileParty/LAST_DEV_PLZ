@@ -39,33 +39,6 @@
 		</div>
 	</div>
 </section>
-<section id="review">
-		<div id="reviewImg">
-			<img alt="reviewImg" src="<%=request.getContextPath()%>/img/common/reviewTest.jpg"
-				width="562px" height="564px">
-		</div>
-		<div id="BestReview">
-			<h3>BEST 후 기</h3>
-			<div id="bReview1">
-				<img alt="유저" src="<%=request.getContextPath()%>/img/common/Profile.png"
-	        						width="50px" height="50px">
-	        	<p>사용자 김인술님의 후기</p>
-			</div>
-			<div id="bReview2">
-				<p>연락도 빨리 받아주시고 우리 복실이도 좋아하더라구요 감사합니다!</p>
-			</div>
-			<div id="arrow">
-				<img alt="" src="<%=request.getContextPath()%>/img/common/arrow1.jpg" width="70px" height="50px">
-				<img alt="" src="<%=request.getContextPath()%>/img/common/arrow2.jpg" width="70px" height="50px">
-			</div>
-		</div>
-		<div id="nextReview"
-			style="background-image:url('<%=request.getContextPath()%>/img/common/nextReviewBg.png')">
-			<img alt="" src="<%=request.getContextPath()%>/img/common/arrow3.png" 
-			width="70px" height="60px">
-			<p>다른 후기 보러가기</p>
-		</div>
-</section>
 <section id="Questions">
 	<h2>자주하는 질문</h2>
 	<div id="questionsDiv">

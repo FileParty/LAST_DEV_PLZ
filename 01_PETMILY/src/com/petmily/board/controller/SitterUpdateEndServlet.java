@@ -20,7 +20,7 @@ import com.petmily.user.model.vo.User;
 /**
  * Servlet implementation class SitterUpdateEndServlet
  */
-@WebServlet("/sitter/updateEnd")
+@WebServlet("/sitter/updateEnd2")
 public class SitterUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		int maxSize = 1024*1024*10;
 		MultipartRequest mr = new MultipartRequest(request, path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		
-		//게시판테이블
+		//寃뚯떆�뙋�뀒�씠釉�
 		String title =mr.getParameter("title");
 		String intro = mr.getParameter("introduce");
 		int small= 0;
@@ -102,7 +102,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		for(String d : dType) {
 			defaultO.add(d);
 		}
-		System.out.println("수정 완료 데이터 출력");
+		System.out.println("�닔�젙 �셿猷� �뜲�씠�꽣 異쒕젰");
 		System.out.println(title);
 		System.out.println(intro);
 		System.out.println(address);
@@ -133,10 +133,10 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		String msg = "";
 		String loc = "";
 		if(result>0) {
-			msg="게시글이 수정 되었습니다.";
+			msg="寃뚯떆湲��씠 �닔�젙 �릺�뿀�뒿�땲�떎.";
 			request.getRequestDispatcher("/views/petsitterMypage/petSitterInfo.jsp").forward(request, response);
 		}else { 
-			msg="게시글 수정을 실패 하였습니다.";
+			msg="寃뚯떆湲� �닔�젙�쓣 �떎�뙣 �븯���뒿�땲�떎.";
 			loc="/views/common/msg.jsp";
 		}
 

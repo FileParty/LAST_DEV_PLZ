@@ -42,7 +42,7 @@ public class PetReservation {
 	private String surchargeText;
 	//기타 카운트
 	private int count;
-
+	
 	
 	
 	public PetReservation() {

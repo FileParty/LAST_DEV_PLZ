@@ -14,6 +14,7 @@ hr{
     width: 10%;
 }
 </style>
+
 <div class="col-2 menu">
 	<div id="menu">
 		<ul type="none">

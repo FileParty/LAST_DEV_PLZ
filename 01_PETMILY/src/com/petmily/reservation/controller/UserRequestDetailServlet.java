@@ -1,6 +1,7 @@
 package com.petmily.reservation.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +36,7 @@ public class UserRequestDetailServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-		PetReservation pr = new ReservationService().requestDetail(userId);
+	    PetReservation pr = new ReservationService().requestDetail(userId);
 		request.setAttribute("rev", pr);
 		request.getRequestDispatcher("/views/userReservation/requestReservation.jsp").forward(request, response);
 	}

@@ -37,28 +37,13 @@
         margin: 0;
         height: 100%;
     }
-    .menu{
-            width: 230px;
-            /* border: 1px solid yellow; */
-            margin-top: 150px;
-            height: 100%;
-            
-        }
-    #menu{
-        width: 230px;
-        position : fixed;
-        height: 100%;
-    }
     ul{
         padding-inline-start:0;
     }
     .title{
         font-size: 14px;
     }
-    .content{
-        font-size: 12px;
-        margin-bottom: 5px;
-    }
+    
         a:link { color: black; text-decoration: none;}
         a:visited { color: gray; text-decoration: none;}
         a:hover { color: black; text-decoration: underline;}
@@ -96,15 +81,14 @@
     td{
         border-top: 1px solid grey;
         border-bottom: 1px solid grey;
-
+		font-size:12px;
+	
     }
 
     th{
         width: 150px;
         font-size: 12px;
         text-align: center;
-        background-color: rgb(189, 188, 188);
-        color: grey;
         border-right: 1px solid white;
     }
 
@@ -114,41 +98,9 @@
 <body>
     <section>
         <div class="container">
-          <form action="<%=request.getContextPath()%>/request/cancels" method="post">
+          
             <div class="row">
-            <div class="col-2 menu">
-                    <div id="menu">
-                        <ul type="none">
-                            <li class="title"><a href="">회원정보</a></li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 회원정보 수정</a></li>
-                            <li class="content"><a href=""> - 회원 탈퇴</a></li>
-                            <li class="content"><a href=""> - 북마크</a></li>
-                            <li class="content"><a href=""> - 작성 후기</a></li>
-                            <br/>
-        
-                            <li class="title">펫 프로필</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 펫 프로필</a></li>
-                            <br/>
-                            
-                            <li class="title">예약</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 종료된 예약</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
-                            <br/>
-                            
-                            <li class="title">결제</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 결제 내역</a></li>
-                            <li class="content"><a href=""> - 추가 요금 내역</a></li>
-                            <br/>
-                            
-                        </ul>
-                    </div>
-                </div>
+          		<%@ include file="/views/user/userSideBar.jsp" %>
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -160,9 +112,9 @@
                 </ul>
      
                    <!-- 콘텐츠 영역 -->
-                   <table id="enrollTB">
+                   <table id="enrollTB" class="table table-borderless">
 	
-                    <tr class="tr-blank">
+                    <tr style="border-bottom:1px solid lightgray;"class="tr-blank">
                         <th>no</th>
             			<th>체크 인</th>
             			<th>체크 아웃</th>
@@ -178,38 +130,31 @@
 	                    <tr align="center">
 	                    
 	                    	
-	                    	<td style="font-size:12px;"><%=pr.getReservationCode() %></td> 
+	                    	<td><%=pr.getReservationCode() %></td> 
 	                    		                    	                    	
-	                    	<td style="font-size:12px;"><%=pr.getCheckIn().substring(0,11)%></td>
+	                    	<td style="	width:200px;"><%=pr.getCheckIn().substring(2,11)%></td>
 	                    	
-	                    	<td style="font-size:12px;"><%=pr.getCheckOut().substring(0,11) %></td>
+	                    	<td style="	width:200px;"><%=pr.getCheckOut().substring(2,11) %></td>
 	                    	
-	                    	<td style="font-size:12px;"><%=pr.getBoardTitle()%></td>
+	                    	<td style="	width:200px;"><%=pr.getBoardTitle()%></td>
 	                    	
-							<td style="font-size:12px;"><%=pr.getSitterName() %></td>
+							<td style="	width:200px;"><%=pr.getSitterName() %></td>
 							
-							<td style="font-size:12px;"><input onclick="requestCheck(<%=pr.getReservationCode() %>)" type="button" id="request" value="상세 요청 확인"></td>
+							<td><input onclick="requestCheck(<%=pr.getReservationCode() %>)" type="button" id="request" value="상세 요청 확인"></td>
 							
-							<td style="font-size:12px;"><%=pr.getPrice() %></td> 
+							<td><%=pr.getPrice() %></td> 
 							
-							<td style="font-size:12px;"><input type="button" id="chat" value="채팅"></td>
+							<td><input type="button" id="chat" value="채팅"></td>
 	                    </tr>
 	                   
 	             <%} %>
     					
                     
-                </table>
-                
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-							<input style="margin-left:400px;" type="submit" value="요청 취소" >
+                </table>             
                     </div>
                 </div>
             </div>
-        </form>
+        
         </div>
     </section>
 

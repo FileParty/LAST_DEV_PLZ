@@ -17,15 +17,15 @@
       }
     .col-9{
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden; 
+        margin:0px;
     }
     .container{
-        height: 100%;
-        padding: 0;
+        height: 100%;    
         width: 1366px;
-        margin-left: auto;
+       margin-left: auto;
         margin-right: auto;
-        /* border: 1px solid red; */
+       
  
     }
     .top-div{

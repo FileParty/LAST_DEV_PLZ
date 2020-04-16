@@ -54,7 +54,7 @@ public class ReservationDao {
 				pr.setBoardNo(rs.getInt("PCODE"));
 				list.add(pr);
 			}
-			System.out.println("dao"+list);
+			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -128,6 +128,7 @@ public class ReservationDao {
 			while(rs.next()) {
 				pr = new PetReservation();
 				pr.setPetImg(rs.getString("PET_IMG_FILENAME"));
+				pr.setPlusQuestion(rs.getString("PLUS_QUESTIONS"));
 				pr.setReservationCode(rs.getInt("RESERVATION_CODE"));
 				pr.setPetCode(rs.getInt("PET_CODE"));
 				pr.setBoardNo(rs.getInt("BOARD_CODE"));
@@ -136,7 +137,7 @@ public class ReservationDao {
 				pr.setCheckOut(rs.getString("CHECKOUT_DATE"));
 				list.add(pr);
 			}
-			System.out.println("DAO"+list);
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -195,6 +196,7 @@ public class ReservationDao {
 				pr.setPrice(rs.getInt("PRICE"));
 				pr.setPetMedication(rs.getString("PET_MDEICATION"));
 				pr.setPetPickup(rs.getString("PET_PICK_UP"));
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

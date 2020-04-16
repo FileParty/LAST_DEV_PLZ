@@ -29,7 +29,7 @@
 
 <title>자격증 추가</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/boardWrite.css">
+	href="<%=request.getContextPath()%>/css/boardWrite2.css">
 <style>
 table {
 	border-radius: 5px;
@@ -47,7 +47,7 @@ th {
 	width: 150px;
 	font-size: 12px;
 	text-align: center;
-	background-color: rgb(189, 188, 188);
+	
 	color: grey;
 	border-right: 1px solid white;
 }
@@ -58,46 +58,7 @@ th {
 
 		<div class="container">
 			<div class="row">
-				<div class="col-2 menu">
-					<div id="menu">
-						<ul type="none">
-							<li class="title">회원정보</li>
-							<hr class="hr-line" />
-							<li class="content"><a href=""> - 회원정보 수정</a></li>
-							<li class="content"><a href=""> - 회원 탈퇴</a></li>
-							<br />
-
-							<li class="title">작성글</li>
-							<hr class="hr-line" />
-							<li class="content"><a
-								href="<%=request.getContextPath()%>/sitter/Detail"> - 작성글 보기</a></li>
-							<li class="content"><a href=""> - 작성한 비밀후기 보기</a></li>
-							<br />
-
-							<li class="title">예약</li>
-							<hr class="hr-line" />
-							<li class="content"><a href=""> - 예약 현황</a></li>
-							<li class="content"><a href=""> - 요청중인 예약</a></li>
-							<li class="content"><a href=""> - 진행중인 예약</a></li>
-							<li class="content"><a href=""> - 완료된 예약</a></li>
-							<li class="content"><a href=""> - 채팅</a></li>
-							<br />
-
-							<li class="title">정산</li>
-							<hr class="hr-line" />
-							<li class="content"><a href=""> - 이번 달 정산 현황</a></li>
-							<li class="content"><a href=""> - 이번 정산 보기</a></li>
-							<br />
-
-							<li class="title">자격증</li>
-							<hr class="hr-line" />
-							<li class="content"><a
-								href="<%=request.getContextPath()%>/sitter/certificate"> -
-									보유 자격증 목록</a></li>
-							<li class="content"><a href="<%=request.getContextPath()%>/sitter/addCertificate"> - 자격증 추가</a></li>
-						</ul>
-					</div>
-				</div>
+				<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
 				<div class="vl"></div>
 				<div class="col-9" style="padding: 0;">
 					<div class="row top-div" style="height: 200px; overflow: hidden;">
@@ -106,7 +67,7 @@ th {
 					</div>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item">자격증</li>
-						<li class="breadcrumb-item active">보유 자격증 목록</li>
+						<li class="breadcrumb-item active">자격증 추가</li>
 					</ul>
 
 
@@ -135,7 +96,7 @@ th {
 									<%}else { %>
 									<td>- </td>
 									<%} %>
-									<td><input type="button" value="이미지 보기" onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')"></td>
+									<td><button type="button" onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')">이미지 보기</button></td>
 									<td><%=pc.getResType() %></td>									
 								</tr>
 								<%} %>

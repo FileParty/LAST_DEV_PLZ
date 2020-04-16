@@ -382,7 +382,64 @@ public class ReservationDao {
 		return result;
 		
 	}
-
+	
+	public List<PetReservation> reservationEnd(Connection conn,String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PetReservation> list = new ArrayList<PetReservation>();
+		PetReservation pr = null;
+		String sql = prop.getProperty("reservationEnd");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pr = new PetReservation();
+				pr.setReservationCode(rs.getInt("RCODE"));
+				pr.setCheckIn(rs.getString("CIN"));
+				pr.setCheckOut(rs.getString("COUT"));
+				pr.setResType(rs.getString("RTYPE"));
+				pr.setPrice(rs.getInt("PRICE"));
+				pr.setBoardNo(rs.getInt("PCODE"));
+				list.add(pr);
+				
+			}
+		}catch(SQLException e ) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public PetReservation reservationEnds(Connection conn,String id,PetReservation p) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("reservationEnds");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, p.getBoardNo());			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				p.setBoardNo(rs.getInt("BCODE"));
+				p.setBoardTitle(rs.getString("BTITLE"));
+				p.setSitterName(rs.getString("UNAME"));
+				
+			}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally { 
+		close(rs);
+		close(pstmt);
+	}
+		return p;
+}
 }
 
 

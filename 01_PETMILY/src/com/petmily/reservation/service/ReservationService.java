@@ -109,4 +109,16 @@ public class ReservationService {
 		  
 	  }
 	  
+	  public List<PetReservation> reservationEnd(String id) {
+		  Connection conn = getConnection();
+		  List<PetReservation> list = dao.reservationEnd(conn,id);
+		  for(int i=0;i<list.size();i++){
+		  			list.set(i,dao.reservationEnds(conn, id,list.get(i)));
+		  			
+		  }
+		  System.out.println("dao:"+list);
+		  close(conn);
+		  return list;
+	  }
+	  
 }

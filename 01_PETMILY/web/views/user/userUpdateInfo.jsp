@@ -301,7 +301,7 @@ label.custom-file-label::after{
                      <tr class="row1" style="display: none;">
                          <td></td>
                          <td style="line-height:40px; padding-left:50px;">
-                         	<input type="email" id="email" name="email" style="height:25px; width: 230px;"/> 
+                         	<input type="email" id="email" name="email" value="<%= loginUser.getEmail() %>" style="height:25px; width: 230px;"/> 
                         	</td> 
                          <td><button class="duplicate" type="button" style="height:25px;">중복확인</button></td>
                          <p></p>
@@ -324,7 +324,9 @@ label.custom-file-label::after{
                      </tr>
                      <tr class="row2" style="display: none;">
                          <td></td>
-                         <td style="line-height:40px; padding-left:50px;"><input type="text" id="phone" name="phone" style="height:25px; width: 230px;"/> </td> 
+                         <td style="line-height:40px; padding-left:50px;">
+                         	<input type="text" id="phone" name="phone" value="<%= loginUser.getPhone() %>" style="height:25px; width: 230px;"/> 
+                       	 </td> 
                          <td><button class="duplicate" type="button" style="height:25px;">중복확인</button></td>
                          <p></p>
                      </tr>
@@ -336,20 +338,20 @@ label.custom-file-label::after{
                      <tr class="row3" style="display: none; border:1px solid white">
                          <td class="subrow"></td>
                          <td colspan = "2" class="subrow"style= "padding-left:50px;" >
-                             <input style="line-height: 40px;" type="text" id="postNum" name="postNum"  placeholder="우편번호">&nbsp;&nbsp;&nbsp;<button class="duplicate" type="button" style="height:25px; width: 100px; " onclick="zip_code();" >우편번호 찾기</button></td> 
+                             <input style="line-height: 40px;" type="text" id="postNum" name="postNum" value="<%= loginUser.getZipCode() %>" placeholder="우편번호">&nbsp;&nbsp;&nbsp;<button class="duplicate" type="button" style="height:25px; width: 100px; " onclick="zip_code();" >우편번호 찾기</button></td> 
                          <!-- <td class="subrow" ></td> -->
                      </tr>
                      <tr class="row3" style="display: none;">
                          <td class="subrow2"></td>
                          <td class="subrow2" style= "padding-left:50px;">
-                             <input style="line-height: 40px; width: 250px;" id="streetAddress" name="address" type="text" placeholder="도로명주소"/>
+                             <input style="line-height: 40px; width: 250px;" id="streetAddress" name="address" type="text" value="<%= loginUser.getAddress() %>" placeholder="도로명주소"/>
                          </td>
                          <td class="subrow2"></td>
                      </tr>
                      <tr class="row3" style="display: none;">
                          <td class="subrow3"></td>
                          <td class="subrow3" style = "padding-left:50px; padding-bottom: 10px;">
-                             <input style="line-height: 40px; width: 250px;" id="addressInput" name="detail" type="text" placeholder="상세주소 입력"/>
+                             <input style="line-height: 40px; width: 250px;" id="addressInput" name="detail" type="text" value="<%= loginUser.getDetailAddress() %>" placeholder="상세주소 입력"/>
                          </td>
                          <td class="subrow3"></td>
                      </tr>
@@ -361,21 +363,21 @@ label.custom-file-label::after{
                      <tr class="row4" style="display: none;">
                          <td class="subrow2"></td>
                          <td class="subrow2" style= "padding-left:50px;">
-                             <input style="line-height: 40px; width: 250px;" id="nowpw" name="nowpw" type="password" placeholder="현재 비밀번호"/>
+                             <input style="line-height: 40px; width: 250px;" id="nowpw" name="nowpw" type="password" value="<%= loginUser.getPassword() %>" placeholder="현재 비밀번호"/>
                          </td>
                          <td class="subrow2"></td>
                      </tr>
                      <tr class="row4" style="display: none;">
                          <td class="subrow2"></td>
                          <td class="subrow2" style = "padding-left:50px;">
-                             <input style="line-height: 40px; width: 250px;" id="newpw" name="newpw" type="password" placeholder="새 비밀번호"/>
+                             <input style="line-height: 40px; width: 250px;" id="newpw" name="newpw" type="password" value="<%= loginUser.getPassword() %>" placeholder="새 비밀번호"/>
                          </td>
                          <td class="subrow2"></td>
                      </tr>
                      <tr class="row4" style="display: none;">
                          <td class="subrow3"></td>
                          <td class="subrow3" style = "padding-left:50px; padding-bottom: 10px;">
-                             <input style="line-height: 40px; width: 250px;" id="pwck" name="pwck" type="password" placeholder="새 비밀번호 확인"/>
+                             <input style="line-height: 40px; width: 250px;" id="pwck" name="pwck" type="password" value="<%= loginUser.getPassword() %>" placeholder="새 비밀번호 확인"/>
                          </td>
                          <td class="subrow3"></td>
                      </tr>
@@ -466,7 +468,7 @@ $('.row4').slideToggle(100); //시간 부여
 	        /* document.getElementById("jibunAddress").value = data.jibunAddress; // 지번주소 */
 	        
 	        // 참고항목 문자열이 있을 경우 해당 필드에 넣는다. (상세주소)
-	        if(roadAddr !== ''){
+	        /* if(roadAddr !== ''){
 	            document.getElementById("addressInput").value = extraRoadAddr;
 	        } else {
 	            document.getElementById("addressInput").value = '';
@@ -486,7 +488,7 @@ $('.row4').slideToggle(100); //시간 부여
 	        } else {
 	            guideTextBox.innerHTML = '';
 	            guideTextBox.style.display = 'none';
-	        }
+	        } */
 	    }
 		/* window.close(); */
 	}).open();

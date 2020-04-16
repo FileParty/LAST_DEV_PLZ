@@ -52,7 +52,7 @@ public class UserUpdateEndServlet extends HttpServlet {
 		if(result>0) {
 			msg = "회원정보가 수정되었습니다";
 			// 일반 사용자 마이페이지 - 대시보드 화면으로 전환하는 기능을 가진 서블릿으로 이동하는 매핑값
-			loc = "/user/Info?userId="+id; 
+			loc = "/common/Info?userId="+id; 
 		}
 		else {
 			msg = "회원정보 수정이 실패되었습니다. 다시 진행해주세요.";

@@ -9,7 +9,7 @@ public class PetReservation {
 	private String petSitterId; // PET_SETTER_ID(펫시터 아이디)
 	private int boardCode; // BOARD_CODE(게시판 코드)
 	private Date checkInDate; // CHECKIN_DATE(체크인 날짜)
-	private Date checkOutDate; // CHECKOUT_DATE(체크아웃 날짜)
+	private String checkOutDate; // CHECKOUT_DATE(체크아웃 날짜)
 	private String careType; // CARE_TYPE(케어 타입)
 	private int price; // PRICE(합계금액)
 	private Date priceEndDate; // PRICE_END_DATE(입금일자)
@@ -21,7 +21,7 @@ public class PetReservation {
 	}
 
 	public PetReservation(int reservationCode, int petCode, String petSitterId, int boardCode, Date checkInDate,
-			Date checkOutDate, String careType, int price, Date priceEndDate, int fees, String resType) {
+			String checkOutDate, String careType, int price, Date priceEndDate, int fees, String resType) {
 		super();
 		this.reservationCode = reservationCode;
 		this.petCode = petCode;
@@ -76,11 +76,11 @@ public class PetReservation {
 		this.checkInDate = checkInDate;
 	}
 
-	public Date getCheckOutDate() {
+	public String getCheckOutDate() {
 		return checkOutDate;
 	}
 
-	public void setCheckOutDate(Date checkOutDate) {
+	public void setCheckOutDate(String checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
 
@@ -132,5 +132,4 @@ public class PetReservation {
 				+ ", fees=" + fees + ", resType=" + resType + "]";
 	}
 
-	
 }

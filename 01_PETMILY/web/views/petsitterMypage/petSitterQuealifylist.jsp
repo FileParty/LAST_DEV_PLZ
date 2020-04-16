@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 
+<!-- 슬기 작업 -->
+
+
 <style>
 	*{   
 	       
@@ -190,15 +193,25 @@
 	                    
 		                 <tr>
 	                    	<!-- no -->
-							<td><p style="text-align: center;"></p></td>
+							<td>
+								<p style="text-align: center;"></p>
+							</td>
 							<!-- 정산(월) -->
-							<td><p style="text-align: center;"></p></td>
+							<td>
+								<p style="text-align: center;"></p>
+							</td>
 							<!-- 결제 건수 --> 
-							<td><p style="text-align: center;"></p></td> 
+							<td>
+								<p style="text-align: center;"></p>
+							</td> 
 							<!-- 최종 정산 금액-->
-							<td><p style="text-align: center;"></p></td> 
+							<td>
+								<p style="text-align: center;"></p>
+							</td> 
 							<!-- 수수료 -->
-							<td><p style="text-align: center;"></p></td> 
+							<td>
+								<p style="text-align: center;"></p>
+							</td> 
 	                    </tr>
                     
                		</table>

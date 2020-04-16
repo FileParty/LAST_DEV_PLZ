@@ -12,7 +12,7 @@
 		opacity:0.7;
 	}
 </style>
-<section>
+<section">
 	<div id="mainText">
 		<p>PET:MILY</p>
 		<p>펫 밀리가 당신의 빈자리를 잠시 채워드릴게요.</p>

@@ -1,12 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="java.util.List, com.petmily.pet.model.vo.Pet" %>
 <%
 	Pet p= (Pet)request.getAttribute("p");
 	int no = Integer.parseInt(request.getParameter("no"));
 %>
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <title>펫 프로필 상세보기</title>
+</head>
 <style>
    *{   
        
@@ -40,12 +61,12 @@
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 50px;
+            margin-top: 150px;
 
         }
     #menu{
         width: 230px;
-        /* position : fixed; */
+        position : fixed;
     }
     ul{
         padding-inline-start:0;
@@ -231,8 +252,11 @@ label.custom-file-label::after{
     background-color: #ffcc33;
     border: solid 1px #ffcc33;
     }
-</style>
 
+
+
+</style>
+<body>
     <section>
         <div class="container">
             <div class="row">
@@ -254,6 +278,7 @@ label.custom-file-label::after{
                             
                             <td class="none" style="line-height: 5px; padding-top:5px; font-size: 10px; width: 200px;">
                             <input id="upload" type="file" name="upload"/></td>
+                            <input type="hidden" name="ori" value="<%=p.getPetImg()%>"/>
                           
                         </tr>
                         <tr>
@@ -496,14 +521,14 @@ label.custom-file-label::after{
                         <tr>
                             <td class="sub-title">지병이 있나요?</td>
                             <td class="yes">
-                            <%if(p.getPetDisease().equals("Y")){ %>
+                            <%if(p.getPetDisease()!=null&&p.getPetDisease().equals("Y")){ %>
                                 <input type="radio" name="ill" id="iy" value="Y" style="vertical-align:0px" required checked>
 						        <label for="iy" style= "font-size:12px; vertical-align:10px; padding-right: 10px;">예</label>
 						        <input type="radio" name="ill" id="in" value="N" style="vertical-align:0px"required >
                                 <label for="in" style=" font-size:12px; vertical-align:10px; padding-right: 10px;">아니오</label>
                                 <input type="radio" name="ill" id="id" style="vertical-align:0px;"required >
 						        <label for="id" style=" font-size:12px; vertical-align:10px;">모름</label>
-						     <%} else if(p.getPetDisease().equals("N")) {%>
+						     <%} else if(p.getPetDisease()!=null&&p.getPetDisease().equals("N")) {%>
                                 <input type="radio" name="ill" id="iy" value="Y" style="vertical-align:0px" required>
 						        <label for="iy" style= "font-size:12px; vertical-align:10px; padding-right: 10px;">예</label>
 						        <input type="radio" name="ill" id="in" value="N" style="vertical-align:0px"required checked>
@@ -889,13 +914,8 @@ label.custom-file-label::after{
                     </div>
                 </div>
             </div>
-            
-            
-            
 
     </section>
-    
-    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -903,15 +923,44 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 function file(){
-	if($(“input[name=upload]”).value==null){
-		$(“input[name=upload]”).attr(‘value’,<%=p.getPetImg()%>);
+	
+<%-- 	if(!$("input[name=upload]").value){
+		$("input[name=upload]").attr('value',<%=p.getPetImg()%>);
+	} --%>
+	
+	if($("input[name=illexplanation]").value==null){
+		$("input[name=illexplanation]").attr('value',"");
 	}
-}
+	
+	if($("input[name=aexplanation]").value==null){
+		$("input[name=aexplanation]").attr('value',"");
+	}
+	
+	if($("input[name=mexplanation]").value==null){
+		$("input[name=mexplanation]").attr('value',"");
+	}
+	
+	if($("input[name=mmexplanation]").value==null){
+		$("input[name=mmexplanation]").attr('value',"");
+	}
+	
+	if($("input[name=bexplanation]").value==null){
+		$("input[name=bexplanation]").attr('value',"");
+	}
+	
+	if($("input[name=detail]").value==null){
+		$("input[name=detail]").attr('value',"");
+	}
+	
+	if($("input[name=ill]").value==null){
+		$("input[name=ill]").attr('value',"");
+	}
+}	
 
 var today = new Date();
 var dd = today.getDate();
@@ -1014,5 +1063,8 @@ $('.row4').slideToggle(100); //시간 부여
 		
 	}
     
-</script>
+    
 
+
+</script>
+</html>

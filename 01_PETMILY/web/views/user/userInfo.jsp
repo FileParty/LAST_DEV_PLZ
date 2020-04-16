@@ -270,9 +270,15 @@ label.custom-file-label::after{
                             
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
+<<<<<<< HEAD
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review"> - 종료된 예약</a></li>
+=======
                             <li class="content"><a href="<%=request.getContextPath()%>/user/request?userId=<%=loginUser.getUserId()%>"> - 요청한 예약</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing?userId=<%=loginUser.getUserId()%>"> - 진행중인 예약</a></li>
                             <li class="content"><a href=""> - 종료된 예약</a></li>
+>>>>>>> refs/remotes/mar1/ysk
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             
@@ -280,8 +286,7 @@ label.custom-file-label::after{
                             <hr class="hr-line"/>
                             <li class="content"><a href=""> - 결제 내역</a></li>
                             <li class="content"><a href=""> - 추가 요금 내역</a></li>
-                            <br/>
-                            
+                            <br/>                           
                         </ul>
                     </div>
                 </div>
@@ -365,7 +370,7 @@ label.custom-file-label::after{
 <script>
 
     
-function toggle1(){ //on/off하나의 버튼으로 가능.
+/* function toggle1(){ //on/off하나의 버튼으로 가능.
 
     $('.row1').slideToggle(1000); //시간 부여
     
@@ -471,7 +476,7 @@ $(function(){
              s.append("<br>");
              console.log(num);
              num++;
-         }
+         } */
 
 </script>
 <%@ include file="/views/common/footer.jsp" %>

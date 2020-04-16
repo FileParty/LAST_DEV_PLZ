@@ -38,7 +38,7 @@ public class LoginUserFilter implements Filter {
 				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			}
 			else {
-				chain.doFilter(request, response);		
+				chain.doFilter(request, response);
 			}
 		}
 		

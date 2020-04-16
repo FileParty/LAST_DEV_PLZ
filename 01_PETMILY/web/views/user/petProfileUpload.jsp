@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <title>펫 프로필 등록</title>
+</head>
 <%@ include file="/views/common/header.jsp" %>
 <style>
    *{   
@@ -35,12 +57,12 @@
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 50px;
+            margin-top: 150px;
 
         }
     #menu{
         width: 230px;
-        /* position : fixed; */
+        position : fixed;
     }
     ul{
         padding-inline-start:0;
@@ -223,7 +245,7 @@ label.custom-file-label::after{
 
 
 </style>
-
+<body>
     <section>
         <div class="container">
             <div class="row">
@@ -233,15 +255,15 @@ label.custom-file-label::after{
                         <ul type="none">
                             <li class="title">회원정보</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/BookMarkList?userId=<%=loginUser.getUserId()%>"> - 북마크</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review?userId=<%=loginUser.getUserId()%>"> - 작성 후기</a></li>
+                            <li class="content"><a href=""> - 회원정보 수정</a></li>
+                            <li class="content"><a href=""> - 회원 탈퇴</a></li>
+                            <li class="content"><a href=""> - 북마크</a></li>
+                            <li class="content"><a href=""> - 작성 후기</a></li>
                             <br/>
                             
                             <li class="title">펫 프로필</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/petprofile?userId=<%=loginUser.getUserId()%>"> - 펫 프로필</a></li>
+                            <li class="content"><a href=""> - 펫 프로필</a></li>
                             <br/>
                             
                             <li class="title">예약</li>
@@ -268,7 +290,7 @@ label.custom-file-label::after{
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item">회원 정보</li>
-                        <li class="breadcrumb-item active">펫 프로필 등록</li>
+                        <li class="breadcrumb-item active">회원 정보 수정</li>
                     </ul>
                     <!-- 콘텐츠 영역 -->
                 <form action="<%=request.getContextPath()%>/user/petprofile/uploadEnd" method="post" enctype="multipart/form-data">
@@ -568,21 +590,7 @@ label.custom-file-label::after{
             </div>
         </form>
         </div>
-        
     </section>
-    
-     <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
-        <br><br><br><br><br><br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -590,8 +598,8 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 var today = new Date();
@@ -694,6 +702,9 @@ $('.row4').slideToggle(100); //시간 부여
 	
 		
 	}
-     
+    
+    
+
+
 </script>
-<%@ include file="/views/common/footer.jsp" %>
+</html>

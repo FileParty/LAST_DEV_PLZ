@@ -23,6 +23,7 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>펫 프로필 등록</title>
 </head>
+<%@ include file="/views/common/header.jsp" %>
 <style>
    *{   
        

@@ -89,7 +89,7 @@
                 	<td>성별</td>
 	                <td style="padding-left: 10%; line-height: 40px;">
 						<input type="radio" name="gender" id="gender0" value="남" required>
-						<label for="gender0">남</label>
+						<label for="gender0">남</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="radio" name="gender" id="gender1" value="여" required>
 						<label for="gender1">여</label>
 					</td>
@@ -106,7 +106,7 @@
                     <td>생년월일</td>
                     <td class="second-td">
                     	<input type="date" id="user_birth_day" name="user_birth_day" min="1900-01-01" max=""
-			            style="width: 175px; padding-left: 10px;" required>
+			            style="width: 220px; padding-left: 10px;" required>
                    </td>
                </tr>
                
@@ -121,7 +121,7 @@
                    <td>이메일</td>
                    <td class="second-td" id="emailSelect">
                    		<div style="display:flex-direction: row;">
-	                   		<input type="email" id="email" name="email" required onchange="emailChange();"> 
+	                   		<input type="email" style="width: 220px;" id="email" name="email" required onchange="emailChange();"> 
 	                   		&nbsp;&nbsp;&nbsp;
 	                   		<button class="checkBtn" type="button" onclick="duplicateEmail();">중복확인</button>
 	                   	</div>
@@ -138,7 +138,7 @@
                <tr class="tr-blank">
                    <td>핸드폰 번호</td>
                    <td class="second-td">
-                   		<input type="text" id="phone" name="phone" required onchange="phoneChange();">
+                   		<input type="text" style="width: 220px;" id="phone" name="phone" required onchange="phoneChange();">
                    		&nbsp;&nbsp;
                    		<button class="checkBtn" type="button" onclick="duplicatePhone();">중복확인</button>
                    		&nbsp;&nbsp;&nbsp;
@@ -156,7 +156,7 @@
                 <tr class="tr-blank">
                     <td>우편변호</td>
                     <td class="second-td">
-                    	<input type="text" id="postNum" name="postNum" placeholder="우편번호">&nbsp;&nbsp;&nbsp;
+                    	<input type="text" style="width: 220px;" id="postNum" name="postNum" placeholder="우편번호">&nbsp;&nbsp;&nbsp;
                     	<button type="button" class="checkBtn" onclick="zip_code();">우편번호 찾기</button>
                     </td>
                 </tr>
@@ -169,7 +169,7 @@
                 <tr class="tr-blank">
                     <td></td>
                     <td class="second-td">
-                    	<input id="streetAddress" name="streetAddress" type="text" placeholder="도로명주소">
+                    	<input style="width: 220px;" id="streetAddress" name="streetAddress" type="text" placeholder="도로명주소">
                     </td>
                 </tr>
                 
@@ -193,7 +193,7 @@
                 <tr class="tr-blank">
                     <td><p id="detailTitle">상세주소</p></td>
                     <td class="second-td">
-                    	<input id="addressInput" name="addressInput" type="text" placeholder="상세주소 입력">
+                    	<input style="width: 220px;" id="addressInput" name="addressInput" type="text" placeholder="상세주소 입력">
                    	</td>
                 </tr>
                 
@@ -478,7 +478,7 @@
 		}
 		
 		/* 휴대번호 숫자 길이 조건 */
-		if(!(phone.value.length<11 && phone.value.length>11)) {
+		if((phone.value.length<11 || phone.value.length>11)) {
 			spanPhone.innerHTML="휴대번호는 숫자 11개로 입력해야 합니다.";
 			spanPhone.style.color="red";
 			spanPhone.style.fontWeight='bolder';

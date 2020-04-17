@@ -486,7 +486,7 @@
 		var phone = $("#phone").val();
 		
 		// 새 창을 띄워서 phone의 값을 비교하는 함수!
-		var url = "<%=request.getContextPath()%>/phoneDuplicate?phone="+phone;
+		var url = "<%=request.getContextPath()%>/sitterPhoneDuplicate?phone="+phone;
 		var status = "height=420px, width=600px, top=200px, left=500px";
 		window.open(url, "_blank", status);
 	}
@@ -499,7 +499,7 @@
 		
 		if( !(email==null || email.trim().length<4) ) {
 			
-			var url = "<%=request.getContextPath()%>/emailDuplicate?emailId="+email;
+			var url = "<%=request.getContextPath()%>/sitterEmailDuplicate?emailId="+email;
 			var status = "height=420px, width=600px, top=200px, left=500px";
 			window.open(url, "_blank", status);
 		}

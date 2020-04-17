@@ -328,7 +328,7 @@ public class UserDao {
 			pstmt.setString(4, postNum);
 			pstmt.setString(5, address);
 			pstmt.setString(6, detailAddress);
-			pstmt.setString(7, id); // SQL 鈺곌�援��억옙
+			pstmt.setString(7, id); // SQL 조건
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -443,7 +443,7 @@ public class UserDao {
 				up = new UserPaymentHistory();
 				up.setCheckIn(rs.getString("checkin"));
 				up.setCheckOut(rs.getString("checkout"));
-				up.setPstId(rs.getString("pstid"));
+				up.setName(rs.getString("name"));
 				up.setPrice(rs.getInt("price"));
 				up.setEndDate(rs.getString("enddate"));
 				list.add(up);

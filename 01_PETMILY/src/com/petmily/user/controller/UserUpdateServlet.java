@@ -36,10 +36,8 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 		else {
 			String id = request.getParameter("userId");
-			
 			System.out.println("회원정보수정 화면으로 이동하기 위해 확인하는 id 값 : "+id);
 			
-//			북마크 테이블 가져오기
 //			DB에서 id와 동일한 정보를 가져온다
 //			아이디가 현재 로그인된 아이디인 계정의 북마크된 내용을 가져온다.
 			User u = new UserService().userSelect(id);

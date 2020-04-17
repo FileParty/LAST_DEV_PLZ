@@ -38,7 +38,7 @@ public class UserPaymentHistoryServlet extends HttpServlet {
 //		가져온값을 담는다.
 		request.setAttribute("list", list);
 //		응답페이지로 보낸다!
-		request.getRequestDispatcher("/views/").forward(request, response);
+		request.getRequestDispatcher("/views/user/userPaymentHistory.jsp").forward(request, response);
 	}
 
 

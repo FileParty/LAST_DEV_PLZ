@@ -270,20 +270,30 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
   	});
   	
   	
-  	$(".bookmark").click(function(){
-  		
-  		$.ajax({
-  			url:"<%=request.getContextPath()%>/search/bookmark",
-  			data:{petsitterId:$(this).val()},
-  			error:function(){
-  				alert("실패");
-  			},
-  			success:data=>{
-  				console.log($(this).val());
-  				$(this).html(data);
-  			}
-  		});
-  	});
+     $(".bookmark").click(function(){
+        
+        
+        if(<%=loginUser!=null%>){
+           
+           $.ajax({
+              url:"<%=request.getContextPath()%>/search/bookmark",
+              data:{petsitterId:$(this).val()},
+              error:function(){
+                 alert("실패");
+              },
+              success:data=>{
+                 console.log($(this).val());
+                 $(this).html(data);
+              }
+           });
+           
+        }else{
+           
+           alert("로그인이 필요한 서비스입니다.");
+        }
+        
+        event.stopPropagation();
+     });
   	
   	
   	

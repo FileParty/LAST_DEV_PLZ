@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.petmily.admin.model.vo.AdminApplyDate;
 import com.petmily.admin.model.vo.AdminPetsitter;
 import com.petmily.admin.model.vo.AdminQuestion;
 import com.petmily.admin.model.vo.AdminUser;
@@ -443,7 +444,7 @@ public class AdminDao {
 				aq.setSendEmail(rs.getString("ANSWER_EMAIL"));
 				aq.setEmailTitle(rs.getString("ANSWER_CONTENT"));
 				aq.setEmailDate(rs.getString("ANSWER_DATE"));
-				aq.setQueYN("ANSWER_YN");
+				aq.setQueYN(rs.getString("ANSWER_YN"));
 				list.add(aq);
 			}
 			
@@ -472,6 +473,51 @@ public class AdminDao {
 		
 		
 		return count;
+	}
+
+	public ArrayList<AdminApplyDate> petsitterApply(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<AdminApplyDate> list = new ArrayList<AdminApplyDate>();
+		String sql = prop.getProperty("adminApplyList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				AdminApplyDate aad = new AdminApplyDate();
+				aad.setUserName(rs.getString("USER_NAME"));
+				aad.setUserType(rs.getString("USER_TYPE"));
+				aad.setEnrollData(rs.getString("ENROLL_DATE"));
+				list.add(aad);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+
+	public ArrayList<String> userQuestion(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> list = new ArrayList<String>();
+		String sql = prop.getProperty("adminQuestionList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String email = rs.getString("ANSWER_EMAIL");
+				list.add(email);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
 	}
 	
 

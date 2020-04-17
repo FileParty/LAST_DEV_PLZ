@@ -76,7 +76,7 @@ public PetsitterMypageReservationDao() {
 	
 	
 	// 펫시터 마이페이지 안에 예약 신청한 유저에 대한 펫시터가 남긴 후기들
-	public List<PetsitterMypageUserReview> selectPetsitterMypageUserReview(Connection conn){
+	public List<PetsitterMypageUserReview> selectPetsitterMypageUserReview(Connection conn,String userId){
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -88,7 +88,7 @@ public PetsitterMypageReservationDao() {
 		try {
 			
 			pstmt=conn.prepareStatement(sql);
-			
+			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {

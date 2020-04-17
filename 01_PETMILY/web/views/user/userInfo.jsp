@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.petmily.user.model.vo.User" %>
-
-
 <%@ include file="/views/common/header.jsp" %>
 
 <style>
@@ -273,8 +271,6 @@ label.custom-file-label::after{
                             <li class="content"><a href="<%=request.getContextPath()%>/user/request?userId=<%=loginUser.getUserId()%>"> - 요청한 예약</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing?userId=<%=loginUser.getUserId()%>"> - 진행중인 예약</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/reservationEnd?userId=<%=loginUser.getUserId()%>"> - 종료된 예약</a></li>
-                            
-
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             

@@ -1,3 +1,4 @@
+<%@page import="com.petmily.common.filter.LoginUserFilter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import=" com.petmily.reservation.model.vo.ReservationPetCode"%>
 <%@page import=" com.petmily.reservation.model.vo.PetReservation"%>
@@ -15,12 +16,14 @@
 
 <%@ page import="com.petmily.board.model.vo.PetSitterBoard" %>
       
+<%@include file="/views/common/header.jsp" %>
+      
 <%
 
 	/* String bFlag = ""; */
 	
 	
-	String userId = (String)request.getAttribute("userId");
+	String userId = loginUser.getUserId();
 	List<String> dsList = (List)request.getAttribute("dsList");
 	PetSitterBoard boardT = (PetSitterBoard)request.getAttribute("boardT");
 	boolean certificateFlag = (boolean)request.getAttribute("certificateFlag");
@@ -35,6 +38,8 @@
 	PetReservation reservation = new PetReservation();
 	List<ReservationPetCode> rPetCodeT = new ArrayList<ReservationPetCode>();
 	
+	int count = 0;;
+	
 	
 	/* ---- 슬기 ↓ 연관 jsp : userInfo.jsp */
 	
@@ -43,7 +48,7 @@
 
 %>
 
-<%@include file="/views/common/header.jsp" %>
+
 
 <link href="<%=request.getContextPath() %>/css/PST.css" rel="stylesheet">
 
@@ -316,7 +321,7 @@
                 </table> -->
 
 				<%for(String s : dsList){%>
-	                <div class="service_sub col-lg-3">
+	                <div class="service_sub col-lg-2">
 	                    <table>
 	
 	                        <tr>
@@ -344,7 +349,7 @@
             <div class="row col-lg-10 info" id="add_service">
 
 				<%for(PlusOptionService pos : pOServiceList){%>
-	                <div class="service_sub col-lg-3">
+	                <div class="service_sub col-lg-2">
 	                    <table>
 	
 	                        <tr>
@@ -395,11 +400,11 @@
 		                        	<%} %>
 	                        	</td>
 	                        	
-	                        	<%if(userId.equals(sitterT.getPetSitterId())){%>
+<%-- 	                        	<%if(userId.equals(sitterT.getPetSitterId())){%>
 	                            	<td style="text-align: right;"><button id="bline_request" style="width:150px; height:30px; margin-bottom: 50px;">블라인드 요청</button></td>
 	                            <%} else{%>
 	                            	<td style="text-align: right;"><button id="bline_request" style="display:none; width:150px; height:30px; margin-bottom: 50px;">블라인드 요청</button></td>
-	                            <%} %>
+	                            <%} %> --%>
 	                            
 	                        </tr>
 	                        <tr>
@@ -430,13 +435,29 @@
 		                
 		       		<%} else{%>
 		       		
+		                <div id="reply1_<%=review.getUserReviewNo()%>" class="col-lg-2" style="height: 200px; display:none">
+		
+		                    <div class="review_profile">
+		                        <img src="<%=request.getContextPath() %>/img/profile/<%=sitterT.getPetSitterImg() %>" alt=""
+		                        width="100%" height="100%">
+		                    </div>
+		
+		                </div>
+		    
+		                    
+		                <div id="reply2_<%=review.getUserReviewNo()%>" class="col-lg-10" style="display:none">
+		
+		                    <div id="reply_reCon_<%=review.getUserReviewNo() %>" style="border:1px solid gray; width:100%; height: 100px; margin-top: 50px;"><%=review.getReviewSend()%></div>
+		
+		                </div>
+		       		
 		       			<%if(userId.equals(sitterT.getPetSitterId())) {%>
 		                	
-		                	<div class="col-lg-10">
-		                		<textarea  cols="87" rows="4" style=" margin-top: 20px; margin-left: 20px;"></textarea>
+		                	<div id="replyIn1_<%=review.getUserReviewNo() %>" class="col-lg-10">
+		                		<textarea id="reply_con_<%=review.getUserReviewNo()%>" cols="87" rows="4" style=" margin-top: 20px; margin-left: 20px;"></textarea>
 		                	</div>
 		                	
-							<div class="col-lg-2"><button style=" margin-top: 20px;">답글 입력</button></div>		                	
+							<div id="replyIn2_<%=review.getUserReviewNo() %>" class="col-lg-2"><button id="reply" style="margin-top: 20px;" onclick="replyUpdate('<%=review.getUserReviewNo()%>');">답글 입력</button></div>		                	
 		                <%} %>
 		       		
 		       		<%} %>
@@ -500,7 +521,7 @@
             <div>체크 인 - 체크 아웃</div>
             <hr>
             <!-- 달력 api 완성 이후 작업 -->
-            <div><input name="checkIn" style="width:40%; margin-right: 13px; margin-left: 13px;" type="date" onchange="checkInC();" id="checkIn"> ~ <input name="checkOut" style="width:40%; margin-right: 13px; margin-left: 13px;" type="date" id="checkOut" onchange="checkOutC();"></div>
+            <div><input name="checkIn" style="width:40%; margin-right: 12px; margin-left: 12px;" type="date" onchange="checkInC();" id="checkIn"> ~ <input name="checkOut" style="width:40%; margin-right: 12px; margin-left: 12px;" type="date" id="checkOut" onchange="checkOutC();"></div>
             
             <br>
             
@@ -696,7 +717,7 @@
 
                 <div class="col-md-2"></div>
                 <div class="col-md-8">사유<br>
-                    <input type="text" list="reason" style="width:110%" placeholder="사유 입력">
+                    <input id="bline_con" type="text" list="reason" style="width:110%" placeholder="사유 입력">
                     <datalist id="reason">
                         <option value="부적절한 게시글 기재"></option>
                         <option value="지속적으로 낮은 서비스 제공"></option>
@@ -708,7 +729,7 @@
 
             <hr>
 
-            <input type="button" value="블라인드 처리" style="width:40%; margin-left: 50%; transform: translateX(-50%);">
+            <button onclick="bline_request_insert();" style="width:40%; margin-left: 50%; transform: translateX(-50%);">블라인드 처리</button>
 
         </div>
 
@@ -819,15 +840,29 @@
                         <div class="row no-gutters" style="height: 150px; margin-top: 50px; margin-left: 13px;">
                         
                             <div class="col-lg-12 row " style="height: 100%;">
+                            
+                            	<%for(String boardImg : BoardImgs) {%>
+                            	
+	                            	<%if(count<4) {%>
+	                            		<%if(count==0) {%>
+	                            			<div class="col-lg-3 modal_sub_img_none" style="height:100%; display:flex;"><img id="firstImg" data-index="0" onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
+	                            		<%} else{%>
+	                            			<div class="col-lg-3 modal_sub_img_none" style="height:100%" display:flex;><img data-index=<%=count+1 %> onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
+	                            		<%} %>
+	                            	<%}else{%>
+	                            		<div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="<%=count+1 %>" onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
+	                            	<%} %>
+	                            	<%count++;%>
+                            	<%} %>
 
-                                <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img id="firstImg" data-index="0" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/fd37e21adee1436c8b9341758eafe5d5.jpg" width="100%" height="100%"></div>
+                                <!-- <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img id="firstImg" data-index="0" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/fd37e21adee1436c8b9341758eafe5d5.jpg" width="100%" height="100%"></div>
                                 <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="1" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/cc06070da695433f92721c1c7ec4f08d.jpg" width="100%" height="100%"></div>
                                 <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="2" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/fdd7ce476cb1458c88e67ea1ac5873c4.jpg" width="100%" height="100%"></div>
                                 <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="3" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/83cf124a05ca4b2aad158d95c0f4d577.jpg" width="100%" height="100%"></div>
                                 <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="4" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/6feeb5a1ed5741b8b196a746e8ccf38f.jpg" width="100%" height="100%"></div>
                                 <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="5" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/6e95dd0cb42e424691c11461f2d5c58c.jpg" width="100%" height="100%"></div>
                                 <div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="6" onclick="small_image();" class="modal_sub_img" src="https://d1cd60iwvuzqnn.cloudfront.net/page/c5cd9b95324142e7b023a2f0ce3a121c.jpg" width="100%" height="100%"></div>
-
+ -->
                             </div>
                         
                         </div>
@@ -1398,6 +1433,75 @@ function resulvation_complete(){
 	});
  	
 }
+
+function replyUpdate(reviewNo){
+	console.log(document.getElementById("reply_con_" + reviewNo).value);
+	
+	$.ajax({
+		type: "POST",
+		url: "<%=request.getContextPath()%>/replyUpdate.do",
+		data: {"reply_con": document.getElementById("reply_con_" + reviewNo).value,
+				"review_no": reviewNo},
+		success: function(data){
+			
+			if(data=="t"){
+				
+				
+				
+				$("#reply").parent().attr("style", "display:none");
+				$("#reply_con_"+reviewNo).parent().attr("style", "display:none");
+				/* document.getElementById("reply_con_" + reviewNo).value = reply_con; */
+				$("#reply1_"+reviewNo).attr("style", "display:block");
+				$("#reply2_"+reviewNo).attr("style", "display:block");
+			/* 	$("#replyIn1_"+reviewNo).parent().attr("style", "display:none");
+				$("#replyIn2_"+reviewNo).parent().attr("style", "display:none"); */
+				
+				document.getElementById("reply_reCon_" + reviewNo).innerHTML = document.getElementById("reply_con_" + reviewNo).value;
+				
+
+				
+			}else{
+				alert("답글입력에 실패하였습니다.");
+			}
+			
+			
+		},
+		error: function(){
+	        
+			alert("답글입력에 실패하였습니다.");
+	        
+		}
+		
+	});
+}
+
+function bline_request_insert(){
+	$.ajax({
+		type: "POST",
+		url: "<%=request.getContextPath()%>/blineRequestInsert.do",
+		data: {"userId": "<%=userId%>", "boardCode": <%=boardT.getBoardNo()%>,
+			"blineText": document.getElementById("bline_con").value},
+		success: function(data){
+			
+			if(data=="t"){
+				alert("블라인드 요청이 완료되었습니다.");
+			}else if(data=="f"){
+				alert("블라인드 요청이 실패하였습니다.");
+			}else if(data=="c"){
+				alert("이미 블라인드 요청한 글입니다.");
+			}
+			
+		},
+		error: function(){
+			alert("블라인드 요청이 실패하였습니다.");
+	        
+		}
+	});
+	
+	$("#bline_process_modal").attr("style", "display:none");
+	$('body').css("overflow", "scroll");
+	
+} 
 
 </script>
 

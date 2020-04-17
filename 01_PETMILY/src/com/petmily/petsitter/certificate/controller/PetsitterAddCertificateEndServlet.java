@@ -48,8 +48,13 @@ public class PetsitterAddCertificateEndServlet extends HttpServlet {
 		String date1 = mr.getParameter("date1");
 		String file = mr.getFilesystemName("file");
 			
+<<<<<<< HEAD
+		PetSitterCertificate pc = null;//new PetSitterCertificate(userId,certificateName,certificationName,date,date1,file,"");
+		int result = 0;//new SitterCertificateService().insertCertificate(pc);
+=======
 		PetSitterCertificate pc = new PetSitterCertificate(userId,certificateName,certificationName,date,date1,file,"");
 		int result = new  SitterCertificateService().insertCertificate(pc);
+>>>>>>> refs/heads/ysk
 		
 		String msg = "";
 		String loc = "";

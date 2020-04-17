@@ -26,6 +26,9 @@ public class PetSitterSettledServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+//		[슬기 작업]
+		
 //		펫시터 마이페이지 - 이전 정산보기 리스트 가져오는 기능
 		HttpSession session = request.getSession();
 		User loginUser = (User)session.getAttribute("loginUser"); // 로그인한 유저의 계정(펫시터)

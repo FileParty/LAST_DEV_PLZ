@@ -23,6 +23,8 @@ public class UserLoginEndServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
+		
 		request.setCharacterEncoding("UTF-8");
 		
 //		클라이언트가 입력한 값을 받는다 (아이디, 비밀번호)

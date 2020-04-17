@@ -303,7 +303,7 @@ label.custom-file-label::after{
                          <td style="line-height:40px; padding-left:50px;">
                          	<input type="email" id="email" name="email" value="<%= loginUser.getEmail() %>" style="height:25px; width: 230px;"/> 
                         	</td> 
-                         <td><button class="duplicate" type="button" style="height:25px;">중복확인</button></td>
+                         <td><button class="duplicate" type="button" style="height:25px;" onclick="duplicateEmail();" >중복확인</button></td>
                          <p></p>
                      </tr>
                      </div>
@@ -327,7 +327,7 @@ label.custom-file-label::after{
                          <td style="line-height:40px; padding-left:50px;">
                          	<input type="text" id="phone" name="phone" value="<%= loginUser.getPhone() %>" style="height:25px; width: 230px;"/> 
                        	 </td> 
-                         <td><button class="duplicate" type="button" style="height:25px;">중복확인</button></td>
+                         <td><button class="duplicate" type="button" style="height:25px;" onclick="duplicatePhone();" >중복확인</button></td>
                          <p></p>
                      </tr>
                      <tr>
@@ -432,6 +432,51 @@ function toggle4(){ //on/off하나의 버튼으로 가능.
 
 $('.row4').slideToggle(100); //시간 부여
 };
+
+
+/* ---------------------------------- */
+	// 이메일 중복확인 팝업창
+	function duplicateEmail() {
+		// 서블릿에 보낼 이메일값 불러오기
+		var email = document.getElementById("email").value; // input 태그 값 가져오기
+		// var optionValue = $("#email option:selected").val(); // select 태그에서 선택된 option 값 가져오기
+		// var emailId = emailInput+optionValue;
+		
+		if( !(email==null || email.trim().length<4) ) {
+			// 새 창을 띄워서 emailInput, email의 값을 비교하는 함수!
+			var url = "<%=request.getContextPath()%>/emailDuplicate?email="+email;
+			var status = "height=420px, width=600px, top=200px, left=500px";
+			window.open(url, "_blank", status);
+		}
+		else {
+			alert("이메일 4글자 이상 입력하세요");
+			$("#email").focus();
+			return;
+		}
+	}
+	
+	// 휴대전화 중복확인 팝업창
+	function duplicatePhone() {
+		// 서블릿에 보낼 휴대번호값 불러오기
+		var phone = $("#phone").val();
+		
+		// 새 창을 띄워서 phone의 값을 비교하는 함수!
+		var url = "<%=request.getContextPath()%>/phoneDuplicate?phone="+phone;
+		var status = "height=420px, width=600px, top=200px, left=500px";
+		
+		/* 유효성검사에 맞게 틀린 값을 입력했을 때 팝업창이 띄워지지 않게 설정한다. */
+		/* if(phone.length<11 && phone.length>11 && phone.value==" "){ // 휴대번호 숫자가 11개가 아니면 팝업창을 띄우지 않는다.
+			return;
+		} */
+		window.open(url, "_blank", status);
+	}
+
+
+/* ---------------------------------- */
+
+
+
+
 
 
                  

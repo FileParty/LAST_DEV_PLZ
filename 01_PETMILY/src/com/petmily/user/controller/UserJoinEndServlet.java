@@ -21,6 +21,7 @@ public class UserJoinEndServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		회원가입 로직
 //		클라이언트가 입력한 값을 받아와서 DB에 저장한다
 		request.setCharacterEncoding("UTF-8");

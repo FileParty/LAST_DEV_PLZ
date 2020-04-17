@@ -22,6 +22,7 @@ public class UserDeleteEndServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		회원정보 삭제하는 로직
 		String id = request.getParameter("userId"); // 유저 아이디
 		

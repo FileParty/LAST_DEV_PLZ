@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.petmily.user.model.vo.PetSitter2;
 import com.petmily.user.model.vo.User;
 import com.petmily.user.model.vo.UserBookMarkBoard;
+import com.petmily.user.model.vo.UserPaymentHistory;
 
 
 public class UserDao {
@@ -124,8 +125,14 @@ public class UserDao {
 		return result;
 	}
 	
-//	嚥≪����占쎌�� 嚥≪��彛� �닌���
-//	占쎄깻占쎌�わ옙��占쎈섧占쎈��揶�占� 占쎌��占쎌�곤옙釉� 占쎈�뀐옙��占쎄숲揶�占� DB占쎈� 占쏙옙占쎌�ｏ옙由븝옙堉� 占쎌�놂옙��筌�占� 占쎌��占쎌�ㅿ옙鍮�占쎈� 占쎈립占쎈��.
+	
+	
+//	----------------------------- ㅆ
+	
+	
+	
+//	유저 로그인 로직
+//	DB에 클라이언트가 입력한 아이디값이 있는지 찾아본다.
 	public User userSelect(Connection conn, String user_id, String password) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -140,18 +147,18 @@ public class UserDao {
 			
 			if(rs.next()) {
 				user = new User();
-				user.setUserId(rs.getString("USER_ID")); // 占쎌��占쏙옙 占쎈�占쎌��占쎈�
-				user.setPassword(rs.getString("PASSWORD")); // 占쎌��占쏙옙 占쎈�ｏ옙�わ옙��占쎈굡
-				user.setUserName(rs.getString("USER_NAME")); // 占쎌��占쏙옙 占쎌���깍옙
-				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // 占쎌��占쏙옙 占쎄문占쎈��占쎌�∽옙��
-				user.setPhone(rs.getString("PHONE")); // 占쎌��占쏙옙 占쎌��占쏙옙甕곕����
-				user.setZipCode(rs.getString("ZIP_CODE")); // 占쎌��占쏙옙 占쎌��占쎈�よ린����
-				user.setAddress(rs.getString("ADDRESS")); // 占쎌��占쏙옙 雅��깅��
-				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // 占쎌��占쏙옙 占쎄맒占쎄쉭雅��깅��
-				user.setEmail(rs.getString("EMAIL")); // 占쎌��占쏙옙 占쎌��筌�遺우��
-				user.setGender(rs.getString("GENDER")); // 占쎌��占쏙옙 占쎄쉐癰�占�
-				user.setStatus(rs.getString("STATUS")); // 占쎌��占쏙옙 占쎌�띰옙��占쎄�占쎈��占쎈연�븝옙
-				user.setUserType(rs.getString("USER_TYPE")); // 占쎌��占쏙옙 占쏙옙占쎌��(占쎌�よ�占�, 占쎈��占쎈��占쎄숲, �울옙�귐���)
+				user.setUserId(rs.getString("USER_ID")); 
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY"));
+				user.setPhone(rs.getString("PHONE"));
+				user.setZipCode(rs.getString("ZIP_CODE"));
+				user.setAddress(rs.getString("ADDRESS")); 
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setGender(rs.getString("GENDER"));
+				user.setStatus(rs.getString("STATUS"));
+				user.setUserType(rs.getString("USER_TYPE"));
 			}
 		}
 		catch(SQLException e) {
@@ -166,7 +173,7 @@ public class UserDao {
 	
 	
 	
-	
+//	회원가입 - 아이디 중복확인 로직
 	public boolean userIdDuplicate(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -178,7 +185,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true占쎈�� 占쎌��占쎌��占쎌�� �븍��占쏙옙�� ( 占쎈�占쎌��占쎈�揶�占� DB占쎈� 占쎌�놂옙��占쎈��, 占쎄�占쎌��占쎈막 占쎈�� 占쎈씨占쎈��! )
+				flag = true; // true는 이용이 불가능 ( 아이디가 DB에 있으니, 사용할 수 없다! )
 			}
 		}
 		catch(SQLException e) {
@@ -191,7 +198,7 @@ public class UserDao {
 		return flag;
 	}
 	
-	
+//	회원가입 - 휴대폰 중복확인 로직
 	public boolean phoneDuplicate(Connection conn, String phone) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -203,7 +210,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true占쎈�� 占쎌��占쎌��占쎌�� �븍��占쏙옙�� ( 占쎈�占쎌��占쎈�揶�占� DB占쎈� 占쎌�놂옙��占쎈��, 占쎄�占쎌��占쎈막 占쎈�� 占쎈씨占쎈��! )
+				flag = true; // true는 이용이 불가능 ( 아이디가 DB에 있으니, 사용할 수 없다! )
 			}
 		}
 		catch(SQLException e) {
@@ -216,6 +223,7 @@ public class UserDao {
 		return flag;
 	}
 	
+//	회원가입 - 이메일 중복확인 로직
 	public boolean emailDuplicate(Connection conn, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -227,7 +235,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true占쎈�� 占쎌��占쎌��占쎌�� �븍��占쏙옙�� ( 占쎈�占쎌��占쎈�揶�占� DB占쎈� 占쎌�놂옙��占쎈��, 占쎄�占쎌��占쎈막 占쎈�� 占쎈씨占쎈��! )
+				flag = true; // true는 이용이 불가능 ( 아이디가 DB에 있으니, 사용할 수 없다! )
 			}
 		}
 		catch(SQLException e) {
@@ -241,7 +249,7 @@ public class UserDao {
 	}
 	
 	
-//	占쎌�띰옙��揶�占쏙옙�� 嚥≪��彛�
+//	회원가입 로직
 	public int userJoin(Connection conn, String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		PreparedStatement pstmt=null;
 		int result = 0;
@@ -268,9 +276,9 @@ public class UserDao {
 		return result;
 	}
 
-//	-----------------------------------------------------------
+//	----------------------------------------------------------- ㅆ
 	
-//	������蹂� 蹂닿린 濡�吏�
+//	회원정보 보기 로직
 	public User userSelect(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -309,7 +317,7 @@ public class UserDao {
 	}
 	
 	
-//	������蹂� ���� 濡�吏�
+//	회원정보 수정 로직
 	public int userUpdate(Connection conn, String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		PreparedStatement pstmt = null;
 		int result= 0;
@@ -334,14 +342,14 @@ public class UserDao {
 		return result;
 	}
 	
-//	�������� 濡�吏�
+//	회원탈퇴 로직
 	public int userDelete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("userDelete");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id); // SQL 鈺곌�援�
+			pstmt.setString(1, id); // SQL 조건
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -353,7 +361,7 @@ public class UserDao {
 		return result;
 	}
 	
-//	留��댄���댁� - 遺�留��� 濡�吏�
+//	마이페이지 - 북마크 로직
 	public List<UserBookMarkBoard> userBookMarkBoard(Connection conn, String id, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -362,13 +370,13 @@ public class UserDao {
 		String sql = prop.getProperty("userBookMarkBoard");
 		try {
 			pstmt = conn.prepareStatement(sql);
-//			���댁� 泥�由ъ��, SQL臾몃�� ������ ��������.
-//			RNUM 泥�由щ�� ���� ��釉�荑쇰━ ������ ��������.
+//			페이징 처리시, SQL문도 수정이 필요하다.
+//			RNUM 처리를 위해 서브쿼리 수정이 필요하다.
 			pstmt.setString(1, id);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
-			System.out.println("dao�� id :"+id);
+			System.out.println("dao의 id :"+id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -383,7 +391,7 @@ public class UserDao {
 				list.add(ubm);
 			}
 			
-			System.out.println("dao���� �� �댁��議���媛�(dao) : "+list);
+			System.out.println("dao에서 잘 담아졌는가(dao) : "+list);
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -395,8 +403,8 @@ public class UserDao {
 		return list;
 	}
 	
-//	遺�留��� 紐⑸� ���댁� 泥�由� 濡�吏� 
-//	page bar 留��ㅺ린(int totalData)
+//	북마크 로직 페이징 처리
+//	page bar 생성(int totalData)
 	public int selectBoardCount(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -418,8 +426,45 @@ public class UserDao {
 		}
 		return count;
 	}
+	
+//	일반사용자 마이페이지 - 결제내역 로직
+	public List<UserPaymentHistory> userPaymentHistory(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserPaymentHistory up = null;
+		List<UserPaymentHistory> list = new ArrayList();
+		String sql = prop.getProperty("userPaymentHistory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id); // SQL 조건
+			System.out.println("dao의 id : "+id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				up = new UserPaymentHistory();
+				up.setCheckIn(rs.getString("checkin"));
+				up.setCheckOut(rs.getString("checkout"));
+				up.setPstId(rs.getString("pstid"));
+				up.setPrice(rs.getInt("price"));
+				up.setEndDate(rs.getString("enddate"));
+				list.add(up);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 
+//	------------------------------------------------------------------------------
+	
 
+//	인술 작업(로그인 API)
 	public User userApiLogin(Connection conn, String userEmail) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -457,29 +502,7 @@ public class UserDao {
 		return user;
 	}
 	
-	public int userUpdate(Connection conn, String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
-		PreparedStatement pstmt = null;
-		int result= 0;
-		String sql = prop.getProperty("userUpdate");
-		try { 
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, newPw);
-			pstmt.setString(2, email); 
-			pstmt.setString(3, phone); 
-			pstmt.setString(4, postNum);
-			pstmt.setString(5, address);
-			pstmt.setString(6, detailAddress);
-			pstmt.setString(7, id); // SQL �브����대떻�㎩��占�
-			result = pstmt.executeUpdate();
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			close(pstmt);
-		}
-		return result;
-	}
+	
 	
 	public int sitterUpdate(Connection conn, String id, String bankName, String accountNo, String accountName, String img) {
 		PreparedStatement pstmt=null; 

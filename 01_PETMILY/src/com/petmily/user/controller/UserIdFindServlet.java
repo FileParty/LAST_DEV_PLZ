@@ -19,6 +19,7 @@ public class UserIdFindServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		로그인 화면에서 [아이디]눌렀을 때 나오는 팝업창으로 화면 전환
 		request.getRequestDispatcher("/views/user/UserIdFind.jsp").forward(request, response);
 	}

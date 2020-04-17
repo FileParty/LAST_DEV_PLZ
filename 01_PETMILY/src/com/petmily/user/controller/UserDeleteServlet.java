@@ -24,6 +24,7 @@ public class UserDeleteServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		회원정보 - 회원탈퇴 화면으로 전환하는 기능
 //		로그인 한 유저만 사용할 수 있도록 처리한다.
 		HttpSession session = request.getSession();

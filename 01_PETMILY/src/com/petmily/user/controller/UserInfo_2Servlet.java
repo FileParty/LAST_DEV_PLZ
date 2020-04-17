@@ -23,6 +23,7 @@ public class UserInfo_2Servlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		새로 다시 만든 일반사용자 - 마이페이지
 //		/user/Info 매핑값으로 처리한 서블릿이 많아서... 이렇게 하나 더 서블릿을 만들게 됨.!!! 2020.04.17
 

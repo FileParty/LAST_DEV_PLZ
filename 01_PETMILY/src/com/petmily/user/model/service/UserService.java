@@ -1,7 +1,7 @@
 package com.petmily.user.model.service;
 
-import static com.petmily.common.JDBCTemplate.commit;
 import static com.petmily.common.JDBCTemplate.close;
+import static com.petmily.common.JDBCTemplate.commit;
 import static com.petmily.common.JDBCTemplate.getConnection;
 import static com.petmily.common.JDBCTemplate.rollback;
 
@@ -11,8 +11,8 @@ import java.util.List;
 import com.petmily.user.model.dao.UserDao;
 import com.petmily.user.model.vo.PetSitter2;
 import com.petmily.user.model.vo.User;
-import com.petmily.user.model.vo.UserBookMark;
 import com.petmily.user.model.vo.UserBookMarkBoard;
+import com.petmily.user.model.vo.UserPaymentHistory;
 
 public class UserService {
 //	�쑀���� �뿰愿��엳�뒗 �꽌鍮꾩뒪 �쁺�뿭
@@ -44,6 +44,9 @@ public class UserService {
 	    	}
 			return result;
 	    }
+	
+	
+//	------------------------------ ㅆ
 	
 	
 //	로그인 로직
@@ -82,13 +85,20 @@ public class UserService {
 	public int userJoin(String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		Connection conn = getConnection();
 		int result = dao.userJoin(conn, id, password, name, bday, phone, post, address, detailedAddress, email, gender);
+		
+		if(result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
 	
 	
 	
-//	------------------------------------------------
+//	------------------------------------------------ ㅆ
 	
 //	마이페이지 이동 로직
 	public User userSelect(String id) {
@@ -145,6 +155,22 @@ public class UserService {
 		close(conn);
 		return count;
 	}
+	
+//	------------ ㅆ
+	
+//	일반사용자 마이페이지 - 결제내역 기능
+	public List<UserPaymentHistory> userPaymentHistory(String id) {
+		Connection conn = getConnection();
+		List<UserPaymentHistory> list = dao.userPaymentHistory(conn, id);
+		close(conn);
+		return list;
+	}
+	
+	
+	
+	
+//	----------------------------------------------------------------------
+	
 
 	// API 이메일을 받아서 로그인
 	public User apiLogin(String userEmail) {

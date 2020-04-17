@@ -24,6 +24,7 @@ public class UserUpdateServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		회원정보 수정하는 화면으로 전환
 //		로그인 된 유저만 사용할 수 있도록 조건을 걸어야 한다.
 		HttpSession session = request.getSession();
@@ -35,6 +36,7 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 		else {
 			String id = request.getParameter("userId");
+			
 			System.out.println("회원정보수정 화면으로 이동하기 위해 확인하는 id 값 : "+id);
 			
 //			북마크 테이블 가져오기

@@ -19,6 +19,7 @@ public class SitterJoinServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업] - 화면만 전환하는 서블릿 생성.
 //		펫시터 지원 - 회원가입 화면으로 이동하는 로직
 		request.getRequestDispatcher("/views/sitter/sitterJoin.jsp").forward(request, response);
 	}

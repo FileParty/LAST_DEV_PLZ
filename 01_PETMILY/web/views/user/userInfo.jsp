@@ -274,9 +274,11 @@ label.custom-file-label::after{
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             
+                            
+                            <!-- 아무도 작업을 안했다고 함. -->
                             <li class="title">결제</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 결제 내역</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/paymentHistory?userId=<%=loginUser.getUserId()%>"> - 결제 내역</a></li>
                             <li class="content"><a href=""> - 추가 요금 내역</a></li>
                             <br/>                           
                         </ul>

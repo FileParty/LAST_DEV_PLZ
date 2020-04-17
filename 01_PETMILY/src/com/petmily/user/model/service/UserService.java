@@ -82,6 +82,13 @@ public class UserService {
 	public int userJoin(String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		Connection conn = getConnection();
 		int result = dao.userJoin(conn, id, password, name, bday, phone, post, address, detailedAddress, email, gender);
+		
+		if(result>0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}

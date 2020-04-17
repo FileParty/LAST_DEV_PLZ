@@ -34,9 +34,9 @@ public class UserReviewListServlet extends HttpServlet {
 
 		String userId=request.getParameter("userId");
 		
-		System.out.println("유저아이디 확인"+userId);
+		//System.out.println("유저아이디 확인"+userId);
 		
-		List<PetsitterMypageUserReview> list=new PetsitterMypageReservationService().selectPetsitterMypageUserReview();
+		List<PetsitterMypageUserReview> list=new PetsitterMypageReservationService().selectPetsitterMypageUserReview(userId);
 		
 		request.setAttribute("list", list);
 		

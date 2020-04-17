@@ -20,7 +20,7 @@ import com.petmily.user.model.vo.UserBookMarkBoard;
 public class UserDao {
 	private Properties prop = new Properties();
 	
-//	湲곕낯 �깮�꽦�옄�뿉 �뙆�씪 寃쎈줈瑜� �꽑�뼵�븳�떎.
+//	疫꿸��� 占쎄문占쎄쉐占쎌��占쎈� 占쎈��占쎌�� 野���以���占� 占쎄�占쎈섧占쎈립占쎈��.
 	public UserDao() {
 		try {
 			String path = UserDao.class.getResource("/sql/user/user-query.properties").getPath();
@@ -29,7 +29,7 @@ public class UserDao {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-	}// UserDao() 湲곕낯�깮�꽦�옄
+	}// UserDao() 疫꿸���占쎄문占쎄쉐占쎌��
 	
 	
 	public int insertUserTable(Connection conn, PetSitter2 pss) {
@@ -38,17 +38,17 @@ public class UserDao {
 		String sql=prop.getProperty("insertUserTable");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?쉶?썝媛??엯 ?븘?씠?뵒
-			pstmt.setString(2, pss.getPassword()); //?쉶?썝媛??엯 鍮꾨?踰덊샇
-			pstmt.setString(3, pss.getSitterName()); //?쉶?썝媛??엯 ?씠由?
-			pstmt.setString(4, pss.getSitterBday().replaceAll("-", "/"));//?쉶?썝媛??엯 ?쑕???룿
+			pstmt.setString(1, pss.getPetsitterId()); //?��?��揶�??�� ?釉�?��?逾�
+			pstmt.setString(2, pss.getPassword()); //?��?��揶�??�� ��袁�?甕곕����
+			pstmt.setString(3, pss.getSitterName()); //?��?��揶�??�� ?����?
+			pstmt.setString(4, pss.getSitterBday().replaceAll("-", "/"));//?��?��揶�??�� ?��???猷�
 			pstmt.setString(5, pss.getSitterPhone());
-			pstmt.setString(6, pss.getPostCode());//?쉶?썝媛??엯 二쇱냼 ?슦?렪踰덊샇
-			pstmt.setString(7, pss.getSitterAddress()); //?쉶?썝媛??엯 二쇱냼
-			pstmt.setString(8, pss.getAddressDetail()); //?쉶?썝媛??엯 ?긽?꽭二쇱냼
-			pstmt.setString(9, pss.getSitterEmail()); //?쉶?썝媛??엯 ?씠硫붿씪
-			pstmt.setString(10, String.valueOf(pss.getSitterGender())); //?쉶?썝媛??엯 ?꽦蹂?
-			pstmt.setString(11, pss.getType()); //?쉶?썝媛??엯 ?떆?꽣 ???엯
+			pstmt.setString(6, pss.getPostCode());//?��?��揶�??�� 雅��깅�� ?��?�よ린����
+			pstmt.setString(7, pss.getSitterAddress()); //?��?��揶�??�� 雅��깅��
+			pstmt.setString(8, pss.getAddressDetail()); //?��?��揶�??�� ?湲�?苑�雅��깅��
+			pstmt.setString(9, pss.getSitterEmail()); //?��?��揶�??�� ?��筌�遺우��
+			pstmt.setString(10, String.valueOf(pss.getSitterGender())); //?��?��揶�??�� ?苑�癰�?
+			pstmt.setString(11, pss.getType()); //?��?��揶�??�� ?��?苑� ???��
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -58,24 +58,24 @@ public class UserDao {
 		return result;
 	}
 	
-	//?렖 ?떆?꽣 ?쉶?썝媛??엯 以? USER_PET_SITTER?뿉 ???븳 硫붿냼?뱶
+	//?�� ?��?苑� ?��?��揶�??�� 餓�? USER_PET_SITTER?肉� ???釉� 筌�遺용��?諭�
 	public int insertUserPetSitter(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
 		String sql=prop.getProperty("insertPetSitter");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?렖?떆?꽣 ?븘?씠?뵒
-			pstmt.setString(2, pss.getCertificateYN()); //?렖?떆?꽣 ?옄寃⑹쬆 蹂댁쑀 ?뿬遺?
-			pstmt.setString(3, pss.getPetSitterJob()); //?렖?떆?꽣 吏곸뾽
-			pstmt.setString(4, pss.getPetSitterFamily()); //?렖?떆?꽣 媛?議? 援ъ꽦?썝
-			pstmt.setString(5, pss.getPetSitterKeeppets()); //?렖?떆?꽣 諛섎젮?룞臾? 諛섎젮 寃쏀뿕 ?뿬遺?
-			pstmt.setString(6, pss.getPetSitterActivity()); //?렖?떆?꽣 ?솢?룞 寃쎈젰
-			pstmt.setString(7, pss.getAccountOwner()); //?렖?떆?꽣 ?젙?궛怨꾩쥖 怨꾩쥖二?
-			pstmt.setString(8, pss.getBankName()); //?렖?떆?꽣 ?젙?궛怨꾩쥖 ???뻾紐?
-			pstmt.setString(9, pss.getAccountNo()); //?렖?떆?꽣 ?젙?궛怨꾩쥖 怨꾩쥖踰덊샇
-		//	pstmt.setString(10, ps.getType()); //?렖?떆?꽣 ?궗?슜?옄 ???엯(?렖?떆?꽣)
-			pstmt.setString(11, pss.getSitterImg()); //?렖?떆?꽣 ?봽濡쒗븘 ?씠誘몄?
+			pstmt.setString(1, pss.getPetsitterId()); //?��?��?苑� ?釉�?��?逾�
+			pstmt.setString(2, pss.getCertificateYN()); //?��?��?苑� ?��野��뱀� 癰����� ?肉ч��?
+			pstmt.setString(3, pss.getPetSitterJob()); //?��?��?苑� 筌�怨몃씜
+			pstmt.setString(4, pss.getPetSitterFamily()); //?��?��?苑� 揶�?鈺�? �닌�苑�?��
+			pstmt.setString(5, pss.getPetSitterKeeppets()); //?��?��?苑� 獄�����?猷���? 獄����� 野���肉� ?肉ч��?
+			pstmt.setString(6, pss.getPetSitterActivity()); //?��?��?苑� ?��?猷� 野�����
+			pstmt.setString(7, pss.getAccountOwner()); //?��?��?苑� ?��?沅��④쑴伊� �④쑴伊�雅�?
+			pstmt.setString(8, pss.getBankName()); //?��?��?苑� ?��?沅��④쑴伊� ???六억�?
+			pstmt.setString(9, pss.getAccountNo()); //?��?��?苑� ?��?沅��④쑴伊� �④쑴伊�甕곕����
+		//	pstmt.setString(10, ps.getType()); //?��?��?苑� ?沅�?��?�� ???��(?��?��?苑�)
+			pstmt.setString(11, pss.getSitterImg()); //?��?��?苑� ?遊썸에��釉� ?��沃�紐�?
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -85,19 +85,19 @@ public class UserDao {
 			return result;
 	}
 		
-	//?렖 ?떆?꽣 ?쉶?썝媛??엯 以? PET_SITTER_CERTIFICATE 硫붿냼?뱶
+	//?�� ?��?苑� ?��?��揶�??�� 餓�? PET_SITTER_CERTIFICATE 筌�遺용��?諭�
 	public int insertPetSitterCertificate(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
 		String sql=prop.getProperty("insertPetSitterCertificate");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?렖?떆?꽣 ?븘?씠?뵒
-			pstmt.setString(2, pss.getCertificateName()); //?렖?떆?꽣 ?옄寃⑹쬆 ?씠由?
-			pstmt.setString(3, pss.getIssuingOrg()); //?렖?떆?꽣 ?옄寃⑹쬆 諛쒓툒湲곌?
-			pstmt.setString(4, pss.getCertiGetDate()); //?렖?떆?꽣 ?옄寃⑹쬆 諛쒓툒?씪
-			pstmt.setString(5, pss.getCertiEndDate()); //?렖?떆?꽣 ?옄寃⑹쬆 留뚮즺?씪
-			pstmt.setString(6, pss.getCertiImg()); //?렖?떆?꽣 ?옄寃⑹쬆 ?씠誘몄?
+			pstmt.setString(1, pss.getPetsitterId()); //?��?��?苑� ?釉�?��?逾�
+			pstmt.setString(2, pss.getCertificateName()); //?��?��?苑� ?��野��뱀� ?����?
+			pstmt.setString(3, pss.getIssuingOrg()); //?��?��?苑� ?��野��뱀� 獄�����疫꿸�?
+			pstmt.setString(4, pss.getCertiGetDate()); //?��?��?苑� ?��野��뱀� 獄�����?��
+			pstmt.setString(5, pss.getCertiEndDate()); //?��?��?苑� ?��野��뱀� 筌���利�?��
+			pstmt.setString(6, pss.getCertiImg()); //?��?��?苑� ?��野��뱀� ?��沃�紐�?
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -107,15 +107,15 @@ public class UserDao {
 		return result;
 	}
 	
-	//?렖?떆?꽣 ?쉶?썝媛??엯 以? RESIDENCE_TYPE ?뀒?씠釉붿뿉 ???븳 寃?
+	//?��?��?苑� ?��?��揶�??�� 餓�? RESIDENCE_TYPE ?��?����遺용� ???釉� 野�?
 	public int insertResidenceType(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
 		String sql=prop.getProperty("insertResidenceType");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?렖?떆?꽣 ?븘?씠?뵒
-			pstmt.setString(2, pss.getResidenceValue()); //嫄곗＜吏? ?쑀?삎
+			pstmt.setString(1, pss.getPetsitterId()); //?��?��?苑� ?釉�?��?逾�
+			pstmt.setString(2, pss.getResidenceValue()); //椰�怨�竊�筌�? ?��?��
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -124,8 +124,8 @@ public class UserDao {
 		return result;
 	}
 	
-//	濡쒓렇�씤 濡쒖쭅 援ы쁽
-//	�겢�씪�씠�뼵�듃媛� �엯�젰�븳 �뜲�씠�꽣媛� DB�뿉 ���옣�릺�뼱 �엳�뒗吏� �솗�씤�빐�빞 �븳�떎.
+//	嚥≪����占쎌�� 嚥≪��彛� �닌���
+//	占쎄깻占쎌�わ옙��占쎈섧占쎈��揶�占� 占쎌��占쎌�곤옙釉� 占쎈�뀐옙��占쎄숲揶�占� DB占쎈� 占쏙옙占쎌�ｏ옙由븝옙堉� 占쎌�놂옙��筌�占� 占쎌��占쎌�ㅿ옙鍮�占쎈� 占쎈립占쎈��.
 	public User userSelect(Connection conn, String user_id, String password) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -140,18 +140,18 @@ public class UserDao {
 			
 			if(rs.next()) {
 				user = new User();
-				user.setUserId(rs.getString("USER_ID")); // �쑀�� �븘�씠�뵒
-				user.setPassword(rs.getString("PASSWORD")); // �쑀�� �뙣�뒪�썙�뱶
-				user.setUserName(rs.getString("USER_NAME")); // �쑀�� �씠由�
-				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // �쑀�� �깮�뀈�썡�씪
-				user.setPhone(rs.getString("PHONE")); // �쑀�� �쑕��踰덊샇
-				user.setZipCode(rs.getString("ZIP_CODE")); // �쑀�� �슦�렪踰덊샇
-				user.setAddress(rs.getString("ADDRESS")); // �쑀�� 二쇱냼
-				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // �쑀�� �긽�꽭二쇱냼
-				user.setEmail(rs.getString("EMAIL")); // �쑀�� �씠硫붿씪
-				user.setGender(rs.getString("GENDER")); // �쑀�� �꽦蹂�
-				user.setStatus(rs.getString("STATUS")); // �쑀�� �쉶�썝�깉�눜�뿬遺�
-				user.setUserType(rs.getString("USER_TYPE")); // �쑀�� ���엯(�씪諛�, �렖�떆�꽣, 愿�由ъ옄)
+				user.setUserId(rs.getString("USER_ID")); // 占쎌��占쏙옙 占쎈�占쎌��占쎈�
+				user.setPassword(rs.getString("PASSWORD")); // 占쎌��占쏙옙 占쎈�ｏ옙�わ옙��占쎈굡
+				user.setUserName(rs.getString("USER_NAME")); // 占쎌��占쏙옙 占쎌���깍옙
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // 占쎌��占쏙옙 占쎄문占쎈��占쎌�∽옙��
+				user.setPhone(rs.getString("PHONE")); // 占쎌��占쏙옙 占쎌��占쏙옙甕곕����
+				user.setZipCode(rs.getString("ZIP_CODE")); // 占쎌��占쏙옙 占쎌��占쎈�よ린����
+				user.setAddress(rs.getString("ADDRESS")); // 占쎌��占쏙옙 雅��깅��
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // 占쎌��占쏙옙 占쎄맒占쎄쉭雅��깅��
+				user.setEmail(rs.getString("EMAIL")); // 占쎌��占쏙옙 占쎌��筌�遺우��
+				user.setGender(rs.getString("GENDER")); // 占쎌��占쏙옙 占쎄쉐癰�占�
+				user.setStatus(rs.getString("STATUS")); // 占쎌��占쏙옙 占쎌�띰옙��占쎄�占쎈��占쎈연�븝옙
+				user.setUserType(rs.getString("USER_TYPE")); // 占쎌��占쏙옙 占쏙옙占쎌��(占쎌�よ�占�, 占쎈��占쎈��占쎄숲, �울옙�귐���)
 			}
 		}
 		catch(SQLException e) {
@@ -167,7 +167,6 @@ public class UserDao {
 	
 	
 	
-//	�븘�씠�뵒 以묐났�솗�씤 濡쒖쭅
 	public boolean userIdDuplicate(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -179,7 +178,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true�뒗 �씠�슜�씠 遺덇��뒫 ( �븘�씠�뵒媛� DB�뿉 �엳�쑝�땲, �궗�슜�븷 �닔 �뾾�떎! )
+				flag = true; // true占쎈�� 占쎌��占쎌��占쎌�� �븍��占쏙옙�� ( 占쎈�占쎌��占쎈�揶�占� DB占쎈� 占쎌�놂옙��占쎈��, 占쎄�占쎌��占쎈막 占쎈�� 占쎈씨占쎈��! )
 			}
 		}
 		catch(SQLException e) {
@@ -193,7 +192,6 @@ public class UserDao {
 	}
 	
 	
-//	�쑕��踰덊샇 以묐났�솗�씤 濡쒖쭅
 	public boolean phoneDuplicate(Connection conn, String phone) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -205,7 +203,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true�뒗 �씠�슜�씠 遺덇��뒫 ( �븘�씠�뵒媛� DB�뿉 �엳�쑝�땲, �궗�슜�븷 �닔 �뾾�떎! )
+				flag = true; // true占쎈�� 占쎌��占쎌��占쎌�� �븍��占쏙옙�� ( 占쎈�占쎌��占쎈�揶�占� DB占쎈� 占쎌�놂옙��占쎈��, 占쎄�占쎌��占쎈막 占쎈�� 占쎈씨占쎈��! )
 			}
 		}
 		catch(SQLException e) {
@@ -218,8 +216,6 @@ public class UserDao {
 		return flag;
 	}
 	
-	
-//	�씠硫붿씪 以묐났�솗�씤 濡쒖쭅
 	public boolean emailDuplicate(Connection conn, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -231,7 +227,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true�뒗 �씠�슜�씠 遺덇��뒫 ( �븘�씠�뵒媛� DB�뿉 �엳�쑝�땲, �궗�슜�븷 �닔 �뾾�떎! )
+				flag = true; // true占쎈�� 占쎌��占쎌��占쎌�� �븍��占쏙옙�� ( 占쎈�占쎌��占쎈�揶�占� DB占쎈� 占쎌�놂옙��占쎈��, 占쎄�占쎌��占쎈막 占쎈�� 占쎈씨占쎈��! )
 			}
 		}
 		catch(SQLException e) {
@@ -245,7 +241,7 @@ public class UserDao {
 	}
 	
 	
-//	�쉶�썝媛��엯 濡쒖쭅
+//	占쎌�띰옙��揶�占쏙옙�� 嚥≪��彛�
 	public int userJoin(Connection conn, String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		PreparedStatement pstmt=null;
 		int result = 0;
@@ -274,7 +270,7 @@ public class UserDao {
 
 //	-----------------------------------------------------------
 	
-//	회원정보 보기 로직
+//	������蹂� 蹂닿린 濡�吏�
 	public User userSelect(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -313,7 +309,7 @@ public class UserDao {
 	}
 	
 	
-//	회원정보 수정 로직
+//	������蹂� ���� 濡�吏�
 	public int userUpdate(Connection conn, String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		PreparedStatement pstmt = null;
 		int result= 0;
@@ -326,7 +322,7 @@ public class UserDao {
 			pstmt.setString(4, postNum);
 			pstmt.setString(5, address);
 			pstmt.setString(6, detailAddress);
-			pstmt.setString(7, id); // SQL 議곌굔臾�
+			pstmt.setString(7, id); // SQL 鈺곌�援��억옙
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -338,14 +334,14 @@ public class UserDao {
 		return result;
 	}
 	
-//	회원탈퇴 로직
+//	�������� 濡�吏�
 	public int userDelete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("userDelete");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id); // SQL 議곌굔
+			pstmt.setString(1, id); // SQL 鈺곌�援�
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -357,7 +353,7 @@ public class UserDao {
 		return result;
 	}
 	
-//	마이페이지 - 북마크 로직
+//	留��댄���댁� - 遺�留��� 濡�吏�
 	public List<UserBookMarkBoard> userBookMarkBoard(Connection conn, String id, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -366,13 +362,13 @@ public class UserDao {
 		String sql = prop.getProperty("userBookMarkBoard");
 		try {
 			pstmt = conn.prepareStatement(sql);
-//			페이징 처리시, SQL문도 수정이 필요하다.
-//			RNUM 처리를 위해 서브쿼리 수정이 필요하다.
+//			���댁� 泥�由ъ��, SQL臾몃�� ������ ��������.
+//			RNUM 泥�由щ�� ���� ��釉�荑쇰━ ������ ��������.
 			pstmt.setString(1, id);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
-			System.out.println("dao의 id :"+id);
+			System.out.println("dao�� id :"+id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -387,7 +383,7 @@ public class UserDao {
 				list.add(ubm);
 			}
 			
-			System.out.println("dao에서 잘 담아졌는가(dao) : "+list);
+			System.out.println("dao���� �� �댁��議���媛�(dao) : "+list);
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -399,8 +395,8 @@ public class UserDao {
 		return list;
 	}
 	
-//	북마크 목록 페이징 처리 로직 
-//	page bar 만들기(int totalData)
+//	遺�留��� 紐⑸� ���댁� 泥�由� 濡�吏� 
+//	page bar 留��ㅺ린(int totalData)
 	public int selectBoardCount(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -437,18 +433,18 @@ public class UserDao {
 			
 			if(rs.next()) {
 				user = new User();
-				user.setUserId(rs.getString("USER_ID")); // �쑀�� �븘�씠�뵒
-				user.setPassword(rs.getString("PASSWORD")); // �쑀�� �뙣�뒪�썙�뱶
-				user.setUserName(rs.getString("USER_NAME")); // �쑀�� �씠由�
-				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // �쑀�� �깮�뀈�썡�씪
-				user.setPhone(rs.getString("PHONE")); // �쑀�� �쑕��踰덊샇
-				user.setZipCode(rs.getString("ZIP_CODE")); // �쑀�� �슦�렪踰덊샇
-				user.setAddress(rs.getString("ADDRESS")); // �쑀�� 二쇱냼
-				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // �쑀�� �긽�꽭二쇱냼
-				user.setEmail(rs.getString("EMAIL")); // �쑀�� �씠硫붿씪
-				user.setGender(rs.getString("GENDER")); // �쑀�� �꽦蹂�
-				user.setStatus(rs.getString("STATUS")); // �쑀�� �쉶�썝�깉�눜�뿬遺�
-				user.setUserType(rs.getString("USER_TYPE")); // �쑀�� ���엯(�씪諛�, �렖�떆�꽣, 愿�由ъ옄)
+				user.setUserId(rs.getString("USER_ID")); // 占쎌��占쏙옙 占쎈�占쎌��占쎈�
+				user.setPassword(rs.getString("PASSWORD")); // 占쎌��占쏙옙 占쎈�ｏ옙�わ옙��占쎈굡
+				user.setUserName(rs.getString("USER_NAME")); // 占쎌��占쏙옙 占쎌���깍옙
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // 占쎌��占쏙옙 占쎄문占쎈��占쎌�∽옙��
+				user.setPhone(rs.getString("PHONE")); // 占쎌��占쏙옙 占쎌��占쏙옙甕곕����
+				user.setZipCode(rs.getString("ZIP_CODE")); // 占쎌��占쏙옙 占쎌��占쎈�よ린����
+				user.setAddress(rs.getString("ADDRESS")); // 占쎌��占쏙옙 雅��깅��
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // 占쎌��占쏙옙 占쎄맒占쎄쉭雅��깅��
+				user.setEmail(rs.getString("EMAIL")); // 占쎌��占쏙옙 占쎌��筌�遺우��
+				user.setGender(rs.getString("GENDER")); // 占쎌��占쏙옙 占쎄쉐癰�占�
+				user.setStatus(rs.getString("STATUS")); // 占쎌��占쏙옙 占쎌�띰옙��占쎄�占쎈��占쎈연�븝옙
+				user.setUserType(rs.getString("USER_TYPE")); // 占쎌��占쏙옙 占쏙옙占쎌��(占쎌�よ�占�, 占쎈��占쎈��占쎄숲, �울옙�귐���)
 			}
 		}
 		catch(SQLException e) {
@@ -459,5 +455,50 @@ public class UserDao {
 			close(pstmt);
 		}
 		return user;
+	}
+	
+	public int userUpdate(Connection conn, String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
+		PreparedStatement pstmt = null;
+		int result= 0;
+		String sql = prop.getProperty("userUpdate");
+		try { 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPw);
+			pstmt.setString(2, email); 
+			pstmt.setString(3, phone); 
+			pstmt.setString(4, postNum);
+			pstmt.setString(5, address);
+			pstmt.setString(6, detailAddress);
+			pstmt.setString(7, id); // SQL �브����대떻�㎩��占�
+			result = pstmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int sitterUpdate(Connection conn, String id, String bankName, String accountNo, String accountName, String img) {
+		PreparedStatement pstmt=null; 
+		int result=0;
+		String sql= prop.getProperty("sitterUpdate");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,bankName);
+			pstmt.setString(2,accountNo);
+			pstmt.setString(3,accountName);
+			pstmt.setString(4,img);
+			pstmt.setString(5,id);
+			result=pstmt.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 }

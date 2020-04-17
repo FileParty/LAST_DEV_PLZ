@@ -135,4 +135,13 @@ public class AdminService {
 		return count;
 	}
 
+	public ArrayList adminMyPage() {
+		Connection conn = getConnection();
+		ArrayList<ArrayList> list = new ArrayList<ArrayList> ();
+		list.add(dao.petsitterApply(conn));
+		list.add(dao.userQuestion(conn));
+		close(conn);
+		return list;
+	}
+
 }

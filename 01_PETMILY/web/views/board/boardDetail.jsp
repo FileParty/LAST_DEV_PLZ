@@ -61,10 +61,12 @@
                             <td colspan="1">
                                 <div class="input-group mb-3" style="width: 500px; height: 25px; margin-top: 10px;">
                                     <div class="files">
+                                    <%if(pb.getBoardImages()!=null){ %>
                                     	<%for(int i=0;i<pb.getBoardImages().size();i++) { %>
                                        <img style="letter-spacing:5px;width:50px;height:50px;"src="<%=request.getContextPath() %>/upload/board/<%=pb.getBoardImages().get(i)%>">
                                        
-                                       <%} %>
+                                       <%}
+                                    	}%>
                                     </div>
                                     <div class="selectFile">
                                      <input type="hidden"class="fileNo" name="count">
@@ -220,7 +222,13 @@
                         </tr>
                         <tr>
                             <td class="sub-title">추가 코멘트</td>
-                            <td><input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다."  value="<%=pb.getBoardAddressContent() %>" readonly></td>
+                            <td>
+                            <%if(pb.getBoardAddressContent()!=null) {%>
+                            <input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다."  value="<%=pb.getBoardAddressContent() %>" readonly>
+                            <%}else { %>
+                            <input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다."  value="-" readonly>
+                            <%} %>
+                            </td>
                         </tr>
                      </table><!-- 펫 시터님 위치 -->
 

@@ -6,13 +6,14 @@
     String plus ="";
     String basic ="";
     String img = "";
-      for(int i=0;i<pb.getPlus().size();i++) {
+    
+      for(int i=0;pb.getPlus()!=null&&i<pb.getPlus().size();i++) {
          plus+=pb.getPlus().get(i);
       }
-      for(int i=0;i<pb.getServiceTypes().size();i++) {
+      for(int i=0;pb.getServiceTypes()!=null&&i<pb.getServiceTypes().size();i++) {
          basic+=pb.getServiceTypes().get(i);
       }
-      for(int i=0;i<pb.getBoardImages().size();i++) {
+      for(int i=0;pb.getBoardImages()!=null&&i<pb.getBoardImages().size();i++) {
     	  img=pb.getBoardImages().get(i);
       }
     %>
@@ -45,7 +46,7 @@
 <body>
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath() %>/sitter/updateEnd?id=<%=pb.getUserId() %>&no=<%=pb.getBoardNo()%>"  method="post" onsubmit="return test();" enctype="multipart/form-data">
+            <form action="<%=request.getContextPath() %>/sitter/updateEnd2?id=<%=pb.getUserId() %>&no=<%=pb.getBoardNo()%>"  method="post" onsubmit="return test();" enctype="multipart/form-data">
             <div class="row">
             	<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
             <div class="vl"></div>
@@ -572,7 +573,7 @@ $(function(){
                num++;
          }
 	
-		<%for(int i=0;i<pb.getBoardImages().size();i++) {%>
+		<%for(int i=0;pb.getBoardImages()!=null&&i<pb.getBoardImages().size();i++) {%>
 		
          var files =$("<input>").attr({
              "type":"file",

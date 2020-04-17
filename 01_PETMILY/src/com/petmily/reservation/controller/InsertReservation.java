@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.petmily.reservation.model.vo.PetReservation;
 import com.petmily.reservation.model.vo.ReservationPetCode;
 import com.petmily.reservation.service.ReservationService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class InsertReservation
@@ -40,7 +41,7 @@ public class InsertReservation extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		/* String userId = (String)session.getAttribute("userId"); */
-		String userId = "user10";
+		String userId = ((User)session.getAttribute("loginUser")).getUserId();
 		String sitterId = request.getParameter("sitterId");
 		int boardCode = Integer.parseInt(request.getParameter("boardCode"));
 		String checkIn = request.getParameter("checkIn");

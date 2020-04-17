@@ -14,6 +14,7 @@
 		type = (String)request.getAttribute("type");
 	}
 %>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <section id="adminMainMenu">
 <%@ include file="/views/admin/adminSideBar.jsp" %>
 	<section id="adminUserList">
@@ -38,7 +39,7 @@
 					width="20px" height="20px"></p>
 		</div>
 		<div class="adminUserInfo">
-			<table>
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>No</th>

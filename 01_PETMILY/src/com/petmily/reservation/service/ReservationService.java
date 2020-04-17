@@ -8,6 +8,7 @@ import static com.petmily.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.petmily.pet.model.vo.Pet;
 import com.petmily.reservation.model.dao.ReservationDao;
 import com.petmily.reservation.model.vo.PetReservation;
 import com.petmily.reservation.model.vo.ReservationPetCode;
@@ -107,6 +108,43 @@ public class ReservationService {
 		  close(conn);
 		  return codeHap;
 		  
+	  }
+	  
+	  public List<PetReservation> reservationEnd(String id) {
+		  Connection conn = getConnection();
+		  List<PetReservation> list = dao.reservationEnd(conn,id);
+		  for(int i=0;i<list.size();i++){
+		  			list.set(i,dao.reservationEnds(conn, id,list.get(i)));
+		  			
+		  }
+		  System.out.println("dao:"+list);
+		  close(conn);
+		  return list;
+	  }
+	  
+	  public PetReservation endRev(int code) {
+		  Connection conn = getConnection();
+		  PetReservation pr = dao.endRev(conn,code);
+		  close(conn);
+		  return pr;
+	  }
+	  
+	  public int endSitting(int code) {
+		  Connection conn = getConnection();
+		  int result = dao.endSitting(conn,code);
+		  if(result>0) {
+			  result = dao.endSitting2(conn, code);
+			  if(result>0) {
+				  commit(conn);
+			  }else {
+				  rollback(conn);
+			  }		 
+			  }else {
+				  rollback(conn);
+			  }
+
+		  close(conn);
+		  return result;
 	  }
 	  
 }

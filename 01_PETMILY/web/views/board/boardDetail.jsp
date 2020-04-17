@@ -66,10 +66,13 @@
                                     <div class="files">
                                     <%if(pb.getBoardImages()!=null){ %>
                                     	<%for(int i=0;i<pb.getBoardImages().size();i++) { %>
+                                    	
                                        <img style="letter-spacing:5px;width:50px;height:50px;"src="<%=request.getContextPath() %>/upload/board/<%=pb.getBoardImages().get(i)%>">
-                                       
-                                       <%}
-                                    	}%>
+                                     	<%} %>
+                                     	<%}else { %>
+                                     	<p>등록 된 이미지가 없습니다.</p>
+                                     	
+                                       <%} %>
                                     </div>
                                     <div class="selectFile">
                                      <input type="hidden"class="fileNo" name="count">

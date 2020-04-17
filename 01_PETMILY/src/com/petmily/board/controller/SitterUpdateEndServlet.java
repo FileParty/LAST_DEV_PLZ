@@ -138,6 +138,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		}else { 
 			msg="寃뚯떆湲� �닔�젙�쓣 �떎�뙣 �븯���뒿�땲�떎.";
 			loc="/views/common/msg.jsp";
+			request.getRequestDispatcher("views/common/msg.jsp").forward(request, response);
 		}
 
 		

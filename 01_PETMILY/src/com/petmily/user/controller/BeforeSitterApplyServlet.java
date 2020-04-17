@@ -1,4 +1,4 @@
-package com.petmily.petsitterMyPage.reservation.controller;
+package com.petmily.user.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 /**
- * Servlet implementation class RequestDetailServlet
+ * Servlet implementation class SitterJoinEndServlet
  */
-@WebServlet("/petsitter/mypage/requestDetail")
-public class RequestDetailServlet extends HttpServlet {
+@WebServlet("/join/before")
+public class BeforeSitterApplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RequestDetailServlet() {
+    public BeforeSitterApplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,18 +29,16 @@ public class RequestDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String requestDetail=request.getParameter("requestDetail");
-		
-		//System.out.println("ìƒì„¸ ìš”êµ¬"+requestDetail);
-		
-		//response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("ìƒì„¸ ìš”êµ¬"+requestDetail);
-		
-		//response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(requestDetail);
-		
+		//¸¸¾à ·Î±×ÀÎÀÌ µÇ¾îÀÖ´Ù¸é ·Î±×¾Æ¿ô ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä ¸Ş¼¼Áö ÈÄ ¸ŞÀÎÆäÀÌÁö·Î ÀÌµ¿
+		//·Î±×ÀÎÀÌ µÇ¾îÀÖÁö ¾ÊÀ» ¶§¿¡´Â Á¤»óÀûÀ¸·Î Æê½ÃÅÍ È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+		HttpSession session=request.getSession();
+		if(session.getAttribute("loginUser")!=null) {
+			request.setAttribute("msg", "·Î±×¾Æ¿ô ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}else {
+			request.getRequestDispatcher("/views/sitter/sitterJoin.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ page import=" com.petmily.board.model.vo.PetSitterBoard"%>
+     <%@ include file="/views/common/header.jsp" %>
      <%
      PetSitterBoard pb = (PetSitterBoard)request.getAttribute("board");
      String plus ="";

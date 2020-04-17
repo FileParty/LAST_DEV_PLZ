@@ -140,9 +140,9 @@
 	                    	
 	                    	<td style="width:250px;"><%=pr.getCheckOut().substring(2,11)%></td>
 	                    	
-							<td style="width:250px;"><%=pr.getSitterName() %></td>
+							<td style="width:280px;"><%=pr.getSitterName() %></td>
 							
-							<td style="width:500px;"><%=pr.getBoardTitle() %></td>
+							<td style="width:600px;"><%=pr.getBoardTitle() %></td>
 							
 							<td><input style="border-radius:20px;font-size:13px;"class="btn btn-outline-secondary" style="width:100px;"onclick="requestCheck()" type="button" id="request" value="상세 요청 확인"></td>
 							<td><%=pr.getResType() %></td> 
@@ -188,10 +188,10 @@
 
 function requestCheck() {
 
-	var popupX = (window.screen.width / 2) - (700 / 2);
-	var popupY= (window.screen.height /2) - (700 / 2);
+	var popupX = (window.screen.width / 2) - (400 / 2);
+	var popupY= (window.screen.height /2) - (450 / 2);
 	
-	window.open('<%=request.getContextPath()%>/user/requestDetail','_blank','height=700,width=700,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+	window.open('<%=request.getContextPath()%>/user/requestDetail','_blank','height=450,width=400,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 }
 
 $("#btn").click(function(){//위

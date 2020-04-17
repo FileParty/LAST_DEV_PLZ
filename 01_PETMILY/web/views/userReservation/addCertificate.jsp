@@ -87,7 +87,7 @@ th {
 								</tr>
 								<tr>
 								<%for(PetSitterCertificate pc : list) {%>
-									<td></td>
+									<td><%=pc.getCount() %></td>
 									<td><%=pc.getCertificateName() %></td>
 									<td><%=pc.getCertificationNmae() %></td>
 									<td><%=pc.getDateOfAcquisition().substring(0,11) %></td>
@@ -127,7 +127,7 @@ th {
 
 <script>
 	function addCertificate() {
-		window.open("<%=request.getContextPath()%>/views/userReservation/addCertificatePop.jsp","_blank","width=500,height=700");
+		window.open("<%=request.getContextPath()%>/views/userReservation/addCertificatePop.jsp","_blank","width=500,height=800");
 	}
 </script>
 </body>

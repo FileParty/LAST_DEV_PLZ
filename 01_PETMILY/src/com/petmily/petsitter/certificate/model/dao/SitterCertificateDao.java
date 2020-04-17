@@ -45,6 +45,7 @@ public class SitterCertificateDao {
 			while(rs.next()) {
 				
 				pc= new PetSitterCertificate();
+				pc.setCount(rs.getInt("RNUM"));
 				pc.setCertificateName(rs.getString("CERTIFICATE_NAME"));
 				pc.setCertificationNmae(rs.getString("CERTIFICATION_NAME"));
 				pc.setDateOfAcquisition(rs.getString("DATE_OF_ACQUISITION"));
@@ -76,6 +77,7 @@ public class SitterCertificateDao {
 			while(rs.next()) {
 				
 				pc= new PetSitterCertificate();
+				pc.setCount(rs.getInt("RNUM"));
 				pc.setCertificateName(rs.getString("CERTIFICATE_NAME"));
 				pc.setCertificationNmae(rs.getString("CERTIFICATION_NAME"));
 				pc.setDateOfAcquisition(rs.getString("DATE_OF_ACQUISITION"));

@@ -1,20 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import=" com.petmily.board.model.vo.PetSitterBoard" %>
+    <%@ include file="/views/common/header.jsp" %>
     <% 
     PetSitterBoard pb = (PetSitterBoard)request.getAttribute("pb");
     String plus ="";
     String basic ="";
     String img = "";
+    if(pb.getPlus()!=null) {
       for(int i=0;i<pb.getPlus().size();i++) {
          plus+=pb.getPlus().get(i);
       }
+    }
+    if(pb.getServiceTypes()!=null) {
       for(int i=0;i<pb.getServiceTypes().size();i++) {
          basic+=pb.getServiceTypes().get(i);
       }
+    }
+    if(pb.getBoardImages()!=null) {
       for(int i=0;i<pb.getBoardImages().size();i++) {
     	  img=pb.getBoardImages().get(i);
       }
+    }
     %>
 <!DOCTYPE html>
 <html>
@@ -227,7 +234,11 @@
                         </tr>
                         <tr>
                             <td class="sub-title">추가 코멘트</td>
+                            <%if(pb.getBoardAddressContent()!=null) {%>
                             <td><input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다." value="<%=pb.getBoardAddressContent()%>"></td>
+                        	<%}else { %>
+                        	<td>-</td>
+                        	<%} %>
                         </tr>
                      </table><!-- 펫 시터님 위치 -->
 
@@ -621,7 +632,8 @@ $(function(){
         	  $(".img"+<%=i+1%>).hide();
            })
           num++;
-		<%}%>
+           <%}%>
+           
 		
 		
 

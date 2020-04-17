@@ -108,7 +108,7 @@
                 </div>
                 <ul class="breadcrumb">
                   
-                    <li class="breadcrumb-item active" style="font-size:15px;">요청 중인 예약 >></li>
+                    <li class="breadcrumb-item active" style="font-size:15px;">종료 된 예약 >></li>
                 </ul>
      
                    <!-- 콘텐츠 영역 -->
@@ -136,7 +136,7 @@
 	                    	
 	                    	<td style="	width:200px;"><%=pr.getCheckOut().substring(2,11) %></td>
 	                    	
-	                    	<td style="	width:200px;"><%=pr.getBoardTitle()%></td>
+	                    	<td style="	width:300px;"><%=pr.getBoardTitle()%></td>
 	                    	
 							<td style="	width:200px;"><%=pr.getSitterName() %></td>
 							

@@ -83,7 +83,7 @@ th {
 
 								<%for(PetSitterCertificate pc : list) {%>
 								<tr>
-									<td>NO</td>
+									<td><%=pc.getCount() %></td>
 									 <td><%=pc.getCertificateName()%></td>
 									<td><%=pc.getCertificationNmae() %></td>
 									<td><%=pc.getDateOfAcquisition().substring(0,11) %></td>

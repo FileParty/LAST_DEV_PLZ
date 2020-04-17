@@ -9,11 +9,13 @@ public class PetSitterCertificate {
 	private String expirationDate;
 	private String certificateFilename;
 	private String resType;
+	private int count;//로우넘
 	public PetSitterCertificate() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	public PetSitterCertificate(String petSitterId, String certificateName, String certificationNmae,
-			String dateOfAcquisition, String expirationDate, String certificateFilename, String resType) {
+			String dateOfAcquisition, String expirationDate, String certificateFilename, String resType, int count) {
 		super();
 		this.petSitterId = petSitterId;
 		this.certificateName = certificateName;
@@ -22,7 +24,17 @@ public class PetSitterCertificate {
 		this.expirationDate = expirationDate;
 		this.certificateFilename = certificateFilename;
 		this.resType = resType;
+		this.count = count;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public String getPetSitterId() {
 		return petSitterId;
 	}

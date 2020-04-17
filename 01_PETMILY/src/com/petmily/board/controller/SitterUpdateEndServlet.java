@@ -9,16 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.petmily.board.model.vo.PetSitterBoard;
 import com.petmily.board.service.BoardService2;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class SitterUpdateEndServlet
  */
-@WebServlet("/sitter/updateEnd")
+@WebServlet("/sitter/updateEnd2")
 public class SitterUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +41,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		int maxSize = 1024*1024*10;
 		MultipartRequest mr = new MultipartRequest(request, path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		
-		//게시판테이블
+		//寃뚯떆�뙋�뀒�씠釉�
 		String title =mr.getParameter("title");
 		String intro = mr.getParameter("introduce");
 		int small= 0;
@@ -100,7 +102,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		for(String d : dType) {
 			defaultO.add(d);
 		}
-		System.out.println("수정 완료 데이터 출력");
+		System.out.println("�닔�젙 �셿猷� �뜲�씠�꽣 異쒕젰");
 		System.out.println(title);
 		System.out.println(intro);
 		System.out.println(address);
@@ -121,11 +123,22 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		
 		
 		int boardNo = Integer.parseInt(mr.getParameter("no"));
-		String id = mr.getParameter("id");
-	PetSitterBoard pb = new PetSitterBoard(boardNo,id,title,intro,small,middle,big,address,comment,"N","N",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
+		HttpSession session = request.getSession();
+	    String userId = ((User)session.getAttribute("loginUser")).getUserId();
+	PetSitterBoard pb = new PetSitterBoard(boardNo,userId,title,intro,small,middle,big,address,comment,"N","N",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
 	
 		
 		int result = new BoardService2().boardInsert(pb);
+		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg="寃뚯떆湲��씠 �닔�젙 �릺�뿀�뒿�땲�떎.";
+			request.getRequestDispatcher("/views/petsitterMypage/petSitterInfo.jsp").forward(request, response);
+		}else { 
+			msg="寃뚯떆湲� �닔�젙�쓣 �떎�뙣 �븯���뒿�땲�떎.";
+			loc="/views/common/msg.jsp";
+		}
 
 		
 	}

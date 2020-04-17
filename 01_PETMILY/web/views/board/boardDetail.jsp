@@ -38,43 +38,7 @@
         <div class="container">
 
             <div class="row">
-            <div class="col-2 menu">
-                    <div id="menu">
-                        <ul type="none">
-                            <li class="title">회원정보</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 회원정보 수정</a></li>
-                            <li class="content"><a href=""> - 회원 탈퇴</a></li>
-                            <br/>
-        
-                            <li class="title">작성글</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/boardDetail"> - 작성글 보기</a></li>
-                            <li class="content"><a href=""> - 작성한 비밀후기 보기</a></li>
-                            <br/>
-                            
-                            <li class="title">예약</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 예약 현황</a></li>
-                            <li class="content"><a href=""> - 요청중인 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 완료된 예약</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
-                            <br/>
-                            
-                            <li class="title">정산</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 이번 달 정산 현황</a></li>
-                            <li class="content"><a href=""> - 이번 정산 보기</a></li>
-                            <br/>
-                            
-                            <li class="title">자격증</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 보유 자격증 목록</a></li>
-                            <li class="content"><a href=""> - 자격증 추가</a></li>
-                        </ul>
-                    </div>
-                </div>
+            	<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -97,10 +61,12 @@
                             <td colspan="1">
                                 <div class="input-group mb-3" style="width: 500px; height: 25px; margin-top: 10px;">
                                     <div class="files">
+                                    <%if(pb.getBoardImages()!=null){ %>
                                     	<%for(int i=0;i<pb.getBoardImages().size();i++) { %>
                                        <img style="letter-spacing:5px;width:50px;height:50px;"src="<%=request.getContextPath() %>/upload/board/<%=pb.getBoardImages().get(i)%>">
                                        
-                                       <%} %>
+                                       <%}
+                                    	}%>
                                     </div>
                                     <div class="selectFile">
                                      <input type="hidden"class="fileNo" name="count">

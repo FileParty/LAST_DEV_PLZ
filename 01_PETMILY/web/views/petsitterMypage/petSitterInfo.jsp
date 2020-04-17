@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ include file="/views/common/header.jsp" %>
-
-
-
-
 <style>
    *{   
        
@@ -37,16 +34,9 @@
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
 
         }
-    #menu{
-        width: 230px;
-        position : fixed;
-    }
-    ul{
-        padding-inline-start:0;
-    }
     .title{
         font-size: 14px;
     }
@@ -78,10 +68,6 @@
         line-height: 16px;
         font-size: 12px;
     }
-    hr{
-            margin-left: 0;
-            width: 10%;
-        }
     table{
         border-radius: 5px;
         margin-left: 50px;
@@ -246,44 +232,11 @@ label.custom-file-label::after{
 }
 </style>
 
-<body>
+
     <section>
         <div class="container">
-           
             <div class="row">
-            <div class="col-2 menu">
-                    <div id="menu">
-                        <ul type="none">
-                            <li class="title"><a href="<%=request.getContextPath()%>/userInfo">회원정보</a></li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userUpdate"> - 회원정보 수정</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userDelete"> - 회원 탈퇴</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userBookMarkList"> - 북마크</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/"> - 작성 후기</a></li>
-                            <br/>
-        
-                            <li class="title">펫 프로필</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 펫 프로필</a></li>
-                            <br/>
-                            
-                            <li class="title">예약</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 종료된 예약</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
-                            <br/>
-                            
-                            <li class="title">결제</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 결제 내역</a></li>
-                            <li class="content"><a href=""> - 추가 요금 내역</a></li>
-                            <br/>
-                            
-                        </ul>
-                    </div>
-                </div>
+                <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -295,14 +248,12 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button style="width: 200px;">펫 프로필 등록</button>
+                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">글 작성하기</button>
                     </div>
                     <table>
                         <tr>
-                            <td class="sub-title" style="width: 100px;">예약 허가: 0건<hr/></td> 
-                            
-                            <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                             
-                            
+                            <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td>                            
+                            <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                                                       
                         </tr>
                         <tr>
                             <td style="padding-left: 20px;"></td>
@@ -344,13 +295,12 @@ label.custom-file-label::after{
                         <br/>
                         <br/>
                         <br/>
-
-                    </div>
-                </div>
-            </div>
-     
-        </div>
+                  </div>
+              </div>
+          </div>
     </section>
+    
+    <br><br><br><br><br><br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -358,9 +308,34 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
 
 <script>
 
+    
+function toggle1(){ //on/off하나의 버튼으로 가능.
+
+    $('.row1').slideToggle(1000); //시간 부여
+    
+}
+
+function toggle2(){ //on/off하나의 버튼으로 가능.
+ 
+    $('.row2').slideToggle(1000); //시간 부여
+    };
+
+function toggle3(){ //on/off하나의 버튼으로 가능.
+
+    $('.row3').slideToggle(1000); //시간 부여
+    };
+
+
+    $(function () {
+   $('[data-toggle="tooltip"]').tooltip()
+})
+
+
+
+            
 
 </script>
+<%@ include file="/views/common/footer.jsp" %>

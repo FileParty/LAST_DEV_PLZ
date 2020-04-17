@@ -17,7 +17,7 @@ public class PetsitterMypageReservation {
 	private String petMedication;
 	private String petPickUp;
 	private String userName;
-	
+
 	public PetsitterMypageReservation() {
 		// TODO Auto-generated constructor stub
 	}
@@ -153,9 +153,6 @@ public class PetsitterMypageReservation {
 				+ priceEndDate + ", price=" + price + ", resType=" + resType + ", petMedication=" + petMedication
 				+ ", petPickUp=" + petPickUp + ", userName=" + userName + "]";
 	}
-	
-	
-	
 	
 	
 	

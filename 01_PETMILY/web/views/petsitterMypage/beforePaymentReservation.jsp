@@ -186,20 +186,22 @@ pageEncoding="UTF-8"%>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
 			                    <tr>
 			                    	<td class="no"><%=count++ %></td>
-			                    	<td class="cho"><form><input type="checkbox" name="" value="" /></form></form></td>
+			                    	<td class="cho"><form><input type="checkbox" name="" value=""></form></td>
 			                    	<td class="ckDate"><%=pmr.getCheckInDate() %></td>
 			                    	<td class="ckDate"><%=pmr.getCheckOutDate() %></td>
 			                    	<td class="name"><%=pmr.getUserName() %></td>
 			                    	<td class="read"><div class="p-1"><button type="button" class="btn" >열람</button></div></td>
-			                    	<td><div class="p-1"><button id="secretReview" type="button" class="btn" data-toggle="modal" data-target="#myModal">열람</button></div></td>
-			                    	<td><div class="p-1"><button type="button" class="btn">상세 요청 확인</button></td>
-			                    	<td class="state"></td>
+			                    	<td><div class="p-1"><button id="secretReview" type="button" class="btn" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
+			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></div></td>
+			                    	<td class="state"><%=pmr.getResType() %></td>
 			                    	<td><div class="p-1"><button type="button" class="btn">채팅</button></div></td>
 			                    </tr>
 			                 	<%} }%>
 			                </table>
 		                	
-		                	  <div class="modal" id="myModal">
+		                	
+		                	<!-- 비밀후기 모달 -->
+		                	  <div class="modal" id="secretReviewModal">
 							    <div class="modal-dialog">
 							      <div class="modal-content">
 							      
@@ -210,8 +212,33 @@ pageEncoding="UTF-8"%>
 							        </div>
 							        
 							        <!-- Modal body -->
-							        <div class="modal-body">
-							          Modal body..
+							        <div class="modal-body" id="secretReviewModalBody">
+							          
+							        </div>
+							        
+							        <!-- Modal footer -->
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							        </div>
+							        
+							      </div>
+							    </div>
+							  </div>
+							  
+							  <!-- 상세요청 모달 -->
+		                	  <div class="modal" id="requestDetailModal">
+							    <div class="modal-dialog">
+							      <div class="modal-content">
+							      
+							        <!-- Modal Header -->
+							        <div class="modal-header">
+							          <h4 class="modal-title ">요청 상세</h4>
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							        </div>
+							        
+							        <!-- Modal body -->
+							        <div class="modal-body" id="modalBody">
+							         
 							        </div>
 							        
 							        <!-- Modal footer -->
@@ -268,17 +295,41 @@ pageEncoding="UTF-8"%>
 <script>
 	$(function(){
 		
-		$("#secretReview").click(()=>{
+		$("#secretReview").click((e)=>{
+			//console.log($(this).val());
+			$.ajax({
+				url:"<%=request.getContextPath()%>/petsitter/mypage/userReviewList",
+				data:{userId:$(e.target).val()},
+				error:function(){
+	  				alert("실패");
+	  				console.log($(this).val());
+	  			},
+	  			success:data=>{
+	  				$("#secretReviewModalBody").html(data);
+	  			}
+			});
+		});
+	});
+	
+	$(function(){
+		
+		$("#requestDetail").click(()=>{
 		
 			$.ajax({
-				
-				url:"<%=request.getContextPath()%>/petsitter/mypage/",
-				date:{}
-				
-			})
+				url:"<%=request.getContextPath()%>/petsitter/mypage/requestDetail",
+				data:{userId:$(this).val()},
+				error:function(){
+	  				alert("실패");
+	  				console.log($(this).val());
+	  			},
+	  			success:data=>{
+	  				$("#requestDetailModal").html(data);
+	  			}
+			});
 			
 		});
 	});
+	
 	
 </script>
 

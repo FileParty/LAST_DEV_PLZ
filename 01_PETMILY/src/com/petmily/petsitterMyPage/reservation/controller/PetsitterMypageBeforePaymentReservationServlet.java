@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
-import com.petmily.petsitterMyPage.reservation.service.PetsitterMypageReservaionService;
+import com.petmily.petsitterMyPage.reservation.service.PetsitterMypageReservationService;
 
 /**
  * Servlet implementation class PetsitterMypageBeforePaymentReservationServlet
@@ -38,7 +38,7 @@ public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet 
 		
 		System.out.println(petsitterId);
 		
-		List<PetsitterMypageReservation> list=new PetsitterMypageReservaionService().selectBeforePaymentRerservarion(petsitterId);
+		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(petsitterId);
 		
 		request.setAttribute("list", list);
 		

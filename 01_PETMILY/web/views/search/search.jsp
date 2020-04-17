@@ -8,14 +8,11 @@ pageEncoding="UTF-8"%>
 %>
 
 <%@ include file="/views/common/header.jsp" %>
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mhindex.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <div class="container">
-    <nav>
-      <div>
-        menu
-      </div>
-    </nav>
     <main>
       <section class="filter_container mt-4 mb-3">
         <div class="row justify-content-center">
@@ -32,23 +29,13 @@ pageEncoding="UTF-8"%>
           </form>
           
           </div>
-          <div class="col-5">
-            <div class="place_container row align-items-center justify-content-between" id="check_in_out">
-              <button type="button" class="btn">체크인</button>
-              <span>
-                <i class="fas fa-arrow-right"></i>
-              </span>
-              <button type="button" class="btn">체크아웃</button>
-            </div>
-          </div>
+       
           
           
           <div class="col-1"></div>
         </div>
         <div class="filter_box mt-5">
-          <header>
-            <span style="font-size:16px;">필터 추가하기</span>
-          </header>
+       
           <article class="filter_btn_box row mt-4">
             <div class="col-1"></div>
             <div class="col-10 row justify-content-between">
@@ -61,9 +48,7 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="col-1"></div>
           </article>
-          <footer class="search_btn">
-            <button type="button" class="btn">검색</button>
-          </footer>
+       
         </div>
       </section>
       <section class="pet_sitter_container border-top">
@@ -103,7 +88,7 @@ pageEncoding="UTF-8"%>
           <div class="col-8" id="area">
           
           <%for(PetsitterSearch ps:list) {%>
-            <div class="pet_sitter_info_container border-top row px-5 py-3">
+            <div class="pet_sitter_info_container border-top row px-5 py-3" onclick="reservation(<%=ps.getBoardCode()%>)">
               <div class="col-6 text-center " >
               
               
@@ -172,7 +157,7 @@ pageEncoding="UTF-8"%>
             <div class="row justify-content-center" id="pageBar">
             	<%=request.getAttribute("pageBar") %>
             </div>
-            
+         
             <br>
             <br>
             <br>
@@ -186,6 +171,12 @@ pageEncoding="UTF-8"%>
   </div> 
   
   <script>
+  	function reservation(boardCode){
+  		console.log(boardCode);
+  		location.replace("<%=request.getContextPath()%>/BoardList.do?boardCode="+boardCode);
+  	}
+  
+  
   	$(function(){
   		
   		$("#priceOrder").hide();
@@ -289,5 +280,3 @@ pageEncoding="UTF-8"%>
   	
   	
   </script>
-
-<%@ include file="/views/common/footer.jsp" %>

@@ -27,7 +27,7 @@ function review(){
 // Get the modal
 var reservation_modal = document.getElementById('reservation_modal');
 var bline_process_modal = document.getElementById('bline_process_modal');
-var bline_request_modal = document.getElementById('bline_request_modal');
+//var bline_request_modal = document.getElementById('bline_request_modal');
 var reservation_end_modal = document.getElementById('reservation_end_modal');
 
 // Get the button that opens the modal
@@ -131,6 +131,10 @@ function resulvation_cancel(){
     if(result){
         reservation_end_modal.style.display = "none";
         $('body').css("overflow", "scroll");
+        
+        $('#section_end1').attr("style", "display:flex");
+        $('#section_end2').attr("style", "display:none");
+        
         
     }
 

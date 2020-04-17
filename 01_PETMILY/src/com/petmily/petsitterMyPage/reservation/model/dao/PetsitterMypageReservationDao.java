@@ -1,18 +1,5 @@
 package com.petmily.petsitterMyPage.reservation.model.dao;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-
-import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
-import com.petmily.userReview.model.dao.UserReviewDao;
-
 import static com.petmily.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -25,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.petmily.userReview.model.vo.UserReview;
+import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
+import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageUserReview;
+import com.petmily.userReview.model.dao.UserReviewDao;
 
 public class PetsitterMypageReservationDao {
 
@@ -84,4 +73,47 @@ public PetsitterMypageReservationDao() {
 		}
 		return list;
 	}
+	
+	
+	// 펫시터 마이페이지 안에 예약 신청한 유저에 대한 펫시터가 남긴 후기들
+	public List<PetsitterMypageUserReview> selectPetsitterMypageUserReview(Connection conn){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		List<PetsitterMypageUserReview> list=new ArrayList<PetsitterMypageUserReview>();
+		
+		String sql=prop.getProperty("selectPetsitterMypageUserReview");
+		
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				PetsitterMypageUserReview pmur=new PetsitterMypageUserReview();
+				
+				pmur.setUserId(rs.getString("user_id"));
+				pmur.setUserName(rs.getString("user_name"));
+				pmur.setPetsitterId(rs.getString("pet_sitter_id"));
+				pmur.setReviewText(rs.getString("review_text"));
+				pmur.setReviewStar(rs.getInt("review_star"));
+			
+				list.add(pmur);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rs);
+			close(pstmt);
+		}return list;
+		
+	}
+	
+	
+	
 }

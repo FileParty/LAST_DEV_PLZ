@@ -1,37 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
-<%@ include file="/views/common/header.jsp" %>
+<%@page import="java.util.List,com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageUserReview" %>
+
+<%
+	List<PetsitterMypageUserReview> list=(List)request.getAttribute("list");
+%>
+
 
 	<div class="container">
-		<div class="col-5">
-			<br>
+		<div class="col-4">
+			<div class="row justify-content-between">
+				
+				<div id="reviewCount">총 3건</div> 
+				<div id="starAvg">평점 4점</div>	
+			</div>
+			<%for(PetsitterMypageUserReview pmur:list) {%>			
 			<br>
 			<div class="row justify-content-between">
-			
-				<div>총 3건</div> 
-				<div>평점 4점</div>	
-			</div>
-			<hr>
-			
-			
-			<div class="row justify-content-between">
-				<div class="colum">ㅇㅇㅇ펫시터 님의 후기</div>
-				<div class="colum">별점 <i class="far fa-star"></i></div>
+				<div class="colum"><%=pmur.getPetsitterId() %> 님의 후기</div>
+				<div class="colum">별점<%for(int i=0;i<pmur.getReviewStar();i++){%><i class="far fa-star"></i><%}%></div>
 			</div>
 			
-			<div class="balloon"> 후기 들어갈 공간 </div>
-			
+			<div class="balloon"> <%=pmur.getReviewText()%> </div>
+			<%} %>
 			
 		</div>
 	</div>
+	
+	<script>
+		$(function(){
+			
+			$.ajax({
+				
+			});
+		});	
+	
+	</script>
 
 <style>
 
 	.balloon {
 	
 	 position:relative;
-	 margin: 50px;
+	 margin: 20px;
 	 width:400px;
 	 height:200px;
 	 
@@ -144,4 +156,3 @@ pageEncoding="UTF-8"%>
 
 	
 </style>
-<%@ include file="/views/common/footer.jsp" %>

@@ -24,21 +24,21 @@ public class LoginUserFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-//		공통적으로 마이페이지는 로그인한 일반 사용자만 접근할 수 있도록 설정한다.
+//		怨듯넻�쟻�쑝濡� 留덉씠�럹�씠吏��뒗 濡쒓렇�씤�븳 �씪諛� �궗�슜�옄留� �젒洹쇳븷 �닔 �엳�룄濡� �꽕�젙�븳�떎.
 		User u=(User)((HttpServletRequest)request).getSession().getAttribute("loginUser");
 		if(u == null) {
 			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
-			request.setAttribute("loc", "/log-in"); // 로그인 화면으로 이동
+			request.setAttribute("loc", "/log-in"); // 濡쒓렇�씤 �솕硫댁쑝濡� �씠�룞
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {
 			if(!u.getUserType().equals("일반")) {
-				request.setAttribute("msg", "일반 사용자만 접근이 가능한 서비스입니다.");
-				request.setAttribute("loc", ""); // 메인으로 이동
+				request.setAttribute("msg", "일반사용자만 접근할 수 있습니다.");
+				request.setAttribute("loc", ""); // 硫붿씤�쑝濡� �씠�룞
 				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			}
 			else {
-				chain.doFilter(request, response);		
+				chain.doFilter(request, response);
 			}
 		}
 		

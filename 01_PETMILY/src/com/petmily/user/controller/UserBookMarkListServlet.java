@@ -27,7 +27,7 @@ public class UserBookMarkListServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+//		[슬기 작업]
 //		회원정보 - 북마크 화면으로 전환하는 기능
 //		로그인 된 상태로 진행되어야 한다.
 		HttpSession session = request.getSession();

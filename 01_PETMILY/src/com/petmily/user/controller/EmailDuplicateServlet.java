@@ -22,6 +22,8 @@ public class EmailDuplicateServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+//		[슬기 작업]
 //		회원가입 중, [이메일 중복확인] 기능
 		String email = request.getParameter("email"); 
 		System.out.println("emailId:" +email);

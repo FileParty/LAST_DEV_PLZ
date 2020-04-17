@@ -24,9 +24,9 @@ public class UserInfoServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-//		�궗�슜�옄 留덉씠�럹�씠吏� �솕硫댁쓣 �쟾�솚�븯�뒗 湲곕뒫
-//		濡쒓렇�씤 �븳 �쑀��留� �궗�슜�븷 �닔 �엳�룄濡� 泥섎━�븳�떎.
+//		[슬기 작업]
+//		사용자 마이페이지 화면을 전환하는 기능
+//		로그인 한 유저만 사용할 수 있도록 처리한다.
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("loginUser")==null) {

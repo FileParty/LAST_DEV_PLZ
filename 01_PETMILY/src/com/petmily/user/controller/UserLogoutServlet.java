@@ -21,6 +21,7 @@ public class UserLogoutServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 		// 로그아웃 로직
 		// 클라이언트가 [로그아웃] 버튼을 누르면 로그아웃되며 메인화면으로 화면을 전환한다.
 		HttpSession session = request.getSession(false);

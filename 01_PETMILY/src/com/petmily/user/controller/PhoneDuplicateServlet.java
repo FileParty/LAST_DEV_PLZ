@@ -22,6 +22,7 @@ public class PhoneDuplicateServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		회원가입 중 휴대번호 중복확인 기능
 //		클라이언트가 입력한 값이 DB에 저장되어 있는지 확인한다.
 		String phone = request.getParameter("phone"); // 유저 휴대번호

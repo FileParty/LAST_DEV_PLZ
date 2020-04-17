@@ -24,6 +24,7 @@ public class UserLoginServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		로그인 화면으로 이동시켜주는 역할
 		request.getRequestDispatcher("/views/user/userLogin.jsp").forward(request, response);
 	}

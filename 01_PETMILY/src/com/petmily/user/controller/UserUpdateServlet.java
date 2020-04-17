@@ -24,6 +24,7 @@ public class UserUpdateServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		[슬기 작업]
 //		회원정보 수정하는 화면으로 전환
 //		로그인 된 유저만 사용할 수 있도록 조건을 걸어야 한다.
 		HttpSession session = request.getSession();

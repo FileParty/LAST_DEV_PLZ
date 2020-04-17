@@ -1,10 +1,182 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style>
+body{
+	margin-bottom:0px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 회원가입 css 설정 */
+article {
+    width: 1366px;
+    margin: 0 auto;
+}
+
+ p#title{
+    	text-align:center; 
+    	margin-top:100px;
+    	margin-bottom:50px;
+    	font-size:24pt;
+    	font-weight: 500;
+    }
+
+/* 회원가입 */
+/* 회원가입 폰트 설정 */
+/* section > h1 {
+    width: 100%;
+   	font-weight: 100;
+    height: 70px;
+    text-align: center;
+} */
+
+/* ---------- */
+
+/* 회원가입 테이블 설정 */
+table#enrollTB {
+    border-radius: 5px; /* 테두리 둥글게 */
+    margin: 0 auto; /*가운데로 정렬*/
+    
+    
+    background-color: #f0f0f0;
+    
+    /* 영역 설정 */
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    padding-right: 150px;  
+    
+    width: 900px;
+}
+
+tr.tr-blank {
+	border: 1px solid;
+}
+
+/* 테이블 내 첫번째 td 설정 */
+table#enrollTB tr >td:first-child {
+	font-size : 14px;
+    width: 250px;
+    text-align: right;
+}
+
+/* 회원가입 테이블 내 td 설정 */
+tr.tr-blank td{
+    padding-bottom: 10px; /* 각 td의 아래 여백 설정 */
+}
+/* 테이블 내 2번째 td의 좌측 여백 설정 */
+tr.tr-blank > td.second-td     {
+    padding-left: 10%;
+}
 
 
+/* input 태그 설정 */
+td.second-td input {
+    /* 높이설정 */
+    height: 30px;
+    
+    /* 태그 내 글씨 위치설정 */
+    line-height: 20px;
+    /* 테두리설정 */
+    border-radius: 5px;
+    border: 1px solid rgb(182, 182, 182);
+}
+input#phone {
+	line-height: 20px;
+	width: 175px;
+}
+
+input#email{
+	
+	width: 175px;
+}
+/* select 태그 설정 */
+/* td.second-td select {
+    height: 30px;
+} */
+
+/* 이메일 선택하는 td 설정 */
+
+/* 이메일 선택하는 select 설정 */
+select#email {
+	/* 길이설정 */
+	width: 175px;
+	/* 높이설정 */
+    height: 30px;
+	/* 테두리설정 */
+    border-radius: 5px;
+    border: 1px solid rgb(182, 182, 182);
+}
+/* 우편번호, 지번주소, 도로명주소, 상세주소입력 input 설정 */
+input#postNum,
+input#streetAddress,
+input#jibunAddress,
+input#addressInput,
+input#accountName,
+input#account,
+input#certiName,
+input#certiAgency,
+input#certiday,
+input#expireday {
+	width: 175px;
+	line-height: 20px;
+	padding-left: 10px;
+}
+
+
+
+
+/* 메세지영역 설정 */
+td.div-msg {
+    /* 원래는 안 보이게 한다 */
+    display: none;
+    
+    padding-left: 10%;
+    font-size: 13px;
+    color: rgb(138, 0, 0);
+}
+
+/* ---------- */
+
+/* 체크하는 버튼 3개 설정 */
+button#check-btn {
+    padding: 7px 15px;
+    
+    border: 1px solid #ffcc33;
+    border-radius: 25px;
+    
+    color: #ffcc33;
+    background-color: white;
+}
+/* 체크하는 버튼 3개에 마우스를 올렸을 때 포인터 설정 */
+button#check-btn:hover {
+    cursor: pointer;
+    background-color: #ffcc33;
+    color: white;
+}
+
+/* submit(완료) 버튼 설정 */
+button#enroll-btn {
+    /* 버튼 크기, 테두리 설정 */
+    padding: 10px 60px;
+    margin-left: 610px;
+
+    background-color: black; /* 버튼 배경 */
+    border-radius:25px; /* 버튼을 둥글게! */
+    border: 0; /* 박스 선 없애기! */
+    font-size: large; /* 폰트 사이즈 */
+    color: white; /* 폰트 컬러 */
+}
+/* submit(완료) 버튼에 마우스를 올렸을 때 마우스 포인터 설정 */
+button#enroll-btn:hover {
+    cursor: pointer;
+    background-color: rgb(98, 98, 98);
+}
+</style>
+
+<%@ include file="/views/common/header.jsp" %>
 	<!-- 내가 적용한 CSS : 회원가입 -->
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/yskCss/joinForm.css">
+	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/joinForm.css"> --%>
 	<!-- 내가 적용한 jQuery -->
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
 	<!-- Daum 우편번호 서비스 API  -->
@@ -12,12 +184,10 @@
 	<!-- 폰트 -->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-<%@ include file="/views/common/header.jsp" %>
 
 <!-- 회원가입 영역 -->
 <section>
-    <h1>회원가입</h1>
-    
+    <p id="title">펫 시터 회원가입</p>
     <article>
 
         <form action="<%=request.getContextPath()%>/apply/join" method="post" enctype="multipart/form-data" onsubmit="return all_join_check();">
@@ -26,7 +196,7 @@
                 <tr class="tr-blank">
                     <td>아이디</td>
                     <td class="second-td">
-                    	<input id="user_id" name="user_id" type="text" required>&nbsp;&nbsp;&nbsp;
+                    	<input id="sitterId" name="sitterId" type="text" placeholder="4~12글자 입력" required >&nbsp;&nbsp;&nbsp;
                     	<button type="button" id="check-btn" onclick="duplicate();">중복 확인</button>
                     </td>
                 </tr>
@@ -34,13 +204,13 @@
                 <tr class="tr-blank">
                     <td>비밀번호</td>
                     <td class="second-td">
-                    	<input type="password" id="password" name="password" required> 
+                    	<input type="password" id="password" name="password" placeholder="8~15자리 입력"required> 
                     </td>
                 </tr>
 
                 <tr class="tr-blank">
                     <td></td>
-                    <td class="div-msg"><div>비밀번호 중복확인 메세지 영역</div></td>
+                    <td class="div-msg">비밀번호 중복확인 메세지 영역 </td>
                 </tr>
 
                 <tr class="tr-blank">
@@ -115,7 +285,7 @@
                 <tr class="tr-blank">
                     <td>우편변호</td>
                     <td class="second-td">
-                    	<input type="text" id="postNum" name="postNum" placeholder="우편번호">&nbsp;&nbsp;&nbsp;
+                    	<input type="text" id="postNum" name="postNum" placeholder="우편번호" readonly>&nbsp;&nbsp;&nbsp;
                     	<button type="button" id="check-btn" onclick="zip_code();">우편번호 찾기</button>
                     	
                     </td>
@@ -124,7 +294,7 @@
                 <tr class="tr-blank">
                     <td></td>
                     <td class="second-td">
-                    	<input id="streetAddress" name="address" type="text" placeholder="도로명주소">
+                    	<input id="streetAddress" name="address" type="text" placeholder="도로명주소" readonly>
                     </td>
                 </tr>
                 
@@ -279,11 +449,11 @@
     </article>
 
 </section>
+<%@ include file="/views/common/footer.jsp" %> 
 
 <script>
-
 /* --------------------------------------------------------------------------------------- */
-	var userId = $("#user_id").val();
+	var sitterId = $("#sitterId").val();
 	var password = $("#password").val();
 	var pwck = $("#pwck").val();
 	var email= $("#email").val();
@@ -297,6 +467,45 @@
 	var liupload = $("#liupload").val(); //자격증 이미지
 	console.log(birth);
 	
+	
+	function idChck(){
+		var checkId=/^[a-zA-Z0-9_\-]{4,12}$/;
+		$("#sitterId").ready(function(){
+			if(!checkId.test(userId.value)){
+				alert("아이디를 다시 입력해주세요.");
+				$("#sitterId").val("");
+				$("#sitterId").focus("");
+				return false;
+			}
+		})
+	}
+		//아이디 유효성 검사(대소문자,-,_, 4~12글자 인지 확인)
+		/* var checkId=RegExp(/^[a-zA-Z0-9_\-]{4,12}$/);
+		$(document).ready(function(){
+			$(document).keyup(function(){
+				if(!checkId.test($("#user_id").val())){
+					alert("아이디를 다시 입력해주세요.");
+					$("#user_id").val("");
+					$("#user_id").focus("");
+					return false;
+				}
+			});
+		}); */
+		
+		
+		
+		//패스워드 유효성 검사 (대소문자,특수문자 포함 8~15자리 인지 확인)
+		var regPw=/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).*$/
+		//패스워드, 패스워드 확인 일치하는지 확인(div영역에 메세지 출력)
+		$(document).ready(function(){
+			if(regPw.test($("#password").val())!=regPw.test($("#pwck").val())){
+				alert("비밀번호가 일치하지 않습니다.")
+			}else{
+				$("#msg").html("비밀번호가 일치합니다.");
+			}
+		});
+		
+		
 	
 	//자격증 유무에 따른 입력부분 활성 비활성
 	$(document).ready(function(){
@@ -323,6 +532,7 @@
 		});
 	});
 	
+	
 	//만료일시 유무에 따른 날짜 선택 활성 비활성 함수
 	 $(document).ready(function(){
 		$("input:radio[name=expiration]").click(function(){
@@ -338,43 +548,9 @@
 	    });
 	}); 
 	
-	
+/*---------------------------------------------------------------*/	
 
-// 이 함수에서는 각각의 input값을 확인하는 '함수'를 호출하는 함수
-	/* function all_join_check() {
-		
-		if(!checkUserId(form.user_id.value)) {
-			return false;
-		}
-		else if(!checkPassword(form.user_id.value, form.password.value, form.pwck.value)) {
-			return false;
-		}
-		else if(!checkEmail(form.email.value)) {
-			return false;
-		}
-		else if(!checkName(form.name.value)) {
-			return false;
-		}
-		else if (!checkBirth(form.identi1.value, form.identi2.value)) {
-	        return false;
-	    } 
-		else if (!checkFavorite()) {
-	        return false;
-	    } 
-		else if (!checkIntro()) {
-	        return false;
-	    }
-	    return true;
-	} */
 	
-	// 공백확인 함수
-	function checkExistData(value, dataName) {
-		if(value=="") {
-			alert(dataName+"입력해주세요.");
-			return false;
-		}
-		return true;
-	}
 	
 	
 	// 아이디가 입력되었는지 확인하는 함수
@@ -399,7 +575,7 @@
 	// 1. 영문 대/소문자와 숫자로 8~15자리 입력할 것
 	// 2. 비밀번호 두 번 입력했을 때 두 번 다 일치할 것
 	// 3. 아이디와 비밀번호는 불일치할 것
-	function checkPassword(user_id, password, pwck) {
+	/* function checkPassword(user_id, password, pwck) {
 		if(!checkExistData(password, "비밀번호를 ")) {
 			return false;
 		}
@@ -433,7 +609,7 @@
 			return false;
 		}
 		return true; // 확인이 완료되었을 때
-	}
+	} */
 	
 	
 	// 이름 검사 함수
@@ -470,12 +646,13 @@
 	}
 	
 	
+	
 	/* --------------------------------------------------------------------------------------- */
 	//아이디 중복확인 팝업창
 	function duplicate() {	
-		var userId=$("#user_id").val();
+		var sitterId=$("#sitterId").val();
 		// 새 창을 띄워서 userId의 값을 비교하는 함수!
-		var url = "<%=request.getContextPath()%>/UserIdDuplicate?userId="+userId;
+		var url = "<%=request.getContextPath()%>/SitterIdDuplicate?sitterId="+sitterId;
 		var status = "height=420px, width=600px, top=200px, left=500px";
 		window.open(url, "_blank", status);
 	}
@@ -486,7 +663,7 @@
 		var phone = $("#phone").val();
 		
 		// 새 창을 띄워서 phone의 값을 비교하는 함수!
-		var url = "<%=request.getContextPath()%>/sitterPhoneDuplicate?phone="+phone;
+		var url = "<%=request.getContextPath()%>/phoneDuplicate?phone="+phone;
 		var status = "height=420px, width=600px, top=200px, left=500px";
 		window.open(url, "_blank", status);
 	}
@@ -499,7 +676,7 @@
 		
 		if( !(email==null || email.trim().length<4) ) {
 			
-			var url = "<%=request.getContextPath()%>/sitterEmailDuplicate?emailId="+email;
+			var url = "<%=request.getContextPath()%>/emailDuplicate?email="+email;
 			var status = "height=420px, width=600px, top=200px, left=500px";
 			window.open(url, "_blank", status);
 		}
@@ -513,7 +690,6 @@
 	}
 	
 	/* --------------------------------------------------------------------------------------- */
-	
 	
 	/* Daum 우편번호 로직 */
 	function zip_code(){
@@ -566,8 +742,6 @@
     }).open();	
 }
 	
-	
-	
+
 </script>
 
-<%@ include file="/views/common/footer.jsp" %>

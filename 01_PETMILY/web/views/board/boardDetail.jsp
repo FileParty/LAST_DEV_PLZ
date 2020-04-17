@@ -185,7 +185,7 @@
                                 
                                     
                            
-                         <div class="row1">
+                         <div id="row1" class="row1">
                             <table style="text-align: center; margin-top:0px;">
                                  <tr>
                                      <td style="width: 50px;">1박</td style="width: 100px;">
@@ -326,7 +326,7 @@
                         </tr>
                     </table><!-- 추가 옵션 -->
 
-                    <div class="row2"style="margin-right:20px;">
+                    <div id="row2" class="row2"style="margin-right:20px;">
                         <div class="in-table d-flex justify-content-center">
                             <table id="inner" style="width: 300px; margin-left: 60px;" >
                                 <tr>
@@ -392,7 +392,7 @@
                         </tr>
                     </table><!-- 추가 옵션 -->
 
-                    <div class="row3">
+                    <div id="row3" class="row3">
                         <div class="in-table d-flex justify-content-center">
                             <table id="inner" style="width: 300px; margin-left: 60px;" >
                                 <tr>
@@ -453,7 +453,7 @@
 
   
         
-           
+           /* 
             var search= $(".address").val();
             console.log(search);
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -491,7 +491,7 @@
                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                    map.setCenter(coords);
                } 
-           });    
+           });     */
            
            $("#mapOff").trigger('click');
            function mapOff(draggable,zoomable) {
@@ -508,20 +508,20 @@
             var row2 = $(".row2");
             var row3 = $(".row3");
             if(chk2.checked!=true) {
-               row1.hide();
+               $("#row1").hide();
                }else {
-                  row1.show();
+            	   $("#row1").show();
                }
                
            if(chk6.checked!=true) {
-           row2.hide();
+        	   $("#row2").hide();
            }else { 
-              row2.show();
+        	   $("#row2").show();
            }
            if(chk8.checked!=true) {
-               row3.hide();
+        	   $("#row3").hide();
                }else { 
-                  row3.show();
+            	   $("#row3").show();
                }
            
      

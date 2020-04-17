@@ -16,7 +16,7 @@
 			지원 결과는 1주 이내에 전달됩니다.<br>
 			</div>
 			
-			<input id="btn_btn" type="button" value="홈으로" onclick="location.replace('')" />
+			<input id="btn_btn" type="button" value="홈으로" onclick="location.replace('<%=request.getContextPath()%>')" />
 		
 		</article>
 	</section>

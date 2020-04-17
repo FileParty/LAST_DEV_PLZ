@@ -1,14 +1,16 @@
 package com.petmily.board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.petmily.board.service.BoardService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class BookmarkChange
@@ -31,9 +33,11 @@ public class BookmarkChange extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		boolean bFlag = Boolean.parseBoolean(request.getParameter("bookmarkFlag"));
-		String userId = request.getParameter("userId");
-		String sitterId = request.getParameter("sitterId");
+		HttpSession session = request.getSession();
+	      
+	     boolean bFlag = Boolean.parseBoolean(request.getParameter("bookmarkFlag"));
+	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
+	     String sitterId = request.getParameter("sitterId");
 		
 		
 		

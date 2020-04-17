@@ -46,7 +46,6 @@
                             <li class="content"><a href="<%=request.getContextPath()%>/user/request?userId=<%=u.getUserId()%>"> - 요청한 예약</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing?userId=<%=u.getUserId()%>"> - 진행중인 예약</a></li>
                             <li class="content"><a href="<%=request.getContextPath()%>/user/reservationEnd?userId=<%=u.getUserId()%>"> - 종료된 예약</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             
                             <li class="title">결제</li>

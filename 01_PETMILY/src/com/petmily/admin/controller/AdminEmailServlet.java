@@ -47,7 +47,7 @@ public class AdminEmailServlet extends HttpServlet {
 		
 		String host = "smtp.naver.com";
 		String user = "wadsij@naver.com";
-		String password = "kim1q2w3e";
+		String password = "kim1q2w3e4r";
 		
 		int result = 0;
 		
@@ -78,7 +78,7 @@ public class AdminEmailServlet extends HttpServlet {
 		try { 
 			MimeMessage msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(user)); 
-			msg.addRecipient(Message.RecipientType.TO, new InternetAddress("sungyon0@naver.com"));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress("pdg300@naver.com"));
 			// 메일 제목 
 			msg.setSubject("PETMILY 펫시터 지원 답변이메일입니다."); 
 			// 메일 전송 및 html로 셋팅

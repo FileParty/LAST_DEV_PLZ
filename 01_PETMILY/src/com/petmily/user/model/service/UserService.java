@@ -180,6 +180,47 @@ public class UserService {
 		return user;
 	}
 	
+	public int sitterUpdateEnd(String id, String newPw, String email, String phone, String postNum, String address, String detailAddress, String bankName, String accountNo, String accountName, String img) {
+        Connection conn = getConnection();
+        int result = dao.userUpdate(conn, id, newPw, email, phone, postNum, address, detailAddress);
+        if(result>0) {
+           result=dao.sitterUpdate(conn, id, bankName,accountNo,accountName,img);
+           if(result>0) {
+              commit(conn);
+           }else {
+              rollback(conn);
+           }
+        }else{
+            rollback(conn);
+         }
+        return result;
+     }
+     
+     
+     //펫시터 회원가입 아이디 중복검사
+     public boolean sitterIdDuplicate(String sitterId) {
+        Connection conn = getConnection();
+        boolean flag = dao.sitterIdDuplicate(conn, sitterId);
+        close(conn);
+        return flag;
+     }
+     
+     //펫시터 회원가입 이메일 중복검사
+     public boolean sitterEmailDuplicate(String email) {
+        Connection conn = getConnection();
+        boolean flag = dao.sitterEmailDuplicate(conn, email);
+        close(conn);
+        return flag;
+     }
+     
+     //펫시터 회원가입 휴대폰 중복검사
+     public boolean sitterPhoneDuplicate(String phone) {
+        Connection conn = getConnection();
+        boolean flag = dao.sitterPhoneDuplicate(conn, phone);
+        close(conn);
+        return flag;
+     }
+	
 	
 	
 }

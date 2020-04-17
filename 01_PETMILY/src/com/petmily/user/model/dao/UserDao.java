@@ -59,18 +59,18 @@ public class UserDao {
 		return result;
 	}
 	
-	//?�� ?��?苑� ?��?��揶�??�� 餓�? USER_PET_SITTER?肉� ???釉� 筌�遺용��?諭�
+	
 	public int insertUserPetSitter(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
 		String sql=prop.getProperty("insertPetSitter");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?��?��?苑� ?釉�?��?逾�
-			pstmt.setString(2, pss.getCertificateYN()); //?��?��?苑� ?��野��뱀� 癰����� ?肉ч��?
-			pstmt.setString(3, pss.getPetSitterJob()); //?��?��?苑� 筌�怨몃씜
-			pstmt.setString(4, pss.getPetSitterFamily()); //?��?��?苑� 揶�?鈺�? �닌�苑�?��
-			pstmt.setString(5, pss.getPetSitterKeeppets()); //?��?��?苑� 獄�����?猷���? 獄����� 野���肉� ?肉ч��?
+			pstmt.setString(1, pss.getPetsitterId()); //
+			pstmt.setString(2, pss.getCertificateYN()); //
+			pstmt.setString(3, pss.getPetSitterJob()); //
+			pstmt.setString(4, pss.getPetSitterFamily()); //�
+			pstmt.setString(5, pss.getPetSitterKeeppets()); //
 			pstmt.setString(6, pss.getPetSitterActivity()); //?��?��?苑� ?��?猷� 野�����
 			pstmt.setString(7, pss.getAccountOwner()); //?��?��?苑� ?��?沅��④쑴伊� �④쑴伊�雅�?
 			pstmt.setString(8, pss.getBankName()); //?��?��?苑� ?��?沅��④쑴伊� ???六억�?
@@ -86,7 +86,6 @@ public class UserDao {
 			return result;
 	}
 		
-	//?�� ?��?苑� ?��?��揶�??�� 餓�? PET_SITTER_CERTIFICATE 筌�遺용��?諭�
 	public int insertPetSitterCertificate(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
@@ -108,15 +107,14 @@ public class UserDao {
 		return result;
 	}
 	
-	//?��?��?苑� ?��?��揶�??�� 餓�? RESIDENCE_TYPE ?��?����遺용� ???釉� 野�?
 	public int insertResidenceType(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
 		String sql=prop.getProperty("insertResidenceType");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?��?��?苑� ?釉�?��?逾�
-			pstmt.setString(2, pss.getResidenceValue()); //椰�怨�竊�筌�? ?��?��
+			pstmt.setString(1, pss.getPetsitterId()); 
+			pstmt.setString(2, pss.getResidenceValue()); 
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -524,4 +522,79 @@ public class UserDao {
 		return result;
 		
 	}
+	
+     
+     //펫시터 회원가입 아이디 중복검사
+     public boolean sitterIdDuplicate(Connection conn, String sitterId) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean flag = false;
+        String sql = prop.getProperty("duplicateSitter");
+        try {
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, sitterId);
+           rs = pstmt.executeQuery();
+           
+           if(rs.next()) {
+              flag = true; 
+           }
+        }
+        catch(SQLException e) {
+           e.printStackTrace();
+        }
+        finally {
+           close(rs);
+           close(pstmt);
+        } 
+        return flag;
+     }
+     
+     //펫시터 이메일 중복검사
+     public boolean sitterEmailDuplicate(Connection conn, String email) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean flag = false;
+        String sql = prop.getProperty("duplicateSitterEmail");
+        try {
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, email);
+           rs = pstmt.executeQuery();
+           
+           if(rs.next()) {
+              flag = true; 
+           }
+        }
+        catch(SQLException e) {
+           e.printStackTrace();
+        }
+        finally {
+           close(rs);
+           close(pstmt);
+        } 
+        return flag;
+     }
+     
+     public boolean sitterPhoneDuplicate(Connection conn, String phone) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        boolean flag = false;
+        String sql = prop.getProperty("duplicateSitterPhone");
+        try {
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, phone);
+           rs = pstmt.executeQuery();
+           
+           if(rs.next()) {
+              flag = true;
+           }
+        }
+        catch(SQLException e) {
+           e.printStackTrace();
+        }
+        finally {
+           close(rs);
+           close(pstmt);
+        } 
+        return flag;
+     }
 }

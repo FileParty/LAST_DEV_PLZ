@@ -41,6 +41,19 @@ public class SearchService {
 		
 	}
 	
+	public int selectCountFilterSearch(String key) {
+		
+		Connection conn=getConnection();
+		int result=dao.selectCountFilterSearch(conn,key);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+
+	
 	public List<PetsitterSearch> searchPetsitter(String key,int cPage,int numPerPage) {
 		
 		Connection conn=getConnection();
@@ -72,11 +85,11 @@ public class SearchService {
 	}
 	
 	// 약물 복용 버튼
-	public List<PetsitterSearch> filterTakingDrug(String takingDrug,int cPage,int numPerPage){
+	public List<PetsitterSearch> filterTakingDrug(String key,int cPage,int numPerPage){
 		
 		Connection conn=getConnection();
 		
-		List<PetsitterSearch> list=dao.filterTakingDrug(conn,takingDrug,cPage,numPerPage);
+		List<PetsitterSearch> list=dao.filterTakingDrug(conn,key,cPage,numPerPage);
 		imageCommentSelect(conn, list);
 		
 		close(conn);
@@ -111,6 +124,7 @@ public class SearchService {
 		return list;
 		
 	}
+	
 	public List<PetsitterSearch> filterOldDogCare(String key,int cPage,int numPerPage){
 		
 		Connection conn=getConnection();
@@ -123,6 +137,7 @@ public class SearchService {
 		return list;
 		
 	}
+	
 	public List<PetsitterSearch> filterProPetsitter(String key,int cPage,int numPerPage){
 		
 		Connection conn=getConnection();
@@ -146,7 +161,7 @@ public class SearchService {
 				dao.searchImage(conn, ps);
 				dao.countComment(conn, ps);
 				
-				System.out.println(ps);
+				//System.out.println(ps);
 			}
 		}
 	}

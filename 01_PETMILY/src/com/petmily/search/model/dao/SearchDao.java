@@ -90,13 +90,42 @@ public class SearchDao {
 			
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
+			
+			rs.next();
+			
+			count=rs.getInt("cnt");
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return count;
+	}
+	
+	public int selectCountFilterSearch(Connection conn,String key) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		
+		String sql=prop.getProperty("selectCountFilterSearch");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,key);
+			
+			rs=pstmt.executeQuery();
+			
 			rs.next();
 			count=rs.getInt("cnt");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return count;
@@ -281,19 +310,19 @@ public class SearchDao {
 			
 	}
 	
-	public List<PetsitterSearch> filterTakingDrug(Connection conn,String takingDrug,int cPage,int numPerPage){
+	public List<PetsitterSearch> filterTakingDrug(Connection conn,String key,int cPage,int numPerPage){
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<PetsitterSearch> list=new ArrayList<PetsitterSearch>();
 		
-		String sql=prop.getProperty("filterTakingDrug");
+		String sql=prop.getProperty("filter");
 		
 		try {
 			
 			pstmt=conn.prepareStatement(sql);
 			
-			pstmt.setString(1,takingDrug);
+			pstmt.setString(1,key);
 			pstmt.setInt(2,(cPage-1)*numPerPage+1);
 			pstmt.setInt(3,cPage*numPerPage);
 			
@@ -333,7 +362,7 @@ public class SearchDao {
 		ResultSet rs=null;
 		List<PetsitterSearch> list=new ArrayList<PetsitterSearch>();
 		
-		String sql=prop.getProperty("filterPickup");
+		String sql=prop.getProperty("filter");
 		
 		try {
 			
@@ -381,7 +410,7 @@ public class SearchDao {
 		ResultSet rs=null;
 		List<PetsitterSearch> list=new ArrayList<PetsitterSearch>();
 		
-		String sql=prop.getProperty("filterIndoorPlay");
+		String sql=prop.getProperty("filter");
 		
 		try {
 			
@@ -428,7 +457,7 @@ public class SearchDao {
 		ResultSet rs=null;
 		List<PetsitterSearch> list=new ArrayList<PetsitterSearch>();
 		
-		String sql=prop.getProperty("filterOldDogCare");
+		String sql=prop.getProperty("filter");
 		
 		try {
 			

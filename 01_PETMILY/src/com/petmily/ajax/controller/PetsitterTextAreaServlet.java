@@ -33,7 +33,8 @@ public class PetsitterTextAreaServlet extends HttpServlet {
 		
 		int starAvg=new SearchService().starAvg();
 		
-		response.setCharacterEncoding("UTF-8");
+		//response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		
 		response.getWriter().write("총 후기는 "+reviewCount+"개 이고 별 점 평균은 "+starAvg+"점 입니다.");
 	}

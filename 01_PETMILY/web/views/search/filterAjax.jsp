@@ -8,9 +8,6 @@ pageEncoding="UTF-8"%>
 %>
 
 
-<%@ include file="/views/common/header.jsp" %>
-
-      
 	         <div class="">
 	          
 	          <%for(PetsitterSearch ps:list) {%>
@@ -87,4 +84,3 @@ pageEncoding="UTF-8"%>
 	          </div>
 	             
 	          
-<%@ include file="/views/common/footer.jsp" %>

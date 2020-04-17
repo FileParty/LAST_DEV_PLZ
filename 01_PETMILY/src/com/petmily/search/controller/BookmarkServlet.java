@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmily.search.service.SearchService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class BookmarkServlet
@@ -29,7 +31,10 @@ public class BookmarkServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String userId="user11";
+		HttpSession session = request.getSession();
+		User u=(User)session.getAttribute("loginUser");
+		
+		String userId=u.getUserId();
 		
 		String petsitterId=request.getParameter("petsitterId");
 		int result=new SearchService().insertBookmark(userId,petsitterId); 

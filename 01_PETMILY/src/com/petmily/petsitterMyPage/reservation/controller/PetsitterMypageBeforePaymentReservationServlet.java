@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
 import com.petmily.petsitterMyPage.reservation.service.PetsitterMypageReservationService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class PetsitterMypageBeforePaymentReservationServlet
@@ -34,9 +36,11 @@ public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet 
 		// TODO Auto-generated method stub
 		
 		// 로그인 되어있는 펫시터 아이디(임시)
-		String petsitterId=request.getParameter("petsitterId");
 		
-		System.out.println(petsitterId);
+		HttpSession session = request.getSession();
+		User u=(User)session.getAttribute("loginUser");
+		
+		String petsitterId=u.getUserId();
 		
 		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(petsitterId);
 		

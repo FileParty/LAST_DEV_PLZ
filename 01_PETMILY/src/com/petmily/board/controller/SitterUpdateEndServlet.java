@@ -138,6 +138,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		}else { 
 			msg="게시글 수정을 실패 하였습니다.";
 			loc="/views/common/msg.jsp";
+			request.getRequestDispatcher("views/common/msg.jsp").forward(request, response);
 		}
 
 		

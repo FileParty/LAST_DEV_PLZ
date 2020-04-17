@@ -50,8 +50,9 @@ public class AdminQuestionServlet extends HttpServlet {
 		String url = request.getContextPath() + "/admin/question?type="+type;
 		String pageBar = getPageBar(url,totalDate,cPage,numPerPage);
 		
-		
-		request.setAttribute("question", list);
+		request.setAttribute("type", type);
+		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("questionList", list);
 		request.getRequestDispatcher("/views/admin/adminQuestion.jsp").forward(request, response);
 		
 		

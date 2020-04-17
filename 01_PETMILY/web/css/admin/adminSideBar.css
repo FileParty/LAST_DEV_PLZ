@@ -19,6 +19,8 @@ div.side{
 	display:flex;
 	flex-direction:column;
 	margin-bottom:15px;
+	font-size: 14px;
+    margin-bottom: 6px;
 }
 
 div.side>h2{
@@ -37,4 +39,13 @@ div.side>a{
 
 div.side>a:hover{
 	color:blue;
+}
+
+hr{
+    margin-left: 0;
+    width: 10%;
+    height: 2px;
+    color: #ffcc33;
+    background-color: #ffcc33;
+    border: none;
 }

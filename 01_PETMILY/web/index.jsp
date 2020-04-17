@@ -82,21 +82,21 @@
 				$(e.target).attr("alt",2);
 				let que2 = $(e.target).parent().next();
 				console.log(que2);
-				que2.slideDown(500);
+				que2.slideDown(600);
 			} else {
 				$(e.target).attr("src","<%=request.getContextPath()%>/img/common/arrowDown.png");
 				$(e.target).attr("alt",1);
 				let que2 = $(e.target).parent().next();
 				console.log(que2);
-				que2.slideUp(500);
+				que2.slideUp(600);
 			}
 		})
 		let scrollE = document.addEventListener('scroll', function(){
 			var scrollTop = window.scrollY || document.documentElement.scrollTop;
-			if(scrollTop>178){
+			if(scrollTop>190){
 				let imgs = $(".mainImgs");
 				$.each(imgs,function(i,d){
-					$(d).slideDown(500);
+					$(d).slideDown(900);
 					
 				})
 			}

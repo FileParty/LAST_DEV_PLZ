@@ -167,7 +167,7 @@ public class UserDao {
 	
 	
 	
-//	�븘�씠�뵒 以묐났�솗�씤 濡쒖쭅
+//	회원가입 - 사용자 아이디 중복확인 로직
 	public boolean userIdDuplicate(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -193,7 +193,7 @@ public class UserDao {
 	}
 	
 	
-//	�쑕��踰덊샇 以묐났�솗�씤 濡쒖쭅
+//	회원가입 - 휴대폰 번호 중복확인 로직
 	public boolean phoneDuplicate(Connection conn, String phone) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -219,7 +219,7 @@ public class UserDao {
 	}
 	
 	
-//	�씠硫붿씪 以묐났�솗�씤 濡쒖쭅
+//	회원가입 - 이메일 중복확인 로직
 	public boolean emailDuplicate(Connection conn, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

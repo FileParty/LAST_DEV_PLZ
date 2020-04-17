@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.petmily.user.model.vo.PetSitter2;
 import com.petmily.user.model.vo.User;
 import com.petmily.user.model.vo.UserBookMarkBoard;
+import com.petmily.user.model.vo.UserPaymentHistory;
 
 
 public class UserDao {
@@ -424,6 +425,40 @@ public class UserDao {
 			close(pstmt);
 		}
 		return count;
+	}
+	
+//	일반사용자 마이페이지 - 결제내역 로직
+	public List<UserPaymentHistory> userPaymentHistory(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserPaymentHistory up = null;
+		List<UserPaymentHistory> list = new ArrayList();
+		String sql = prop.getProperty("userPaymentHistory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id); // SQL 조건
+			System.out.println("dao의 id : "+id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				up = new UserPaymentHistory();
+				up.setCheckIn(rs.getString("checkin"));
+				up.setCheckOut(rs.getString("checkout"));
+				up.setPstId(rs.getString("pstid"));
+				up.setPrice(rs.getInt("price"));
+				up.setEndDate(rs.getString("enddate"));
+				list.add(up);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 
 //	------------------------------------------------------------------------------

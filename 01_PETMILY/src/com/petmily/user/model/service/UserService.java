@@ -1,7 +1,7 @@
 package com.petmily.user.model.service;
 
-import static com.petmily.common.JDBCTemplate.commit;
 import static com.petmily.common.JDBCTemplate.close;
+import static com.petmily.common.JDBCTemplate.commit;
 import static com.petmily.common.JDBCTemplate.getConnection;
 import static com.petmily.common.JDBCTemplate.rollback;
 
@@ -11,8 +11,8 @@ import java.util.List;
 import com.petmily.user.model.dao.UserDao;
 import com.petmily.user.model.vo.PetSitter2;
 import com.petmily.user.model.vo.User;
-import com.petmily.user.model.vo.UserBookMark;
 import com.petmily.user.model.vo.UserBookMarkBoard;
+import com.petmily.user.model.vo.UserPaymentHistory;
 
 public class UserService {
 //	�쑀���� �뿰愿��엳�뒗 �꽌鍮꾩뒪 �쁺�뿭
@@ -158,7 +158,13 @@ public class UserService {
 	
 //	------------ ㅆ
 	
-	
+//	일반사용자 마이페이지 - 결제내역 기능
+	public List<UserPaymentHistory> userPaymentHistory(String id) {
+		Connection conn = getConnection();
+		List<UserPaymentHistory> list = dao.userPaymentHistory(conn, id);
+		close(conn);
+		return list;
+	}
 	
 	
 	

@@ -89,7 +89,10 @@ public PetsitterMypageReservationDao() {
 			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
+<<<<<<< HEAD
 			
+=======
+>>>>>>> refs/heads/dev
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {

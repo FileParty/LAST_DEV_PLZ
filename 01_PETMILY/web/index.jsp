@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" type = "text/css">
 <style>
 	div#mainText{
+		margin: 0 auto;
 		width:1366px;
 		height:700px;
 		background-image:url("<%=request.getContextPath()%>/img/common/main.jpg");
@@ -12,7 +13,7 @@
 		opacity:0.7;
 	}
 </style>
-<section>
+<section style="margin: 0 auto;">
 	<div id="mainText">
 		<p>PET:MILY</p>
 		<p>펫 밀리가 당신의 빈자리를 잠시 채워드릴게요.</p>
@@ -82,21 +83,21 @@
 				$(e.target).attr("alt",2);
 				let que2 = $(e.target).parent().next();
 				console.log(que2);
-				que2.slideDown(500);
+				que2.slideDown(600);
 			} else {
 				$(e.target).attr("src","<%=request.getContextPath()%>/img/common/arrowDown.png");
 				$(e.target).attr("alt",1);
 				let que2 = $(e.target).parent().next();
 				console.log(que2);
-				que2.slideUp(500);
+				que2.slideUp(600);
 			}
 		})
 		let scrollE = document.addEventListener('scroll', function(){
 			var scrollTop = window.scrollY || document.documentElement.scrollTop;
-			if(scrollTop>178){
+			if(scrollTop>190){
 				let imgs = $(".mainImgs");
 				$.each(imgs,function(i,d){
-					$(d).slideDown(500);
+					$(d).slideDown(900);
 					
 				})
 			}

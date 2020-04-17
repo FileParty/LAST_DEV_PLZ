@@ -42,7 +42,7 @@ public class UserDeleteEndServlet extends HttpServlet {
 //			회원탈퇴 실패
 			msg = "회원탈퇴 처리가 실패되었습니다.";
 //			회원탈퇴 화면으로 보낸다
-			loc = "/userDelete?userId="+id; // 유저아이디와 반드시 같이 보낸다
+			loc = "/user/Delete?userId="+id; // 유저아이디와 반드시 같이 보낸다
 		}
 		
 		request.setAttribute("msg", msg);

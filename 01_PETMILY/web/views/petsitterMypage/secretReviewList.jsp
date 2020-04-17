@@ -32,7 +32,7 @@ pageEncoding="UTF-8"%>
 		$(function(){
 			
 			$.ajax({
-				
+				url:"<%=request.getContextPath()%>"
 			});
 		});	
 	

@@ -35,6 +35,7 @@ public class UserUpdateServlet extends HttpServlet {
 		}
 		else {
 			String id = request.getParameter("userId");
+			
 			System.out.println("회원정보수정 화면으로 이동하기 위해 확인하는 id 값 : "+id);
 			
 //			북마크 테이블 가져오기

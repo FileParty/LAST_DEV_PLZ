@@ -46,6 +46,9 @@ public class UserService {
 	    }
 	
 	
+//	------------------------------ ㅆ
+	
+	
 //	로그인 로직
 	public User userSelect(String user_id, String password) {
 		Connection conn = getConnection();
@@ -95,7 +98,7 @@ public class UserService {
 	
 	
 	
-//	------------------------------------------------
+//	------------------------------------------------ ㅆ
 	
 //	마이페이지 이동 로직
 	public User userSelect(String id) {
@@ -152,6 +155,9 @@ public class UserService {
 		close(conn);
 		return count;
 	}
+	
+//	----------------------------------------------------------------------
+	
 
 	// API 이메일을 받아서 로그인
 	public User apiLogin(String userEmail) {

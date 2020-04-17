@@ -222,7 +222,13 @@
                         </tr>
                         <tr>
                             <td class="sub-title">추가 코멘트</td>
-                            <td><input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다."  value="<%=pb.getBoardAddressContent() %>" readonly></td>
+                            <td>
+                            <%if(pb.getBoardAddressContent()!=null) {%>
+                            <input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다."  value="<%=pb.getBoardAddressContent() %>" readonly>
+                            <%}else { %>
+                            <input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다."  value="-" readonly>
+                            <%} %>
+                            </td>
                         </tr>
                      </table><!-- 펫 시터님 위치 -->
 

@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.petmily.board.model.vo.PetSitterBoard;
 import com.petmily.board.service.BoardService2;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class SitterUpdateEndServlet
@@ -121,11 +123,22 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		
 		
 		int boardNo = Integer.parseInt(mr.getParameter("no"));
-		String id = mr.getParameter("id");
-	PetSitterBoard pb = new PetSitterBoard(boardNo,id,title,intro,small,middle,big,address,comment,"N","N",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
+		HttpSession session = request.getSession();
+	    String userId = ((User)session.getAttribute("loginUser")).getUserId();
+	PetSitterBoard pb = new PetSitterBoard(boardNo,userId,title,intro,small,middle,big,address,comment,"N","N",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
 	
 		
 		int result = new BoardService2().boardInsert(pb);
+		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg="게시글이 수정 되었습니다.";
+			request.getRequestDispatcher("/views/petsitterMypage/petSitterInfo.jsp").forward(request, response);
+		}else { 
+			msg="게시글 수정을 실패 하였습니다.";
+			loc="/views/common/msg.jsp";
+		}
 
 		
 	}

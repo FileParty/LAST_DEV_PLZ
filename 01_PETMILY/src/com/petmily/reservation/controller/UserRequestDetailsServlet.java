@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmily.reservation.model.vo.PetReservation;
 import com.petmily.reservation.service.ReservationService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class UserRequestDetailsServlet
@@ -29,7 +31,8 @@ public class UserRequestDetailsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = "user03";
+		HttpSession session = request.getSession();
+	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
 		PetReservation pr = new ReservationService().requestDetails(userId);
 		request.setAttribute("revs", pr);
 		request.getRequestDispatcher("/views/userReservation/requestReservations.jsp").forward(request, response);

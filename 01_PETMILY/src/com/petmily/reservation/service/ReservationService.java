@@ -1,8 +1,8 @@
 package com.petmily.reservation.service;
 
 import static com.petmily.common.JDBCTemplate.close;
-import static com.petmily.common.JDBCTemplate.getConnection;
 import static com.petmily.common.JDBCTemplate.commit;
+import static com.petmily.common.JDBCTemplate.getConnection;
 import static com.petmily.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.petmily.reservation.model.dao.ReservationDao;
 import com.petmily.reservation.model.vo.PetReservation;
+import com.petmily.reservation.model.vo.ReservationPetCode;
 
 public class ReservationService {
 	
@@ -71,6 +72,41 @@ public class ReservationService {
 		  PetReservation pr = dao.addPay(conn,revNo);
 		  close(conn);
 		  return pr;
+	  }
+	  
+	  public boolean insertReservation(PetReservation pr, List<ReservationPetCode> pcrList) {
+		  Connection conn = getConnection();
+		  
+		  int codeHap1 = dao.getReservationCodesHap(conn);
+		  
+		  boolean result = dao.insertReservation(conn, pr);
+		  		  
+		  if(result) {
+			  int codeHap2 = dao.getReservationCodesHap(conn);
+			  
+			  int reservationCode = codeHap2-codeHap1;
+			  
+			  result = dao.insertReservationSub(conn, pcrList, reservationCode);
+			  
+			  if(result)
+				  commit(conn);
+			  else
+				  rollback(conn);
+		  }
+		  else
+			  rollback(conn);
+		  
+		  close(conn);
+		  
+		  return result;
+	  }
+	  
+	  public int getReservationCodesHap() {
+		  Connection conn = getConnection();
+		  int codeHap = dao.getReservationCodesHap(conn);
+		  close(conn);
+		  return codeHap;
+		  
 	  }
 	  
 }

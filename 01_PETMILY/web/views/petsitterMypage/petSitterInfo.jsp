@@ -232,7 +232,7 @@ label.custom-file-label::after{
 }
 </style>
 
-<body>
+
     <section>
         <div class="container">
             <div class="row">
@@ -248,14 +248,12 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write)" style="width: 200px; cursor: pointer;">글 작성하기</button>
+                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">글 작성하기</button>
                     </div>
                     <table>
                         <tr>
-                            <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td> 
-                            
-                            <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                             
-                            
+                            <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td>                            
+                            <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                                                       
                         </tr>
                         <tr>
                             <td style="padding-left: 20px;"></td>
@@ -301,6 +299,8 @@ label.custom-file-label::after{
               </div>
           </div>
     </section>
+    
+    <br><br><br><br><br><br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -308,7 +308,7 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
+
 <script>
 
     

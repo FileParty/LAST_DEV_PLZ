@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmily.reservation.model.vo.PetReservation;
 import com.petmily.reservation.service.ReservationService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class UserReservationingServlet
@@ -31,13 +33,14 @@ public class UserReservationingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = "user03";
-		List<PetReservation> list = new ReservationService().reservation(id);
-		System.out.println(list);
-		for(PetReservation p : list) {
-			System.out.println(p.getPlusType().contains("추가할인"));
-			
-		}
+		
+		
+		HttpSession session = request.getSession();
+	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
+	     System.out.println("진행예약 : " + userId);
+		List<PetReservation> list = new ReservationService().reservation(userId);
+		
+		
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/userReservation/userReservationing.jsp").forward(request, response);
 	}

@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList, com.petmily.admin.model.vo.ApplyUserData, 
  com.petmily.admin.model.vo.User,com.petmily.admin.model.vo.AdminPetsitter" %>
 <% 
-PetReservation pr = (PetReservation)request.getAttribute("rev");
+PetReservation pr = (PetReservation)request.getAttribute("addPay");
 
 %>
 <!DOCTYPE html>
@@ -15,32 +15,34 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+	<%if(pr!=null) {  %>
+
 	<table>
 		
 			<tr>
-				<th></th>
-				<td><%=pr.getReservationCode() %></td>
-			</tr>
+				
+				<td>추가 결제 금액 :<%=pr.getFinalyPrice() %></td>
+			</tr>	
 			<tr>
-				<th>예약자 ID</th>
-				<td><%=pr.getUserId() %></td>
+			<br>		
+				<td> <b>추가 사유</b>  <textarea cols=30; rows=3; ><%=pr.getSurchargeText() %></textarea></td>
+				
 			</tr>
 		
 			
 			<tr>
-				<th>체크 인</th>
-				<td><%=pr.getCheckIn().substring(0,11) %></td>
+			<br>
+				<td><input type="button" value="결제 문의"></td>
+				
 			</tr>
 		
 				<tr>
-					<th>체크 아웃</th>
-					<td><%=pr.getCheckOut().substring(0,11) %></td>
+				<td><input type="button" value="결제" onclick="closePage()"></td>						
 				</tr>
 			
-				
-		
 	</table>
-	<button onclick="closePage();">확인</button>
+	<%} %>
+	
 </body>
 <style>
 	body{
@@ -55,7 +57,7 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 		text-align:center;
 	}
 	table tr{
-		background-color:lightgray;
+		
 		board:1px solid black;
 	}
 	table th, table td{

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.petmily.user.model.vo.User" %>
-
-
 <%@ include file="/views/common/header.jsp" %>
 
 <style>
@@ -247,7 +245,7 @@ label.custom-file-label::after{
 }
 </style>
 
-<body>
+
     <section>
         <div class="container">
             <form action="<%=request.getContextPath()%>/user/petprofile/upload" method="post" onsubmit="return test();">
@@ -270,9 +268,11 @@ label.custom-file-label::after{
                             
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 종료된 예약</a></li>
+
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review"> - 종료된 예약</a></li>
+
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             
@@ -280,8 +280,7 @@ label.custom-file-label::after{
                             <hr class="hr-line"/>
                             <li class="content"><a href=""> - 결제 내역</a></li>
                             <li class="content"><a href=""> - 추가 요금 내역</a></li>
-                            <br/>
-                            
+                            <br/>                           
                         </ul>
                     </div>
                 </div>
@@ -296,7 +295,7 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button tylpe="submit" onclick="location.replace('<%=request.getContextPath()%>/user/petprofile/upload')" style="width: 200px; cursor: pointer;">펫 프로필 등록</button>
+                        <button type="submit" onclick="location.replace('<%=request.getContextPath()%>/user/petprofile/upload')" style="width: 200px; cursor: pointer;">펫 프로필 등록</button>
                     </div>
                     <table>
                         <tr>
@@ -352,6 +351,8 @@ label.custom-file-label::after{
         </form>
         </div>
     </section>
+    
+    <br><br><br><br><br><br>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -359,11 +360,11 @@ label.custom-file-label::after{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
+
 <script>
 
     
-function toggle1(){ //on/off하나의 버튼으로 가능.
+/* function toggle1(){ //on/off하나의 버튼으로 가능.
 
     $('.row1').slideToggle(1000); //시간 부여
     
@@ -469,7 +470,7 @@ $(function(){
              s.append("<br>");
              console.log(num);
              num++;
-         }
+         } */
 
 </script>
 <%@ include file="/views/common/footer.jsp" %>

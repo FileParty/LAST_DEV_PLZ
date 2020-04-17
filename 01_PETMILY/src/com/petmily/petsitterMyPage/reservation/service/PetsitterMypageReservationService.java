@@ -1,7 +1,9 @@
 package com.petmily.petsitterMyPage.reservation.service;
 
 import static com.petmily.common.JDBCTemplate.close;
+import static com.petmily.common.JDBCTemplate.commit;
 import static com.petmily.common.JDBCTemplate.getConnection;
+import static com.petmily.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -41,5 +43,40 @@ public class PetsitterMypageReservationService {
 		return list;
 		
 	}
+	
+	public int updateStatus(int[] pcodes) {
+		
+		Connection conn=getConnection();
+		int result=0;
+		for(int pcode : pcodes) {
+			result+=dao.updateStatus(conn,pcode);
+		}
+		if(result==pcodes.length) {
+			commit(conn); close(conn);
+		}
+		else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+	}
+	
+	public int updateStatusRefusal(int[] pcodes) {
+		
+		Connection conn=getConnection();
+		int result=0;
+		for(int pcode : pcodes) {
+			result+=dao.updateStatusRefusal(conn,pcode);
+		}
+		if(result==pcodes.length) {
+			commit(conn); close(conn);
+		}
+		else {
+			rollback(conn);
+			close(conn);
+		}
+		return result;
+	}
+	
 	
 }

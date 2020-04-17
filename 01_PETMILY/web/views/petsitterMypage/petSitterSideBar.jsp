@@ -37,7 +37,6 @@ hr{
 			<li class="content"><a href=""> - 결제 전 예약</a></li>
 			<li class="content"><a href=""> - 결제 완료 예약</a></li>
 			<li class="content"><a href=""> - 내 예약 일정</a></li>
-			<li class="content"><a href=""> - 채팅</a></li>
 			<br/>
 			<li class="title">정산</li>
 			<hr class="hr-line"/>

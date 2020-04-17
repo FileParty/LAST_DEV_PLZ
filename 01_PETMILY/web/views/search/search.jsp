@@ -13,11 +13,6 @@ pageEncoding="UTF-8"%>
 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <div class="container">
-    <nav>
-      <div>
-        menu
-      </div>
-    </nav>
     <main>
       <section class="filter_container mt-4 mb-3">
         <div class="row justify-content-center">
@@ -29,7 +24,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             <div class="place_container row align-items-center" id="search_box">
             
               <label class="ml-3">장소</label>
-              <input type="text" placeholder="동 이름을 검색하세요" name="searchKeyword"/>
+              <input type="text" placeholder="찾으시는 장소를 입력하세요." name="searchKeyword"/>
             </div>
           </form>
           
@@ -76,6 +71,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             
           </div>
           <div class="col-5">
+          
             <ul class="nav justify-content-end">
               <li class="nav-item inactive" id="popularity" value="popularity">인기순</li>
               <li class="nav-item inactive" id="newestPost">최신 글</li>
@@ -93,7 +89,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
           <div class="col-8" id="area">
           
           <%for(PetsitterSearch ps:list) {%>
-            <div class="pet_sitter_info_container border-top row px-5 py-3">
+            <div class="pet_sitter_info_container border-top row px-5 py-3" onclick="reservation(<%=ps.getBoardCode()%>)">
               <div class="col-6 text-center " >
               
               
@@ -109,11 +105,16 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				  <div class="carousel-inner">
 				  <% //if(ps.getImgFile()!=null){
 				  	for(String img : ps.getImgFile()) {%>
+				  	
+				  		<% if(ps.getImgFile()!=null){ %>
 					    <div class="carousel-item active">
-					      <img src="<%=request.getContextPath()%>/upload/<%=img %>" alt="" width="320" height="210">
+					      <img src="<%=request.getContextPath()%>/upload/board/<%=img %>" alt="" width="320" height="210">
 					    </div>
-				     <%}
-				  	//} %>
+				     <%}else {%>
+				    	 <div class="carousel-item active">
+					      <img src="<%=request.getContextPath()%>/upload/search/noImg.gif" alt="" width="320" height="210">
+					    </div>
+				  	<%} } %>
 				  </div>
 				  
 				  <!-- Left and right controls -->
@@ -162,7 +163,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             <div class="row justify-content-center" id="pageBar">
             	<%=request.getAttribute("pageBar") %>
             </div>
-            
+         
             <br>
             <br>
             <br>
@@ -170,12 +171,20 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
              
           <div class="col-2">
           </div>
+          
         </section>
       </section>
     </main>  
   </div> 
   
+  
   <script>
+  	function reservation(boardCode){
+  		console.log(boardCode);
+  		location.replace("<%=request.getContextPath()%>/BoardList.do?boardCode="+boardCode);
+  	}
+  
+  
   	$(function(){
   		
   		$("#priceOrder").hide();

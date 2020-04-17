@@ -89,6 +89,10 @@ public PetsitterMypageReservationDao() {
 			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
+<<<<<<< HEAD
+			
+=======
+>>>>>>> refs/heads/dev
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -114,6 +118,45 @@ public PetsitterMypageReservationDao() {
 		
 	}
 	
+	
+	public int updateStatus(Connection conn, int pcode) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String status="진행";
+		String sql=prop.getProperty("updateStatus");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,status);
+			pstmt.setInt(2, pcode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	
+	public int updateStatusRefusal(Connection conn, int pcode) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String status="취소";
+		String sql=prop.getProperty("updateStatus");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,status);
+			pstmt.setInt(2, pcode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	
 }

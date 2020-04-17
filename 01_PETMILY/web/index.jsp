@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" type = "text/css">
 <style>
 	div#mainText{
+		margin: 0 auto;
 		width:1366px;
 		height:700px;
 		background-image:url("<%=request.getContextPath()%>/img/common/main.jpg");
@@ -12,7 +13,7 @@
 		opacity:0.7;
 	}
 </style>
-<section">
+<section style="margin: 0 auto;">
 	<div id="mainText">
 		<p>PET:MILY</p>
 		<p>펫 밀리가 당신의 빈자리를 잠시 채워드릴게요.</p>

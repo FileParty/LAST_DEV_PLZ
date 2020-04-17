@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/com/petmily/board/controller/SitterUpdateEndServlet.java=UTF-8
+encoding//src/com/petmily/common/filter/AdminFilter.java=UTF-8
+encoding//src/com/petmily/common/filter/LoginUserFilter.java=UTF-8
+encoding//src/com/petmily/common/filter/PetSitterFilter.java=UTF-8
+encoding//src/com/petmily/sitter/controller/SitterUpdateEndServlet.java=UTF-8
+encoding//src/com/petmily/user/controller/UserInfoServlet.java=UTF-8
 encoding//web/views/petsitterMypage/petSitterQuealifylist.jsp=UTF-8

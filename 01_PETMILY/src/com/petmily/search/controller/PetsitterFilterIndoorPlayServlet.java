@@ -47,6 +47,7 @@ public class PetsitterFilterIndoorPlayServlet extends HttpServlet {
 		List<PetsitterSearch> list=new SearchService().filterIndoorPlay(key,cPage,numPerPage);
 		// pageBar 만들기
 		String pageBar="";
+		
 		int totalDate=new SearchService().selectSearchCount();
 		
 		int totalPage=(int)Math.ceil((double)totalDate/numPerPage);

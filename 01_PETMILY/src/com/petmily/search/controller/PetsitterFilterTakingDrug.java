@@ -32,7 +32,7 @@ public class PetsitterFilterTakingDrug extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String takingDrug="약물복용";
+		String key="약물복용";
 		
 		
 		int cPage;
@@ -45,10 +45,10 @@ public class PetsitterFilterTakingDrug extends HttpServlet {
 				
 		int numPerPage=3;
 				
-		List<PetsitterSearch> list=new SearchService().filterTakingDrug(takingDrug,cPage,numPerPage);
+		List<PetsitterSearch> list=new SearchService().filterTakingDrug(key,cPage,numPerPage);
 		// pageBar 만들기
 		String pageBar="";
-		int totalDate=new SearchService().selectSearchCount();
+		int totalDate=new SearchService().selectCountFilterSearch(key);
 		int totalPage=(int)Math.ceil((double)totalDate/numPerPage);
 				
 		int pageBarSize=5;

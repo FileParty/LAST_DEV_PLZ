@@ -1,30 +1,25 @@
 package com.petmily.petsitterMyPage.reservation.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageUserReview;
 import com.petmily.petsitterMyPage.reservation.service.PetsitterMypageReservationService;
-import com.petmily.user.model.vo.User;
 
 /**
- * Servlet implementation class UserReviewListServlet
+ * Servlet implementation class ReservationUpdateStatusRefusalServlet
  */
-@WebServlet("/petsitter/mypage/userReviewList")
-public class UserReviewListServlet extends HttpServlet {
+@WebServlet("/petsitter/mypage/statusRefusal")
+public class ReservationUpdateStatusRefusalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserReviewListServlet() {
+    public ReservationUpdateStatusRefusalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +28,29 @@ public class UserReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//HttpSession session = request.getSession();
-		//User u=(User)session.getAttribute("loginUser");
 		
-		String userId=request.getParameter("userId");
+		String[] reservationArray = request.getParameterValues("reservationCode");
+		int[] pcodes=new int[reservationArray.length];
+		for(int i=0; i<reservationArray.length; i++) {
+			
+			String re = reservationArray[i];
+			
+			// int형으로 변환 해서 다시 pcodes 에 대입
+			pcodes[i]=Integer.parseInt(re);
+		}
 		
-<<<<<<< HEAD
-=======
-		//System.out.println("유저아이디 확인"+userId);
->>>>>>> refs/heads/dev
 		
-		List<PetsitterMypageUserReview> list=new PetsitterMypageReservationService().selectPetsitterMypageUserReview(userId);
+		//int pcode = Integer.parseInt((String)request.getParameterValues("reservationCode"));
 		
-		request.setAttribute("list", list);
+		int result=new PetsitterMypageReservationService().updateStatusRefusal(pcodes);
 		
-		request.getRequestDispatcher("/views/petsitterMypage/secretReviewList.jsp").forward(request, response);
+		//for(String pcode : pcodes) {
+		//	System.out.println("pcode"+pcode);
+		//}
+	    System.out.println(result);
+	    
+		request.getRequestDispatcher("/petsitter/mypage/beforePaymentReservation").forward(request, response);
+		
 		
 	}
 

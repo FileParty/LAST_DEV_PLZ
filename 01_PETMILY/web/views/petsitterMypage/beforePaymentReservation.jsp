@@ -118,7 +118,7 @@ pageEncoding="UTF-8"%>
 
 	    <section>
 	        <div class="container">
-	            <form action="<%=request.getContextPath()%>/sitter/write?userId=sebin" method="post" onsubmit="return test();" enctype="multipart/form-data">
+	            <form name="reFrm" method="post">
 		            <div class="row">
 		            	<div class="col-2 menu">
 		                    <div id="menu">
@@ -137,7 +137,7 @@ pageEncoding="UTF-8"%>
 		                            
 		                            <li class="title">예약</li>
 		                            <hr class="hr-line"/>
-		                            <li class="content"><a href=""> - 요약 현황</a></li>
+		                            <li class="content"><a href=""> - 예약 현황</a></li>
 		                            <li class="content"><a href=""> - 결제 전 예약</a></li>
 		                            <li class="content"><a href=""> - 결제 완료 예약</a></li>
 		                            <li class="content"><a href=""> - 내 예약 일정</a></li>
@@ -186,7 +186,7 @@ pageEncoding="UTF-8"%>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
 			                    <tr>
 			                    	<td class="no"><%=count++ %></td>
-			                    	<td class="cho"><form><input type="checkbox" name="" value=""></form></td>
+			                    	<td class="cho"><input type="checkbox" name="reservationCode" value=<%=pmr.getReservationCode() %>></td>
 			                    	<td class="ckDate"><%=pmr.getCheckInDate() %></td>
 			                    	<td class="ckDate"><%=pmr.getCheckOutDate() %></td>
 			                    	<td class="name"><%=pmr.getUserName() %></td>
@@ -237,7 +237,7 @@ pageEncoding="UTF-8"%>
 							        </div>
 							        
 							        <!-- Modal body -->
-							        <div class="modal-body" id="modalBody">
+							        <div class="modal-body" id="requestDetailModalBody">
 							         
 							        </div>
 							        
@@ -250,10 +250,14 @@ pageEncoding="UTF-8"%>
 							    </div>
 							  </div>
 		                	
-			                <div>
 			                	<br>
-				                <button action="#" class="btn">결제 거절</button>
-				                <button action="#" class="btn">결제 진행</button>
+			                	<br>
+			                	<br>
+			                <div class="row justify-content-center" >
+				                <input type="submit" value="예약 진행" onclick="return rego();" class="btn" style="margin-right:15px;">
+				                <br>
+				                <br>
+				                <input type="submit" value="예약 거절" class="btn"  onclick="return reStop();">
 							</div>
 		                </div>
 	            </div>
@@ -293,6 +297,12 @@ pageEncoding="UTF-8"%>
 </style>
 
 <script>
+	function rego(){
+		document.reFrm.action="<%=request.getContextPath()%>/petsitter/mypage/statusAccept";		
+	}
+	function reStop(){
+		document.reFrm.action="<%=request.getContextPath()%>/petsitter/mypage/statusRefusal"; 
+	}
 	$(function(){
 		
 		$("#secretReview").click((e)=>{
@@ -302,10 +312,10 @@ pageEncoding="UTF-8"%>
 				data:{userId:$(e.target).val()},
 				error:function(){
 	  				alert("실패");
-	  				console.log($(this).val());
 	  			},
 	  			success:data=>{
 	  				$("#secretReviewModalBody").html(data);
+	  				console.log($(e.target).val());
 	  			}
 			});
 		});
@@ -313,20 +323,19 @@ pageEncoding="UTF-8"%>
 	
 	$(function(){
 		
-		$("#requestDetail").click(()=>{
+		$("#requestDetail").click((e)=>{
 		
 			$.ajax({
 				url:"<%=request.getContextPath()%>/petsitter/mypage/requestDetail",
-				data:{userId:$(this).val()},
+				data:{requestDetail:$(e.target).val()},
 				error:function(){
 	  				alert("실패");
-	  				console.log($(this).val());
 	  			},
 	  			success:data=>{
-	  				$("#requestDetailModal").html(data);
+	  				$("#requestDetailModalBody").html(data);
+	  				//console.log($(this).val());
 	  			}
 			});
-			
 		});
 	});
 	

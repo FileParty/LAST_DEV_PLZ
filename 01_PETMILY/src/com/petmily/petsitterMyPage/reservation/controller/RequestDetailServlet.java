@@ -29,9 +29,16 @@ public class RequestDetailServlet extends HttpServlet {
 		
 		String requestDetail=request.getParameter("requestDetail");
 		
+<<<<<<< HEAD
+		//System.out.println("상세 요구"+requestDetail);
+		
+		//response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+=======
 		System.out.println("상세 요구"+requestDetail);
 		
-		response.setCharacterEncoding("UTF-8");
+		//response.setCharacterEncoding("UTF-8");
+>>>>>>> refs/heads/dev
 		response.getWriter().write(requestDetail);
 		
 	}

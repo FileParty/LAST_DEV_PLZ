@@ -12,7 +12,7 @@
     }
     html, body,section {
           height: 100%;
-      }
+      } 
     .col-9{
         height: 100%;
         overflow: hidden; 

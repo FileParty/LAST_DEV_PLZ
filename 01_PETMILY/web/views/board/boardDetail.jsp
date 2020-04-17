@@ -64,10 +64,12 @@
                             <td colspan="1">
                                 <div class="input-group mb-3" style="width: 500px; height: 25px; margin-top: 10px;">
                                     <div class="files">
+                                    <%if(pb.getBoardImages()!=null){ %>
                                     	<%for(int i=0;i<pb.getBoardImages().size();i++) { %>
                                        <img style="letter-spacing:5px;width:50px;height:50px;"src="<%=request.getContextPath() %>/upload/board/<%=pb.getBoardImages().get(i)%>">
                                        
-                                       <%} %>
+                                       <%}
+                                    	}%>
                                     </div>
                                     <div class="selectFile">
                                      <input type="hidden"class="fileNo" name="count">

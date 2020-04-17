@@ -48,7 +48,7 @@ public class PetsitterFilterPickupServlet extends HttpServlet {
 		List<PetsitterSearch> list=new SearchService().filterPickUp(key,cPage,numPerPage);
 		// pageBar 만들기
 		String pageBar="";
-		int totalDate=new SearchService().selectSearchCount();
+		int totalDate=new SearchService().selectCountFilterSearch(key);
 		
 		int totalPage=(int)Math.ceil((double)totalDate/numPerPage);
 				

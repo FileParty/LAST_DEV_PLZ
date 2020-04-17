@@ -12,9 +12,11 @@
           plus+=pb.getPlus().get(i);
        }
      }
+     if(pb.getServiceTypes()!=null) {
        for(int i=0;i<pb.getServiceTypes().size();i++) {
           basic+=pb.getServiceTypes().get(i);
        }
+     }
        
      %>
 <!DOCTYPE html>

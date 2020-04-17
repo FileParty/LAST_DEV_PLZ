@@ -40,6 +40,7 @@ public class AdminEmailServlet extends HttpServlet {
 		String type = request.getParameter("type");
 		String userId = request.getParameter("userId");
 		String userName = request.getParameter("userName");
+		String email = request.getParameter("userEmail");
 		System.out.println(type);
 		System.out.println(userId);
 		System.out.println(userName);

@@ -30,11 +30,11 @@ public class PetsitterMypageReservationService {
 	
 	
 	// 펫시터 마이페이지 안에 예약 신청한 유저에 대한 펫시터가 남긴 후기들
-	public List<PetsitterMypageUserReview> selectPetsitterMypageUserReview(){
+	public List<PetsitterMypageUserReview> selectPetsitterMypageUserReview(String userId){
 		
 		Connection conn=getConnection();
 		
-		List<PetsitterMypageUserReview> list=dao.selectPetsitterMypageUserReview(conn);
+		List<PetsitterMypageUserReview> list=dao.selectPetsitterMypageUserReview(conn,userId);
 		
 		close(conn);
 		

@@ -12,18 +12,18 @@
     }
     html, body,section {
           height: 100%;
-      }
+      } 
     .col-9{
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden; 
+        margin:0px;
     }
     .container{
-        height: 100%;
-        padding: 0;
+        height: 100%;    
         width: 1366px;
-        margin-left: auto;
+       margin-left: auto;
         margin-right: auto;
-        /* border: 1px solid red; */
+       
  
     }
     .top-div{
@@ -268,11 +268,9 @@ label.custom-file-label::after{
                             
                             <li class="title">예약</li>
                             <hr class="hr-line"/>
-
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/request"> - 요청한 예약</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing"> - 진행중인 예약</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review"> - 종료된 예약</a></li>
-
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/request?userId=<%=loginUser.getUserId()%>"> - 요청한 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationing?userId=<%=loginUser.getUserId()%>"> - 진행중인 예약</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/reservationEnd?userId=<%=loginUser.getUserId()%>"> - 종료된 예약</a></li>
                             <li class="content"><a href=""> - 채팅</a></li>
                             <br/>
                             

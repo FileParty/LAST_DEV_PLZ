@@ -25,33 +25,25 @@ public class UserInfoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		사용자 마이페이지 화면을 전환하는 기능
-//		로그인 한 유저만 사용할 수 있도록 처리한다.
+//		�궗�슜�옄 留덉씠�럹�씠吏� �솕硫댁쓣 �쟾�솚�븯�뒗 湲곕뒫
+//		濡쒓렇�씤 �븳 �쑀��留� �궗�슜�븷 �닔 �엳�룄濡� 泥섎━�븳�떎.
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser")==null) { // 로그인한 값이 없으면(로그인 안함)
-//			잘못된 접근 처리
-			request.setAttribute("msg","잘못된 접근입니다.");
-			request.setAttribute("loc", ""); // 메인으로 이동
+		if(session.getAttribute("loginUser")==null) {
+			request.setAttribute("msg","로그인이 필요한 서비스입니다.");
+			request.setAttribute("loc", "");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		else { // 로그인한 값이 있으면(로그인 함)
-//			페이지 전환
+		else {
 			String id = request.getParameter("userId");
-			System.out.println("마이페이지에 들어오는 id값 확인 : "+id);
 			
-//			DB에서 id와 동일한 정보를 가져온다
 			User u = new UserService().userSelect(id);
 			
-//			가져온 데이터 저장
 			request.setAttribute("user", u);
-			
-//			화면 전환
-			// 분기처리 추가
 			switch(u.getUserType()) {
 				case "일반" : request.getRequestDispatcher("/views/user/userInfo.jsp").forward(request, response); break;
 				case "펫시터" : request.getRequestDispatcher("/views/petsitterMypage/petSitterInfo.jsp").forward(request, response); break;
-				case "관리자" : request.getRequestDispatcher("/views/admin/adminMypage.jsp").forward(request, response); break;
+				case "관리자" : request.getRequestDispatcher("/admin/").forward(request, response); break;
 			}
 			
 		}

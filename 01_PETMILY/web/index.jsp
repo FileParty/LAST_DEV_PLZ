@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" type = "text/css">
 <style>
 	div#mainText{
+		margin: 0 auto;
 		width:1366px;
 		height:700px;
 		background-image:url("<%=request.getContextPath()%>/img/common/main.jpg");
@@ -12,7 +13,7 @@
 		opacity:0.7;
 	}
 </style>
-<section">
+<section style="margin: 0 auto;">
 	<div id="mainText">
 		<p>PET:MILY</p>
 		<p>펫 밀리가 당신의 빈자리를 잠시 채워드릴게요.</p>
@@ -39,7 +40,8 @@
 		</div>
 	</div>
 </section>
-<section id="review">
+<!-- 없어진 코드 (인술 확인 완료) -->
+<%-- <section id="review" style="border: 1px solid;">
 		<div id="reviewImg">
 			<img alt="reviewImg" src="<%=request.getContextPath()%>/img/common/reviewTest.jpg"
 				width="562px" height="564px">
@@ -65,7 +67,8 @@
 			width="70px" height="60px">
 			<p>다른 후기 보러가기</p>
 		</div>
-</section>
+		
+</section> --%>
 <section id="Questions">
 	<h2>자주하는 질문</h2>
 	<div id="questionsDiv">

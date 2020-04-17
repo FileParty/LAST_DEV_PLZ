@@ -1,26 +1,27 @@
-package com.petmily.board.controller;
+package com.petmily.bline.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.petmily.board.service.BoardService;
+import com.petmily.bline.service.BlineService;
+import com.petmily.petsitterReview.service.PetSitterReviewService;
 
 /**
- * Servlet implementation class BookmarkChange
+ * Servlet implementation class BlineRequest
  */
-@WebServlet("/BookmarkChange.do")
-public class BookmarkChange extends HttpServlet {
+@WebServlet("/blineRequestInsert.do")
+public class BlineRequestInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BookmarkChange() {
+    public BlineRequestInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,27 +31,31 @@ public class BookmarkChange extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		boolean bFlag = Boolean.parseBoolean(request.getParameter("bookmarkFlag"));
+
 		String userId = request.getParameter("userId");
-		String sitterId = request.getParameter("sitterId");
+		int boardCode = Integer.parseInt(request.getParameter("boardCode"));
+		String blineText = request.getParameter("blineText");
 		
+		int count = new BlineService().blineCount(userId, boardCode);
 		
-		
-		if(bFlag) {
-			new BoardService().bookmarkDelete(userId, sitterId);
-			response.getWriter().write("t");
+		if(count>0) {
+			response.getWriter().write("c");
+			
 		}else {
-			new BoardService().bookmarkAdd(userId, sitterId);
-			response.getWriter().write("f");
+		
+			boolean result = new BlineService().blineRequestInsert(userId, boardCode, blineText);
+			
+			
+			if(result) {
+				response.getWriter().write("t");
+			}else {
+				response.getWriter().write("f");
+			}
+		
 		}
 		
-//		new Gson().toJson(!bFlag,response.getWriter());
 		
-		// bFlag == false면  true로 변경!
-//		request.setAttribute("bFlag", !bFlag);
-		
-		
+			
 		
 		
 		

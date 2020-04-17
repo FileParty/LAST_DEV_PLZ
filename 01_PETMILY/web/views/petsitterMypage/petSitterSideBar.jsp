@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
+    
 <style>
 #menu{
 	width: 230px;
-	position : fixed;
+	/* position : fixed; */
 	height: 100%;
 }
 ul{
@@ -33,12 +36,11 @@ hr{
 			<li class="content"><a href=""> - 결제 전 예약</a></li>
 			<li class="content"><a href=""> - 결제 완료 예약</a></li>
 			<li class="content"><a href=""> - 내 예약 일정</a></li>
-			<li class="content"><a href=""> - 채팅</a></li>
 			<br/>
 			<li class="title">정산</li>
 			<hr class="hr-line"/>
 			<li class="content"><a href=""> - 이번 달 정산 현황</a></li>
-			<li class="content"><a href=""> - 이전 정산 보기</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/settled"> - 이전 정산 보기</a></li>
 			<br/>
 			<li class="title">자격증</li>
 			<hr class="hr-line"/>

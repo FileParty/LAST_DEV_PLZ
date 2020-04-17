@@ -98,4 +98,28 @@ public class PetSitterReviewDao {
 		}
 		return psr;
 	}
+	
+	public boolean replyUpdate(Connection conn, int reviewNo, String replyCon) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("replyUpdate");
+		boolean result = false;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, replyCon);
+			pstmt.setInt(2, reviewNo);
+			
+			if(pstmt.executeUpdate()>0)
+				result = true;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 }

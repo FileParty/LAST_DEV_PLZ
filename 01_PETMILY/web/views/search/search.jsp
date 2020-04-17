@@ -13,11 +13,6 @@ pageEncoding="UTF-8"%>
 integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
   <div class="container">
-    <nav>
-      <div>
-        menu
-      </div>
-    </nav>
     <main>
       <section class="filter_container mt-4 mb-3">
         <div class="row justify-content-center">
@@ -94,7 +89,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
           <div class="col-8" id="area">
           
           <%for(PetsitterSearch ps:list) {%>
-            <div class="pet_sitter_info_container border-top row px-5 py-3">
+            <div class="pet_sitter_info_container border-top row px-5 py-3" onclick="reservation(<%=ps.getBoardCode()%>)">
               <div class="col-6 text-center " >
               
               
@@ -168,7 +163,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             <div class="row justify-content-center" id="pageBar">
             	<%=request.getAttribute("pageBar") %>
             </div>
-            
+         
             <br>
             <br>
             <br>
@@ -184,6 +179,12 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
   
   
   <script>
+  	function reservation(boardCode){
+  		console.log(boardCode);
+  		location.replace("<%=request.getContextPath()%>/BoardList.do?boardCode="+boardCode);
+  	}
+  
+  
   	$(function(){
   		
   		$("#priceOrder").hide();

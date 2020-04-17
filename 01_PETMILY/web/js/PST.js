@@ -159,6 +159,8 @@ function main_img_view(){
             break;
         }
     }
+    
+    if(event.target.src)
 
 
     for(let j=i; i<j+4; i++){

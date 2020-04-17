@@ -38,7 +38,8 @@
 	PetReservation reservation = new PetReservation();
 	List<ReservationPetCode> rPetCodeT = new ArrayList<ReservationPetCode>();
 	
-	int count = 0;;
+	int count = 0;
+	int countBath=0;
 	
 	
 	/* ---- 슬기 ↓ 연관 jsp : userInfo.jsp */
@@ -60,36 +61,67 @@
 
     
     <div class="row no-gutters" id="main_img">
+    
+    	<%if(BoardImgs.size()==1) {%>
 
-            <div class="col-lg-8" style="height: 100%;">
+
+            <div class="col-lg-12" style="height: 100%;">
 
                 <div style="width: 100%; height: 100%; overflow: hidden;">
 
-					<%if(BoardImgs.size()>0) {%>
-                    	<img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(0) %>" alt="" width="100%">
-					<%} %>
+                    <img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(0) %>" alt="" width="100%">
+
                 </div>
 
             </div>
 
+		<%} else if(BoardImgs.size()==2) {%>
+		
+			<div class="col-lg-8" style="height: 100%;">
 
-            <div class="col-lg-4" style="height: 100%;">
-                <div style="width: 100%; height: 50%; overflow: hidden;">
-                
-					<%if(BoardImgs.size()>1) {%>
-                    	<img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(1) %>" alt="" width="100%">
-                    <%} %>
+                <div style="width: 100%; height: 100%; overflow: hidden;">
+
+                    <img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(0) %>" alt="" width="100%">
 
                 </div>
 
-                <div style="width: 100%; height: 50%; overflow: hidden;">
+            </div>
+		
+			<div class="col-lg-4" style="height: 100%;">
+                <div style="width: 100%; height: 100%; overflow: hidden;">
+              
+                   	<img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(1) %>" alt="" width="100%">
+                   
+                </div>
+			</div>
+		
+		<%} else if(BoardImgs.size()>2) {%>
+		
+			<div class="col-lg-8" style="height: 100%;">
 
-					<%if(BoardImgs.size()>2){ %>
+                <div style="width: 100%; height: 100%; overflow: hidden;">
+
+                    <img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(0) %>" alt="" width="100%">
+
+                </div>
+
+            </div>
+		
+			<div class="col-lg-4" style="height: 100%;">
+                <div style="width: 100%; height: 50%; overflow: hidden;">
+              
+                   	<img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(1) %>" alt="" width="100%">
+                   
+                </div>
+                
+      			<div style="width: 100%; height: 50%; overflow: hidden;">
+
                     	<img onclick="main_img_view();" src="<%=request.getContextPath()%>/img/boardMain/<%=BoardImgs.get(2) %>" alt="" width="100%">
-                    <%} %>
 					
                 </div>
-            </div>
+			</div>
+		
+		<%} %>
 
         </div>
 
@@ -137,8 +169,8 @@
                 		<table style="width:250px; height:50%; margin-left: 50%;transform: translateX(-50%); margin-top: 50px;">
                             <tr>
                             	<%if(certificateFlag) {%>
-	                                <td><button>프로 펫시터</button></td>
-	                                <td><%=userT.getUserName().substring(0,1)%>*<%=userT.getUserName().substring(2)%> 펫시터</td>
+	                                <td><h4 style="color:navy">프로 펫시터</h4></td>
+	                                <td> <%=userT.getUserName().substring(0,1)%>*<%=userT.getUserName().substring(2)%> 펫시터</td>
                                 <%} else{%>
                                 	<td colspan="2"><%=userT.getUserName().substring(0,1)%>*<%=userT.getUserName().substring(2)%></td>
                                 <%} %>
@@ -234,8 +266,16 @@
 	
 	
 	                    </table>
-					<%} %>
-                    
+					<%}else{ %>
+                    	<p class="sub_title">자격증 및 교육 수료</p>
+                    	<table id="certificate" >
+	
+	                        <tr>                            
+	                            <td><h4 style="margin-top: 30px; text-align:center;">해당 사항이 없습니다.</h4></td>
+	                        </tr>
+	
+	                    </table>
+                    <%} %>
                     
 
                 </div>
@@ -319,6 +359,8 @@
                     </tr>
 
                 </table> -->
+                
+                <div class="col-lg-1 info" ></div>
 
 				<%for(String s : dsList){%>
 	                <div class="service_sub col-lg-2">
@@ -338,6 +380,8 @@
 	                </div>
                 <%} %>
                 
+                <div class="col-lg-1 info" ></div>
+                
             </div>
 
             <div class="col-lg-1 info" ></div>
@@ -347,6 +391,8 @@
             <div class="col-lg-1 info"></div>
 
             <div class="row col-lg-10 info" id="add_service">
+            
+            	<div class="col-lg-1"></div>
 
 				<%for(PlusOptionService pos : pOServiceList){%>
 	                <div class="service_sub col-lg-2">
@@ -363,6 +409,8 @@
 	                    </table>
 	                </div>  
                 <%} %>
+                
+                <div class="col-lg-1"></div>
 
             </div>
 
@@ -546,8 +594,13 @@
             
             <br>
             
-            <div id="addS" style="display:none">추가 옵션 선택</div>
+            
+            <!-- <div id="addS" style="width:100%; height:100%;"> -->
+            
+            <div style="display:none">추가 옵션 선택</div>
 		    <hr>
+		    
+		    
 
 			<%for(PetInfo petInfo : petsInfos) {%>
 				<div id="<%=petInfo.getPetCode()%>" style="display :none;">
@@ -565,9 +618,10 @@
 					                		<input id="bath_text_<%=petInfo.getPetCode() %>" type='text' placeholder='ex)산책 후 목욕 부탁드립니다. 50자 이내' style='width:100%'>
 					                	</td>
 					                	<td style='text-align:right; width:25%'>
-					                		<input type='number' id='path_<%=-petInfo.getPetCode() %>' placeholder='횟수' style='width:100%'>
+					                		<input type='number' id='path_<%=-petInfo.getPetCode() %>' onchange="bath_change();" minlength="0" placeholder='일 횟수' style='width:100%'>
 					                	</td>
 					                </tr>
+					                <tr><td><br></td></tr>
 					         	<%}else if(petInfo.getPetWeight().equals("중형")) {%>
 					         		<tr>
 					                    <td>목욕 / <%=petInfo.getPetName() %></td>
@@ -578,9 +632,10 @@
 					                		<input id="bath_text_<%=petInfo.getPetCode() %>" type='text' placeholder='ex)산책 후 목욕 부탁드립니다. 50자 이내' style='width:100%'>
 					                	</td>
 					                	<td style='text-align:right; width:25%'>
-					                		<input type='number' id='path_<%=-petInfo.getPetCode() %>' placeholder='횟수' style='width:100%'>
+					                		<input type='number' id='path_<%=-petInfo.getPetCode() %>' onchange="bath_change();" minlength="0" placeholder='일 횟수' style='width:100%'>
 					                	</td>
 					                </tr>
+					                <tr><td><br></td></tr>
 					         	<%} else{ %>
 					         		<tr>
 					                    <td>목욕 / <%=petInfo.getPetName() %></td>
@@ -591,19 +646,21 @@
 					                		<input id="bath_text_<%=petInfo.getPetCode() %>" type='text' placeholder='ex)산책 후 목욕 부탁드립니다. 50자 이내' style='width:100%'>
 					                	</td>
 					                	<td style='text-align:right; width:25%'>
-					                		<input type='number' id='path_<%=-petInfo.getPetCode() %>' placeholder='횟수' style='width:100%'>
+					                		<input type='number' id='path_<%=-petInfo.getPetCode() %>' onchange="bath_change();" minlength="0" placeholder='일 횟수' style='width:100%'>
 					                	</td>
 					                </tr>
+					                <tr><td><br></td></tr>
 					         	<%} %>
 			                <%break;} %>
+			                
+			                
 		            	<%} %>
 		            	
-		            	<td><br></td>
 	            	</table>
             	</div>
             <%} %>
             
-            <hr>
+            
             
             
             	<div style="height:100%">
@@ -615,10 +672,11 @@
 				                    <td style="width: 294px; 
 				                    text-align: right; margin-right: 30px;"><input onclick="medication_con();" id="Medication" type="checkbox"></td>
 				                </tr>
+				                <tr><td><br></td></tr>
 			                <%break;} %>
 		            	<%} %>		          
 		            	
-		            	<td><br></td>      
+		            	      
 		
  						<%for(PlusOptionService pos : pOServiceList) {%>
 							<%if(pos.getPlusOptionType().equals("집앞픽업")){ %>
@@ -637,6 +695,7 @@
 		            </table>
 	            </div>
             
+            <!-- </div> -->
 
             <div>추가 요청 및 문의 사항</div>
             <input id="plusQuestions" type="text" placeholder="300자 이내" style="width: 100%; line-height: 100px;">
@@ -845,9 +904,9 @@
                             	
 	                            	<%if(count<4) {%>
 	                            		<%if(count==0) {%>
-	                            			<div class="col-lg-3 modal_sub_img_none" style="height:100%; display:flex;"><img id="firstImg" data-index="0" onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
+	                            			<div class="col-lg-3 modal_sub_img_none" style="height:100%; "><img id="firstImg" data-index="0" onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
 	                            		<%} else{%>
-	                            			<div class="col-lg-3 modal_sub_img_none" style="height:100%" display:flex;><img data-index=<%=count+1 %> onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
+	                            			<div class="col-lg-3 modal_sub_img_none" style="height:100%" ><img data-index=<%=count+1 %> onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
 	                            		<%} %>
 	                            	<%}else{%>
 	                            		<div class="col-lg-3 modal_sub_img_none" style="height:100%"><img data-index="<%=count+1 %>" onclick="small_image();" class="modal_sub_img" src="<%=request.getContextPath()%>/img/boardMain/<%=boardImg%>" width="100%" height="100%"></div>
@@ -920,6 +979,8 @@ var s=0;
 var m=0;
 var b=0;
 
+var posCount=0;
+
 
 
 
@@ -956,6 +1017,7 @@ function petDisplay(petCode, weight){
 	
 	
 	if(document.getElementById(petCode).style.display=="block"){
+		var countBath=0;
 		$("#" + petCode).attr("style", "display :none;");
 		petWeightCodes.splice(petWeightCodes.indexOf(petCode), 1);
 		if(weight=="소형")
@@ -964,6 +1026,21 @@ function petDisplay(petCode, weight){
 			middle--;
 		else
 			big--;
+		
+ 		<%for(PetInfo petInfo : petsInfos){%>
+			if(document.getElementById("<%=petInfo.getPetCode()%>").style.display=="block"){
+				countBath++;
+			}
+		<%}%>
+		
+		if(countBath==0){
+			$("#addS").attr("style", "display :none;");
+			$("#medication1").attr("style", "display :none");
+			$("#pickup").attr("style", "display :none");
+			$("#pickup3").attr("style", "display :none");
+		}
+		
+		
 		return;
 	}
 	
@@ -1044,12 +1121,16 @@ function medication_con(){
 
 	$("#Medication").parent().parent().after(code);
 	
-	if(document.getElementById("Medication").checked==false)
+	if(document.getElementById("Medication")!=null && document.getElementById("Medication").checked==false)
 		$("tr").remove("#medication_content");
 	
 }
 
 function receipt(){
+	
+	var temp_s = 0;
+	var temp_m = 0;
+	var temp_b = 0;
 	
 	if(document.getElementById("checkOut").value=="" || document.getElementById("checkIn").value==""){
     	alert("날짜를 지정해주세요");
@@ -1089,12 +1170,9 @@ function receipt(){
 	document.getElementById("p_weight").innerHTML = numberWithCommas(weightPrice) + "원";
 	
 	
-	
 
 	<%for(PlusOptionService pos : pOServiceList){%>
-		var temp_s = 0;
-		var temp_m = 0;
-		var temp_b = 0;
+
 		<%if(pos.getPlusOptionType().equals("목욕가능")){%>
 			<%for(PetInfo pet : petsInfos){%>
 				if(document.getElementById("-<%=pet.getPetCode()%>").checked==true){
@@ -1134,9 +1212,12 @@ function receipt(){
 	
 	if(bathCode!=""){
 		document.getElementById("pos_bath").style.display = "table-row";
+		document.getElementById("t_bath").innerHTML = bathCode;
 	}
-	document.getElementById("t_bath").innerHTML = bathCode;
-	document.getElementById("p_bath").innerHTML = numberWithCommas(bathPrice) + "원";
+	
+	if(bathPrice!=0){
+		document.getElementById("p_bath").innerHTML = numberWithCommas(bathPrice) + "원";
+	}
 	
 	
 	<%for(PlusOptionService pos : pOServiceList){%>
@@ -1164,8 +1245,9 @@ function receipt(){
 	
 	<%}%>
 	
-	document.getElementById("t_pickup").innerHTML = "집앞픽업 " + pickupCode;
-	
+	if(pickupCode!=""){
+		document.getElementById("t_pickup").innerHTML = "집앞픽업 " + pickupCode;
+	}
 	
 	document.getElementById("p_date").innerHTML = document.getElementById("checkIn").value + " ~ " + document.getElementById("checkOut").value;
 	
@@ -1175,9 +1257,12 @@ function receipt(){
 	}
 	
 	if((big+middle+small)>1){
-		document.getElementById("pos_sale").style.display = "table-row";
-		document.getElementById("t_sale").innerHTML = "추가할인 * " + (big+middle+small-1);
-		document.getElementById("p_sale").innerHTML = numberWithCommas(((big+middle+small)-1)*10000) + "원";
+		if(document.getElementById("pos_sale")!=null)
+			document.getElementById("pos_sale").style.display = "table-row";
+		if(document.getElementById("t_sale")!=null){
+			document.getElementById("t_sale").innerHTML = "추가할인 * " + (big+middle+small-1);
+			document.getElementById("p_sale").innerHTML = numberWithCommas(((big+middle+small)-1)*10000) + "원";
+		}
 	}
 	
 	document.getElementById("total_price").innerHTML = numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
@@ -1224,7 +1309,8 @@ function receipt(){
 function pickup_con(){
 	
 	if(document.getElementById("pickup2").style.display=="table-row"){
-		$("#pickup2").attr("style", "display :none;");		
+		$("#pickup2").attr("style", "display :none;");	
+		return;
 	}
 	
 	$("#pickup2").attr("style", "display :table-row;");
@@ -1361,7 +1447,7 @@ function resulvation_complete(){
 			petSizes.push("<%=pet.getPetWeight()%>");
 			console.log("push 실행");
 			
-			if(document.getElementById("-<%=pet.getPetCode()%>").checked==true || (document.getElementById("path_-<%=pet.getPetCode()%>").value!="")){
+			if(document.getElementById("-<%=pet.getPetCode()%>")!=null && (document.getElementById("-<%=pet.getPetCode()%>").checked==true || (document.getElementById("path_-<%=pet.getPetCode()%>").value!=""))){
 				if(document.getElementById("path_-<%=pet.getPetCode()%>").value>0){
 					petBaths.push(document.getElementById("path_-<%=pet.getPetCode()%>").value);
 				}else{
@@ -1386,11 +1472,16 @@ function resulvation_complete(){
 	
 	console.log(petBathTexts);
 	
-	if(document.getElementById('Medication').checked==false){
-		medicine = "";
+	if(document.getElementById('Medication')!=null){
+		if(document.getElementById('Medication').checked==false){
+			medicine = "";
+		}else{
+			medicine = document.getElementById('medication_con').value;
+		}
 	}else{
-		medicine = document.getElementById('medication_con').value;
+		medicine = "";
 	}
+	
 
  
  	$.ajax({
@@ -1502,6 +1593,13 @@ function bline_request_insert(){
 	$('body').css("overflow", "scroll");
 	
 } 
+
+function bath_change(){
+	if(event.target.value<0){
+		alert("0이하의 수는 입력하실 수 없습니다");
+		event.target.value = "";
+	}
+}
 
 </script>
 

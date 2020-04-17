@@ -2,6 +2,8 @@ package com.petmily.petsitterReview.service;
 
 import static com.petmily.common.JDBCTemplate.close;
 import static com.petmily.common.JDBCTemplate.getConnection;
+import static com.petmily.common.JDBCTemplate.commit;
+import static com.petmily.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -33,5 +35,18 @@ public class PetSitterReviewService {
 		close(conn);
 		//System.out.println(list);
 		return psr;
+	}
+	
+	public boolean replyUpdate(int reviewNo, String replyCon) {
+		Connection conn = getConnection();
+		boolean result = dao.replyUpdate(conn, reviewNo, replyCon);
+		
+		if(result)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		return result;
 	}
 }

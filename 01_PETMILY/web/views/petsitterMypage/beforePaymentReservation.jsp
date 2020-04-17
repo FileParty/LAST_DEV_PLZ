@@ -180,7 +180,7 @@ pageEncoding="UTF-8"%>
 			                        <th class="read">비밀 후기 열람</th>
 			                        <th>요청 상세</th>
 			                        <th class="state">상태</th>
-			                        <th>채팅</th>
+			                        
 			                    </tr>
 			                    <%if(list!=null){ %>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
@@ -190,11 +190,21 @@ pageEncoding="UTF-8"%>
 			                    	<td class="ckDate"><%=pmr.getCheckInDate() %></td>
 			                    	<td class="ckDate"><%=pmr.getCheckOutDate() %></td>
 			                    	<td class="name"><%=pmr.getUserName() %></td>
-			                    	<td class="read"><div class="p-1"><button type="button" class="btn" >열람</button></div></td>
-			                    	<td><div class="p-1"><button id="secretReview" type="button" class="btn" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
-			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></div></td>
+			                    	<td class="read">
+			                    		<div class="p-1">
+			                    			<input type="hidden" name="rsCode" value="<%=pmr.getReservationCode()%>" />
+			                    			<button type="button" class="btn petProfile" >열람</button>
+			                    		</div>
+			                    	</td>
+			                    	<td><div class="p-1"><button class="btn secretReview" type="button" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
+			                    	<td>
+			                    		<div class="p-1">
+			                    			<input type="hidden" name="rsCode" value="<%=pmr.getReservationCode()%>" />
+			                    			<button type="button" class="btn requestDetail"> 상세 요청 확인</button>
+			                    		</div>
+			                    	</td>
 			                    	<td class="state"><%=pmr.getResType() %></td>
-			                    	<td><div class="p-1"><button type="button" class="btn">채팅</button></div></td>
+			                    	
 			                    </tr>
 			                 	<%} }%>
 			                </table>
@@ -305,17 +315,17 @@ pageEncoding="UTF-8"%>
 	}
 	$(function(){
 		
-		$("#secretReview").click((e)=>{
+		$(".secretReview").click((e)=>{
 			//console.log($(this).val());
 			$.ajax({
 				url:"<%=request.getContextPath()%>/petsitter/mypage/userReviewList",
 				data:{userId:$(e.target).val()},
 				error:function(){
 	  				alert("실패");
+	  				console.log($(this).val());
 	  			},
 	  			success:data=>{
 	  				$("#secretReviewModalBody").html(data);
-	  				console.log($(e.target).val());
 	  			}
 			});
 		});
@@ -323,21 +333,32 @@ pageEncoding="UTF-8"%>
 	
 	$(function(){
 		
-		$("#requestDetail").click((e)=>{
+		$(".requestDetail").click((e)=>{
 		
-			$.ajax({
-				url:"<%=request.getContextPath()%>/petsitter/mypage/requestDetail",
-				data:{requestDetail:$(e.target).val()},
-				error:function(){
-	  				alert("실패");
-	  			},
-	  			success:data=>{
-	  				$("#requestDetailModalBody").html(data);
-	  				//console.log($(this).val());
-	  			}
+			var rsCode = $(e.target).prev().val();
+			var url = "<%=request.getContextPath()%>/sitter/beforePaymentDetail?rsCode="+rsCode;
+			var status = "height=420px, width=600px, top=200px, left=500px";
+			
+			window.open(url, "_blank", status);
+			
 			});
+			
 		});
-	});
+
+	$(function(){
+		
+		$(".petProfile").click((e)=>{
+		
+			var rsCode = $(e.target).prev().val();
+			var url = "<%=request.getContextPath()%>/sitter/beforePaymentPetprofile?rsCode="+rsCode;
+			var status = "height=420px, width=600px, top=200px, left=500px";
+			
+			window.open(url, "_blank", status);
+			
+			});
+			
+		});
+	
 	
 	
 </script>

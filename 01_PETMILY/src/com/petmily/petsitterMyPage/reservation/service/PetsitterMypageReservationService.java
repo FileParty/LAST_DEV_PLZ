@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.petmily.petsitterMyPage.reservation.model.dao.PetsitterMypageReservationDao;
+import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageDetail;
+import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypagePetprofile;
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageUserReview;
 
@@ -18,18 +20,17 @@ public class PetsitterMypageReservationService {
 	private PetsitterMypageReservationDao dao=new PetsitterMypageReservationDao();
 	
 	
-	public List<PetsitterMypageReservation> selectBeforePaymentRerservarion(String petsitterId){
+	public List<PetsitterMypageReservation> selectBeforePaymentRerservarion(String sitterId){
 		
 		Connection conn=getConnection();
 		
-		List<PetsitterMypageReservation> list=dao.selectBeforePaymentRerservation(conn,petsitterId);
+		List<PetsitterMypageReservation> list=dao.selectBeforePaymentRerservation(conn,sitterId);
 		
 		close(conn);
 		
 		return list;
 		
 	}
-	
 	
 	// 펫시터 마이페이지 안에 예약 신청한 유저에 대한 펫시터가 남긴 후기들
 	public List<PetsitterMypageUserReview> selectPetsitterMypageUserReview(String userId){
@@ -43,6 +44,14 @@ public class PetsitterMypageReservationService {
 		return list;
 		
 	}
+	
+	public List<PetsitterMypageDetail> selectBeforePaymentDetail(int rsCode) {
+		Connection conn=getConnection();
+		List<PetsitterMypageDetail> list = dao.selectBeforePaymentDetail(conn,rsCode);
+		close(conn);
+		return list;
+	}
+	
 	
 	public int updateStatus(int[] pcodes) {
 		
@@ -78,5 +87,12 @@ public class PetsitterMypageReservationService {
 		return result;
 	}
 	
+	public List<PetsitterMypagePetprofile> selectPetprofile(int rsCode){
+		Connection conn=getConnection();
+		List<PetsitterMypagePetprofile> list = dao.selectPetprofile(conn,rsCode);
+		close(conn);
+		return list;
+		
+	}
 	
 }

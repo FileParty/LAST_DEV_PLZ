@@ -706,8 +706,10 @@ label.custom-file-label::after{
                         <tr>
                          <%if(p.getPetHowlingTxt()!=null){%>
                             <td colspan="2"><textarea style="font-size: 12px; padding:5px; margin-top: 5px;" name="bexplanation" cols="80" rows="4"
-                                placeholder="주로 어떤 상황에서 짖는지,짖을 경우 따로 주의를 주는 행동이 있는지 적어주세요." ></textarea></td>
+                                placeholder="주로 어떤 상황에서 짖는지,짖을 경우 따로 주의를 주는 행동이 있는지 적어주세요." ><%=p.getPetHowlingTxt()%></textarea></td>
                          <%}else{ %>
+                         	 <td colspan="2"><textarea style="font-size: 12px; padding:5px; margin-top: 5px;" name="bexplanation" cols="80" rows="4"
+                                placeholder="주로 어떤 상황에서 짖는지,짖을 경우 따로 주의를 주는 행동이 있는지 적어주세요." ></textarea></td>
                          <%} %>
                         </tr>
 

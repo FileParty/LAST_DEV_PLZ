@@ -132,10 +132,10 @@
             <div class="col-lg-6 main_content_01">
 
 				<%if(!bookmarkFlag){%>
-	                <img id="bookmark" onclick="bookmark();"src="<%=request.getContextPath()%>/img/bookmark/bookmarkBlack.png" alt=""
+	                <img id="bookmark" onclick="bookmark();"src="<%=request.getContextPath()%>/img/bookmark/icons8-bookmark-off.png" alt=""
 	                width="50px" height="50px">
                 <%} else{%>
-                <img id="bookmark" onclick="bookmark();"src="<%=request.getContextPath()%>/img/bookmark/bookmarkRed.png" alt=""
+                <img id="bookmark" onclick="bookmark();"src="<%=request.getContextPath()%>/img/bookmark/icons8-bookmark-on.png" alt=""
 	                width="50px" height="50px">
                	<% }%>
                	
@@ -1003,9 +1003,9 @@ function bookmark(){
     	});
     	
     	if(flag)
-			event.target.src = "<%=request.getContextPath()%>/img/bookmark/bookmarkBlack.png";
+			event.target.src = "<%=request.getContextPath()%>/img/bookmark/icons8-bookmark-off.png";
 		else
-			event.target.src = "<%=request.getContextPath()%>/img/bookmark/bookmarkRed.png";
+			event.target.src = "<%=request.getContextPath()%>/img/bookmark/icons8-bookmark-on.png";
 }
 
 bline_process.onclick = function() {

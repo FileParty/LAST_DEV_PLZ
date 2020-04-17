@@ -54,7 +54,7 @@ public class ReservationDao {
 				pr.setBoardNo(rs.getInt("PCODE"));
 				list.add(pr);
 			}
-			System.out.println("dao"+list);
+			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -128,6 +128,7 @@ public class ReservationDao {
 			while(rs.next()) {
 				pr = new PetReservation();
 				pr.setPetImg(rs.getString("PET_IMG_FILENAME"));
+				pr.setPlusQuestion(rs.getString("PLUS_QUESTIONS"));
 				pr.setReservationCode(rs.getInt("RESERVATION_CODE"));
 				pr.setPetCode(rs.getInt("PET_CODE"));
 				pr.setBoardNo(rs.getInt("BOARD_CODE"));
@@ -136,7 +137,7 @@ public class ReservationDao {
 				pr.setCheckOut(rs.getString("CHECKOUT_DATE"));
 				list.add(pr);
 			}
-			System.out.println("DAO"+list);
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -195,6 +196,7 @@ public class ReservationDao {
 				pr.setPrice(rs.getInt("PRICE"));
 				pr.setPetMedication(rs.getString("PET_MDEICATION"));
 				pr.setPetPickup(rs.getString("PET_PICK_UP"));
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -382,7 +384,130 @@ public class ReservationDao {
 		return result;
 		
 	}
-
+	
+	public List<PetReservation> reservationEnd(Connection conn,String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PetReservation> list = new ArrayList<PetReservation>();
+		PetReservation pr = null;
+		String sql = prop.getProperty("reservationEnd");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pr = new PetReservation();
+				pr.setReservationCode(rs.getInt("RCODE"));
+				pr.setCheckIn(rs.getString("CIN"));
+				pr.setCheckOut(rs.getString("COUT"));
+				pr.setResType(rs.getString("RTYPE"));
+				pr.setPrice(rs.getInt("PRICE"));
+				pr.setBoardNo(rs.getInt("PCODE"));
+				list.add(pr);
+				
+			}
+		}catch(SQLException e ) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public PetReservation reservationEnds(Connection conn,String id,PetReservation p) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("reservationEnds");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, p.getBoardNo());			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				p.setBoardNo(rs.getInt("BCODE"));
+				p.setBoardTitle(rs.getString("BTITLE"));
+				p.setSitterName(rs.getString("UNAME"));
+				
+			}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally { 
+		close(rs);
+		close(pstmt);
+	}
+		return p;
+}
+	
+	public PetReservation endRev(Connection conn,int code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PetReservation pr = null;
+		String sql = prop.getProperty("endRev");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pr = new PetReservation();
+				pr.setReservationCode(rs.getInt("RESERVATION_CODE"));
+				pr.setCheckIn(rs.getString("CHECKIN_DATE"));
+				pr.setCheckOut(rs.getString("CHECKOUT_DATE"));
+				pr.setPrice(rs.getInt("PRICE"));
+				pr.setResType(rs.getString("RES_TYPE"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pr;
+	}
+	
+	public int endSitting(Connection conn,int code) {
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int result = 0;
+			String sql = prop.getProperty("endSitting");
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, code);
+				rs=pstmt.executeQuery();
+				
+				rs.next();
+				result = rs.getInt(1);
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+	}
+	public int endSitting2(Connection conn,int code) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("endSitting2");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, code);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+		}
+		return result;
+}
 }
 
 

@@ -4,7 +4,7 @@
 <%@ include file="/views/common/header.jsp"%>
 <%
 	List<PetSitterCertificate> list = (List)request.getAttribute("pc");
-	System.out.print("ㅎㅎ"+list.get(0).getCertificateFilename());
+	
 	%>
 <!DOCTYPE html>
 <html>
@@ -23,14 +23,15 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=21457534dfe681cc96c51d32694dc5a9&libraries=services"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
 <title>보유 자격증 목록</title>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/boardWrite.css">
-<style>
+ <link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/boardWrite2.css">
+ <style>
 table {
 	border-radius: 5px;
 	margin-left: auto;
@@ -38,19 +39,14 @@ table {
 	border-collapse: collapse;
 }
 
-td {
-	border-top: 1px solid grey;
-	border-bottom: 1px solid grey;
-}
 
 th {
 	width: 150px;
 	font-size: 12px;
 	text-align: center;
-	background-color: rgb(189, 188, 188);
-	color: grey;
-	border-right: 1px solid white;
-}
+	
+	color: black;
+	}
 </style>
 </head>
 <body>
@@ -73,8 +69,8 @@ th {
 
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">
-							<table id="inner" border="1">
-							<%for(PetSitterCertificate pc : list) {%>
+							<table id="inner" border="1" class="table table-hover">
+							
 								<tr>
 									<th>no</th>
 									<th>자격증 명</th>
@@ -85,7 +81,7 @@ th {
 								</tr>
 
 
-
+								<%for(PetSitterCertificate pc : list) {%>
 								<tr>
 									<td>NO</td>
 									 <td><%=pc.getCertificateName()%></td>
@@ -96,7 +92,7 @@ th {
 									<%}else { %>
 									<td>- </td>
 									<%} %>						
-									<td><input type="button" value="이미지 보기" onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')"></td>
+									<td><button type="button"onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')">이미지 보기</button></td>
 									
 
 								</tr>

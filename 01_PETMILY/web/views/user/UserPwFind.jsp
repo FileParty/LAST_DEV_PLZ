@@ -20,35 +20,46 @@
 		<div id="contentModal1" name="contentModal1">
 			<p id="p_title">회원가입 때 작성한 아이디와 이메일을 입력하세요</p>
 			<table id="firstTB">
+			
 				<tr>
 					<td>아이디 입력</td>
 					<td id="inputId">
 						<input type="text" id="userId" name="userId" required>
 					</td>
+					<td></td>
 				</tr>
+				
 				<tr>
 					<td></td>
 					<td id="id_warningMsg">
-						<span id="idMsg">아이디 메세지</span><!-- 아이디 메세지 -->
+						<span id="idMsg">아이디를 입력하세요.</span><!-- 아이디 메세지 -->
 					</td> 
+					<td></td>
 				</tr>
+				
 				<tr>
 					<td>이메일 입력</td>
 					<td>
-						<input type="text" id="inputEmail" name="inputEmail">
+						<input type="text" id="inputEmail" name="inputEmail" required>
 					</td>
 					<td>
-						<button id="send-btn" onclick="next2(); ckechEmail();">인증번호 전송</button> 
+						<button id="send-btn" onclick="check(); smtpEmail();">인증번호 전송</button> 
 					</td>
 				</tr>
+				
+				<tr>
+					<td></td>
+					<td id="id_warningMsg">
+						<span id="emailMsg">이메일을 입력하세요.</span><!-- 아이디 메세지 -->
+					</td> 
+					<td></td>
+				</tr>
 			</table>
-			<br>
 			<hr id="bottom-line">
-			<button id="send-next-btn" onclick="ckechId();">다음</button>
 		</div>
 		
 		
-		
+		<!--  -->
 		
 		
 		<!-- [비밀번호 찾기] 이메일 인증번호 입력 -->
@@ -61,7 +72,9 @@
 					<td><input type="text" name="randomNum" id="randomNum"></td>
 				</tr>
 				<tr>
-					<td id="warningMsg">*인증번호가 일치하지 않습니다.</td>
+					<td id="warningMsg">
+						<span>*인증번호가 일치하지 않습니다.</span>
+					</td>
 				</tr>
 			</table>
 			
@@ -97,42 +110,71 @@
 	
 	
 	/* ------------- */
+	// span 태그 불러오기
+	var idMsgSpan = document.getElementById("idMsg");
+	var emailMsgSpan = document.getElementById("emailMsg");
 	
-	// [다음] 버튼 누를 때 화면전환하기 전!! 아이디 확인하는 함수
-	function ckechId() {
-		let id = document.getElementById("userId").value; // 아이디 값 가져오기
+	idMsgSpan.innerHTML="&nbsp;";
+	emailMsgSpan.innerHTML="&nbsp;";
+	
+	
+	//	SMTP 함수 - 화면 전환과 동시에 SMTP 실행
+	function smtpEmail() {
+		let email = document.getElementById("inputEmail").value; // 이메일 값 가져오기
+		console.log("입력한 이메일값 넘어오는가? : "+email);
+		
+		if(email=="" || email.trim().length<4) {
+			console.log('if문이 찍혀요!');
+			alert('이메일을 입력하세요. (4글자 이상-이메일 포함)');
+			emailMsgSpan.innerHTML="이메일을 입력하세요";			
+			document.getElementById("inputEmail").focus();
+		}
+		else {
+			console.log('else문이 찍혀요!');
+			location.replace('<%=request.getContextPath()%>/smtpPWEmail?email='+email);		
+		}
+		
+	} // smtpEmail()
+	
+	
+	// [인증번호] 버튼 눌렀을 때 처리하는 것들.
+	function check() {
+		var id = document.getElementById("userId").value; // 아이디 값 가져오기
+		var email = document.getElementById("inputEmail").value; // 이메일 값 가져오기
+		console.log("id값 :"+id);
+		console.log("email값 :"+email);
 		
 		// 만약, 두 태그 중 둘중에 하나라도 값이 없으면?
-		if( id==null ) { // 아이디 
-			alert('아이디를 입력하세요');
+		if( id=="" || email=="" ) { 
+			alert('아이디와 이메일을 입력하세요');
+			let modal3 = document.getElementById("contentModal3");
+			modal3.style.display = "none"; // 아직 모달처리하지 마라!
 			
-			// 화면전환을 막는다
-			let modal1 = document.getElementById("contentModal1");
-			let modal2 = document.getElementById("contentModal2");
-			modal1.style.display = "inline";
-			modal2.style.display = "none";
+			// 아이디 값이 없으면?
+			if( id=="" ) {
+				idMsgSpan.innerHTML="아이디를 입력하세요";
+				document.getElementById("userId").focus();
+			}
+			else {
+				idMsgSpan.innerHTML="아이디 입력 확인 완료!";
+				idMsgSpan.style.color="green";
+				idMsgSpan.style.fontWeight='bolder';
+				idMsgSpan.style.fontSize= '15px';
+			}
+			
+			// 이메일 값이 없으면?
+			if( email=="" ) {
+				emailMsgSpan.innerHTML="이메일을 입력하세요";			
+				document.getElementById("inputEmail").focus();
+			}
+			else {
+				emailMsgSpan.innerHTML="아이디 입력 확인 완료!";
+				emailMsgSpan.style.color="green";
+				emailMsgSpan.style.fontWeight='bolder';
+				emailMsgSpan.style.fontSize= '15px';
+			}
 		}
-		
-		if( !id==null ) { // 값이 있으면?
-			// 화면전환한다
-			alert("");
-			let modal1 = document.getElementById("contentModal1");
-			let modal2 = document.getElementById("contentModal2");
-			modal1.style.display = "none";
-			modal2.style.display = "inline";
-		}
-		
-	} // checkId
-	
-	/* // [다음] 버튼 누를 때 화면전환하기 전!! 이메일 확인하는 함수
-	function checkEmail() {
-		let email = document.getElementById("inputEmail").value; // 이메일 값 가져오기
-		console.log("input의 email값 확인하기 : "+email);
-		if( email==null ) { // 이메일
-			alert('이메일을 입력하세요');
-			$("#inputEmail").focus();
-		}
-	} */
+	} // check()
 	
 	
 	

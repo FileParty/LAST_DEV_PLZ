@@ -55,6 +55,15 @@ span#idMsg {
 	margin-left: 90px;
 }
 
+span#emailMsg {
+	color: red;
+	font-weight: bolder;
+	font-size: 15px;
+	
+	margin-left: 90px;
+	
+}
+
 
 /* hr 아래 선 설정 */
 hr#bottom-line {

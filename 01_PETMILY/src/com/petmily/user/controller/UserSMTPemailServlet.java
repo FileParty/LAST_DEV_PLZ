@@ -128,6 +128,7 @@ public class UserSMTPemailServlet extends HttpServlet {
 			 */
 
 			request.setAttribute("email", email);
+			request.setAttribute("u",u);
 			request.getRequestDispatcher("/views/user/userIdFindRandomNum.jsp").forward(request, response);
 		} // else
 	} // doGet

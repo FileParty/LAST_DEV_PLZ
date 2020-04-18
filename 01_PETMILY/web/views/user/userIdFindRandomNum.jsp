@@ -4,10 +4,13 @@
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
+
+<%@ page import="com.petmily.user.model.vo.User" %>
 <%
 	String temp = (String)session.getAttribute("AuthenticationKey");
-	String email = (String)request.getAttribute("email");
+	User u = (User)request.getAttribute("u");
 	System.out.println("jsp에서 보여지는 인증번호:" + temp);
+	System.out.println("jsp에서 보여지는 유저 : "+u);
 %>
 
 
@@ -117,6 +120,9 @@
 			<span id="success">인증확인 완료!</span>
 		</div>
 		
+		
+		<input type="hidden" id="hiddenInput">
+		
 		<hr style="margin-bottom: 20px;">
 		<button id="send-login-btn" onclick="moveLogin();">인증완료</button>
 	</article>
@@ -127,8 +133,6 @@
 <!--  -->
 
 <script>
-	var functionCode = '통과했어요!';
-
 	// 인증번호 확인 함수(SMTP)
 	function checkNum() {
 		let randomNum = document.getElementById("randomNum").value;
@@ -141,13 +145,30 @@
 		else { // 만약 인증번호가 같다면?
 			let success = document.getElementById("success");
 			success.style.display='inline';
+			
+			document.getElementById("hiddenInput").value = "통과했어요!";
 		}
 	};
 	
 	
-	
+	// 인증번호 확인을 마치고, 버튼을 눌렀을 때 발생함.
 	function moveLogin() {
+		let msg = document.getElementById("hiddenInput").value;
+		console.log(msg);
+		let randomNum = document.getElementById("randomNum").value;
 		
+		// hidden input에 통과했어요! 값이 없다면?
+		if( !randomNum==msg ) {
+			alert('인증번호 확인 진행이 필요합니다.');
+			$("#randomNum").focus();
+		}
+		else { // 값이 있다면?
+			// 화면 전환하기
+			location.replace("<%=request.getContextPath()%>/log-in");
+			// input값에 있었던 email값을 부모창에 뿌리기
+			opener.document.getElementById("userId").value='<%=u.getUserId()%>';
+			self.close();	
+		}
 		
 	}
 </script>

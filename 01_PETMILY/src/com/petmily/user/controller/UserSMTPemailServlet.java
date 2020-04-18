@@ -98,7 +98,7 @@ public class UserSMTPemailServlet extends HttpServlet {
 			// email 전송
 			try {
 				MimeMessage msg = new MimeMessage(session);
-				msg.setFrom(new InternetAddress(user, "KH"));
+				msg.setFrom(new InternetAddress(user, "PET:MILY"));
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
 
 				// 메일 제목
@@ -113,9 +113,12 @@ public class UserSMTPemailServlet extends HttpServlet {
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+//			인증번호가 맞는지 로직을 구현하기 위해 값을 가져갈거얌
 			HttpSession saveKey = request.getSession();
 			saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
-			
+			HttpSession session2 = request.getSession();
+			session2.setAttribute("AuthenticationKey", AuthenticationKey);
 			
 			// 패스워드 바꿀때 뭘 바꿀지 조건에 들어가는 id ( 내 로직엔 필요 없어 보여서 주석처리 완료)
 			/*
@@ -123,8 +126,9 @@ public class UserSMTPemailServlet extends HttpServlet {
 			 * req.getRequestDispatcher("/views/login_myPage/searchPasswordEnd.jsp").forward
 			 * (req, resp);
 			 */
-			
-			request.getRequestDispatcher("/views/user/userIdFind.jsp").forward(request, response);
+
+			request.setAttribute("email", email);
+			request.getRequestDispatcher("/views/user/userIdFindRandomNum.jsp").forward(request, response);
 		} // else
 	} // doGet
 

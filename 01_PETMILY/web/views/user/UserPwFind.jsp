@@ -23,7 +23,7 @@
 				<tr>
 					<td>아이디</td>
 					<td id="inputId">
-						<input type="text" id="userId" name="userId" value="" required>
+						<input type="text" id="userId" name="userId" required>
 					</td>
 				</tr>
 				<tr>
@@ -40,9 +40,9 @@
 		<!-- userId값이 DB에 있는지 확인되면 해당 화면으로 전환시키고 위의  화면을 가림 -->
 		<div id="contentModal2" name="contentModal2">
 			<p id="p_title">회원가입 시 작성한 이메일을 입력해 주세요</p> <br><br>
-			<input type="text" id="inputEmail" name="inputEmail"> @ 
-			<select id="email_select">직접입력</select>
-			<button id="send-btn" onclick="next2();">인증번호 전송</button> <!-- API랑 어떻게 이어야 하는 부분이죠?ㅋㅋ -->
+			<input type="text" id="inputEmail" name="inputEmail">
+			
+			<button id="send-btn" onclick="next2(); ckechInput();">인증번호 전송</button> 
 			<br><br><br><br>
 			<hr id="bottom-line">
 		</div>
@@ -92,7 +92,10 @@
 		modal3.style.display = "inline";
 	}
 	
-	
+	// [인증번호 전송] 버튼 누를 때 화면전환하기 전!! 확인하는 함수
+	function ckechInput() {
+		let id = document.getElementById("").value;
+	}
 	
 	
 	

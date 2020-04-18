@@ -148,12 +148,6 @@
 				<input type="text" id="email" name="email">
 				<button id="send-btn" onclick="smtpEmail();">인증번호 전송</button>
 			</div>
-			<!-- <select id="email_select">
-				<option>직접입력</option>
-				<option value="naver.com">naver.com</option>
-				<option value="google.com">google.com</option>
-			</select> -->
-			
 		</div>
 		
 		

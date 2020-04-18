@@ -31,9 +31,13 @@
 			padding-top: 50px;
 		}
 		
+		span#inputEmail {
+			margin-left: 80px;
+		}
+		
 		/* 이메일입력 input 설정 */
 		input#email {
-			width:150px; /* 가로설정 */
+			width:215px; /* 가로설정 */
 			height:30px; /* 세로설정 */
 			line-height:20px; /* 태그 내 글씨위치 설정 */
 			
@@ -41,7 +45,7 @@
 			border:1px solid rgb(182, 182, 182); /* 테두리  색상 설정  */
 			
 			padding-left:10px; /* 글씨 살짝 왼쪽에서 띄움 */
-			margin-left: 70px; /* 영역을 왼쪽에서 살짝 띄움 */
+			margin-left: 10px;
 		}
 		
 		/* 이메일선택 select문 설정 */
@@ -139,13 +143,17 @@
 		
 		<div id="divModal1" name="contentModal1">
 			<p>회원가입 시 작성한 이메일을 입력해 주세요</p> <br><br>
-			<input type="text" id="email" name="email"> @ 
-			<select id="email_select">
+			<div id="emailDiv">
+				<span id="inputEmail">이메일 입력</span> 
+				<input type="text" id="email" name="email">
+				<button id="send-btn" onclick="nextModal(); smtpEmail();">인증번호 전송</button>
+			</div>
+			<!-- <select id="email_select">
 				<option>직접입력</option>
 				<option value="naver.com">naver.com</option>
-				<option>여기엔 뭐 넣지</option>
-			</select>
-			<button id="send-btn" onclick="nextModal();">인증번호 전송</button> <!-- API랑 어떻게 이어야 하는 부분이죠?ㅋㅋ -->
+				<option value="google.com">google.com</option>
+			</select> -->
+			
 		</div>
 		
 		
@@ -170,8 +178,9 @@
 <!-- -------------------------------------------------------------------------------------------------------- -->
 
 <script>
+//	화면 전환하는 함수
 	function nextModal() {
-		let modal1 = document.getElementById("divModal1");
+		/* let modal1 = document.getElementById("divModal1");
 		let ss = $("#divModal1");
 		console.log(ss);
 		let modal2 = document.getElementById("contentModal2");
@@ -179,7 +188,20 @@
 		console.log("modal2:"+modal2);
 		
 		modal1.style.display = "none";
-		modal2.style.display = "inline";
+		modal2.style.display = "inline"; */
+		
+		
+		
+		
+		/* 화면을 전환하는 것으로 수정해야 함 2020.04.19 */
+	};
+	
+//	SMTP 함수
+	function smtpEmail() {
+		let email = document.getElementById("email").value; // 이메일 가져오기
+		console.log("입력한 이메일값 넘어오는가? : "+email);
+		
+		location.replace('<%=request.getContextPath()%>/smtpEmail?email='+email);
 	};
 </script>
 

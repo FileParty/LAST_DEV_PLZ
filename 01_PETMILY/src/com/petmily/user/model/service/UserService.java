@@ -15,7 +15,6 @@ import com.petmily.user.model.vo.UserBookMarkBoard;
 import com.petmily.user.model.vo.UserPaymentHistory;
 
 public class UserService {
-//	�쑀���� �뿰愿��엳�뒗 �꽌鍮꾩뒪 �쁺�뿭
 	
 	private UserDao dao = new UserDao();
 	
@@ -56,6 +55,30 @@ public class UserService {
 		close(conn);
 		return user;
 	}
+	
+	
+//	아이디 찾기 로직(SMTP)
+	public User searchUserEmail(String email) {
+		Connection conn = getConnection();
+		User user = dao.searchUserEmail(conn, email);
+		close(conn);
+		return user;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 //	아이디 중복확인 로직
 	public boolean userIdDuplicate(String userId) {

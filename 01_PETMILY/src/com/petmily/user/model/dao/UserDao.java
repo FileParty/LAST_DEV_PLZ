@@ -30,7 +30,7 @@ public class UserDao {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-	}// UserDao() 疫꿸���占쎄문占쎄쉐占쎌��
+	}// UserDao() 기본생성자
 	
 	
 	public int insertUserTable(Connection conn, PetSitter2 pss) {
@@ -168,6 +168,46 @@ public class UserDao {
 		}
 		return user;
 	}
+	
+
+//	아이디찾기 로직(SMTP)
+	public User searchUserEmail(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		String sql = prop.getProperty("selectUserEmail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("USER_ID")); 
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY"));
+				user.setPhone(rs.getString("PHONE"));
+				user.setZipCode(rs.getString("ZIP_CODE"));
+				user.setAddress(rs.getString("ADDRESS")); 
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setGender(rs.getString("GENDER"));
+				user.setStatus(rs.getString("STATUS"));
+				user.setUserType(rs.getString("USER_TYPE"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return user;
+	}
+	
+	
 	
 	
 	

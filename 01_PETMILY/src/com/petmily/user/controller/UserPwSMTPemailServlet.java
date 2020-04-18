@@ -21,40 +21,41 @@ import com.petmily.user.model.service.UserService;
 import com.petmily.user.model.vo.User;
 
 
-@WebServlet("/smtpEmail")
-public class UserSMTPemailServlet extends HttpServlet {
+@WebServlet("/smtpPWEmail")
+public class UserPwSMTPemailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
-    public UserSMTPemailServlet() {
+    public UserPwSMTPemailServlet() {
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		[슬기 작업]
-//		아이디 찾기 smtp 설정
+//		비밀번호 찾기 smtp 설정
 //		유저가 입력한 이메일을 받아, DB값이 있는지 확인한다.
+		String id = request.getParameter("userId");
 		String email = request.getParameter("email");
 		
 //		DB에 있는지 먼저 확인한다.
-		User u = new UserService().searchUserEmail(email);
+		User u = new UserService().searchUserEmail(id, email);
 		System.out.println("유저의 값을 잘 가져왔는가? : "+u); // 값 잘 가져옴. 확인 완료!
 		
-		
-		// 먼저 아이디로 회원정보를 받아오고 가져온 데이터에서 email값을 비교하여 존재하지 않으면 인증메일 보내지 못함
-		if( u==null || !u.getEmail().equals(email)) { 
+//		먼저 아이디로 회원정보를 받아오고 가져온 데이터에서 email값을 비교하여 존재하지 않으면 인증메일 보내지 못함
+		if( u==null || !u.getUserId().equals(id) || !u.getEmail().equals(email)) { 
 			request.setAttribute("msg", "아이디나 이메일 정보가 맞지 않습니다"); 
 			request.setAttribute("loc", "/log-in"); // 로그인 화면으로 이동
 			return;
 		}
 		else {
 //			[SMTP 작업 : 참고자료 https://loy124.tistory.com/182]
-//			자바메일 설정
+//				자바메일 설정
 			String host = "smtp.naver.com"; // smtp 메일 설정
 			String user = "marungs@naver.com"; // 자신의 계정
 			String password = "heartful12"; // 자신의 패스워드
 			
-//			메일받을 주소
+//				메일받을 주소
 			String to_email = "marungs@naver.com"; // 받는 이메일
 			
 			// SMTP 서버 정보를 설정한다.
@@ -102,7 +103,7 @@ public class UserSMTPemailServlet extends HttpServlet {
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
 
 				// 메일 제목
-				msg.setSubject("안녕하세요. [펫밀리] 아이디 찾기 인증 메일입니다.");
+				msg.setSubject("안녕하세요. [펫밀리] 비밀번호 찾기 인증 메일입니다.");
 				// 메일 내용
 				msg.setText("인증 번호 :" + temp);
 
@@ -114,7 +115,7 @@ public class UserSMTPemailServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-//			인증번호가 맞는지 로직을 구현하기 위해 값을 가져갈거얌
+//				인증번호가 맞는지 로직을 구현하기 위해 값을 가져갈거얌
 			HttpSession saveKey = request.getSession();
 			saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
 			HttpSession session2 = request.getSession();
@@ -129,9 +130,10 @@ public class UserSMTPemailServlet extends HttpServlet {
 
 			request.setAttribute("email", email);
 			request.setAttribute("u",u);
-			request.getRequestDispatcher("/views/user/userIdFindRandomNum.jsp").forward(request, response);
-		} // else
-	} // doGet
+			request.getRequestDispatcher("/views/user/userPwFindRandomNum.jsp").forward(request, response);
+		} //else
+	} //doGet
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

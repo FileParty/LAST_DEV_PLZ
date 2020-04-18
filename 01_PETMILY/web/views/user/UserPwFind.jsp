@@ -120,6 +120,7 @@
 	
 	//	SMTP 함수 - 화면 전환과 동시에 SMTP 실행
 	function smtpEmail() {
+		let id = document.getElementById("userId").value; // 아이디 값 가져오기
 		let email = document.getElementById("inputEmail").value; // 이메일 값 가져오기
 		console.log("입력한 이메일값 넘어오는가? : "+email);
 		
@@ -131,7 +132,7 @@
 		}
 		else {
 			console.log('else문이 찍혀요!');
-			location.replace('<%=request.getContextPath()%>/smtpPWEmail?email='+email);		
+			location.replace('<%=request.getContextPath()%>/smtpPWEmail?userId='+id+'&email='+email);		
 		}
 		
 	} // smtpEmail()

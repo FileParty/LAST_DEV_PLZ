@@ -65,7 +65,13 @@ public class UserService {
 		return user;
 	}
 	
-
+//	비밀번호 찾기 로직(SMTP)
+	public User searchUserEmail(String id, String email) {
+		Connection conn = getConnection();
+		User user = dao.searchUserEmail(conn, id, email);
+		close(conn);
+		return user;
+	}
 	
 	
 	

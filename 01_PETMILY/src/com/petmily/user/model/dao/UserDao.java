@@ -207,6 +207,45 @@ public class UserDao {
 		return user;
 	}
 	
+//	비밀번호 로직(SMTP)
+	public User searchUserEmail(Connection conn, String id, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		String sql = prop.getProperty("selectUserIdEmail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("USER_ID")); 
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY"));
+				user.setPhone(rs.getString("PHONE"));
+				user.setZipCode(rs.getString("ZIP_CODE"));
+				user.setAddress(rs.getString("ADDRESS")); 
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setGender(rs.getString("GENDER"));
+				user.setStatus(rs.getString("STATUS"));
+				user.setUserType(rs.getString("USER_TYPE"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return user;
+	}
+	
+	
 	
 
 	

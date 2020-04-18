@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NaverLoginSDK</title>
+	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+	<input type="radio" name="radio"  id="radio" onclick="test();">있음
+	<input type="radio" name="radio"  id="radio1" onclick="test();">없음
+	<input type="checkbox" id="chk" >하하
+	<br>
+	 <input type="date" name="date1" id="date1" > 
+
+  <script>
+	
+	$("#date1").hide();
+	  var id = document.getElementById("radio");
+	  var id2 = document.getElementById("radio1");
+function test() {
+  if(id.checked==true) {
+	  console.log("이프문 ");
+	$("#date1").show();
+  }else if(id2.checked==true) {
+	$("#date1").hide();
+  }
+  
+}
+
+
+ 
+</script>
+</body>
+
+</html>

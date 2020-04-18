@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+            <title>구글 로그인</title>
+            <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://apis.google.com/js/api:client.js"></script>
+            <script>
+                gapi.load('auth2', function() {
+                    gapi.auth2.init({
+                        client_id: '1013311792329-ai5tcrpira32h3viqj9ahn8hd7m5jjru.apps.googleusercontent.com ',
+                        cookiepolicy: 'single_host_origin',
+                        scope: 'profile email'
+                    }).then(() => {
+                        var auth2 = gapi.auth2.getAuthInstance();
+        
+                        function createSignInButton() {
+                            $("#profile").empty();
+                            var btn = $("<a/>", {
+                                "text": "로그인"
+                            });
+                            $("#buttons").empty().append(btn);
+                            signIn(btn[0]);
+                        }
+        
+                        function signIn(element) {
+                            auth2.attachClickHandler(element, {
+                                scope: 'profile email'
+                            }, function(googleUser) {
+        
+                                button();
+                            }, function(error) {
+                                alert(JSON.stringify(error, undefined, 2));
+                            });
+                        }
+        
+                        function button() {
+                            if (auth2.isSignedIn.get()) {
+                                $("#profile").append($("<img/>", {
+                                    "src": auth2.currentUser.get().getBasicProfile().getImageUrl()
+                                }));
+                                $("#buttons").empty().append($("<a/>", {
+                                    "text": "로그아웃"
+                                }).click(function() {
+                                    auth2.signOut();
+                                    createSignInButton();
+                                }));
+                            } else {
+                                createSignInButton();
+                            }
+                        }
+                        button();
+                    });
+                });
+            </script>
+        
+        </head>
+        
+        <body>
+            <div id="buttons"></div>
+            <div id="profile"></div>
+        </body>
+        
+        </html>
+   

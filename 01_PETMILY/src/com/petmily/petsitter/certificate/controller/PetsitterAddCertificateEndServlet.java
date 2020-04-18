@@ -52,15 +52,18 @@ public class PetsitterAddCertificateEndServlet extends HttpServlet {
 		
 		String msg = "";
 		String loc = "";
+		String close = "";
 		if(result > 0) {
 			msg = "자격증이 추가 되었습니다.";
-			loc = "/views/petsitterMypage/petSitterInfo.jsp";
+			close="window.close();";
+			
 		}else {
 			msg = "자격증 추가를 실패했습니다.";
 			loc = "/views/userReservation/addCertificate.jsp";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
+		request.setAttribute("close", close);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 

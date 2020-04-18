@@ -9,40 +9,39 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 %>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
+
 
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
+
 <body>
-	<table border="1" class="table table-hover">
+	<table style="border:1px solid lightgray;" class="table table-hover">
 		
-			<tr>
-				<th>예약NO</th>
+			<tr >
+				<th style="border-right:1px solid lightgray;">예약NO</th>
 				<td><%=pr.getReservationCode() %></td>						
 			</tr>
 			<tr>
-				<th>예약자 ID</th>
+				<th style="border-right:1px solid lightgray;">예약자 ID</th>
 				<td><%=pr.getUserId() %></td>
 			</tr>
 			<tr>
-				<th>예약자 ID</th>
-				<td><%=pr.getUserId() %></td>
+				<th style="border-right:1px solid lightgray;">체크 인</th>
+				<td><%=pr.getCheckIn().substring(0,11) %></td>
 			</tr>
 			<tr>
-				<th>체크 인</th>
-				<td><%=pr.getUserId() %></td>
-			</tr>
-			<tr>
-				<th>체크 아웃</th>
+				<th style="border-right:1px solid lightgray;">체크 아웃</th>
 				<td><%=pr.getCheckOut().substring(0,11) %></td>
 				
 			</tr>
 			
 			<tr>
-				<th>추가 요청 문의사항</th>
+				<th style="border-right:1px solid lightgray;">요청 사항</th>
 				<%if(pr.getPlusQuestion()==null) { %>
 					<td>없음</td>
 					<%} else { %>
@@ -50,7 +49,7 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 					<%} %>
 			</tr>
 			<tr>
-				<th>입금 일자</th>
+				<th style="border-right:1px solid lightgray;">입금 일자</th>
 					<%if(pr.getPriceEndDate()!=null) {%>
 					<td><%=pr.getPriceEndDate().substring(0,11) %></td>
 					<%}else { %>
@@ -60,12 +59,12 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 				
 			</tr>
 			<tr>
-				<th>총 금액</th>
+				<th style="border-right:1px solid lightgray;">총 금액</th>
 				<td><%=pr.getPrice() %></td>
 			</tr>
 			
 			<tr>
-				<th>약물 복용 상세</th>
+				<th style="border-right:1px solid lightgray;">약물 복용 상세</th>
 				
 				<%if(pr.getPetMedication()==null) { %>
 				<td>없음</td>
@@ -74,7 +73,7 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 				<%} %>
 			</tr>
 			<tr>
-				<th>픽업</th>
+				<th style="border-right:1px solid lightgray;">픽업</th>
 				
 				<%if(pr.getPetPickup()==null) { %>
 				<td>없음</td>
@@ -84,12 +83,12 @@ PetReservation pr = (PetReservation)request.getAttribute("rev");
 			</tr>
 			
 				<tr>
-				<th>펫 사이즈</th>
+				<th style="border-right:1px solid lightgray;">펫 사이즈</th>
 				<td><%=pr.getPetSize() %></td>
 			</tr>
 			
 				<tr>
-				<th>목욕 횟수</th>
+				<th style="border-right:1px solid lightgray;">목욕 횟수</th>
 				<td><%=pr.getPetBath() %></td>
 			</tr>							
 	</table>

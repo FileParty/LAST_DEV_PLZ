@@ -36,7 +36,9 @@ public class UserRequestDetailServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-	    PetReservation pr = new ReservationService().requestDetail(userId);
+	     int revCode =Integer.parseInt(request.getParameter("revCode"));
+	     System.out.println("서블릿옴옴ㅇ모"+revCode);
+	    PetReservation pr = new ReservationService().requestDetail(userId,revCode);
 		request.setAttribute("rev", pr);
 		request.getRequestDispatcher("/views/userReservation/requestReservation.jsp").forward(request, response);
 	}

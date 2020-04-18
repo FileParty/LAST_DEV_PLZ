@@ -1,7 +1,12 @@
+<%@page import="com.petmily.board.model.vo.PetSitterBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@ include file="/views/common/header.jsp" %>
+
+<%
+int type = (int)(request.getAttribute("result"));
+%> 
 <style>
    *{   
        
@@ -248,7 +253,12 @@ label.custom-file-label::after{
                 </ul>
                     <div class="col-3" style= "margin-left: auto; margin-right: auto;">
                         <br/>
-                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">글 작성하기</button>
+                     	<%if(type>0) {%>
+                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/listBoard')" style="width: 200px; cursor: pointer;">내 게시글 보기</button>  
+                      	<%}else { %>
+                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">게시글 작성 하기</button>
+                    	<%} %>
+                    	
                     </div>
                     <table>
                         <tr>
@@ -310,6 +320,7 @@ label.custom-file-label::after{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
+
 
     
 function toggle1(){ //on/off하나의 버튼으로 가능.

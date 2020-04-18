@@ -94,6 +94,9 @@
 
 </style>
 
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
 
 <body>
     <section>
@@ -110,7 +113,15 @@
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active" style="font-size:15px;">요청 중인 예약 >></li>
                 </ul>
-                           
+                <div style="margin-left:600px;">
+                	<input style="border-radius:30px;font-size:8px;"class="btn btn-outline-dark"  type="button" id="btn" value="예약번호 순↑">            
+                 	<input style="border-radius:30px;font-size:8px;"class="btn btn-outline-dark"  type="button" id="btn1" value="예약번호 순↓">
+                 	<input style="border-radius:30px;font-size:8px;"class="btn btn-outline-dark"  type="button" id="btn2" value="체크인 순↑">
+                 	<input style="border-radius:30px;font-size:8px;"class="btn btn-outline-dark"  type="button" id="btn3" value="체크인 순↓">
+                 	<input style="border-radius:30px;font-size:8px;"class="btn btn-outline-dark"  type="button" id="btn4" value="금액 순↑">
+                 	<input style="border-radius:30px;font-size:8px;"class="btn btn-outline-dark"  type="button" id="btn5" value="금액 순↓">
+               </div>
+                           <div id="tt"></div>
                    <table id="enrollTB" class="table table-hover">
 
                     <tr style="border-bottom:1px solid lightgray;" class="tr-blank">
@@ -123,7 +134,7 @@
                         <th>요청 상세</th>
                         <th>상태</th>
                         <th>총 금액</th>
-                        <th>채팅</th>
+                        
                     </tr>
                     <%for(PetReservation pr : list) {%>
                    	
@@ -144,12 +155,12 @@
 							
 							<td style="width:600px;"><%=pr.getBoardTitle() %></td>
 							
-							<td><input style="border-radius:20px;font-size:13px;"class="btn btn-outline-secondary" style="width:100px;"onclick="requestCheck()" type="button" id="request" value="상세 요청 확인"></td>
+							<td><input style="border-radius:20px;font-size:13px;"class="btn btn-outline-secondary" style="width:100px;"onclick="requestCheck('<%=pr.getReservationCode() %>')" type="button" id="request" value="상세 요청 확인"></td>
 							<td><%=pr.getResType() %></td> 
 							
 							<td><%=pr.getPrice() %></td> 
 							
-							<td><input class="btn btn-outline-secondary" style="border-radius:20px;font-size:13px;" type="button" id="chat" value="채팅"></td>
+							
 							<%} %>
 	                    </tr>
 	                   
@@ -164,12 +175,7 @@
                 <br>
                 <br>
 							<input style="margin-left:400px;" type="submit" value="요청 취소" >
-                 
-               
-            
-        
-          
-           
+<div style="width:100px;height:100px;"id="test"></div>
             </div>
        	</div>
        </form>
@@ -186,47 +192,109 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-function requestCheck() {
+function requestCheck(revCode) {
 
-	var popupX = (window.screen.width / 2) - (400 / 2);
-	var popupY= (window.screen.height /2) - (450 / 2);
+	var popupX = (window.screen.width / 2) - (500 / 2);
+	var popupY= (window.screen.height /2) - (650 / 2);
 	
-	window.open('<%=request.getContextPath()%>/user/requestDetail','_blank','height=450,width=400,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
-}
+	window.open('<%=request.getContextPath()%>/user/requestDetail?revCode='+revCode,'_blank','height=650,width=500,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+} 
+$("#btn1").hide();
+$("#btn3").hide();
+$("#btn5").hide();
 
-$("#btn").click(function(){//위
-	$("#btn1").show();
-	$("#btn").hide(); 
-	location.replace('<%=request.getContextPath()%>/user/request?type=btn')
+
+
+$("#btn").click(function(){
+	$.ajax({
+	url:"<%=request.getContextPath()%>/user/request",
+	type:"post",
+	data:{type:'btn'},
+	success:function(data) {
+		$("#enrollTB").hide();
+		$("#btn").hide();
+		$("#btn1").show();
+		
+		$("#tt").html(data);			
+	}	
+})
 })
 
-$("#btn1").click(function(){//아래
-	$("#btn1").hide();
-	$("#btn").show();
-	location.replace('<%=request.getContextPath()%>/user/request?type=btn1')
+$("#btn2").click(function(){
+	$.ajax({
+	url:"<%=request.getContextPath()%>/user/request",
+	type:"post",
+	data:{type:'btn3'},
+	success:function(data) {
+		$("#enrollTB").hide();
+		$("#btn2").hide();
+		$("#btn3").show();
+		$("#tt").html(data);			
+	}	
 })
-<%-- $("#btn2").click(function(){
-	$("#btn2").hide();
-	$("#btn3").show();
-	location.replace('<%=request.getContextPath()%>/user/request?type=btn2')
+})
+
+$("#btn4").click(function(){
+	$.ajax({
+	url:"<%=request.getContextPath()%>/user/request",
+	type:"post",
+	data:{type:'btn5'},
+	success:function(data) {
+		$("#enrollTB").hide();
+		$("#btn4").hide();
+		$("#btn5").show();
+		$("#tt").html(data);			
+	}	
+})
+})
+
+
+	 
+	
+
+$("#btn1").click(function(){
+	$.ajax({
+	url:"<%=request.getContextPath()%>/user/request",
+	type:"post",
+	data:{type:'btn1'},
+	success:function(data) {
+		$("#enrollTB").hide();
+		$("#btn1").hide();
+		$("#btn").show();
+		
+		$("#tt").html(data);			
+	}	
+})
 })
 
 $("#btn3").click(function(){
-	$("#btn3").hide();
-	$("#btn2").show();
-	location.replace('<%=request.getContextPath()%>/user/request?type=btn3')
+	$.ajax({
+	url:"<%=request.getContextPath()%>/user/request",
+	type:"post",
+	data:{type:'btn2'},
+	success:function(data) {
+		$("#enrollTB").hide();
+		$("#btn3").hide();
+		$("#btn2").show();
+		$("#tt").html(data);			
+	}	
 })
-$("#btn4").click(function(){
-	$("#btn4").hide();
-	$("#btn5").show();
-	location.replace('<%=request.getContextPath()%>/user/request?type=btn4')
 })
 
 $("#btn5").click(function(){
-	$("#btn5").hide();
-	$("#btn4").show();
-	location.replace('<%=request.getContextPath()%>/user/request?type=btn5')
-}) --%>
+	$.ajax({
+	url:"<%=request.getContextPath()%>/user/request",
+	type:"post",
+	data:{type:'btn4'},
+	success:function(data) {
+		$("#enrollTB").hide();
+		$("#btn5").hide();
+		$("#btn4").show();
+		$("#tt").html(data);			
+	}	
+})
+})
+
 
     
 

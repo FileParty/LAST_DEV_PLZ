@@ -181,7 +181,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 								<%} else { %>
 								<input style="display:inline;margin:0px;"type="checkbox"><p style="font-size:13px;display:inline;">추가 할인</p>
 								<%} %>
-								<input class="btn btn-outline-secondary" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail();">
+								<input class="btn btn-outline-secondary" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail('<%=p.getReservationCode()%>');">
 								</div>
 							</div>
 					
@@ -209,12 +209,12 @@ List<PetReservation> list = (List)request.getAttribute("list");
     
     <script>
     
-    	function requestDetail() {
+    	function requestDetail(revCode) {
     		var popupX = (window.screen.width / 2) - (300 / 2);
     		var popupY= (window.screen.height /2) - (350 / 2);
 
     		
-    		window.open('<%=request.getContextPath()%>/user/requestDetails','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+    		window.open('<%=request.getContextPath()%>/user/requestDetails?revCode='+revCode,'_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
     	}
     	
     	function endSitting(code) { 

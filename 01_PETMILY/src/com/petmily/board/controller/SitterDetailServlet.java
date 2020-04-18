@@ -35,10 +35,10 @@ public class SitterDetailServlet extends HttpServlet {
 	   
 	  HttpSession session = request.getSession();
       String userId = ((User)session.getAttribute("loginUser")).getUserId();
-      System.out.println(userId);
-      PetSitterBoard pb = new BoardService2().boardDetail(userId);
+      int no = Integer.parseInt(request.getParameter("no"));
      
-           System.out.println("디테일"+pb);
+      PetSitterBoard pb = new BoardService2().boardDetail(userId,no);
+     System.out.println("디테일 : "+pb);
       request.setAttribute("board", pb);
       request.getRequestDispatcher("/views/board/boardDetail.jsp").forward(request, response);
       

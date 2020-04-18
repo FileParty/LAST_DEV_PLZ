@@ -40,18 +40,21 @@
                             
                             <td>
                                 <input type="text" name="title" class="title" style="width: 500px" required>
+                               
                             </td>
                         </tr>
                         <tr>
                             <td class="sub-title" style="width: 100px;">파일 첨부</td>
                             <!-- <td class="sub-title" style="width: 100px;">파일 첨부</td> -->
                             <td colspan="1">
-                                <div class="input-group mb-3" style="width: 500px; height: 25px; margin-top: 10px;">
+                                <div class="input-group mb-3" style="width: 700px; height: 25px; margin-top: 10px;">
                                     <div class="files">
-                                       <input style="height:40px;" type="button" value="파일첨부" class="addFlie"onclick="addFile();">
+                                       <button style="margin:0px;height:20px;width:70px;" type="button" class="addFlie"onclick="addFile();">파일첨부</button>
                                     </div>
-                                    <div class="selectFile">
+                                    <div class="selectFile" style="height:100%;">
+                                     
                                      <input type="hidden"class="fileNo" name="count">
+                                     
                                     </div>
                                     </div>
                               
@@ -105,18 +108,18 @@
                                 </tr>
                                 <tr>
                                     <td>소형견</td>
-                                    <td><input name="small" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare"  step="5000" min='20000' max='50000'></td>
+                                    <td><input name="small" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare"  step="5000" min='20000' max='50000' required></td>
                                     
                                     
                                 </tr>
                                 <tr>
                                     <td>중형견</td>
-                                    <td><input name="middle" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare" step="5000" min='30000' max='50000'></td>
+                                    <td><input name="middle" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare" step="5000" min='30000' max='50000' required></td>
                                     
                                 </tr>
                                 <tr>
                                     <td>대형견</td>
-                                    <td><input name="big" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare" step="5000" min='40000' max='50000'></td>
+                                    <td><input name="big" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare" step="5000" min='40000' max='50000' required></td>
                                     
                                 </tr>
                             </table>
@@ -146,7 +149,7 @@
                             <table style="text-align: center; margin-top:0px;">
                                  <tr>
                                      <td style="width: 50px;">1박</td style="width: 100px;">
-                                     <td><input name="sale" style="width: 100px; height: 25px; font-size: 12px;"type="number" id="onecare2" class="form-control onecare2" step="5000" min="5000" max='20000'></td>
+                                     <td><input name="sale" style="width: 100px; height: 25px; font-size: 12px;"type="number" id="onecare" class="form-control onecare" step="5000" min="5000" max='20000'></td>
                                      <td>할인</td>
                                  </tr>
                                 
@@ -383,21 +386,11 @@ $(function(){
       })
    })
 
-   var onecare= document.getElementsByClassName("onecare");
-   var onecare2 = document.getElementsByClassName("onecare2");
+   
+   var onecare = document.getElementsByClassName("onecare");
    var shower = document.getElementsByClassName("shower");
    var pick = document.getElementsByClassName("pick");
-
       $(onecare).change(function(){
-              
-        if(event.target.value<20000) {
-          $(event.target).val(event.target.min);
-        }else if(event.target.value>50000){
-            $(event.target).val(event.target.max);
-        }
-      });
-
-      $(onecare2).change(function(){
               
               if(event.target.value<5000) {
                 $(event.target).val(event.target.min);
@@ -424,35 +417,70 @@ $(function(){
         }
             });
 
-            
-
-
+   
+	
          function test() {
-                if($("#myCheckbox2")[0].checked==true && $("#onecare2").val().trim().length==0) {
+        	 
+                if($("#myCheckbox2")[0].checked==true && $("#onecare").val().trim().length==0) {
                     alert("추가비 할인액을 입력하세요.");
-                    return false;
-                }if($("#myCheckbox6")[0].checked==true && $(".shower").val().trim().length==0) {
-                    alert("목욕 비용을 입력하세요.");
-                    return false;
-                }if($("#myCheckbox8")[0].checked==true && $(".pick").val().trim().length==0) {
-                    alert("픽업 비용을 입력하세요.");
+                    $("#onecare").focus();
                     return false;
                 }
-                
+               
+                 if($("#myCheckbox6")[0].checked==true && $("input[name=small1]").val().trim().length==0) {
+                    alert("소형견 목욕 비용을 입력하세요."); 
+                    $(".shower")[0].focus();
+                    return false;
+                }if($("#myCheckbox6")[0].checked==true && $("input[name=middle1]").val().trim().length==0) {
+                    alert("중형견 목욕 비용을 입력하세요.");
+                    $(".shower")[1].focus();
+                    return false;
+                }if($("#myCheckbox6")[0].checked==true && $("input[name=big1]").val().trim().length==0) {
+                    alert("대형견 목욕 비용을 입력하세요.");
+                    $(".shower")[2].focus();
+                    return false;
+                }if($("#myCheckbox8")[0].checked==true && $("input[name=oneWay]").val().trim().length==0) {
+                    alert("편도 픽업 비용을 입력하세요.");
+                    $(".pick")[0].focus();
+                    return false;
+                }if($("#myCheckbox8")[0].checked==true && $("input[name=allWay]").val().trim().length==0) {
+                    alert("왕복 픽업 비용을 입력하세요.");
+                    $(".pick")[1].focus();
+                    return false;
+                }if($(".file").length<4) {
+                  	 alert("파일을 4개 이상 첨부해주세요!");
+                   	 $(".addFlie").focus();
+                   	 return false;                
+                }
+                for(let i=0;i<6;i++) {
+                	if($("#file"+(i+1)).val()=="") {
+                		alert("파일을 첨부해주세요");
+                		$(".file")[i].focus();
+                		return false;
+                	}
+                }
+                if($("#myCheckbox3")[0].checked!=true && $("#myCheckbox4")[0].checked!=true) {
+              	  alert("기본제공 서비스를 선택해주세요.");
+              	  $("#myCheckbox3").focus();
+              	  return false;
+                }
+
                 return true;
          };
          
          var num =1;
          function addFile() {
-             
+             if(num<6) {
              let file =$("<input>").attr({
                  "type":"file",
                  "name": "file"+num,
-                 "id":"file"+num
+                 "id":"file"+num,
+                 "class":"file"
+                 
                  
              }).css({
             	 "height":"40px",
-            	 "width":"200px"
+            	 "width":"170px"
             	 
             	 });
              let label = $("<label>").attr({
@@ -464,11 +492,15 @@ $(function(){
              })
              var s = $(".selectFile").append(file);
              s.append(label);
-             s.append("<br>");
-             console.log(num);
+             
              num++;
+             if(num%3==0) {
+            	 s.append("<br>");
+             }
+             }
          }
-
+         
+        
          function searchMap(draggable) { 
         	
         	 var search= $(".address").val();

@@ -16,7 +16,7 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 </head>
 <body>
 	<table>
-		
+		<%if(pr!=null) { %>
 			<tr>
 				<th>예약NO</th>
 				<td><%=pr.getReservationCode() %></td>
@@ -79,7 +79,7 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 					<td><%=pr.getPetBath() %></td>
 				</tr>
 				
-		
+		<%} %>
 	</table>
 	<button onclick="closePage();">확인</button>
 </body>

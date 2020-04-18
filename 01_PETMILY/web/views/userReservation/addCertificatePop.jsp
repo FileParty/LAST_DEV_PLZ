@@ -23,7 +23,7 @@
 </head>
 <body align="center">
 
-	<form action="<%=request.getContextPath() %>/sitter/AddCertificateEnd"  method="post" enctype="multipart/form-data">
+	<form action="<%=request.getContextPath() %>/sitter/AddCertificateEnd" method="post" enctype="multipart/form-data">
 	<table  class="table table-hover">
 	<tr><td><p>자격증 명</p></td></tr>
 	<tr><td><input type="text" name="certificateName"></td></tr>
@@ -39,7 +39,7 @@
 	<tr><td><p>이미지 첨부</p></td></tr>
 	<tr><td><input type="file" name="file"></td></tr>
 	
-	<tr><td><button type="submit" onclick="close();">추가 요청</button></td></tr>
+	<tr><td><button  type="submit">추가 요청</button></td></tr>
 	</table>
 
 		
@@ -58,9 +58,7 @@
 		}
 		}
 		
-		function close() { 
-			window.close();
-		}
+		
 	</script>
 </body>
 </html>

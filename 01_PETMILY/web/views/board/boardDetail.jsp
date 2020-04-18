@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ page import=" com.petmily.board.model.vo.PetSitterBoard"%>
-     <%@ include file="/views/common/header.jsp" %>
+     
      <%
      PetSitterBoard pb = (PetSitterBoard)request.getAttribute("board");
      String plus ="";
@@ -40,10 +40,10 @@
     <section>
         <div class="container">
 
-            <div class="row">
-            	<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
-            <div class="vl"></div>
-            <div class="col-9" style="padding:0;">
+            
+            	
+            
+            <div class="col-12" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
                     <img class="top-img" style="width: 100%; margin-top: -230px;" src="https://images.unsplash.com/flagged/photo-1548245643-7b805f2f93d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
                 </div>
@@ -418,7 +418,7 @@
                         <div class="row" style="margin-left: 35%;">
                             <div style="margin-top:80px; margin-bottom: 100px;">
                                 
-                                <button style="color:white; border: solid 1px black; background-color :black" class="btn1" onclick="location.replace('<%=request.getContextPath()%>/sitter/update?id=<%=pb.getUserId()%>')">수정하기</button>
+                               
                             </div>
                         </div>
 
@@ -444,17 +444,12 @@
     
 
 
-    $(function () {
+   $(function () {
    $('[data-toggle="tooltip"]').tooltip();
 
 })
-
-
-
-  
-        
-           /* 
-            var search= $(".address").val();
+               
+           var search= $(".address").val();
             console.log(search);
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                mapOption = {
@@ -491,7 +486,7 @@
                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                    map.setCenter(coords);
                } 
-           });     */
+           });    
            
            $("#mapOff").trigger('click');
            function mapOff(draggable,zoomable) {
@@ -499,7 +494,7 @@
            		  map.setZoomable(zoomable); 
            }
           
-              var chk2 = document.getElementById("myCheckbox2");
+            var chk2 = document.getElementById("myCheckbox2");
             var chk6 = document.getElementById("myCheckbox6");
             var chk8 = document.getElementById("myCheckbox8");
             
@@ -507,6 +502,7 @@
             var row1 = $(".row1");
             var row2 = $(".row2");
             var row3 = $(".row3");
+            
             if(chk2.checked!=true) {
                $("#row1").hide();
                }else {

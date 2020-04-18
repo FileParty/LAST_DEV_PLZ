@@ -1,11 +1,12 @@
-<%@page import="com.petmily.petsitter.model.vo.PetSitterCertificate,java.util.List"%>
+<%@page import="com.petmily.board.model.vo.PetSitterBoard"%>
+<%@page import="com.petmily.board.model.vo.PetSitterBoard,java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-    	List<PetSitterCertificate> list = (List)request.getAttribute("pc");
-		System.out.println("추가목록:"+list);
-    %>
+	List<PetSitterBoard> list = (List)request.getAttribute("list");
+	
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,29 +24,30 @@
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=21457534dfe681cc96c51d32694dc5a9&libraries=services"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<title>자격증 추가</title>
-<link rel="stylesheet"
+<title>보유 자격증 목록</title>
+ <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/boardWrite2.css">
-<style>
+ <style>
 table {
-	
+	border-radius: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	border-collapse: collapse;
 }
 
+
 th {
 	width: 150px;
 	font-size: 12px;
 	text-align: center;
-	background-color:lightgray;
-	color: grey;
 	
-}
+	color: black;
+	}
 </style>
 </head>
 <body>
@@ -53,7 +55,7 @@ th {
 
 		<div class="container">
 			<div class="row">
-				<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
+			<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp"%> 
 				<div class="vl"></div>
 				<div class="col-9" style="padding: 0;">
 					<div class="row top-div" style="height: 200px; overflow: hidden;">
@@ -61,49 +63,62 @@ th {
 							src="https://images.unsplash.com/flagged/photo-1548245643-7b805f2f93d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80">
 					</div>
 					<ul class="breadcrumb">
-						<li class="breadcrumb-item">자격증</li>
-						<li class="breadcrumb-item active">자격증 추가</li>
+						
+						<li class="breadcrumb-item active">작성글 List >></li>
 					</ul>
-
+						<h6 style="text-align:center;">고객에게는 최신글만 보여집니다.</h6>
 
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">
 							<table id="inner" border="1" class="table table-hover">
 							
-						
 								<tr>
-									<th>no</th>
-									<th>자격증 명</th>
-									<th>인증 기관</th>
-									<th>취득 일시</th>
-									<th>만료 일시</th>
-									<th>이미지 보기</th>
-									<th>상태</th>
+									<th>no</th>									
+									<th>제목</th>								
+									<th>소개 글</th>									
+									<th style="width:250px;">요금(소형)</th>
+									<th style="width:250px;">요금(중형)</th>
+									<th style="width:250px;">요금(대형)</th>
+									<th style="width:250px;">주소</th>
+									<th style="width:250px;">상태</th>
+									
 								</tr>
+
+									<%for(PetSitterBoard p : list) {%>
 								<tr>
-								<%for(PetSitterCertificate pc : list) {%>
-									<td><%=pc.getCount() %></td>
-									<td><%=pc.getCertificateName() %></td>
-									<td><%=pc.getCertificationNmae() %></td>
-									<td><%=pc.getDateOfAcquisition().substring(0,11) %></td>
-									<%if(pc.getExpirationDate()!=null) {%>
-									<td><%=pc.getExpirationDate().substring(0,11) %></td>
+									
+									<td><%=p.getBoardNo() %></td>
+									<td><%=p.getBoardTitle()%></td>
+									<td><%=p.getBoardInfo()%></td>
+									<td><%=p.getSmallPrice()%>원</td>
+									<td><%=p.getMiddlePrice()%>원</td>
+									<td><%=p.getBigPrice()%>원</td>
+									<td><%=p.getBoardAddress()%></td>
+									<%if(p.getBoardNewType().equals("Y")) {%>
+									<td>최신</td>
 									<%}else { %>
-									<td>- </td>
+									<td>이전</td>
 									<%} %>
-									<td><button type="button" onclick="window.open('<%=request.getContextPath()%>/views/userReservation/imgView.jsp?img=<%=pc.getCertificateFilename()%>','_blank','width=500px,height=500px')">이미지 보기</button></td>
-									<td><%=pc.getResType() %></td>									
+									<td>
+									<%if(p.getBoardNewType().equals("Y")) {%>
+									<button style="width:60px;"type="button" onclick="boardDetail('<%=p.getBoardNo()%>');">상세보기</button>
+									<button style="width:50px;"type="button" onclick="boardUpdate('<%=p.getBoardNo()%>');">수정</button>
+									<%}else { %>
+									<button style="width:60px;"type="button" onclick="boardDetail('<%=p.getBoardNo()%>');">상세보기</button>
+									<%} %>
+									</td>
 								</tr>
 								<%} %>
-							
 							</table>
-							
 						</div>
 					</div>
-							<button type="button" style="margin-left:400px;font-size:10px;height:25px;border-radius:15px;" onclick="addCertificate();">자격증 추가</button>
+
+
 				</div>
 			</div>
 		</div>
+
+
 	</section>
 
 
@@ -121,10 +136,15 @@ th {
 </body>
 
 <script>
-	function addCertificate() {
-		window.open("<%=request.getContextPath()%>/views/userReservation/addCertificatePop.jsp","pop","width=500,height=800");
+	function boardDetail(no,userId) {
+		
+		var popupX = (window.screen.width / 2) - (1000 / 2);
+		var popupY= (window.screen.height /2) - (800 / 2);
+		window.open('<%=request.getContextPath()%>/sitter/Detail?no='+no,'_blank','width=1000,height=800,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 	}
-
+	function boardUpdate(no) {
+		location.replace('<%=request.getContextPath()%>/sitter/update?no='+no);
+	}
 </script>
 </body>
 </html>

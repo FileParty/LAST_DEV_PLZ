@@ -30,9 +30,9 @@ public class UserReservationEndsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int code = Integer.parseInt(request.getParameter("no"));
-		System.out.println("들어옵ㅇㅇㅇ"+code);
+		
 		PetReservation pr = new ReservationService().endRev(code);
-		System.out.println("서블릿ㅇㅇㅇ"+pr.getReservationCode());
+		
 		request.setAttribute("pr", pr);
 		request.getRequestDispatcher("/views/userReservation/endPop.jsp").forward(request, response);
 	}

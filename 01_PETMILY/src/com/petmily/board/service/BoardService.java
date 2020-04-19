@@ -6,6 +6,7 @@ import static com.petmily.common.JDBCTemplate.getConnection;
 import static com.petmily.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 
 import com.petmily.board.model.dao.BoardDao;
@@ -139,6 +140,13 @@ public class BoardService {
 		List<PetInfo> petsT = dao.getPetInfoT(conn, userId);
 		close(conn);
 		return petsT;
+	}
+	
+	public List<String> getSchedule(String sitterId){
+		Connection conn = getConnection();
+		List<String> schedule = dao.getSchedule(conn, sitterId);
+		close(conn);
+		return schedule;
 	}
 	
 

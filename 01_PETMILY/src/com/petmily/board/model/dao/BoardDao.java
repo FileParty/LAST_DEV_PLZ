@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,9 +20,6 @@ import com.petmily.petsitter.model.vo.PetSitter;
 import com.petmily.petsitter.model.vo.PetSitterCertificate;
 import com.petmily.review.model.vo.ReviewPetSitter;
 import com.petmily.user.model.vo.User;
-import com.sun.prism.Presentable;
-
-import oracle.jdbc.proxy.annotation.Pre;
 
 public class BoardDao {
 	
@@ -532,7 +530,37 @@ public class BoardDao {
 		
 		return petsT;
 		
+	}
+	
+	public List<String> getSchedule(Connection conn, String sitterId){
 		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+				
+		String sql = prop.getProperty("getSchedule");
+		
+		List<String> schedule = new ArrayList<String>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sitterId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				schedule.add(rs.getString(2));
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return schedule;
 		
 	}
 

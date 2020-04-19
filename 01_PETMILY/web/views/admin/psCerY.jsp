@@ -41,7 +41,7 @@
 							<td><%=ap.getEXPIRATION_DATE()!=null?ap.getEXPIRATION_DATE().substring(0, 11):"만료일자없음"%></td>
 							<td>
 							<% if(ap.getCERTIFICATE_FILENAME()!=null){%>
-								<button class="Abtns" onclick="CerImg(<%=ap.getCERTIFICATE_FILENAME()%>)">보기</button>
+								<button class="Abtns" onclick="CerImg('<%=ap.getCERTIFICATE_FILENAME()%>')">보기</button>
 							<% } else { %>
 								<p> 사진이 없습니다 </p>
 							<% } %>
@@ -58,8 +58,7 @@
 </section>
 <script>
 	function CerImg(fileName){
-		console.log(fileName);
-		<%-- window.open("<%=request.getContextPath()%>/admin/psCerImg?file="+fileName,"_blank","width=500px; height=500px"); --%>
+		window.open("<%=request.getContextPath()%>/admin/psCerImg?file="+fileName,"_blank","width=500px; height=500px");
 	}
 	
 	function CerTypeChange(){

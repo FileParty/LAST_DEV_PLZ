@@ -67,7 +67,6 @@
 </section>
 <script>
 	function CerImg(fileName){
-		console.log(fileName);
 		window.open("<%=request.getContextPath()%>/admin/psCerImg?file="+fileName,"_blank","width=500px; height=500px");
 	}
 	

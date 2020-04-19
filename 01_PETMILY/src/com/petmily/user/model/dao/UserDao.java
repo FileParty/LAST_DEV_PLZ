@@ -21,7 +21,7 @@ import com.petmily.user.model.vo.UserPaymentHistory;
 public class UserDao {
 	private Properties prop = new Properties();
 	
-//	疫꿸��� 占쎄문占쎄쉐占쎌��占쎈� 占쎈��占쎌�� 野���以���占� 占쎄�占쎈섧占쎈립占쎈��.
+
 	public UserDao() {
 		try {
 			String path = UserDao.class.getResource("/sql/user/user-query.properties").getPath();
@@ -30,26 +30,29 @@ public class UserDao {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-	}// UserDao() 疫꿸���占쎄문占쎄쉐占쎌��
+	}
 	
 	
 	public int insertUserTable(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
+		
 		String sql=prop.getProperty("insertUserTable");
+		
+		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?��?��揶�??�� ?釉�?��?逾�
-			pstmt.setString(2, pss.getPassword()); //?��?��揶�??�� ��袁�?甕곕����
-			pstmt.setString(3, pss.getSitterName()); //?��?��揶�??�� ?����?
-			pstmt.setString(4, pss.getSitterBday().replaceAll("-", "/"));//?��?��揶�??�� ?��???猷�
+			pstmt.setString(1, pss.getPetsitterId()); 
+			pstmt.setString(2, pss.getPassword()); 
+			pstmt.setString(3, pss.getSitterName()); 
+			pstmt.setString(4, pss.getSitterBday().replaceAll("-", "/"));
 			pstmt.setString(5, pss.getSitterPhone());
-			pstmt.setString(6, pss.getPostCode());//?��?��揶�??�� 雅��깅�� ?��?�よ린����
-			pstmt.setString(7, pss.getSitterAddress()); //?��?��揶�??�� 雅��깅��
-			pstmt.setString(8, pss.getAddressDetail()); //?��?��揶�??�� ?湲�?苑�雅��깅��
-			pstmt.setString(9, pss.getSitterEmail()); //?��?��揶�??�� ?��筌�遺우��
-			pstmt.setString(10, String.valueOf(pss.getSitterGender())); //?��?��揶�??�� ?苑�癰�?
-			pstmt.setString(11, pss.getType()); //?��?��揶�??�� ?��?苑� ???��
+			pstmt.setString(6, pss.getPostCode());
+			pstmt.setString(7, pss.getSitterAddress()); 
+			pstmt.setString(8, pss.getAddressDetail()); 
+			pstmt.setString(9, pss.getSitterEmail());
+			pstmt.setString(10, pss.getSitterGender());
+			pstmt.setString(11, pss.getType()); 
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -66,17 +69,17 @@ public class UserDao {
 		String sql=prop.getProperty("insertPetSitter");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //
-			pstmt.setString(2, pss.getCertificateYN()); //
-			pstmt.setString(3, pss.getPetSitterJob()); //
-			pstmt.setString(4, pss.getPetSitterFamily()); //�
-			pstmt.setString(5, pss.getPetSitterKeeppets()); //
-			pstmt.setString(6, pss.getPetSitterActivity()); //?��?��?苑� ?��?猷� 野�����
-			pstmt.setString(7, pss.getAccountOwner()); //?��?��?苑� ?��?沅��④쑴伊� �④쑴伊�雅�?
-			pstmt.setString(8, pss.getBankName()); //?��?��?苑� ?��?沅��④쑴伊� ???六억�?
-			pstmt.setString(9, pss.getAccountNo()); //?��?��?苑� ?��?沅��④쑴伊� �④쑴伊�甕곕����
-		//	pstmt.setString(10, ps.getType()); //?��?��?苑� ?沅�?��?�� ???��(?��?��?苑�)
-			pstmt.setString(11, pss.getSitterImg()); //?��?��?苑� ?遊썸에��釉� ?��沃�紐�?
+			pstmt.setString(1, pss.getPetsitterId()); 
+			pstmt.setString(2, pss.getCertificateYN()); 
+			pstmt.setString(3, pss.getPetSitterJob()); 
+			pstmt.setString(4, pss.getPetSitterFamily()); 
+			pstmt.setString(5, pss.getPetSitterKeeppets()); 
+			pstmt.setString(6, pss.getPetSitterActivity()); 
+			pstmt.setString(7, pss.getAccountOwner()); 
+			pstmt.setString(8, pss.getBankName()); 
+			pstmt.setString(9, pss.getAccountNo()); 
+		//	pstmt.setString(10, ps.getType());
+			pstmt.setString(10, pss.getSitterImg()); 
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -86,35 +89,43 @@ public class UserDao {
 			return result;
 	}
 		
+	
 	public int insertPetSitterCertificate(Connection conn, PetSitter2 pss) {
 		PreparedStatement pstmt=null;
-		int result = 0 ;
-		String sql=prop.getProperty("insertPetSitterCertificate");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); //?��?��?苑� ?釉�?��?逾�
-			pstmt.setString(2, pss.getCertificateName()); //?��?��?苑� ?��野��뱀� ?����?
-			pstmt.setString(3, pss.getIssuingOrg()); //?��?��?苑� ?��野��뱀� 獄�����疫꿸�?
-			pstmt.setString(4, pss.getCertiGetDate()); //?��?��?苑� ?��野��뱀� 獄�����?��
-			pstmt.setString(5, pss.getCertiEndDate()); //?��?��?苑� ?��野��뱀� 筌���利�?��
-			pstmt.setString(6, pss.getCertiImg()); //?��?��?苑� ?��野��뱀� ?��沃�紐�?
-			result=pstmt.executeUpdate();	
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
+		int result = 0;
+		
+		String sql="";
+		sql=prop.getProperty("insertPetSitterCertificate");
+				try {
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setString(1, pss.getPetsitterId()); 
+					pstmt.setString(2, pss.getCertificateName()); 
+					pstmt.setString(3, pss.getIssuingOrg()); 
+					pstmt.setString(4, pss.getCertiGetDate()); 
+					pstmt.setString(5, pss.getCertiEndDate()); 
+					pstmt.setString(6, pss.getCertiImg()); 
+					result=pstmt.executeUpdate();	
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}finally {
+					close(pstmt);
+				}
+			return result;
+			
+	}//insertPetSitterCertificate
 	
-	public int insertResidenceType(Connection conn, PetSitter2 pss) {
+	
+	
+	
+	public int insertResidenceType(Connection conn, String id, String res) {
 		PreparedStatement pstmt=null;
 		int result = 0 ;
 		String sql=prop.getProperty("insertResidenceType");
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, pss.getPetsitterId()); 
-			pstmt.setString(2, pss.getResidenceValue()); 
+			pstmt.setString(1, id); 
+			pstmt.setString(2, res);
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -122,15 +133,15 @@ public class UserDao {
 		}
 		return result;
 	}
+
 	
 	
 	
-//	----------------------------- ㅆ
+//	----------------------------- 
 	
 	
 	
-//	유저 로그인 로직
-//	DB에 클라이언트가 입력한 아이디값이 있는지 찾아본다.
+
 	public User userSelect(Connection conn, String user_id, String password) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -171,7 +182,7 @@ public class UserDao {
 	
 	
 	
-//	회원가입 - 아이디 중복확인 로직
+
 	public boolean userIdDuplicate(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -183,7 +194,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true는 이용이 불가능 ( 아이디가 DB에 있으니, 사용할 수 없다! )
+				flag = true; 
 			}
 		}
 		catch(SQLException e) {
@@ -196,7 +207,7 @@ public class UserDao {
 		return flag;
 	}
 	
-//	회원가입 - 휴대폰 중복확인 로직
+
 	public boolean phoneDuplicate(Connection conn, String phone) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -208,7 +219,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true는 이용이 불가능 ( 아이디가 DB에 있으니, 사용할 수 없다! )
+				flag = true; 
 			}
 		}
 		catch(SQLException e) {
@@ -221,7 +232,7 @@ public class UserDao {
 		return flag;
 	}
 	
-//	회원가입 - 이메일 중복확인 로직
+
 	public boolean emailDuplicate(Connection conn, String email) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -233,7 +244,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				flag = true; // true는 이용이 불가능 ( 아이디가 DB에 있으니, 사용할 수 없다! )
+				flag = true; 
 			}
 		}
 		catch(SQLException e) {
@@ -247,7 +258,7 @@ public class UserDao {
 	}
 	
 	
-//	회원가입 로직
+
 	public int userJoin(Connection conn, String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		PreparedStatement pstmt=null;
 		int result = 0;
@@ -274,9 +285,9 @@ public class UserDao {
 		return result;
 	}
 
-//	----------------------------------------------------------- ㅆ
+//	----------------------------------------------------------- 
 	
-//	회원정보 보기 로직
+//	
 	public User userSelect(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -315,7 +326,7 @@ public class UserDao {
 	}
 	
 	
-//	회원정보 수정 로직
+//
 	public int userUpdate(Connection conn, String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		PreparedStatement pstmt = null;
 		int result= 0;
@@ -328,7 +339,7 @@ public class UserDao {
 			pstmt.setString(4, postNum);
 			pstmt.setString(5, address);
 			pstmt.setString(6, detailAddress);
-			pstmt.setString(7, id); // SQL 鈺곌�援��억옙
+			pstmt.setString(7, id); 
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -340,14 +351,14 @@ public class UserDao {
 		return result;
 	}
 	
-//	회원탈퇴 로직
+
 	public int userDelete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("userDelete");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id); // SQL 조건
+			pstmt.setString(1, id); 
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -359,7 +370,7 @@ public class UserDao {
 		return result;
 	}
 	
-//	마이페이지 - 북마크 로직
+
 	public List<UserBookMarkBoard> userBookMarkBoard(Connection conn, String id, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -368,13 +379,12 @@ public class UserDao {
 		String sql = prop.getProperty("userBookMarkBoard");
 		try {
 			pstmt = conn.prepareStatement(sql);
-//			페이징 처리시, SQL문도 수정이 필요하다.
-//			RNUM 처리를 위해 서브쿼리 수정이 필요하다.
+
 			pstmt.setString(1, id);
 			pstmt.setInt(2, (cPage-1)*numPerPage+1);
 			pstmt.setInt(3, cPage*numPerPage);
 			
-			System.out.println("dao의 id :"+id);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -389,7 +399,7 @@ public class UserDao {
 				list.add(ubm);
 			}
 			
-			System.out.println("dao에서 잘 담아졌는가(dao) : "+list);
+
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -401,8 +411,7 @@ public class UserDao {
 		return list;
 	}
 	
-//	북마크 로직 페이징 처리
-//	page bar 생성(int totalData)
+
 	public int selectBoardCount(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -425,7 +434,7 @@ public class UserDao {
 		return count;
 	}
 	
-//	일반사용자 마이페이지 - 결제내역 로직
+
 	public List<UserPaymentHistory> userPaymentHistory(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -435,8 +444,8 @@ public class UserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id); // SQL 조건
-			System.out.println("dao의 id : "+id);
+			pstmt.setString(1, id); 
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -462,7 +471,7 @@ public class UserDao {
 //	------------------------------------------------------------------------------
 	
 
-//	인술 작업(로그인 API)
+//	
 	public User userApiLogin(Connection conn, String userEmail) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -476,18 +485,18 @@ public class UserDao {
 			
 			if(rs.next()) {
 				user = new User();
-				user.setUserId(rs.getString("USER_ID")); // 占쎌��占쏙옙 占쎈�占쎌��占쎈�
-				user.setPassword(rs.getString("PASSWORD")); // 占쎌��占쏙옙 占쎈�ｏ옙�わ옙��占쎈굡
-				user.setUserName(rs.getString("USER_NAME")); // 占쎌��占쏙옙 占쎌���깍옙
-				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); // 占쎌��占쏙옙 占쎄문占쎈��占쎌�∽옙��
-				user.setPhone(rs.getString("PHONE")); // 占쎌��占쏙옙 占쎌��占쏙옙甕곕����
-				user.setZipCode(rs.getString("ZIP_CODE")); // 占쎌��占쏙옙 占쎌��占쎈�よ린����
-				user.setAddress(rs.getString("ADDRESS")); // 占쎌��占쏙옙 雅��깅��
-				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); // 占쎌��占쏙옙 占쎄맒占쎄쉭雅��깅��
-				user.setEmail(rs.getString("EMAIL")); // 占쎌��占쏙옙 占쎌��筌�遺우��
-				user.setGender(rs.getString("GENDER")); // 占쎌��占쏙옙 占쎄쉐癰�占�
-				user.setStatus(rs.getString("STATUS")); // 占쎌��占쏙옙 占쎌�띰옙��占쎄�占쎈��占쎈연�븝옙
-				user.setUserType(rs.getString("USER_TYPE")); // 占쎌��占쏙옙 占쏙옙占쎌��(占쎌�よ�占�, 占쎈��占쎈��占쎄숲, �울옙�귐���)
+				user.setUserId(rs.getString("USER_ID")); 
+				user.setPassword(rs.getString("PASSWORD")); 
+				user.setUserName(rs.getString("USER_NAME")); 
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY")); 
+				user.setPhone(rs.getString("PHONE")); 
+				user.setZipCode(rs.getString("ZIP_CODE")); 
+				user.setAddress(rs.getString("ADDRESS")); 
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS")); 
+				user.setEmail(rs.getString("EMAIL")); 
+				user.setGender(rs.getString("GENDER")); 
+				user.setStatus(rs.getString("STATUS")); 
+				user.setUserType(rs.getString("USER_TYPE"));
 			}
 		}
 		catch(SQLException e) {
@@ -524,7 +533,7 @@ public class UserDao {
 	}
 	
      
-     //펫시터 회원가입 아이디 중복검사
+  
      public boolean sitterIdDuplicate(Connection conn, String sitterId) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -549,7 +558,7 @@ public class UserDao {
         return flag;
      }
      
-     //펫시터 이메일 중복검사
+    
      public boolean sitterEmailDuplicate(Connection conn, String email) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;

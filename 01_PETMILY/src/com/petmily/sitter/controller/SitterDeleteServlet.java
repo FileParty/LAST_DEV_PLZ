@@ -30,30 +30,32 @@ public class SitterDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		íšŒì›ì •ë³´ - íšŒì›íƒˆí‡´ í™”ë©´ìœ¼ë¡œ ì „í™˜í•˜ëŠ” ê¸°ëŠ¥
+//		ë¡œê·¸ì¸ í•œ ìœ ì €ë§Œ ì‚¬ìš©í•  ìˆ˜ ìˆë„ë¡ ì²˜ë¦¬í•œë‹¤.
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser")==null) { // ·Î±×ÀÎÇÑ °ªÀÌ ¾øÀ¸¸é(·Î±×ÀÎ ¾ÈÇÔ)
-//			Àß¸øµÈ Á¢±Ù Ã³¸®
-			request.setAttribute("msg","Àß¸øµÈ Á¢±ÙÀÔ´Ï´Ù.");
-			request.setAttribute("loc", ""); // ¸ŞÀÎÀ¸·Î ÀÌµ¿
+		if(session.getAttribute("loginUser")==null) { // ë¡œê·¸ì¸í•œ ê°’ì´ ì—†ìœ¼ë©´(ë¡œê·¸ì¸ ì•ˆí•¨)
+//			ì˜ëª»ëœ ì ‘ê·¼ ì²˜ë¦¬
+			request.setAttribute("msg","ì˜ëª»ëœ ì ‘ê·¼ì…ë‹ˆë‹¤.");
+			request.setAttribute("loc", ""); // ë©”ì¸ìœ¼ë¡œ ì´ë™
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		else { // ·Î±×ÀÎÇÑ °ªÀÌ ÀÖÀ¸¸é(·Î±×ÀÎ ÇÔ)
-//			ÆäÀÌÁö ÀüÈ¯
+		else { // ë¡œê·¸ì¸í•œ ê°’ì´ ìˆìœ¼ë©´(ë¡œê·¸ì¸ í•¨)
+//			í˜ì´ì§€ ì „í™˜
 			String id = request.getParameter("userId");
-			System.out.println("È¸¿øÅ»ÅğÇÏ±â À§ÇØ °¡Á®¿Â id°ª È®ÀÎ : "+id);
+			System.out.println("íšŒì›íƒˆí‡´í•˜ê¸° ìœ„í•´ ê°€ì ¸ì˜¨ idê°’ í™•ì¸ : "+id);
 			
-//			DB¿¡¼­ id¿Í µ¿ÀÏÇÑ Á¤º¸¸¦ °¡Á®¿Â´Ù
+//			DBì—ì„œ idì™€ ë™ì¼í•œ ì •ë³´ë¥¼ ê°€ì ¸ì˜¨ë‹¤
 			User u = new UserService().userSelect(id);
-			System.out.println("È¸¿øÅ»ÅğÇÏ±âÀ§ÇÑ À¯ÀúÁ¤º¸. dao¿¡¼­ user°ªÀ» Àß °¡Á®¿Ô´Â°¡? : "+u);
+			System.out.println("íšŒì›íƒˆí‡´í•˜ê¸°ìœ„í•œ ìœ ì €ì •ë³´. daoì—ì„œ userê°’ì„ ì˜ ê°€ì ¸ì™”ëŠ”ê°€? : "+u);
 			
-//			°¡Á®¿Â µ¥ÀÌÅÍ ÀúÀå
+//			ê°€ì ¸ì˜¨ ë°ì´í„° ì €ì¥
 			request.setAttribute("user", u);
 			
-//			È¸¿øÅ»Åğ È­¸éÀ¸·Î ÀüÈ¯
-			request.getRequestDispatcher("/views/petsitterMypage/sitterDelete.jsp").forward(request, response);
-			
+//			íšŒì›íƒˆí‡´ í™”ë©´ìœ¼ë¡œ ì „í™˜
+			request.getRequestDispatcher("/views/user/UserDelete.jsp").forward(request, response);
 		}
+			
 	}
 
 	/**

@@ -30,31 +30,23 @@ public class SitterUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//½ÃÅÍÈ¸¿øÁ¤º¸ ¼öÁ¤À¸·Î ÀÌµ¿
-//		È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ´Â È­¸éÀ¸·Î ÀüÈ¯
-//		·Î±×ÀÎ µÈ À¯Àú¸¸ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï Á¶°ÇÀ» °É¾î¾ß ÇÑ´Ù.
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser")==null) { // ·Î±×ÀÎ ·ÎÁ÷¿¡¼­ set Ã³¸® ¿Ï·á
-//			Àß¸øµÈ Á¢±Ù Ã³¸®
-			request.setAttribute("msg","Àß¸øµÈ Á¢±ÙÀÔ´Ï´Ù.");
-			request.setAttribute("loc", "/"); // ¸ŞÀÎÀ¸·Î ÀÌµ¿
+		if(session.getAttribute("loginUser")==null) { 
+//			ì˜ëª»ëœ ì ‘ê·¼ ì²˜ë¦¬
+			request.setAttribute("msg","ì˜ëª»ëœ ì ‘ê·¼ì…ë‹ˆë‹¤.");
+			request.setAttribute("loc", ""); // ë©”ì¸ìœ¼ë¡œ ì´ë™
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {
 			String id = request.getParameter("userId");
-			System.out.println("È¸¿øÁ¤º¸¼öÁ¤ È­¸éÀ¸·Î ÀÌµ¿ÇÏ±â À§ÇØ È®ÀÎÇÏ´Â id °ª : "+id);
 			
-//			ºÏ¸¶Å© Å×ÀÌºí °¡Á®¿À±â
-//			DB¿¡¼­ id¿Í µ¿ÀÏÇÑ Á¤º¸¸¦ °¡Á®¿Â´Ù
-//			¾ÆÀÌµğ°¡ ÇöÀç ·Î±×ÀÎµÈ ¾ÆÀÌµğÀÎ °èÁ¤ÀÇ ºÏ¸¶Å©µÈ ³»¿ëÀ» °¡Á®¿Â´Ù.
 			User u = new UserService().userSelect(id);
-			System.out.println("Á¤º¸¼öÁ¤ÇÏ±â À§ÇØ ¸ÕÀú »Ñ·ÁÁ®¾ß ÇÏ´Â È¸¿øÁ¤º¸. dao¿¡¼­ user°ªÀ» Àß °¡Á®¿Ô´Â°¡? : "+u);
 			
-//			°¡Á®¿Â ³»¿ëÀ» ÀúÀåÇÏ°í ¾ÆÀÌµğ°ª°ú ÇÔ²² ¸ÅÇÎ°ªÀ» º¸³½´Ù.
 			request.setAttribute("user", u);
 			request.getRequestDispatcher("/views/petsitterMypage/sitterUpdateInfo.jsp").forward(request, response);
 			
 		}
+			
 	}
 
 	/**

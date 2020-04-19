@@ -28,33 +28,32 @@ public class SitterDeleteEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		ȸ������ �����ϴ� ����
-		String id = request.getParameter("userId"); // ���� ���̵�
+//		회원정보 삭제하는 로직
+		String id = request.getParameter("userId"); // 유저 아이디
 		
-//		ȸ��Ż���ϱ� ���� service ����
-		int result = new UserService().userDelete(id); // ����� int��
+//		회원탈퇴하기 위한 service 연결
+		int result = new UserService().userDelete(id); // 결과값 int형
 		
-//		���������� ����
+//		응답페이지 구성
 		String msg = "";
 		String loc = "";
 		
 		if(result>0) {
-//			ȸ��Ż�� �Ϸ�
-			msg = "ȸ��Ż�� ó���� �Ϸ�Ǿ����ϴ�.";
-//			�α׾ƿ� ó���� �Ǹ鼭 ����ȭ������ ��ȯ�Ѵ�
-			loc = "/log-out"; // �α׾ƿ� ó���� �Ǿ�� �Ѵ�.  (�߿�)
+//			회원탈퇴 완료
+			msg = "회원탈퇴 처리가 완료되었습니다.";
+//			로그아웃 처리가 되면서 메인화면으로 전환한다
+			loc = "/log-out"; // 로그아웃 처리가 되어야 한다.  (중요)
 		}
 		else {
-//			ȸ��Ż�� ����
-			msg = "ȸ��Ż�� ó���� ���еǾ����ϴ�.";
-//			ȸ��Ż�� ȭ������ ������
-			loc = "/sitter/Delete?userId="+id; // �������̵�� �ݵ�� ���� ������
+//			회원탈퇴 실패
+			msg = "회원탈퇴 처리가 실패되었습니다.";
+//			회원탈퇴 화면으로 보낸다
+			loc = "/sitter/Delete?userId="+id; // 유저아이디와 반드시 같이 보낸다
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-	}
 	}
 
 	/**

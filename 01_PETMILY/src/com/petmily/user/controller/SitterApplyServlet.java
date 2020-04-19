@@ -34,33 +34,29 @@ public class SitterApplyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//������ 諛��� �곗�댄�곕�� �몄���� 遺��ъ���� 媛��몄��
 		HttpSession session=request.getSession();
 		PetSitter2 pss=(PetSitter2)session.getAttribute("petsitter");
 		
 		System.out.println(pss);
 		
-		//�レ���� 吏��� �쇱���� 諛��� �곗�댄�곕�� ������ 媛��� 8媛�
 		
-		//�レ���� 吏����� ���� �대�
 //		String sitterName=request.getParameter("name");
-		//�レ���� 吏����� ���� �대���
+		
 //		String sitterEmail=request.getParameter("email");
-		//�レ���� 吏����� ���� 二쇱��
+		
 //		String sitterAddress=request.getParameter("address");
 		
-		//�レ���� 吏����� ���� 嫄곗＜吏� ����
+		
 		String[] residenceValue=request.getParameterValues("houseType");
-		//�レ���� 吏����� ���� 吏���
+		
 		String[] petSitterJob=request.getParameterValues("jobCheck");
-		//�レ���� 吏����� 媛�議� 援ъ�깆�� 
+		
 		String petSitterFamily=request.getParameter("familyNoChck");
-		//�レ���� 吏����� 諛��ㅻ��臾� 諛��� 寃쏀�� �щ�
+		
 		String petSitterKeeppets=request.getParameter("careCheck");
-		//�レ���� 吏����� �レ���� 寃쎈�ν���� ��臾�
+		
 		String petSitterActivity=request.getParameter("career");
 		
-		//遺��ъ�� �곗�댄�곕�� vo�� �댁��以�
 //		pss.setSitterName(sitterName);
 //		pss.setSitterEmail(sitterEmail);
 //		pss.setSitterAddress(sitterAddress);
@@ -72,14 +68,14 @@ public class SitterApplyServlet extends HttpServlet {
 		
 		System.out.println(pss);
 		
-		//db�곌껐
+		
 		int result=new UserService().insertSitter(pss);
 		
-		//吏�����猷� ���댁�濡� ���닿�
+		
 		RequestDispatcher rd=request.getRequestDispatcher("/views/sitter/applyEnd.jsp");
 		rd.forward(request, response);
 		
-		//�몄�� ���댁＜湲�
+		
 		session.removeAttribute("petsitter");
 
 	}

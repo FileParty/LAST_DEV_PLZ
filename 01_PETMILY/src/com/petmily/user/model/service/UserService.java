@@ -15,7 +15,7 @@ import com.petmily.user.model.vo.UserBookMarkBoard;
 import com.petmily.user.model.vo.UserPaymentHistory;
 
 public class UserService {
-//	�쑀���� �뿰愿��엳�뒗 �꽌鍮꾩뒪 �쁺�뿭
+
 	
 	private UserDao dao = new UserDao();
 	
@@ -25,9 +25,12 @@ public class UserService {
 	    if(result>0) {
 	    	result=dao.insertUserPetSitter(conn, pss);
 	    	if(result>0) {
-	    		result=dao.insertPetSitterCertificate(conn, pss);
-	    		if(result>0) {
-	    			result=dao.insertResidenceType(conn, pss);
+	    		if(pss.getCertificateYN().equals("Y")){
+	    			result=dao.insertPetSitterCertificate(conn, pss);
+	    		}if(result>0) {
+	    			for(String res : pss.getResidenceValue().split(",")) {
+	    				result=dao.insertResidenceType(conn, pss.getPetsitterId(),res);
+	    			}
 	    			if(result>0) {
 	    				commit (conn);
 	    			}else {
@@ -46,10 +49,10 @@ public class UserService {
 	    }
 	
 	
-//	------------------------------ ㅆ
+//	------------------------------ 
 	
 	
-//	로그인 로직
+
 	public User userSelect(String user_id, String password) {
 		Connection conn = getConnection();
 		User user = dao.userSelect(conn, user_id, password);
@@ -57,7 +60,7 @@ public class UserService {
 		return user;
 	}
 	
-//	아이디 중복확인 로직
+
 	public boolean userIdDuplicate(String userId) {
 		Connection conn = getConnection();
 		boolean flag = dao.userIdDuplicate(conn, userId);
@@ -65,7 +68,7 @@ public class UserService {
 		return flag;
 	}
 	
-//	휴대폰 중복확인 로직
+
 	public boolean phoneDuplicate(String phone) {
 		Connection conn = getConnection();
 		boolean flag = dao.phoneDuplicate(conn, phone);
@@ -73,7 +76,7 @@ public class UserService {
 		return flag;
 	}
 	
-//	이메일 중복확인 로직
+
 	public boolean emailDuplicate(String email) {
 		Connection conn = getConnection();
 		boolean flag = dao.emailDuplicate(conn, email);
@@ -81,7 +84,7 @@ public class UserService {
 		return flag;
 	}
 	
-//	회원가입 로직
+
 	public int userJoin(String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		Connection conn = getConnection();
 		int result = dao.userJoin(conn, id, password, name, bday, phone, post, address, detailedAddress, email, gender);
@@ -98,9 +101,9 @@ public class UserService {
 	
 	
 	
-//	------------------------------------------------ ㅆ
+//	------------------------------------------------
 	
-//	마이페이지 이동 로직
+
 	public User userSelect(String id) {
 		Connection conn = getConnection();
 		User u = dao.userSelect(conn, id);
@@ -108,7 +111,7 @@ public class UserService {
 		return u;
 	}
 	
-//	회원정보 수정 로직
+
 	public int userUpdate(String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		Connection conn = getConnection();
 		int result = dao.userUpdate(conn, id, newPw, email, phone, postNum, address, detailAddress);
@@ -124,7 +127,7 @@ public class UserService {
 	}
 	
 	
-//	회원정보 삭제 로직
+
 	public int userDelete(String id) {
 		Connection conn = getConnection();
 		int result = dao.userDelete(conn, id);
@@ -140,7 +143,7 @@ public class UserService {
 	}
 	
 	
-//	북마크 로직
+
 	public List<UserBookMarkBoard> userBookMarkList(String id, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<UserBookMarkBoard> list = dao.userBookMarkBoard(conn, id, cPage, numPerPage);
@@ -148,7 +151,7 @@ public class UserService {
 		return list;
 	}
 	
-//	북마크 목록 페이징 처리 로직
+
 	public int selectBoardCount(String id) {
 		Connection conn = getConnection();
 		int count = dao.selectBoardCount(conn, id);
@@ -156,9 +159,9 @@ public class UserService {
 		return count;
 	}
 	
-//	------------ ㅆ
+//	------------
 	
-//	일반사용자 마이페이지 - 결제내역 기능
+
 	public List<UserPaymentHistory> userPaymentHistory(String id) {
 		Connection conn = getConnection();
 		List<UserPaymentHistory> list = dao.userPaymentHistory(conn, id);
@@ -172,7 +175,7 @@ public class UserService {
 //	----------------------------------------------------------------------
 	
 
-	// API 이메일을 받아서 로그인
+	
 	public User apiLogin(String userEmail) {
 		Connection conn = getConnection();
 		User user = dao.userApiLogin(conn, userEmail);
@@ -197,7 +200,7 @@ public class UserService {
      }
      
      
-     //펫시터 회원가입 아이디 중복검사
+    
      public boolean sitterIdDuplicate(String sitterId) {
         Connection conn = getConnection();
         boolean flag = dao.sitterIdDuplicate(conn, sitterId);
@@ -205,7 +208,7 @@ public class UserService {
         return flag;
      }
      
-     //펫시터 회원가입 이메일 중복검사
+     
      public boolean sitterEmailDuplicate(String email) {
         Connection conn = getConnection();
         boolean flag = dao.sitterEmailDuplicate(conn, email);
@@ -213,7 +216,7 @@ public class UserService {
         return flag;
      }
      
-     //펫시터 회원가입 휴대폰 중복검사
+    
      public boolean sitterPhoneDuplicate(String phone) {
         Connection conn = getConnection();
         boolean flag = dao.sitterPhoneDuplicate(conn, phone);

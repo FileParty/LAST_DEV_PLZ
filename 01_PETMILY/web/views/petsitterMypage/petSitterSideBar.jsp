@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@page  import="com.petmily.user.model.vo.User"  %>
+<%
+	User u = (User)session.getAttribute("loginUser");
+%>
 
-    
 <style>
 #menu{
 	width: 230px;
@@ -23,8 +26,8 @@ hr{
 		<ul type="none">
 			<li class="title">회원정보</li>
 			<hr class="hr-line"/>
-			<li class="content"><a href=""> - 회원정보 수정</a></li>
-			<li class="content"><a href=""> - 회원 탈퇴</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/Update?userId=<%=u.getUserId()%>"> - 회원정보 수정</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/Delete?userId=<%=u.getUserId()%>"> - 회원 탈퇴</a></li>
 			<br/>
 			<li class="title">작성글</li>
 			<hr class="hr-line"/>

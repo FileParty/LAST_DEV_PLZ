@@ -161,7 +161,7 @@ button#enroll-btn {
     /* 버튼 크기, 테두리 설정 */
     padding: 10px 60px;
     margin-left: 610px;
-
+	margin-bottom:50px;
     background-color: black; /* 버튼 배경 */
     border-radius:25px; /* 버튼을 둥글게! */
     border: 0; /* 박스 선 없애기! */
@@ -443,9 +443,6 @@ span.spanClass {
                 </tr>
                 
             </table>
-
-            <br>
-            <br>
             
 			<div>
 			<br>

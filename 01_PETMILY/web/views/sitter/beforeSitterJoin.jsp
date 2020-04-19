@@ -17,6 +17,7 @@ article {
 section{
 	background-image: url(<%=request.getContextPath()%>/img/common/sitter_2.jpg);
 	height:800px !important;
+	
 }
 
 
@@ -24,7 +25,7 @@ section{
 #btnn_btnn {
     /* 버튼 크기, 테두리 설정 */
     padding: 10px 25px;
-    margin-left: 100px;
+    margin-left: 300px;
 
     background-color: black; /* 버튼 배경 */
     border-radius:25px; /* 버튼을 둥글게! */
@@ -45,7 +46,7 @@ section{
 <body>
 
 <section>
-		<div style="margin-left: 100px; margin-top:150px;">
+		<div style="margin-left: 300px; margin-top:150px;">
 			<h1 style="font-weight:500; font-size:28pt;">펫시터 지원</h1>
 			우리집에서 사랑스러운 강아지를 돌보며 수익을 벌어요.<br/>
 			혼자 남겨진 반려 동물에게 행복한 시간을 선물해볼까요?

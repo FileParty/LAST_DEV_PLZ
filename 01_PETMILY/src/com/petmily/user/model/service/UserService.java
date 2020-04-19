@@ -49,10 +49,10 @@ public class UserService {
 	    }
 	
 	
-//	------------------------------ 
+//	------------------------------ ㅆ
 	
 	
-
+//	로그인 로직
 	public User userSelect(String user_id, String password) {
 		Connection conn = getConnection();
 		User user = dao.userSelect(conn, user_id, password);
@@ -88,7 +88,7 @@ public class UserService {
 		return flag;
 	}
 	
-
+//	휴대폰 중복확인 로직
 	public boolean phoneDuplicate(String phone) {
 		Connection conn = getConnection();
 		boolean flag = dao.phoneDuplicate(conn, phone);
@@ -96,7 +96,7 @@ public class UserService {
 		return flag;
 	}
 	
-
+//	이메일 중복확인 로직
 	public boolean emailDuplicate(String email) {
 		Connection conn = getConnection();
 		boolean flag = dao.emailDuplicate(conn, email);
@@ -104,7 +104,7 @@ public class UserService {
 		return flag;
 	}
 	
-
+//	회원가입 로직
 	public int userJoin(String id, String password, String name, String bday, String phone, String post, String address, String detailedAddress, String email, String gender) {
 		Connection conn = getConnection();
 		int result = dao.userJoin(conn, id, password, name, bday, phone, post, address, detailedAddress, email, gender);
@@ -121,9 +121,9 @@ public class UserService {
 	
 	
 	
-//	------------------------------------------------
+//	------------------------------------------------ ㅆ
 	
-
+//	일반사용자 마이페이지 이동 로직
 	public User userSelect(String id) {
 		Connection conn = getConnection();
 		User u = dao.userSelect(conn, id);
@@ -131,7 +131,7 @@ public class UserService {
 		return u;
 	}
 	
-
+//	일반사용자 마이페이지 - 회원정보 수정 로직
 	public int userUpdate(String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		Connection conn = getConnection();
 		int result = dao.userUpdate(conn, id, newPw, email, phone, postNum, address, detailAddress);
@@ -147,7 +147,7 @@ public class UserService {
 	}
 	
 	
-
+//	일반사용자 마이페이지 - 회원정보 삭제(탈퇴) 로직
 	public int userDelete(String id) {
 		Connection conn = getConnection();
 		int result = dao.userDelete(conn, id);
@@ -163,7 +163,7 @@ public class UserService {
 	}
 	
 	
-
+//	일반사용자 마이페이지 - 북마크 리스트 로직
 	public List<UserBookMarkBoard> userBookMarkList(String id, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<UserBookMarkBoard> list = dao.userBookMarkBoard(conn, id, cPage, numPerPage);
@@ -171,7 +171,7 @@ public class UserService {
 		return list;
 	}
 	
-
+//	일반사용자 마이페이지 - 북마크 페이징 로직
 	public int selectBoardCount(String id) {
 		Connection conn = getConnection();
 		int count = dao.selectBoardCount(conn, id);
@@ -179,9 +179,9 @@ public class UserService {
 		return count;
 	}
 	
-//	------------
+//	------------ ㅆ
 	
-
+//	일반사용자 마이페이지 - 결제내역 로직
 	public List<UserPaymentHistory> userPaymentHistory(String id) {
 		Connection conn = getConnection();
 		List<UserPaymentHistory> list = dao.userPaymentHistory(conn, id);

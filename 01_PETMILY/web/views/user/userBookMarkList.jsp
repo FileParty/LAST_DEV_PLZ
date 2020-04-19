@@ -7,6 +7,8 @@
 	for(UserBookMarkBoard ubmb : list) {
 		System.out.println("화면에 갖고오나?"+ubmb);
 	}
+	
+	int count=1;
 %>     
     
 <%@ include file="/views/common/header.jsp" %>
@@ -181,7 +183,7 @@
                     <% for(UserBookMarkBoard ubmb : list) { %>
 	                 <tr>
                     	<!-- no -->
-						<td><p style="text-align: center;"><%= ubmb.getBoardCode() %></p></td>
+						<td><p style="text-align: center;"><%= count++ %></p></td>
 						<!-- 제목 -->
 						<td><p style="text-align: center;"><%= ubmb.getBoardTitle() %></p></td>
 						<!-- 펫 시터 이름 --> 

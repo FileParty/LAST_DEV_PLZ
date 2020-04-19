@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section,form {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%>
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            height: 100%;
+            height: auto;
         }
     .breadcrumb .active {
         color: white;

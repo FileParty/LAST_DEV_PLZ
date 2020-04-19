@@ -16,19 +16,19 @@
 
 
 <style>
-   *{   
-       
+  *{   
         box-sizing: border-box;
         font-family: 'Noto Sans KR', sans-serif;
     }
-    html, body,section {
-          height: 100%;
+    html, body,section{
+          height: auto;
       }
     .col-9{
         height: 100%;
         /* overflow: hidden; */
+        
     }
- 
+
     .container{
         height: 100%;
         padding: 0;
@@ -42,16 +42,20 @@
     	overflow: hidden;
     }
     .row{
+    	height: 100%;
         padding: 0;
         margin: 0;
+        height: 100%;
     }
     .menu{
+            height: 100%;
             width: 230px;
             /* border: 1px solid yellow; */
             margin-top: 50px;
 
         }
     #menu{
+    height: 100%;
         width: 230px;
         /* position : fixed; */
     }
@@ -62,6 +66,7 @@
         font-size: 14px;
     }
     .content{
+    height: 100%;
         font-size: 12px;
         margin-bottom: 5px;
     }
@@ -71,7 +76,7 @@
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            /* height: 100%; */
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -90,13 +95,15 @@
         font-size: 12px;
     }
     hr{
+    height: 100%;
             margin-left: 0;
             width: 10%;
         }
     table{
+    display:flex;
         border-radius: 5px;
         margin-left: 50px;
-        margin-top: 60px;
+        margin-top: 30px;
     }
  .notice{
     margin: 20px;
@@ -175,52 +182,8 @@
 <!-- 회원탈퇴 화면 -->
     <section>
         <div class="container">
-            
-            
-            <!-- form을 넘기기 위해 hidden 처리한 input을 만듦. -->
-            
-            
             <div class="row">
-            <div class="col-2 menu">
-                    <div id="menu">
-                        <ul type="none">
-                            <li class="title">회원정보</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 회원정보 수정</a></li>
-                            <li class="content"><a href=""> - 회원 탈퇴</a></li>
-                   
-                            <br/>
-                            
-                            <li class="title">작성글</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 작성글 보기</a></li>
-                            <li class="content"><a href=""> > 작성한 비밀후기 보기</a></li>
-                            <br/>
-                            
-                            <li class="title">예약</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 예약 현황</a></li>
-                            <li class="content"><a href=""> - 결제 전 예약</a></li>
-                            <li class="content"><a href=""> - 결제 완료 예약</a></li>
-                            <li class="content"><a href=""> - 내 예약 일정</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
-                            <br/>
-                            
-                            <li class="title">정산</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> > 이번 달 정산 현황</a></li>
-                            <li class="content"><a href=""> - 이전 정산 보기</a></li>
-                            <br/>
-                            
-                            <li class="title">자격증</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 보유 자격증 목록</a></li>
-                            <li class="content"><a href=""> - 자격증 추가</a></li>
-                            <br/>
-                            
-                        </ul>
-                    </div>
-                </div>
+            <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -231,10 +194,11 @@
                     <li class="breadcrumb-item active">이번 달 정산 현황</li>
                 </ul>
                    <!-- 콘텐츠 영역 -->
-                    <div class="row notice">
-                        <p><회원 탈퇴></p>
+                    <div class="notice">
+                       
                         <p>* 정산은 매달 5일에 이루어 집니다.</p>
-						<p>* 매달 1일부터 말일까지 결제 완료된 금액에 대해서 정산을 진행합니다. * 건당 수수료 10%가 (주)펫 밀리로 지급됩니다.</p>
+						<p>* 매달 1일부터 말일까지 결제 완료된 금액에 대해서 정산을 진행합니다.</p>
+						<p>* 건당 수수료 10%가 (주)펫 밀리로 지급됩니다.</p>
 						<p>* 정산된 금액은 회원정보에 등록된 계좌로 입금됩니다.</p>
                     </div>     
                		<select id="month" name="month" onchange="end();">
@@ -253,12 +217,7 @@
 						<option value="12">12</option>	
 					</select>
 				
-					<script>
-					function end(){
-						
-						location.replace('<%=request.getContextPath()%>/sitter/calculatorEnd?month='+event.target.value);
-					}
-					</script>
+
                         <table>
                         <tr class="tr-blank">
                         <th>No</th>
@@ -269,8 +228,6 @@
                         <th>수수료</th>
                         <th>결제 날짜</th>
                     </tr>
-    
-                    
 					
                     <%for(Calculator c:list){ %>
                     	<tr>
@@ -308,18 +265,25 @@
 							isum += minus;
 							
 						} %>
-						
+						<div style="margin-bottom:50px;">
 						<span>이번 달 총 정산 금액 : <span> <%=sum-isum %><span>원</span>
 						</div>
                     </div>
                 </div>
             </div>
-        
         </div>
     </section>
-   
     
-    <br><br><br><br>
+<div style="bottom:0;">
+<%@ include file="/views/common/footer.jsp" %>
+</div>
+    
+<script>
+	function end(){
+		
+		location.replace('<%=request.getContextPath()%>/sitter/calculatorEnd?month='+event.target.value);
+	}
+	</script>
 
     <!-- Optional JavaScript -->
     <!— jQuery first, then Popper.js, then Bootstrap JS —>
@@ -328,5 +292,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<%@ include file="/views/common/footer.jsp" %>

@@ -17,7 +17,7 @@
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
@@ -59,7 +59,7 @@
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            /* height: 100%; */
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -257,6 +257,7 @@ label.custom-file-label::after{
                 </ul>
                  
                     <table>
+                     <br>
                         <tr>
                             <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td>                            
                             <td class="sub-title" style="width: 100px;">신규 메세지 : 3건<hr/></td>                                                       
@@ -297,13 +298,13 @@ label.custom-file-label::after{
                         </tr>
                         
                         </table>
-                        <br/>
-                      
+                        <br/> <br>
+                       <br><br><br><br><br><br>
                   </div>
               </div>
           </div>
     </section>
-   
+ 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

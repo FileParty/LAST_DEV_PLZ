@@ -246,7 +246,7 @@ public class SearchService {
 		
 		Connection conn=getConnection();
 		
-		boolean flag=dao.findBookmark(conn,userId,petsitterId);
+		boolean flag=true;//dao.findBookmark(conn,userId,petsitterId);
 		
 		close(conn);
 		

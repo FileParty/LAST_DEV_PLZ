@@ -135,7 +135,7 @@ public PetsitterMypageReservation afterPaymentSecret(Connection conn,String sitt
 	
 }
 
-public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connection conn,String sitterId){
+	public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connection conn,String sitterId){
 
 	
 	PreparedStatement pstmt=null;
@@ -179,6 +179,10 @@ public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connecti
 		close(rs);
 		close(pstmt);
 	}
+	
+	return list;
+	
+}
 
 
 public  PetsitterMypageExtraFee extraFeeDetail(Connection conn, int rsCode) {

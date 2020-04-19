@@ -8,10 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import com.petmily.search.model.vo.PetsitterSearch;
 import com.petmily.search.service.SearchService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class PetsitterSearch
@@ -49,6 +50,13 @@ public class PetsitterSearchServlet extends HttpServlet {
 		
 		
 		List<PetsitterSearch> list=new SearchService().selectSearch(cPage,numPerPage);
+		
+		HttpSession session = request.getSession();
+		User u=(User)session.getAttribute("loginUser");
+		
+		String userId=u.getUserId();
+		
+		//new SearchService().checkBookMark(list,userId);
 		
 		// 사용자가 원하는 페이지(데이터)를 볼 수 있게 버튼을 만든다 -> pageBar
 		// 전체 데이터 갯수

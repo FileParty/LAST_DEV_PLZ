@@ -1,6 +1,8 @@
 package com.petmily.search.service;
 
 import static com.petmily.common.JDBCTemplate.close;
+import static com.petmily.common.JDBCTemplate.commit;
+import static com.petmily.common.JDBCTemplate.rollback;
 import static com.petmily.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -223,11 +225,24 @@ public class SearchService {
 		
 		int result=dao.insertBookmark(conn,userId,petsitterId);
 		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
 		close(conn);
 		
 		return result;
 	}
 	
+	public boolean findBookmark(String userId,String petsitterId) {
+		
+		Connection conn=getConnection();
+		
+		boolean flag=dao.findBookmark(conn,userId,petsitterId);
+		
+		close(conn);
+		
+		return flag;
+	}
 	
 	
 }

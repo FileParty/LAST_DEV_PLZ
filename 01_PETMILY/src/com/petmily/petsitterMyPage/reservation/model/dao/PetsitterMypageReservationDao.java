@@ -37,11 +37,13 @@ public PetsitterMypageReservationDao() {
 		List<PetsitterMypageReservation> list=new ArrayList<PetsitterMypageReservation>();
 		
 		String sql=prop.getProperty("selectBeforePaymentRerservation");
+		String resType="요청";
 		
 		try {
 			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, petsitterId);
+			pstmt.setString(2, resType);
 			
 			rs=pstmt.executeQuery();
 			
@@ -51,7 +53,7 @@ public PetsitterMypageReservationDao() {
 				
 				pmr.setReservationCode(rs.getInt("reservation_code"));
 				pmr.setUserId(rs.getString("user_id"));
-				pmr.setPetsitterId(rs.getString("pet_sitter_id"));
+				pmr.setPetsitterId(rs.getString("pet_setter_id"));
 				pmr.setBoardCode(rs.getInt("board_code"));
 				pmr.setCheckInDate(rs.getDate("checkin_date"));
 				pmr.setCheckOutDate(rs.getDate("checkout_date"));
@@ -59,7 +61,7 @@ public PetsitterMypageReservationDao() {
 				pmr.setPriceEndDate(rs.getDate("price_end_date"));
 				pmr.setPrice(rs.getInt("price"));
 				pmr.setResType(rs.getString("res_type"));
-				pmr.setPetMedication(rs.getString("pet_medication"));
+				pmr.setPetMedication(rs.getString("pet_mdeication"));
 				pmr.setPetPickUp(rs.getString("pet_pick_up"));
 				pmr.setUserName(rs.getString("user_name"));
 				

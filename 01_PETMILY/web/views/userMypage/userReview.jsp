@@ -175,13 +175,13 @@ pageEncoding="UTF-8"%>
                    <%for(UserReview ur:list){ %>
                    	<tr style="font-size: 12px;">
                    		<td><%=count++ %></td>
-                   		<td class="starR on"><%for(int i=0;i<ur.getReviewStar();i++){%><i class="far fa-star"></i><%}%></td>
+                   		<td class="starR on"><%for(int i=0;i<ur.getReviewStar();i++){%><span>⭐</span><%}%></td>
                    		<td><%=ur.getReviewText() %></td>
                    		<td><%=ur.getPetsitterName() %></td>
                    		<td><%=ur.getCheckIn() %></td>
                    		<td><%=ur.getCheckOut() %></td>
                    		<td><a href="javascript:void(0);" 
-                   		onclick="location.replace('<%=request.getContextPath()%>/user/reviewDetail?userId=<%=loginUser.getUserId()%>&PetsitterId=<%=ur.getPetsitterId()%>')" style="color: gray;" >작성글 보기</a></td>
+                   		onclick="location.replace('<%=request.getContextPath()%>/BoardList.do?boardCode=<%=ur.getBoardCode() %>')" style="color: gray;" >작성글 보기</a></td>
                    	</tr>
                    <%} %>
 						

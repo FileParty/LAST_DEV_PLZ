@@ -12,14 +12,12 @@ pageEncoding="UTF-8"%>
 		<div class="col-4">
 			<div class="row justify-content-between">
 				
-				<div id="reviewCount">총 3건</div> 
-				<div id="starAvg">평점 4점</div>	
 			</div>
 			<%for(PetsitterMypageUserReview pmur:list) {%>			
 			<br>
 			<div class="row justify-content-between">
 				<div class="colum"><%=pmur.getPetsitterId() %> 님의 후기</div>
-				<div class="colum">별점<%for(int i=0;i<pmur.getReviewStar();i++){%><i class="far fa-star"></i><%}%></div>
+				<div class="colum">별점<%for(int i=0;i<pmur.getReviewStar();i++){%><span>⭐</span><%}%></div>
 			</div>
 			
 			<div class="balloon"> <%=pmur.getReviewText()%> </div>

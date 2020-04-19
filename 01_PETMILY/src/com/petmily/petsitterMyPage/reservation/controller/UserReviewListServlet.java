@@ -38,7 +38,7 @@ public class UserReviewListServlet extends HttpServlet {
 		//User u=(User)session.getAttribute("loginUser");
 		
 		String userId=request.getParameter("userId");
-		
+		//String userId="user01";
 		
 		List<PetsitterMypageUserReview> list=new PetsitterMypageReservationService().selectPetsitterMypageUserReview(userId);
 		

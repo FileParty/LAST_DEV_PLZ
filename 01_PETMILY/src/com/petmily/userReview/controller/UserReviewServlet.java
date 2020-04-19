@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.petmily.user.model.vo.User;
 import com.petmily.userReview.model.vo.UserReview;
 import com.petmily.userReview.service.UserReviewService;
 
@@ -32,11 +33,16 @@ public class UserReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId=request.getParameter("userId");
-		userId = "user10";
+		
+		User u=(User)(request.getSession().getAttribute("loginUser"));
+		
+		String userId=u.getUserId();
+		
+		//String userId=request.getParameter("userId");
+		//String userId = "user10";
 		List<UserReview> list=new UserReviewService().selectUserReviewList(userId);
 		//System.out.println(list.size());
-		//System.out.println(userId);
+		System.out.println(userId);
 		//System.out.println(list);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/userMypage/userReview.jsp").forward(request, response);

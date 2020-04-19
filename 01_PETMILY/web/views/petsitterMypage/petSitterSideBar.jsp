@@ -34,7 +34,7 @@ hr{
 			<li class="title">예약</li>
 			<hr class="hr-line"/>
 			<li class="content"><a href=""> - 요약 현황</a></li>
-			<li class="content"><a href=""> - 결제 전 예약</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/petsitter/mypage/beforePaymentReservation"> - 결제 전 예약</a></li>
 			<li class="content"><a href=""> - 결제 완료 예약</a></li>
 			<li class="content"><a href=""> - 내 예약 일정</a></li>
 			<br/>

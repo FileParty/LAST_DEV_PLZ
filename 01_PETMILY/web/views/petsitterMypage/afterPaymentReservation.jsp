@@ -47,15 +47,11 @@ pageEncoding="UTF-8"%>
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
             height: 100%;
             
         }
-    #menu{
-        width: 230px;
-        position : fixed;
-        height: 100%;
-    }
+
     ul{
         padding-inline-start:0;
     }

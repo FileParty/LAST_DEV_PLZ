@@ -135,51 +135,54 @@ public PetsitterMypageReservation afterPaymentSecret(Connection conn,String sitt
 	
 }
 
-public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connection conn,String sitterId){
-	   
-	   PreparedStatement pstmt=null;
-	   ResultSet rs=null;
-	   List<PetsitterMypageReservation> list=new ArrayList<PetsitterMypageReservation>();
-	   
-	   String sql=prop.getProperty("selectBeforePaymentRerservation");
-	   String resType="요청";
-	   
-	   try {
-	      
-	      pstmt=conn.prepareStatement(sql);
-	      pstmt.setString(1, sitterId);
-	      pstmt.setString(2,resType);
-	      
-	      rs=pstmt.executeQuery();
-	      
-	      while(rs.next()) {
-	         
-	         PetsitterMypageReservation pmr=new PetsitterMypageReservation();
-	         
-	         pmr.setReservationCode(rs.getInt("reservation_code"));
-	         pmr.setUserId(rs.getString("user_id"));
-	         pmr.setPetsitterId(rs.getString("pet_setter_id"));
-	         pmr.setBoardCode(rs.getInt("board_code"));
-	         pmr.setCheckInDate(rs.getDate("checkin_date"));
-	         pmr.setCheckOutDate(rs.getDate("checkout_date"));
-	         pmr.setPlusQuestions(rs.getString("plus_questions"));
-	         pmr.setPriceEndDate(rs.getDate("price_end_date"));
-	         pmr.setPrice(rs.getInt("price"));
-	         pmr.setResType(rs.getString("res_type"));
-	         pmr.setPetMedication(rs.getString("pet_mdeication"));
-	         pmr.setPetPickUp(rs.getString("pet_pick_up"));
-	         pmr.setUserName(rs.getString("user_name"));
-	         
-	         list.add(pmr);
-	      }
-	   }catch(SQLException e) {
-	      e.printStackTrace();
-	   }finally {
-	      close(rs);
-	      close(pstmt);
-	   }
-	   return list;
+	public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connection conn,String sitterId){
+
+	
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	List<PetsitterMypageReservation> list=new ArrayList<PetsitterMypageReservation>();
+	
+	String sql=prop.getProperty("selectBeforePaymentRerservation");
+	String resType="요청";
+	
+	try {
+		
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setString(1, sitterId);
+		pstmt.setString(2,resType);
+		
+		rs=pstmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			PetsitterMypageReservation pmr=new PetsitterMypageReservation();
+			
+			pmr.setReservationCode(rs.getInt("reservation_code"));
+			pmr.setUserId(rs.getString("user_id"));
+			pmr.setPetsitterId(rs.getString("pet_setter_id"));
+			pmr.setBoardCode(rs.getInt("board_code"));
+			pmr.setCheckInDate(rs.getDate("checkin_date"));
+			pmr.setCheckOutDate(rs.getDate("checkout_date"));
+			pmr.setPlusQuestions(rs.getString("plus_questions"));
+			pmr.setPriceEndDate(rs.getDate("price_end_date"));
+			pmr.setPrice(rs.getInt("price"));
+			pmr.setResType(rs.getString("res_type"));
+			pmr.setPetMedication(rs.getString("pet_mdeication"));
+			pmr.setPetPickUp(rs.getString("pet_pick_up"));
+			pmr.setUserName(rs.getString("user_name"));
+			
+			list.add(pmr);
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
 	}
+	
+	return list;
+	
+}
 
 
 public  PetsitterMypageExtraFee extraFeeDetail(Connection conn, int rsCode) {

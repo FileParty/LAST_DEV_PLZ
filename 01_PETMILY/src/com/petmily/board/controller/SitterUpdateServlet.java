@@ -16,7 +16,7 @@ import com.petmily.user.model.vo.User;
 /**
  * Servlet implementation class SitterUpdateEndServlet
  */
-@WebServlet("/sitter/update")
+@WebServlet("/sitter/update2")
 public class SitterUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

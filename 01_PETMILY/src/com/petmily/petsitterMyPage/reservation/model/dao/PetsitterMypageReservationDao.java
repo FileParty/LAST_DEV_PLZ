@@ -160,11 +160,13 @@ public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connecti
 	List<PetsitterMypageReservation> list=new ArrayList<PetsitterMypageReservation>();
 	
 	String sql=prop.getProperty("selectBeforePaymentRerservation");
+	String resType="요청";
 	
 	try {
 		
 		pstmt=conn.prepareStatement(sql);
 		pstmt.setString(1, sitterId);
+		pstmt.setString(2,resType);
 		
 		rs=pstmt.executeQuery();
 		

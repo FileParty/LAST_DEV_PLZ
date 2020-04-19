@@ -148,7 +148,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                   
                   <%if(loginUser==null||loginUser.getUserType().equals("일반")){ %>
                   	  <h2 class="ml-auto" id=<%=ps.getPetsitterId() %> >
-                  
+                  		
                 		<i class="far fa-heart bookmark"  ></i>
                 		
                   	</h2>

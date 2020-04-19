@@ -18,13 +18,22 @@ public class SearchService {
 	private SearchDao dao=new SearchDao();
 	
 	
-	public List<PetsitterSearch> selectSearch(int cPage,int numPerPage){
+	public List<PetsitterSearch> selectSearch(int cPage,int numPerPage,String userId){
 		
 		Connection conn=getConnection();
 		
 		List<PetsitterSearch> list=dao.selectSearch(conn,cPage,numPerPage);
 		
 		imageCommentSelect(conn, list);
+		
+		if(userId!=null) {
+			
+			for(PetsitterSearch ps:list) {
+				
+				boolean flag=dao.selectBookmark(conn,ps.getPetsitterId(),userId);
+				ps.setPrefer(flag);
+			}
+		}
 
 		close(conn);
 		

@@ -13,9 +13,11 @@ import java.util.List;
 import java.util.Properties;
 
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageDetail;
+import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageExtraFee;
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypagePetprofile;
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageReservation;
 import com.petmily.petsitterMyPage.reservation.model.vo.PetsitterMypageUserReview;
+import com.petmily.petsitterReview.model.vo.PetSitterReview;
 import com.petmily.userReview.model.dao.UserReviewDao;
 
 public class PetsitterMypageReservationDao {
@@ -32,6 +34,107 @@ public PetsitterMypageReservationDao() {
 		}
 	}
 
+public PetSitterReview selectSecret(Connection conn, int rsCode){
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	PetSitterReview psr= null;
+	
+	String sql=prop.getProperty("selectSecret");
+	
+try {
+		
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, rsCode);
+		
+		rs=pstmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			psr =new PetSitterReview();
+			
+			psr.setSitterReviewNo(rs.getInt("pet_sitter_review_no"));
+			psr.setUserId(rs.getString("user_id"));
+			psr.setRsCode(rs.getInt("reservation_code"));
+			psr.setReviewTxt(rs.getString("review_text"));
+			psr.setReviewStar(rs.getInt("review_star"));
+			psr.setReviewDate(rs.getString("review_date"));
+			
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}
+	return psr;
+	
+}
+
+
+
+public int insertSecret(Connection conn,PetSitterReview psr) {
+	
+	int result= 0;
+	PreparedStatement pstmt =null;
+	String sql = prop.getProperty("insertSecret");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, psr.getUserId());
+		pstmt.setInt(2, psr.getRsCode());
+		pstmt.setString(3,psr.getSitterId());
+		pstmt.setString(4, psr.getReviewTxt());
+		pstmt.setInt(5, psr.getReviewStar());		
+		
+		
+		result = pstmt.executeUpdate();
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	System.out.println(result);
+	return result;
+	
+}
+
+public PetsitterMypageReservation afterPaymentSecret(Connection conn,String sitterId,int rsCode) {
+	
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	PetsitterMypageReservation pmr= null;
+	
+	String sql=prop.getProperty("afterPaymentSecret");
+	
+	try {
+		
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, rsCode);
+		pstmt.setString(2, sitterId);
+		
+		rs=pstmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			pmr =new PetsitterMypageReservation();
+			
+			pmr.setReservationCode(rs.getInt("RESERVATION_CODE"));
+			pmr.setUserId(rs.getString("user_id"));
+			
+			
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}
+	return pmr;
+	
+	
+}
+
 public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connection conn,String sitterId){
 	
 	PreparedStatement pstmt=null;
@@ -39,6 +142,127 @@ public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connecti
 	List<PetsitterMypageReservation> list=new ArrayList<PetsitterMypageReservation>();
 	
 	String sql=prop.getProperty("selectBeforePaymentRerservation");
+	
+	try {
+		
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setString(1, sitterId);
+		
+		rs=pstmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			PetsitterMypageReservation pmr=new PetsitterMypageReservation();
+			
+			pmr.setReservationCode(rs.getInt("reservation_code"));
+			pmr.setUserId(rs.getString("user_id"));
+			pmr.setPetsitterId(rs.getString("pet_setter_id"));
+			pmr.setBoardCode(rs.getInt("board_code"));
+			pmr.setCheckInDate(rs.getDate("checkin_date"));
+			pmr.setCheckOutDate(rs.getDate("checkout_date"));
+			pmr.setPlusQuestions(rs.getString("plus_questions"));
+			pmr.setPriceEndDate(rs.getDate("price_end_date"));
+			pmr.setPrice(rs.getInt("price"));
+			pmr.setResType(rs.getString("res_type"));
+			pmr.setPetMedication(rs.getString("pet_mdeication"));
+			pmr.setPetPickUp(rs.getString("pet_pick_up"));
+			pmr.setUserName(rs.getString("user_name"));
+			
+			list.add(pmr);
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}
+	return list;
+}
+
+public  PetsitterMypageExtraFee extraFeeDetail(Connection conn, int rsCode) {
+	
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	PetsitterMypageExtraFee pme= null;
+	
+	String sql=prop.getProperty("selectExtraFeeDetail");
+	
+	try {
+		
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setInt(1, rsCode);
+		
+		rs=pstmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			pme=new PetsitterMypageExtraFee();
+			
+			pme.setReservationCode(rs.getInt("reservation_code"));
+			pme.setFinalyPrice(rs.getInt("finaly_price"));
+			pme.setSurchargeTxt(rs.getString("surcharge_text"));
+			pme.setResImgFileName(rs.getString("res_sur_img_filename"));
+			pme.setResSurType(rs.getString("res_sur_type_values"));
+			pme.setResType(rs.getString("res_type"));
+			pme.setResEndDate(rs.getString("res_sur_end_date"));
+			
+			
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}
+	return pme;
+	
+}
+
+public PetsitterMypageExtraFee extraFee(Connection conn, String sitterId) {
+	
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	PetsitterMypageExtraFee pme= null;
+	
+	String sql=prop.getProperty("selectExtraFee");
+	
+	try {
+		
+		pstmt=conn.prepareStatement(sql);
+		pstmt.setString(1, sitterId);
+		
+		rs=pstmt.executeQuery();
+		
+		if(rs.next()) {
+			
+			pme=new PetsitterMypageExtraFee();
+			
+			pme.setReservationCode(rs.getInt("reservation_code"));
+			pme.setFinalyPrice(rs.getInt("finaly_price"));
+			pme.setSurchargeTxt(rs.getString("surcharge_text"));
+			pme.setResImgFileName(rs.getString("res_sur_img_filename"));
+			pme.setResSurType(rs.getString("res_sur_type_values"));
+			pme.setResType(rs.getString("res_type"));
+			pme.setResEndDate(rs.getString("res_sur_end_date"));
+			
+			
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}
+	return pme;
+	
+}
+public List<PetsitterMypageReservation> selectAfterPaymentRerservation(Connection conn,String sitterId){
+	
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	List<PetsitterMypageReservation> list=new ArrayList<PetsitterMypageReservation>();
+	
+	String sql=prop.getProperty("selectAfterPaymentRerservation");
 	
 	try {
 		
@@ -136,6 +360,25 @@ public List<PetsitterMypageReservation> selectBeforePaymentRerservation(Connecti
 		
 	}
 	
+	public int end(Connection conn,int pcode) {
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		String status="취소";
+		String sql=prop.getProperty("endStatus");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,status);
+			pstmt.setInt(2, pcode);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
 	
 	public int updateStatusRefusal(Connection conn, int pcode) {
 		PreparedStatement pstmt=null;

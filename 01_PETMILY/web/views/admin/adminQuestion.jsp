@@ -56,7 +56,7 @@
 						<td><% if(aq.getEmailTitle().length()<10){ %>
 								<%=aq.getEmailTitle() %>
 							<% } else { %>
-								<%=aq.getEmailTitle().substring(0,11) + "..." %>
+								<%=aq.getEmailTitle().substring(0,aq.getEmailTitle().length()/2+4) + "..." %>
 							<% } %>
 							<input type="hidden" class="question" value="<%=aq.getEmailTitle()%>">
 							<input type="hidden" class="scNum" value="<%=aq.getScNum()%>">

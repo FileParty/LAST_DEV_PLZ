@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="/views/common/header.jsp" %>
 <style>
 body{
 	margin-bottom:0px;
@@ -50,7 +50,7 @@ table#enrollTB {
 }
 
 tr.tr-blank {
-	border: 1px solid;
+	/* border: 1px solid; */
 }
 
 /* 테이블 내 첫번째 td 설정 */
@@ -59,6 +59,7 @@ table#enrollTB tr >td:first-child {
     width: 250px;
     text-align: right;
 }
+
 
 /* 회원가입 테이블 내 td 설정 */
 tr.tr-blank td{
@@ -79,7 +80,7 @@ td.second-td input {
     line-height: 20px;
     /* 테두리설정 */
     border-radius: 5px;
-    border: 1px solid rgb(182, 182, 182);
+    /* border: 1px solid rgb(182, 182, 182); */
 }
 input#phone {
 	line-height: 20px;
@@ -105,7 +106,7 @@ select#email {
     height: 30px;
 	/* 테두리설정 */
     border-radius: 5px;
-    border: 1px solid rgb(182, 182, 182);
+    /* border: 1px solid rgb(182, 182, 182); */
 }
 /* 우편번호, 지번주소, 도로명주소, 상세주소입력 input 설정 */
 input#postNum,
@@ -172,9 +173,18 @@ button#enroll-btn:hover {
     cursor: pointer;
     background-color: rgb(98, 98, 98);
 }
+#enrollTB td{
+	border :none;
+}
+
+span.spanClass {
+	margin-left: 80px;
+	visibility:hidden; 
+}
+
 </style>
 
-<%@ include file="/views/common/header.jsp" %>
+
 	<!-- 내가 적용한 CSS : 회원가입 -->
 	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/joinForm.css"> --%>
 	<!-- 내가 적용한 jQuery -->
@@ -183,7 +193,6 @@ button#enroll-btn:hover {
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<!-- 폰트 -->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
 
 <!-- 회원가입 영역 -->
 <section>
@@ -208,9 +217,10 @@ button#enroll-btn:hover {
                     </td>
                 </tr>
 
-                <tr class="tr-blank">
+                <tr>
                     <td></td>
-                    <td class="div-msg">비밀번호 중복확인 메세지 영역 </td>
+                    <td id="pwMsg">
+                    	<span id="result" class="spanClass">비밀번호 중복확인 메세지 영역</span></td>
                 </tr>
 
                 <tr class="tr-blank">
@@ -228,7 +238,7 @@ button#enroll-btn:hover {
                     </td>
                 </tr>
                 
-				<tr class="tr-blank">
+				<!-- <tr class="tr-blank">
 				<td></td>
 				</tr>
 				<tr class="tr-blank">
@@ -236,7 +246,7 @@ button#enroll-btn:hover {
 				</tr>
 				<tr class="tr-blank">
 				<td></td>
-				</tr>
+				</tr> -->
                 <tr class="tr-blank">
                     <td>이름</td>
                     <td class="second-td" style="padding-bottom:0px;">
@@ -313,7 +323,7 @@ button#enroll-btn:hover {
                    	<td><input type="hidden" name="type" value="미승인펫시터"/></td>
                 </tr>
                 
-                <tr class="tr-blank">
+                <!-- <tr class="tr-blank">
 				<td></td>
 				</tr>
 				<tr class="tr-blank">
@@ -321,7 +331,7 @@ button#enroll-btn:hover {
 				</tr>
 				<tr class="tr-blank">
 				<td></td>
-				</tr>
+				</tr> -->
 				
                 <tr>
                 	<td style="padding-bottom:10px;">정산계좌 등록</td>
@@ -437,7 +447,7 @@ button#enroll-btn:hover {
             <br>
             <br>
             
-			<div style="background-color:grey; width:100%; height:150px;">
+			<div>
 			<br>
 			<br>
 			
@@ -454,8 +464,6 @@ button#enroll-btn:hover {
 <script>
 /* --------------------------------------------------------------------------------------- */
 	var sitterId = $("#sitterId").val();
-	var password = $("#password").val();
-	var pwck = $("#pwck").val();
 	var email= $("#email").val();
 	var userName = $("#user_name").val();
 	var birth = $("#user_birth_day").val();
@@ -501,12 +509,66 @@ button#enroll-btn:hover {
 			if(regPw.test($("#password").val())!=regPw.test($("#pwck").val())){
 				alert("비밀번호가 일치하지 않습니다.")
 			}else{
-				$("#msg").html("비밀번호가 일치합니다.");
+				$("#result").html("비밀번호가 일치합니다.");
 			}
 		});
 		
+		var pw = document.getElementById("password"); // 비밀번호
+		var pwck = document.getElementById("pwck"); // 비밀번호 확인
+		var span = document.getElementById("result"); // 메세지
 		
-	
+		/* pw.onfocus= function() { span.innerHTML=''; } */
+		
+		//비밀번호가 일치하지 않을 시, 입력한 값이 전부 지워집니다.
+		$("#password").change(function() {
+			let idck = document.getElementById("sitterId");
+			var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+			if(!reg.test(pw.value)) {
+				span.innerHTML='비밀번호는 8자 이상! (숫자/영문자(대소)/특수문자 포함)';
+				span.style.color= 'red';
+				span.style.fontWeight='bolder';
+				span.style.fontSize= '13px';
+				span.style.visibility='visible';
+				console.log("비밀번호 유효성 검사 값을 보여줘! 1 : "+reg.test(pw.value));
+			}
+			else {
+				span.innerHTML='유효성 검사 확인 완료!';
+				span.style.color= 'green';
+				span.style.fontWeight='bolder';
+				span.style.fontSize= '13px';
+				span.style.visibility='visible';
+				console.log("비밀번호 유효성 검사 값을 보여줘! 3 : "+reg.test(pw.value));
+			}
+		});
+		
+		 $("#pwck").change(function() {
+			 var pwck = document.getElementById("pwck");
+			 var pwckSpan = document.getElementById("resultPwck");
+			 
+	        if(pw.value==pwck.value && pw.value.trim()!='') {
+	           pwckSpan.innerHTML='비밀번호가 일치합니다.';
+	           pwckSpan.style.color='green';
+	           pwckSpan.style.fontSize= '13px';
+	           pwckSpan.style.fontWeight='bolder';
+	           pwckSpan.style.visibility='visible';
+	           
+	           console.log(pwck.value);
+	           console.log(typeof(pw.value));
+	        }
+	        else {
+	           pwckSpan.innerHTML='비밀번호가 일치하지 않습니다.';
+	           pwckSpan.style.color= 'red';
+	           pwckSpan.style.fontSize= '13px';
+	           pwckSpan.style.fontWeight= 'bolder';
+	           pwckSpan.style.visibility='visible';
+	           pw.value='';
+	           pwck.value='';
+	           pw.focus();
+	           console.log(this);
+	           console.log(pwck.value);
+	        }
+	     });
+//-------------------------------------------------------	
 	//자격증 유무에 따른 입력부분 활성 비활성
 	$(document).ready(function(){
 		$("input:radio[name=certificate]").click(function(){
@@ -612,29 +674,16 @@ button#enroll-btn:hover {
 	} */
 	
 	
-	// 이름 검사 함수
-	function checkName(userName) {
-		if(!checkExistData(userName, "이름을 ")) {
-			return false;
-		}
-		
-		var nameReg = /^[가-힣]{2,4}$/g; // 한글만 입력하도록 설정
-		if(!nameReg.test(userName)) {
-			alert("이름이 올바르지 않습니다.");
-			return false;
-		}
-		return true; // 확인이 완료되었을 때
-	}
 	
 	
-	// 이메일이 입력되었는지 확인하기
-	// 이메일 좀 봐달라고 해야겠다! (정규식 표현)
+	
+
 	function checkEmail() {
 		if(!checkExistData(email, "이메일을 ")) {
 			return false;
 		} 
 		
-		// 특수문자 @와 .는 반드시 하나만 입력되어야 한다.
+		
 		var emailReg = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/g;
 		if(!emailReg.test(email)) {
 			alert("이메일 형식이 올바르지 않습니다.");

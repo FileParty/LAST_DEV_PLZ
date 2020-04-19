@@ -13,11 +13,7 @@ com.petmily.user.model.vo.PetSitter2" %>
 	User u = (User)request.getAttribute("user");
 	PetSitter2 pss=(PetSitter2)request.getAttribute("pss");
 %> 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="/views/common/header.jsp" %>
 <style>
    *{   
        
@@ -473,6 +469,7 @@ label.custom-file-label::after{
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
+<%@ include file="/views/common/footer.jsp" %> 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
@@ -577,4 +574,3 @@ function toggle6(){ //on/off하나의 버튼으로 가능.
 
 
 </script>
-</html>

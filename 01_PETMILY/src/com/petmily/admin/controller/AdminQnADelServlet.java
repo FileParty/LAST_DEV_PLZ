@@ -1,9 +1,6 @@
 package com.petmily.admin.controller;
 
-import static com.petmily.common.PageBarTemplate.getPageBar;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.admin.model.vo.ServiceData;
 import com.petmily.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminQnAServlet
+ * Servlet implementation class AdminQnADelServlet
  */
-@WebServlet("/admin/scMain")
-public class AdminQnAServlet extends HttpServlet {
+@WebServlet("/admin/delSD")
+public class AdminQnADelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQnAServlet() {
+    public AdminQnADelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +30,16 @@ public class AdminQnAServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cPage = 1;
-		if(request.getParameter("cPage")!=null) {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
+		String del = request.getParameter("qd");
+		int result = new AdminService().scDel(del);
+		
+		if(result>0) {
+			request.setAttribute("msg", "정상적으로 삭제되었습니다.");
+		} else {
+			request.setAttribute("msg", "삭제에 실패했습니다!");
 		}
-		int numPerPage = 5;
-		
-		ArrayList<ServiceData> list = new AdminService().adminSCList(cPage, numPerPage);
-		
-		int totalDate = new AdminService().scAllCount();
-		String url = request.getContextPath() + "/admin/scMain?type=엄준식";
-		String pageBar = getPageBar(url,totalDate,cPage,numPerPage);
-		
-		
-		request.setAttribute("pageType", "8");
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("SDList", list);
-		request.getRequestDispatcher("/views/admin/adminSCMain.jsp").forward(request, response);
-		
+		request.setAttribute("loc", "/admin/scMain");
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 

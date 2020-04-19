@@ -42,7 +42,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
               <button type="button" class="btn" onclick="location.replace('<%=request.getContextPath()%>/search/filterProPetsitter')">프로 펫 시터</button>
               <button type="button" class="btn" onclick="location.replace('<%=request.getContextPath()%>/filterSearch/takingDrug')">약물 복용</button>
               <button type="button" class="btn" onclick="location.replace('<%=request.getContextPath()%>/filterSearch/pickup')" >집앞 픽업 가능</button>
-              <button type="button" class="btn" onclick="location.replace('<%=request.getContextPath()%>/filterSearch/indoorPlay')" >실내 놀이</button>
+     
               <button type="button" class="btn" onclick="location.replace('<%=request.getContextPath()%>/filterSearch/oldDogCare')">노견 케어</button>
              
             </div>
@@ -95,11 +95,16 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
               
                 <div id="demo" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
-				  <ul class="carousel-indicators">
-				    <li data-target="#demo" data-slide-to="0" class="active"></li>
-				    <li data-target="#demo" data-slide-to="1"></li>
-				    <li data-target="#demo" data-slide-to="2"></li>
-				  </ul>
+						<ul class="carousel-indicators">
+						
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<%if(ps.getImgFile().size()>=1){ %>
+							
+							<% for(int i=1;i<ps.getImgFile().size();i++){ %>
+							
+							<li data-target="#myCarousel" data-slide-to="<%=i %>"></li>
+							<%} }%>
+						</ul>
 				  
 				  <!-- The slideshow -->
 				  <div class="carousel-inner">
@@ -124,16 +129,30 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				  <a class="carousel-control-next" href="#demo" data-slide="next">
 				    <span class="carousel-control-next-icon"></span>
 				  </a>
+				  
+				  
+				  
+				  
 				</div>
                 
               </div>
+              
+              
+              
               <div class="col-6" >
                 <div class="row align-items-center">
                 <%if(ps.getProPetsitter()!=null&&ps.getProPetsitter().equals("프로펫시터")){ %>
                   <button class="btn btn-outline-secondary rounded-pill" >프로 펫 시터</button>
                   <%} %>
                   <span class="ml-2"><%= ps.getBoardAddress() %></span>
-                  <button class="ml-auto bookmark" value=<%=ps.getPetsitterId() %>><i class="far fa-heart"></i></button>
+                  
+                  <%if(loginUser==null||loginUser.getUserType().equals("일반")){ %>
+                  	  <h2 class="ml-auto" id=<%=ps.getPetsitterId() %> >
+                  
+                		<i class="far fa-heart bookmark"  ></i>
+                		
+                  	</h2>
+                  <% } %>
                 </div>
                 <div class="mt-3">
                   <p class="h6"><%=ps.getBoardTitle() %></p>
@@ -156,10 +175,13 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
             <hr>
             
             <div class="row justify-content-center">
+            <%if(loginUser!=null&&loginUser.getUserType().equals("펫시터")){ %>
                   <button class="btn btn-outline-secondary rounded-pill">글쓰기</button>  
+                  <% }%>
             </div>
             <br>
             <br>
+            
             <div class="row justify-content-center" id="pageBar">
             	<%=request.getAttribute("pageBar") %>
             </div>
@@ -214,7 +236,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
   	
   	$(function(){
   		let p=$("#popularity").text();
-  		console.log(p);
+  		//console.log(p);
   	})
   	
   	$(function(){
@@ -270,31 +292,58 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
   	});
   	
   	
-     $(".bookmark").click(function(){
-        
-        
-        if(<%=loginUser!=null%>){
-           
-           $.ajax({
-              url:"<%=request.getContextPath()%>/search/bookmark",
-              data:{petsitterId:$(this).val()},
-              error:function(){
-                 alert("실패");
-              },
-              success:data=>{
-                 console.log($(this).val());
-                 $(this).html(data);
-              }
-           });
-           
-        }else{
-           
-           alert("로그인이 필요한 서비스입니다.");
-        }
-        
-        event.stopPropagation();
-     });
+  /*	$(".bookmark").parent().click(function(){
+  		
+  		
+	  	if(<%=loginUser!=null%>){
+	  		var i=$(this).find("i");
+	  		$.ajax({
+	  			url:"<%=request.getContextPath()%>/search/bookmark",
+	  			data:{petsitterId:this.id},
+	  			error:function(){
+	  				alert("실패");
+	  			},
+	  			success: function(data){
+		  				if(data=='true'){	
+		  					i.removeClass('far');
+		  					i.addClass('fas');
+		  				}
+		  				}
+	  				}
+	  			}
+	  		});
+	  		
+  		}else{
+  			alert("로그인이 필요한 서비스입니다.");
+  		}
+  		event.stopPropagation();
+  	}); */
+
+
   	
-  	
+  	$(".bookmark").parent().click(function(){
+  		
+  		
+	  	if(<%=loginUser!=null%>){
+	  		
+	  		$.ajax({
+	  			url:"<%=request.getContextPath()%>/search/bookmark",
+	  			data:{petsitterId:this.id},
+	  			error:function(){
+	  				alert("실패");
+	  			},
+	  			success:data=>{
+	  				console.log(this.id);
+	  				$(this).html(data);
+	  			}
+	  		});
+	  		
+  		}else{
+  			alert("로그인이 필요한 서비스입니다.");
+  		}
+  		event.stopPropagation();
+  	});
+
+
   	
   </script>

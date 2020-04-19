@@ -43,22 +43,40 @@ public PetSitterReview selectSecret(Connection conn, int rsCode){
 	
 try {
 		
-		pstmt=conn.prepareStatement(sql);
-		pstmt.setInt(1, rsCode);
-		
 		rs=pstmt.executeQuery();
-		
+		String sql=prop.getProperty("selectBeforePaymentRerservation");
+		String resType="요청";
+
 		if(rs.next()) {
-			
-			psr =new PetSitterReview();
-			
-			psr.setSitterReviewNo(rs.getInt("pet_sitter_review_no"));
-			psr.setUserId(rs.getString("user_id"));
-			psr.setRsCode(rs.getInt("reservation_code"));
-			psr.setReviewTxt(rs.getString("review_text"));
-			psr.setReviewStar(rs.getInt("review_star"));
-			psr.setReviewDate(rs.getString("review_date"));
-			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, petsitterId);
+			pstmt.setString(2, resType);
+
+			while(rs.next()) {
+				
+				PetsitterMypageReservation pmr=new PetsitterMypageReservation();
+				
+				pmr.setReservationCode(rs.getInt("reservation_code"));
+				pmr.setUserId(rs.getString("user_id"));
+				pmr.setPetsitterId(rs.getString("pet_setter_id"));
+				pmr.setBoardCode(rs.getInt("board_code"));
+				pmr.setCheckInDate(rs.getDate("checkin_date"));
+				pmr.setCheckOutDate(rs.getDate("checkout_date"));
+				pmr.setPlusQuestions(rs.getString("plus_questions"));
+				pmr.setPriceEndDate(rs.getDate("price_end_date"));
+				pmr.setPrice(rs.getInt("price"));
+				pmr.setResType(rs.getString("res_type"));
+				pmr.setPetMedication(rs.getString("pet_mdeication"));
+				pmr.setPetPickUp(rs.getString("pet_pick_up"));
+				pmr.setUserName(rs.getString("user_name"));
+				
+				list.add(pmr);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
 		}
 	}catch(SQLException e) {
 		e.printStackTrace();

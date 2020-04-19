@@ -11,19 +11,23 @@ public class UserReview {
 	private Date checkIn;
 	private Date checkOut;
 	private String petsitterId;
+	private int boardCode;
 	private String reviewText;
 	private int reviewStar;
 	private Date reviewDate;
 	private String reviewType;
 	private String reviewBlindText;
 	
+	
+	
 	public UserReview() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public UserReview(int userReviewNo, String userId, String petsitterName, int reservationCode, Date checkIn,
-			Date checkOut, String petsitterId, String reviewText, int reviewStar, Date reviewDate, String reviewType,
-			String reviewBlindText) {
+			Date checkOut, String petsitterId, int boardCode, String reviewText, int reviewStar, Date reviewDate,
+			String reviewType, String reviewBlindText) {
 		super();
 		this.userReviewNo = userReviewNo;
 		this.userId = userId;
@@ -32,6 +36,7 @@ public class UserReview {
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.petsitterId = petsitterId;
+		this.boardCode = boardCode;
 		this.reviewText = reviewText;
 		this.reviewStar = reviewStar;
 		this.reviewDate = reviewDate;
@@ -95,6 +100,14 @@ public class UserReview {
 		this.petsitterId = petsitterId;
 	}
 
+	public int getBoardCode() {
+		return boardCode;
+	}
+
+	public void setBoardCode(int boardCode) {
+		this.boardCode = boardCode;
+	}
+
 	public String getReviewText() {
 		return reviewText;
 	}
@@ -139,11 +152,10 @@ public class UserReview {
 	public String toString() {
 		return "UserReview [userReviewNo=" + userReviewNo + ", userId=" + userId + ", petsitterName=" + petsitterName
 				+ ", reservationCode=" + reservationCode + ", checkIn=" + checkIn + ", checkOut=" + checkOut
-				+ ", petsitterId=" + petsitterId + ", reviewText=" + reviewText + ", reviewStar=" + reviewStar
-				+ ", reviewDate=" + reviewDate + ", reviewType=" + reviewType + ", reviewBlindText=" + reviewBlindText
-				+ "]";
+				+ ", petsitterId=" + petsitterId + ", boardCode=" + boardCode + ", reviewText=" + reviewText
+				+ ", reviewStar=" + reviewStar + ", reviewDate=" + reviewDate + ", reviewType=" + reviewType
+				+ ", reviewBlindText=" + reviewBlindText + "]";
 	}
-	
 
 	
 }

@@ -714,4 +714,38 @@ public class SearchDao {
 		
 	}
 	
+	public boolean findBookmark(Connection conn,String userId,String petsitterId) {
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		boolean flag=true;
+		
+		String sql=prop.getProperty("findBookmark");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, petsitterId);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				flag=true;
+			}else {
+				flag=false;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return flag;
+		
+	}
+	
+	
+	
 }

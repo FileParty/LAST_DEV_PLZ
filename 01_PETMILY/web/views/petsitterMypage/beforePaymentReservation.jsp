@@ -144,7 +144,6 @@ pageEncoding="UTF-8"%>
 			                        <th class="read">비밀 후기 열람</th>
 			                        <th>요청 상세</th>
 			                        <th class="state">상태</th>
-			                        
 			                    </tr>
 			                    <%if(list!=null){ %>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
@@ -167,8 +166,10 @@ pageEncoding="UTF-8"%>
 			                    			<button type="button" class="btn requestDetail"> 상세 요청 확인</button>
 			                    		</div>
 			                    	</td>
+			                    	<td class="read"><div class="p-1"><button type="button" class="btn" >열람</button></div></td>
+			                    	<td><div class="p-1"><button  type="button" class="btn secretReview" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
+			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></div></td>
 			                    	<td class="state"><%=pmr.getResType() %></td>
-			                    	
 			                    </tr>
 			                 	<%} }%>
 			                </table>

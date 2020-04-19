@@ -38,9 +38,22 @@ public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet 
 		HttpSession session = request.getSession();
 	    String sitterId = ((User)session.getAttribute("loginUser")).getUserId();
 		
-		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(sitterId);
+		String petsitterId=u.getUserId();
+		//String petsitterId="petsitter1";
 		
-
+		if(petsitterId==null) {
+			
+			String msg="로그인이 필요한 서비스 입니다.";
+			String loc="/log-in";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			
+			return ;
+		}
+		
+		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(petsitterId);
+		//System.out.println(list);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/petsitterMypage/beforePaymentReservation.jsp").forward(request, response);
 		

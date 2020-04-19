@@ -53,6 +53,7 @@ public class UserReviewDao {
 				ur.setCheckIn(rs.getDate("checkin_date"));
 				ur.setCheckOut(rs.getDate("checkout_date"));
 				ur.setPetsitterId(rs.getString("pet_sitter_id"));
+				ur.setBoardCode(rs.getInt("board_code"));
 				ur.setReviewText(rs.getString("review_text"));
 				ur.setReviewStar(rs.getInt("review_Star"));
 				ur.setReviewDate(rs.getDate("review_date"));

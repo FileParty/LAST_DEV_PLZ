@@ -73,7 +73,7 @@
 		</div>
 	</div>
 	<button id="serviceCenter" 
-		onclick="location.replace('<%=request.getContextPath()%>')">고객센터에 문의</button>
+		onclick="location.replace('<%=request.getContextPath()%>/serivceCenter')">고객센터에 문의</button>
 </section>
 <script>
 	$(function(){

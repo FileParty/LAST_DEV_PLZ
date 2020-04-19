@@ -1,9 +1,6 @@
 package com.petmily.admin.controller;
 
-import static com.petmily.common.PageBarTemplate.getPageBar;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +12,16 @@ import com.petmily.admin.model.vo.AdminQuestion;
 import com.petmily.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminQuestionServlet
+ * Servlet implementation class ServiceCenterQueServlet
  */
-@WebServlet("/admin/question")
-public class AdminQuestionServlet extends HttpServlet {
+@WebServlet("/scQuestionEnd")
+public class ServiceCenterQueEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQuestionServlet() {
+    public ServiceCenterQueEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +31,25 @@ public class AdminQuestionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cPage = 1;
-		if(request.getParameter("cPage")!=null) {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
+		
+		AdminQuestion aq = new AdminQuestion();
+		aq.setUserId(request.getParameter("userId"));
+		aq.setSendEmail(request.getParameter("email"));
+		aq.setEmailTitle(request.getParameter("aData"));
+		
+		int result = new AdminService().scQue(aq);
+		
+		if(result>0) {
+			request.setAttribute("msg", "문의하기에 성공했습니다.");
+			request.setAttribute("script", "window.close(); opener.document.location.reload();");
+			request.setAttribute("loc", "/serivceCenter");
+		} else {
+			request.setAttribute("msg", "문의하기에 실패했습니다.");
+			request.setAttribute("script", "window.close()");
+			request.setAttribute("loc", "/serivceCenter");
 		}
-		String type = "ANSWER_YN";
-		if(request.getParameter("type")!=null) {
-			type = request.getParameter("type");
-		}
-		int numPerPage = 10;
 		
-		ArrayList<AdminQuestion> list = new AdminService().question(cPage, numPerPage, type);
-		
-		int totalDate = new AdminService().questionCount();
-		String url = request.getContextPath() + "/admin/question?type="+type;
-		String pageBar = getPageBar(url,totalDate,cPage,numPerPage);
-		
-		request.setAttribute("pageType", "7");
-		request.setAttribute("type", type);
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("questionList", list);
-		request.getRequestDispatcher("/views/admin/adminQuestion.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 

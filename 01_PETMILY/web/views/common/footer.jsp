@@ -4,7 +4,7 @@
 	<div id="footerBox">
 	    <p><pre>ⓒPET:MILY</pre> Inc. All Rights Reserved</p>
 	    <div id="ServiceCenter">
-	        <a href="#" style="color: white;">고객센터</a>
+	        <a href="<%=request.getContextPath()%>/serivceCenter" style="color: white;">고객센터</a>
 	    </div>
 	</div>
 </footer>

@@ -17,7 +17,7 @@
 <section id="adminMainMenu">
 <%@ include file="/views/admin/adminSideBar.jsp" %>
 	<section id="adminUserList">
-		<h4>고객 문의</h4>
+		<h4>펫 시터 지원 목록</h4>
 		<hr/>
 		<div id="adminUserListSearchType">
 			<p id="type-date">등록 순
@@ -59,16 +59,10 @@
 								<%=aq.getEmailTitle().substring(0,11) + "..." %>
 							<% } %>
 							<input type="hidden" class="question" value="<%=aq.getEmailTitle()%>">
-							<input type="hidden" class="scNum" value="<%=aq.getScNum()%>">
 						</td>
 						<td><%=aq.getSendEmail() %></td>
 						<td><%=aq.getQueYN() %></td>
-						<td><%if(aq.getQueYN().equals("N")){ %>
-								<button class="Abtns" onclick="sendQuestion('<%=aq.getSendEmail()%>')">회신</button>
-							<% } else { %>
-								<p> - </p>
-							<% } %>
-						</td>
+						<td><button class="Abtns" onclick="sendQuestion('<%=aq.getSendEmail()%>')">회신</button></td>
 						<td><%=aq.getEmailDate().substring(0,11) %></td>
 					</tr>
 					<% } %>
@@ -83,22 +77,21 @@
 <script>
 	$(function(){
 		// 신청일순 이벤트
-		$("#type-date").click(function(){
-				location.replace('<%=request.getContextPath()%>/admin/question?type=ANSWER_DATE');
+		$("#type-date").click(e=>{
+				location.replace('<%=request.getContextPath()%>/admin/questionEnd?type=ANSWER_DATE');
 		})
 		// 답변순 이벤트
-		$("#type-yn").click(function(){
-			location.replace('<%=request.getContextPath()%>/admin/question?type=ANSWER_YN');
+		$("#type-yn").click(e=>{
+			location.replace('<%=request.getContextPath()%>/admin/questionEnd?type=ANSWER_YN');
 		})
 		
 	})
 	
 	function sendQuestion(){
 		let question = $(event.target).parent().parent().find("td:nth-of-type(2)").find("input.question").val();
-		let scNum = $(event.target).parent().parent().find("td:nth-of-type(2)").find("input.scNum").val();
 		let email = $(event.target).parent().parent().find("td:nth-of-type(3)").text();
 		console.log(question, email);
-		window.open("<%=request.getContextPath()%>/admin/quePopUp?email="+email+"&qData="+question+"&scNum="+scNum
+		window.open("<%=request.getContextPath()%>/admin/quePopUp?email="+email+"&qData="+question
 				,"_blank","width=725px; height=500px");
 	}
 </script>

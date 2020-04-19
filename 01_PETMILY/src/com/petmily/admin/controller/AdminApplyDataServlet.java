@@ -35,9 +35,8 @@ public class AdminApplyDataServlet extends HttpServlet {
 		if(request.getParameter("userId")!=null) {
 			userId = (String)request.getParameter("userId");
 		}
-		
+		System.out.println(userId);
 		ApplyUserData aud = new AdminService().applyUser(userId);
-		
 		
 		request.setAttribute("showType", "apply");
 		request.setAttribute("userData", aud);

@@ -1,27 +1,23 @@
 package com.petmily.admin.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.admin.model.vo.User;
-import com.petmily.admin.service.AdminService;
-
 /**
- * Servlet implementation class AdminNormalDataServlet
+ * Servlet implementation class ServiceCenterServlet
  */
-@WebServlet("/admin/normalUserData")
-public class AdminNormalDataServlet extends HttpServlet {
+@WebServlet("/serivceCenter")
+public class ServiceCenterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNormalDataServlet() {
+    public ServiceCenterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +27,8 @@ public class AdminNormalDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = null;
-		if(request.getParameter("userId")!=null) {
-			userId = request.getParameter("userId");
-		}
-		System.out.println(userId);
-		User u = new AdminService().userData(userId);
-		System.out.println(u);
-		
-		request.setAttribute("showType", "user");
-		request.setAttribute("userData", u);
-		request.getRequestDispatcher("/views/admin/InfoPage.jsp").forward(request, response);
-		
+		// 페이지전환
+		request.getRequestDispatcher("/views/admin/ServiceCenter.jsp").forward(request, response);
 	}
 
 	/**

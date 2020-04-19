@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.admin.model.vo.AdminQuestion;
+import com.petmily.admin.model.vo.AdminPetsitter;
 import com.petmily.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminQuestionServlet
+ * Servlet implementation class AdminPetsitterCerApplyServlet
  */
-@WebServlet("/admin/question")
-public class AdminQuestionServlet extends HttpServlet {
+@WebServlet("/admin/petsitterCerApply")
+public class AdminPetsitterCerApplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQuestionServlet() {
+    public AdminPetsitterCerApplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,23 +38,24 @@ public class AdminQuestionServlet extends HttpServlet {
 		if(request.getParameter("cPage")!=null) {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}
-		String type = "ANSWER_YN";
+		String type = "DATE_OF_ACQUISITION";
 		if(request.getParameter("type")!=null) {
 			type = request.getParameter("type");
 		}
 		int numPerPage = 10;
 		
-		ArrayList<AdminQuestion> list = new AdminService().question(cPage, numPerPage, type);
-		
-		int totalDate = new AdminService().questionCount();
-		String url = request.getContextPath() + "/admin/question?type="+type;
+		ArrayList<AdminPetsitter> list = new AdminService().psNewCerList(cPage,numPerPage,type);
+		System.out.println(type);
+		int totalDate = new AdminService().psNewCerCount();
+		String url = request.getContextPath() + "/admin/petsitterCerApply?type="+type;
 		String pageBar = getPageBar(url,totalDate,cPage,numPerPage);
+		System.out.println(list);
 		
-		request.setAttribute("pageType", "7");
+		request.setAttribute("pageType", "5");
 		request.setAttribute("type", type);
 		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("questionList", list);
-		request.getRequestDispatcher("/views/admin/adminQuestion.jsp").forward(request, response);
+		request.setAttribute("psList", list);
+		request.getRequestDispatcher("/views/admin/psNewCer.jsp").forward(request, response);
 		
 		
 	}

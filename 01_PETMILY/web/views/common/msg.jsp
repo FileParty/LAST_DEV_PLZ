@@ -9,6 +9,7 @@
 <body>
 	<script>
 		alert("<%=request.getAttribute("msg")%>");
+		<%=request.getAttribute("script")%>
 		location.replace("<%=request.getContextPath()%><%=request.getAttribute("loc")%>");
 		<%=request.getAttribute("close")%>;
 	</script>

@@ -15,16 +15,16 @@ import com.petmily.admin.model.vo.AdminQuestion;
 import com.petmily.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminQuestionServlet
+ * Servlet implementation class AdminSCNewSdServlet
  */
-@WebServlet("/admin/question")
-public class AdminQuestionServlet extends HttpServlet {
+@WebServlet("/admin/newSD")
+public class AdminSCNewSdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQuestionServlet() {
+    public AdminSCNewSdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,23 +38,18 @@ public class AdminQuestionServlet extends HttpServlet {
 		if(request.getParameter("cPage")!=null) {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}
-		String type = "ANSWER_YN";
-		if(request.getParameter("type")!=null) {
-			type = request.getParameter("type");
-		}
-		int numPerPage = 10;
+		int numPerPage = 5;
 		
-		ArrayList<AdminQuestion> list = new AdminService().question(cPage, numPerPage, type);
+		ArrayList<AdminQuestion> list = new AdminService().scAQlist(cPage, numPerPage);
 		
-		int totalDate = new AdminService().questionCount();
-		String url = request.getContextPath() + "/admin/question?type="+type;
+		int totalDate = new AdminService().scCount();
+		String url = request.getContextPath() + "/admin/scMain?type=엄준식";
 		String pageBar = getPageBar(url,totalDate,cPage,numPerPage);
 		
-		request.setAttribute("pageType", "7");
-		request.setAttribute("type", type);
+		request.setAttribute("pageType", "8");
 		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("questionList", list);
-		request.getRequestDispatcher("/views/admin/adminQuestion.jsp").forward(request, response);
+		request.setAttribute("aqList", list);
+		request.getRequestDispatcher("/views/admin/adminSCNewSD.jsp").forward(request, response);
 		
 		
 	}

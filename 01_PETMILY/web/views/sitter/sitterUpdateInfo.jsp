@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="com.petmily.user.model.vo.User,
+com.petmily.user.model.vo.PetSitter2" %>
 <%-- <%@ page import="com.petmily.user.model.vo.PetSitter2"
 %>
-
 <%	
 	PetSitter2 pss=(PetSitter2)session.getAttribute("pss");
 %>  --%>
+
+<%
+	User u = (User)request.getAttribute("user");
+	PetSitter2 pss=(PetSitter2)request.getAttribute("pss");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -241,17 +247,17 @@ label.custom-file-label::after{
             <form action="<%=request.getContextPath()%>/sitter/updateEnd" method="post" onsubmit="return test();">
             
             <!-- form을 넘기기 위해 hidden 처리한 input을 만듦. -->
-            <input type="hidden" id="userId" name="userId" value="" >
+            <input type="hidden" id="userId" name="userId" value="<%= u.getUserId() %>" >
             
             <div class="row">
                 <!-- 메뉴 영역 -->
             <div class="col-2 menu">
                     <div id="menu">
                         <ul type="none">
-                            <li class="title"><a href="<%=request.getContextPath()%>/userInfo">회원정보</a></li>
+                            <li class="title"><a href="<%=request.getContextPath()%>/sitterInfo">회원정보</a></li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userUpdate?userId="> - 회원정보 수정</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/userDelete?userId="> - 회원 탈퇴</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/sitter/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/sitter/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
                             <li class="content"><a href=""> - 북마크</a></li>
                             <li class="content"><a href=""> - 작성 후기</a></li>
                             <br/>
@@ -291,7 +297,7 @@ label.custom-file-label::after{
                     <table style="margin-left: auto; margin-right:auto">
                     	<tr>  
                             <td class="sub-title">프로필 이미지</td> 
-                            <td class="second-td"><%-- <%=pss.getSitterImg()%> --%></td>
+                            <td class="second-td"><%=pss.getSitterImg()%></td>
                             <td class="third-td"><button type="button" onclick="toggle1();">수정하기</button></td>
                         </tr>
                         <div>
@@ -304,11 +310,11 @@ label.custom-file-label::after{
                         </div>
                         <tr>
                             <td class="sub-title" style="width: 150px;">이름</td> 
-                            <td colspan="2" class="second-td" style="width: 400px;">고세빈<%-- <%=pss.getSitterName()%> --%></td>
+                            <td colspan="2" class="second-td" style="width: 400px;"><%= loginUser.getUserName() %></td>
                         </tr>
                         <tr>  
                             <td class="sub-title">이메일</td> 
-                            <td class="second-td"><%-- <%=pss.getSitterEmail()%> --%></td>
+                            <td class="second-td"><%= loginUser.getEmail() %></td>
                             <td class="third-td"><button type="button" onclick="toggle2();">수정하기</button></td>
                         </tr>
                         <div>
@@ -319,18 +325,18 @@ label.custom-file-label::after{
                             <p></p>
                         </tr>
                         </div>
-
+						<% String birth = loginUser.getUserBirth(); %>
                         <tr>
                             <td class="sub-title">생년월일</td> 
-                            <td colspan="2" class="second-td"><%-- <%=pss.getSitterBday()%> --%></td>
+                            <td colspan="2" class="second-td"><%= birth.substring(0,11) %></td>
                         </tr>
                         <tr>
                             <td class="sub-title">성별</td> 
-                            <td colspan="2" class="second-td"><%-- <%=pss.getSitterGender()%> --%></td>
+                            <td colspan="2" class="second-td"><%= loginUser.getGender() %></td>
                         </tr>
                         <tr>
                             <td class="sub-title">휴대폰 번호</td> 
-                            <td class="second-td"><%-- <%=pss.getSitterPhone() %> --%></td>
+                            <td class="second-td"><%= u.getPhone() %></td>
                             <td class="third-td"><button type="button" onclick="toggle3();">수정하기</button></td>
                         </tr>
                         <tr class="row3" style="display: none;">
@@ -341,33 +347,33 @@ label.custom-file-label::after{
                         </tr>
                         <tr>
                             <td class="sub-title">주소</td> 
-                            <td class="second-td"><%-- <%=pss.getPostCode() %> <%=pss.getSitterAddress() %> <%=pss.getAddressDetail() %> --%> </td>
+                            <td class="second-td"><%=pss.getPostCode() %> <%=pss.getSitterAddress() %> <%=pss.getAddressDetail() %> </td>
                             <td class="third-td"><button type="button" onclick="toggle4();">수정하기</button></td>
                         </tr>
                         <tr class="row4" style="display: none; border:1px solid white">
                             <td class="subrow"></td>
                             <td colspan = "2" class="subrow"style= "padding-left:50px;" >
-                                <input style="line-height: 40px;" type="text" id="postNum" name="postNum"  placeholder="우편번호">&nbsp;&nbsp;&nbsp;<button class="duplicate" type="button" style="height:25px; width: 100px; " onclick="zip_code();" >우편번호 찾기</button></td> 
+                                <input style="line-height: 40px;" type="text" id="postNum" name="postNum" <%=pss.getPostCode() %> placeholder="우편번호">&nbsp;&nbsp;&nbsp;<button class="duplicate" type="button" style="height:25px; width: 100px; " onclick="zip_code();" >우편번호 찾기</button></td> 
                             <!-- <td class="subrow" ></td> -->
                         </tr>
                         <tr class="row4" style="display: none;">
                             <td class="subrow2"></td>
                             <td class="subrow2" style= "padding-left:50px;">
-                                <input style="line-height: 40px; width: 250px;" id="streetAddress" name="address" type="text" placeholder="도로명주소"/>
+                                <input style="line-height: 40px; width: 250px;" id="streetAddress" name="address" type="text" <%=pss.getSitterAddress() %> placeholder="도로명주소"/>
                             </td>
                             <td class="subrow2"></td>
                         </tr>
                         <tr class="row4" style="display: none;">
                             <td class="subrow3"></td>
                             <td class="subrow3" style = "padding-left:50px; padding-bottom: 10px;">
-                                <input style="line-height: 40px; width: 250px;" id="addressInput" name="detail" type="text" placeholder="상세주소 입력"/>
+                                <input style="line-height: 40px; width: 250px;" id="addressInput" name="detail" type="text" <%=pss.getAddressDetail() %> placeholder="상세주소 입력"/>
                             </td>
                             <td class="subrow3"></td>
                         </tr>
                         <tr>
                             <td class="sub-title">정산 계좌 등록</td> 
                             <td class="second-td">신한은행 / 1111 / 예금주 : 고세빈
-                            <%-- <%=pss.getBankName()%><%=pss.getAccountNo()%><%=pss.getAccountOwner()%> --%></td>
+                            <%=pss.getBankName()%><%=pss.getAccountNo()%><%=pss.getAccountOwner()%></td>
                             <td class="third-td"><button type="button" onclick="toggle5();">수정하기</button></td>    
                         </tr>
                         <tr class="row5" style="display: none;">

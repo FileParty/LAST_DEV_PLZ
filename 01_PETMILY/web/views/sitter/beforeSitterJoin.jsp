@@ -18,6 +18,11 @@ article {
     margin: 0 auto;
 }
 
+section{
+	background-image: url(<%=request.getContextPath()%>/img/common/sitter_2.jpg);
+	height:800px !important;
+}
+
 
 /* submit(완료) 버튼 설정 */
 #btnn_btnn {
@@ -44,7 +49,6 @@ article {
 <body>
 
 <section>
-	<article>
 		<div style="margin-left: 100px; margin-top:150px;">
 			<h1 style="font-weight:500; font-size:28pt;">펫시터 지원</h1>
 			우리집에서 사랑스러운 강아지를 돌보며 수익을 벌어요.<br/>
@@ -53,8 +57,8 @@ article {
 		<br>
 		<br>
 		<input type="button" id="btnn_btnn" value="펫 시터로 회원 가입" onclick="location.replace('<%=request.getContextPath()%>/join/before')" />
-		<img src="<%=request.getContextPath()%>/img/common/sitter_2.jpg" alt="펫시터지원하기" width=1366px/>
-	</article>
+		
+		
 </section>
 
 

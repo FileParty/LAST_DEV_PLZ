@@ -4,9 +4,7 @@
 
 <%@ include file="/views/common/header.jsp" %>
 
-<%
-int type = (int)(request.getAttribute("result"));
-%> 
+
 <style>
    *{   
        
@@ -251,15 +249,7 @@ label.custom-file-label::after{
                     <li class="breadcrumb-item">마이페이지</li>
                     <li class="breadcrumb-item active">메인</li>
                 </ul>
-                    <div class="col-3" style= "margin-left: auto; margin-right: auto;">
-                        <br/>
-                     	<%if(type>0) {%>
-                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/listBoard')" style="width: 200px; cursor: pointer;">내 게시글 보기</button>  
-                      	<%}else { %>
-                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">게시글 작성 하기</button>
-                    	<%} %>
-                    	
-                    </div>
+                 
                     <table>
                         <tr>
                             <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td>                            

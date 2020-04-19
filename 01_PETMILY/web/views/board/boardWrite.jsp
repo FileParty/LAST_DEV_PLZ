@@ -332,8 +332,8 @@
 
                         <div class="row" style="margin-left: 35%;">
                             <div style="margin-top:80px; margin-bottom: 100px;">
-                                <input  type="button" value="수정" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview"  onclick="location.replace('<%=request.getContextPath() %>/sitterUpdate')">
-                                <button style="color:white; border: solid 1px black; background-color :black" class="btn1" type="submit">글 등록</button>
+                                
+                                <button style="margin-left:70px;color:white; border: solid 1px black; background-color :black" class="btn1" type="submit">글 등록</button>
                             </div>
                         </div>
 

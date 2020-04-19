@@ -100,7 +100,7 @@
 
 <body>
     <section>
-    <form action="<%=request.getContextPath()%>/request/cancels" method="post">
+    <form action="<%=request.getContextPath()%>/request/cancels" method="post" onsubmit="return cancel();">
         <div class="container">
         	<div class="row">
           
@@ -153,7 +153,7 @@
 	                    	
 							<td style="width:280px;"><%=pr.getSitterName() %></td>
 							
-							<td style="width:600px;"><%=pr.getBoardTitle() %></td>
+							<td style="width:400px;"><%=pr.getBoardTitle() %></td>
 							
 							<td><input style="border-radius:20px;font-size:13px;"class="btn btn-outline-secondary" style="width:100px;"onclick="requestCheck('<%=pr.getReservationCode() %>')" type="button" id="request" value="상세 요청 확인"></td>
 							<td><%=pr.getResType() %></td> 
@@ -169,13 +169,10 @@
                     
                 </table>
                 
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-							<input style="margin-left:400px;" type="submit" value="요청 취소" >
-<div style="width:100px;height:100px;"id="test"></div>
+             
+                
+							<input style="margin-left:400px;"type="submit" value="요청 취소" >
+
             </div>
        	</div>
        </form>
@@ -199,6 +196,15 @@ function requestCheck(revCode) {
 	
 	window.open('<%=request.getContextPath()%>/user/requestDetail?revCode='+revCode,'_blank','height=650,width=500,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 } 
+
+function cancel() {
+	if(confirm("요청을 취소하시겠습니까?")) {		
+		return true;
+		}else {
+			return false;
+		}
+	
+}
 $("#btn1").hide();
 $("#btn3").hide();
 $("#btn5").hide();

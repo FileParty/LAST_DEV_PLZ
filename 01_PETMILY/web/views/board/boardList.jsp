@@ -66,7 +66,10 @@ th {
 						
 						<li class="breadcrumb-item active">작성글 List >></li>
 					</ul>
-						<h6 style="text-align:center;">고객에게는 최신글만 보여집니다.</h6>
+					
+						
+						<button style="display:inline;margin-left:730px;"type="button" onclick="location.replace('<%=request.getContextPath()%>/sitter/write')">글 쓰기</button>
+				
 
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">

@@ -118,7 +118,7 @@ public class SitterWriteEndServlet extends HttpServlet {
 		String loc = "";
 		if(result>0) {
 		msg="게시글 등록 성공하였습니다.";
-		loc="/views/petsitterMypage/petSitterInfo.jsp";
+		loc="/sitter/listBoard";
 		}else {
 			msg="게시글 등록을 실패 하였습니다.";
 			loc="/views/common/msg.jsp";

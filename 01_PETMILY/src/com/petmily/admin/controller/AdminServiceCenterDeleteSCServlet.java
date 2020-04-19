@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.admin.model.vo.User;
 import com.petmily.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminNormalDataServlet
+ * Servlet implementation class AdminServiceCenterDeleteSCServlet
  */
-@WebServlet("/admin/normalUserData")
-public class AdminNormalDataServlet extends HttpServlet {
+@WebServlet("/admin/delSD?")
+public class AdminServiceCenterDeleteSCServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNormalDataServlet() {
+    public AdminServiceCenterDeleteSCServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +30,17 @@ public class AdminNormalDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = null;
-		if(request.getParameter("userId")!=null) {
-			userId = request.getParameter("userId");
-		}
-		System.out.println(userId);
-		User u = new AdminService().userData(userId);
-		System.out.println(u);
+		String qd = request.getParameter("qd");
 		
-		request.setAttribute("showType", "user");
-		request.setAttribute("userData", u);
-		request.getRequestDispatcher("/views/admin/InfoPage.jsp").forward(request, response);
+		int result = new AdminService().delSD(qd);
+		
+		if(result>0) {
+			request.setAttribute("msg", "삭제에 성공했습니다.");
+		} else {
+			request.setAttribute("msg", "삭제에 실패했습니다.");
+		}
+		request.setAttribute("loc", "/admin/scMain");
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 

@@ -30,7 +30,7 @@
 		<div id="adminUser">
 			<div id="adminUserInfo">
 				<h4>고객 문의</h4>
-				<h4>추가 요금 청구 건</h4>
+				<h4>자격증 신청목록</h4>
 			</div>
 			<hr/>
 			<div id="adminUserData">
@@ -40,6 +40,7 @@
 					<% } %>
 				</div>
 				<div id="adminUserPlusPrice">
+					<p>-&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/admin/userCer"></a> 님의 자격증 신청</p>
 				</div>
 			</div>
 		</div>

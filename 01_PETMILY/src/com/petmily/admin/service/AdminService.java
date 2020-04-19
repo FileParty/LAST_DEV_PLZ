@@ -14,6 +14,7 @@ import com.petmily.admin.model.vo.AdminQuestion;
 import com.petmily.admin.model.vo.AdminUser;
 import com.petmily.admin.model.vo.ApplyUser;
 import com.petmily.admin.model.vo.ApplyUserData;
+import com.petmily.admin.model.vo.ServiceData;
 import com.petmily.admin.model.vo.User;
 
 public class AdminService {
@@ -137,11 +138,143 @@ public class AdminService {
 
 	public ArrayList adminMyPage() {
 		Connection conn = getConnection();
-		ArrayList<ArrayList> list = new ArrayList<ArrayList> ();
+		ArrayList<ArrayList> list = new ArrayList<ArrayList>();
 		list.add(dao.petsitterApply(conn));
 		list.add(dao.userQuestion(conn));
 		close(conn);
 		return list;
+	}
+
+	public AdminQuestion questionData(String qData) {
+		Connection conn = getConnection();
+		AdminQuestion aq = dao.questionData(conn,qData);
+		close(conn);
+		return aq;
+		
+	}
+
+	public int questionUpdate(String send, String qdata) {
+		Connection conn = getConnection();
+		int result = dao.questionUpdate(conn,send,qdata);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int[] adminMyPageAlert() {
+		Connection conn = getConnection();
+		int[] result = new int[3];
+		result[0] = dao.alertApply(conn);
+		result[1] = dao.alertCer(conn);
+		result[2] = dao.alertQue(conn);
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<ServiceData> scList(String type) {
+		Connection conn = getConnection();
+		ArrayList<ServiceData> list = dao.scList(conn, type);
+		close(conn);
+		return list;
+	}
+
+	public int scQue(AdminQuestion aq) {
+		Connection conn = getConnection();
+		int result = dao.scQue(conn,aq);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<ServiceData> adminSCList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		ArrayList<ServiceData> list = dao.SCquestion(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int delSD(String qd) {
+		Connection conn = getConnection();
+		int result = dao.delSD(conn,qd);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public ArrayList<AdminQuestion> scAQlist(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		ArrayList<AdminQuestion> list = dao.aqYlist(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int scInsert(String type, String scQ, String scA) {
+		Connection conn = getConnection();
+		int result = dao.scInsert(conn,type,scQ,scA);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public int scCount() {
+		Connection conn = getConnection();
+		int count = dao.scCount(conn);
+		close(conn);
+		return count;
+	}
+
+	public ArrayList<AdminPetsitter> psNewCerList(int cPage, int numPerPage, String type) {
+		Connection conn = getConnection();
+		ArrayList<AdminPetsitter> list = dao.psNewCerList(conn,cPage,numPerPage,type);
+		close(conn);
+		return list;
+	}
+
+	public int psNewCerCount() {
+		Connection conn = getConnection();
+		int count = dao.psNewCerCount(conn);
+		close(conn);
+		return count;
+	}
+
+	public int cerChange(String userId, String centerName, String cerName, String type) {
+		Connection conn = getConnection();
+		int result = dao.psCerChange(conn,userId,centerName,cerName,type);
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<AdminPetsitter> psCerYList(int cPage, int numPerPage, String type) {
+		Connection conn = getConnection();
+		ArrayList<AdminPetsitter> list = dao.psCerYList(conn,cPage,numPerPage,type);
+		close(conn);
+		return list;
+	}
+
+	public int psCerYCount() {
+		Connection conn = getConnection();
+		int count = dao.psCerYCount(conn);
+		close(conn);
+		return count;
 	}
 
 }

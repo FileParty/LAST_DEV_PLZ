@@ -1,6 +1,7 @@
 package com.petmily.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.petmily.admin.model.vo.User;
+import com.google.gson.Gson;
+import com.petmily.admin.model.vo.ServiceData;
 import com.petmily.admin.service.AdminService;
 
 /**
- * Servlet implementation class AdminNormalDataServlet
+ * Servlet implementation class ServletCenterDataServlet
  */
-@WebServlet("/admin/normalUserData")
-public class AdminNormalDataServlet extends HttpServlet {
+@WebServlet("/scData")
+public class ServletCenterDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNormalDataServlet() {
+    public ServletCenterDataServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +33,11 @@ public class AdminNormalDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = null;
-		if(request.getParameter("userId")!=null) {
-			userId = request.getParameter("userId");
-		}
-		System.out.println(userId);
-		User u = new AdminService().userData(userId);
-		System.out.println(u);
+		String type = request.getParameter("type");
+		ArrayList<ServiceData> list = new AdminService().scList(type);
 		
-		request.setAttribute("showType", "user");
-		request.setAttribute("userData", u);
-		request.getRequestDispatcher("/views/admin/InfoPage.jsp").forward(request, response);
-		
+		response.setContentType("application/json;charset=UTF-8");
+		new Gson().toJson(list,response.getWriter());
 	}
 
 	/**

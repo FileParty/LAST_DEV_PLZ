@@ -5,6 +5,7 @@ public class ApplyUser {
 	private String userid;
 	private String name;
 	private String enrollDate;
+	private String email;
 	
 	public ApplyUser() {
 		// TODO Auto-generated constructor stub
@@ -34,9 +35,18 @@ public class ApplyUser {
 		this.enrollDate = enrollDate;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
-		return "ApplyUser [userid=" + userid + ", name=" + name + ", enrollDate=" + enrollDate + "]";
+		return "ApplyUser [userid=" + userid + ", name=" + name + ", enrollDate=" + enrollDate + ", email=" + email
+				+ "]";
 	}
 	
 	

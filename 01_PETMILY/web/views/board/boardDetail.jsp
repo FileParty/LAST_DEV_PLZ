@@ -453,7 +453,7 @@
 
   
         
-           /* 
+           
             var search= $(".address").val();
             console.log(search);
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -491,7 +491,7 @@
                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                    map.setCenter(coords);
                } 
-           });     */
+           });  
            
            $("#mapOff").trigger('click');
            function mapOff(draggable,zoomable) {

@@ -65,7 +65,7 @@
 				<% 	}%>
 				</td>
 			</tr>
-			<% if(aud.getPET_CERTIFICATE_YN()!=null){ %>
+			<% if(aud.getPET_CERTIFICATE_YN().equals("Y")){ %>
 				<tr>
 					<th>자격증이름</th>
 					<td><%=aud.getCERTIFICATE_NAME()%></td>
@@ -160,15 +160,15 @@
 			</tr>
 			<tr>
 				<th>우편번호</th>
-				<td><%=u.getZipCode()%></td>
+				<td><%=u.getZipCode()!=null?u.getZipCode():"우편번호가 없습니다."%></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><%=u.getAddress()%></td>
+				<td><%=u.getAddress()!=null?u.getAddress():"주소가 없습니다."%></td>
 			</tr>
 			<tr>
 				<th>상세주소</th>
-				<td><%=u.getDetAddress()%></td>
+				<td><%=u.getDetAddress()!=null?u.getDetAddress():"상세주소가 없습니다."%></td>
 			</tr>
 			<tr>
 				<th>등록일</th>

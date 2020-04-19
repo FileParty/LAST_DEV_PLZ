@@ -95,6 +95,7 @@
 		
 	})
 	
+	
 	function showUserData(){
 		let userId = $(event.target).parent().parent().find("td:nth-of-type(2)").text();
 		window.open("<%=request.getContextPath()%>/admin/normalUserData?userId="+userId,"_blank","width=725px; height=500px");

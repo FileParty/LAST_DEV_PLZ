@@ -22,7 +22,6 @@ public class JDBCTemplate {
 			try {
 				Properties prop = new Properties();
 				String path = JDBCTemplate.class.getResource("/sql/driver/driver.properties").getPath();
-				System.out.println(path);
 				prop.load(new FileReader(path));
 				Class.forName(prop.getProperty("driver"));
 //				Class.forName("oracle.jdbc.driver.OracleDriver");

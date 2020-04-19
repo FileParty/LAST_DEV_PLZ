@@ -494,7 +494,7 @@ public class UserDao {
 			pstmt.setString(1, id);
 			rs= pstmt.executeQuery();
 			rs.next();
-			count= rs.getInt(1);
+			count= rs.getInt(1); // 첫번째 컬럼이라는 의미!
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

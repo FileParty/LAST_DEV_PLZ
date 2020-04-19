@@ -79,10 +79,10 @@ th {
 									<th>no</th>									
 									<th>제목</th>								
 									<th>소개 글</th>									
-									<th style="width:250px;">요금(소형)</th>
-									<th style="width:250px;">요금(중형)</th>
-									<th style="width:250px;">요금(대형)</th>
-									<th style="width:250px;">주소</th>
+									<th style="width:200px;">요금(소형)</th>
+									<th style="width:200px;">요금(중형)</th>
+									<th style="width:200px;">요금(대형)</th>
+									<th style="width:350px;">주소</th>
 									<th style="width:250px;">상태</th>
 									
 								</tr>
@@ -96,7 +96,7 @@ th {
 									<td><%=p.getSmallPrice()%>원</td>
 									<td><%=p.getMiddlePrice()%>원</td>
 									<td><%=p.getBigPrice()%>원</td>
-									<td><%=p.getBoardAddress()%></td>
+									<td style="width:300px;"><%=p.getBoardAddress()%></td>
 									<%if(p.getBoardNewType().equals("Y")) {%>
 									<td>최신</td>
 									<%}else { %>

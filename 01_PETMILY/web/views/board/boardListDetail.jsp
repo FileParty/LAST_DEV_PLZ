@@ -3,7 +3,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import=" com.petmily.reservation.model.vo.ReservationPetCode"%>
 <%@page import=" com.petmily.reservation.model.vo.PetReservation"%>
-<%@page import="javafx.geometry.Pos"%>
 <%@page import=" com.petmily.pet.model.vo.PetInfo"%>
 <%@page import=" com.petmily.review.model.vo.ReviewPetSitter"%>
 <%@page import=" com.petmily.board.model.vo.boardImg"%>

@@ -1,6 +1,7 @@
 package com.petmily.board.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -44,17 +45,29 @@ public class BoardList extends HttpServlet {
 		
 		int boardCode = Integer.parseInt(request.getParameter("boardCode"));
 //		String userId = (String)request.getParameter("userId");
-		String userId = ((User)session.getAttribute("loginUser")).getUserId();
+		
+		String userId = "null";
+		boolean bookmark = false;
+		List<PetInfo> petsST = null;
+		
+		if((User)session.getAttribute("loginUser")!=null)
+			userId = ((User)session.getAttribute("loginUser")).getUserId();
 		
 		PetSitterBoard sitterBoardT = new BoardService().getPetSitterBoardT(boardCode);		
 		String sitterId = sitterBoardT.getUserId();
 		PetSitter sitterT = new BoardService().getPetSitterT(sitterId);
 		User userInfoT = new BoardService().getUserInfoT(sitterId);
+		User uInfoT = new BoardService().getUserInfoT(userId);
 		
 //		String sitterName = new BoardService().getSitterName(sitterId);
 		
+		// 스케줄 관리
+		System.out.println(sitterId);
+		List<String> schedule = new BoardService().getSchedule(sitterId);
+				
 		// bookmark check 여부 / check 시 true 
-		boolean bookmark = new BoardService().bookmark(userId, sitterId);
+		if((User)session.getAttribute("loginUser")!=null)
+			bookmark = new BoardService().bookmark(userId, sitterId);
 		
 		// 자격증 보유여부 / 보유 시 true
 		boolean certificateFlag = new BoardService().getCertificateFlag(sitterId);
@@ -77,7 +90,10 @@ public class BoardList extends HttpServlet {
 		List<String> boardImgs = new BoardService().getBoardImg(boardCode);
 		
 		// 사용자의 pet 정보
-		List<PetInfo> petsST = new BoardService().getPetInfoT(userId);
+		if((User)session.getAttribute("loginUser")!=null)
+			petsST = new BoardService().getPetInfoT(userId);
+		
+		
 		
 		
 		request.setAttribute("bookmark", bookmark);
@@ -87,6 +103,7 @@ public class BoardList extends HttpServlet {
 		request.setAttribute("userId", userId);
 		request.setAttribute("sitterT", sitterT);
 		request.setAttribute("userInfoT", userInfoT);
+		request.setAttribute("uInfoT", uInfoT);
 		
 		request.setAttribute("dsList", defaultServiceList);
 		request.setAttribute("pOServiceList", pOServiceList);
@@ -95,6 +112,7 @@ public class BoardList extends HttpServlet {
 		request.setAttribute("reviews", reviews);
 		
 		request.setAttribute("petsInfo", petsST);
+		request.setAttribute("scheduleT", schedule);
 		
 		request.getRequestDispatcher("/views/board/boardListDetail.jsp").forward(request, response);
 		

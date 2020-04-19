@@ -25,16 +25,16 @@ function review(){
 
 
 // Get the modal
-var reservation_modal = document.getElementById('reservation_modal');
+//var reservation_modal = document.getElementById('reservation_modal');
 var bline_process_modal = document.getElementById('bline_process_modal');
 //var bline_request_modal = document.getElementById('bline_request_modal');
-var reservation_end_modal = document.getElementById('reservation_end_modal');
+//var reservation_end_modal = document.getElementById('reservation_end_modal');
 
 // Get the button that opens the modal
-var reservation = document.getElementById("reservation");
+//var reservation = document.getElementById("reservation");
 var bline_process = document.getElementById("bline_process");
 var bline_request = document.getElementById("bline_request");
-var reservation_end = document.getElementById("reservation_end");
+//var reservation_end = document.getElementById("reservation_end");
 
 
 // Get the <span> element that closes the modal
@@ -44,15 +44,12 @@ var bline_request_close = document.getElementsByClassName("close")[2];
 var reservation_end_close = document.getElementsByClassName("close")[3];
 
 // When the user clicks on the button, open the modal 
-reservation.onclick = function() {
-    reservation_modal.style.display = "block";
-    $('body').css("overflow", "hidden");
-}
-reservation_end.onclick = function() {
-    reservation_end_modal.style.display = "block";
-    $('body').css("overflow", "hidden");
-    
-}
+
+
+//reservation_end.onclick = function() {
+//    reservation_end_modal.style.display = "block";
+//    $('body').css("overflow", "hidden");
+//}
 
 bline_process.onclick = function() {
     bline_process_modal.style.display = "block";
@@ -94,13 +91,19 @@ window.onclick = function(event) {
     } else if (event.target == bline_request_modal) {
         bline_request_modal.style.display = "none";
         $('body').css("overflow", "scroll");
-    /*} 
-    else if (event.target == reservation_end_modal) {
+    } else if (event.target == reservation_end_modal) {
         reservation_end_modal.style.display = "none";
-        $('body').css("overflow", "scroll");*/
+        $('body').css("overflow", "scroll");
     } else if (event.target == document.getElementsByClassName("close")[4]) { // main img modal / function 따로 만듦
         document.getElementById("img_modal").style.display = "none";
         $('body').css("overflow", "scroll");
+        
+        let i = first_img_index;
+        for(let j=i; i<j+4; i++){
+            window["temp" + i] = document.getElementsByClassName("modal_sub_img_none");
+            window["temp" + i][i].setAttribute("style", "display:none;height:100%");
+        }
+        
     }
 }
 
@@ -132,7 +135,7 @@ function resulvation_cancel(){
         reservation_end_modal.style.display = "none";
         $('body').css("overflow", "scroll");
         
-        $('#section_end1').attr("style", "display:flex");
+        $('#section_end1').attr("style", "display:flex; z-index:999;");
         $('#section_end2').attr("style", "display:none");
         
         
@@ -160,7 +163,7 @@ function main_img_view(){
         }
     }
     
-    if(event.target.src)
+    /*if(event.target.src)*/
 
 
     for(let j=i; i<j+4; i++){

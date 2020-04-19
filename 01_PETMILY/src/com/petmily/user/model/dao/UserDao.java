@@ -424,7 +424,7 @@ public class UserDao {
 	public int userDelete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("userDelete");
+		String sql = prop.getProperty("userDelete"); // SQL문은 업데이트로 수정처리함
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id); // SQL 조건

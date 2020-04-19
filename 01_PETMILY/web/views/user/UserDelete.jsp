@@ -173,7 +173,7 @@
                         <br/>
                         <div class="row" style="margin-left: 35%;">
                             <div style="margin-top:80px; margin-bottom: 100px;">
-                                <button class="btn" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview" type="button">예약 요청 삭제</button>
+                                <button class="btn" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview" type="button" onclick="alert('서비스 준비중입니다.');">예약 요청 삭제</button>
                                 <button class="btn" style="color:white; border: solid 1px black; background-color :black" class="btn1" type="submit">회원 탈퇴</button>
                             </div>
                         </div>

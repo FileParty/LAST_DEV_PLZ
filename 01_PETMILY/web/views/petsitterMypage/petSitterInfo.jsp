@@ -244,7 +244,7 @@ label.custom-file-label::after{
     <section>
         <div class="container">
             <div class="row">
- <%--                <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %> --%>
+               <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">

@@ -25,7 +25,7 @@ pageEncoding="UTF-8"%>
 					  
 					  <!-- The slideshow -->
 					  <div class="carousel-inner">
-					  	<%for(String img : ps.getImgFile()) {%>
+					  	<%for(String img : ps.getImgFile() ) {%>
 						    <div class="carousel-item active">
 						      <img src="<%=request.getContextPath()%>/upload/<%=img %>" alt="" width="320" height="210">
 						    </div>

@@ -53,10 +53,10 @@
 					<% for(AdminQuestion aq : aqList){ %>
 					<tr>
 						<td><%=qCount++%></td>
-						<td><% if(aq.getEmailTitle().length()<10){ %>
+						<td><% if(aq.getEmailTitle().length()<11){ %>
 								<%=aq.getEmailTitle() %>
 							<% } else { %>
-								<%=aq.getEmailTitle().substring(0,aq.getEmailTitle().length()/2+4) + "..." %>
+								<%=aq.getEmailTitle().substring(0,10) + "..." %>
 							<% } %>
 							<input type="hidden" class="question" value="<%=aq.getEmailTitle()%>">
 							<input type="hidden" class="scNum" value="<%=aq.getScNum()%>">

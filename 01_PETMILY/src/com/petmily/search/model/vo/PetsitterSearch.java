@@ -29,30 +29,10 @@ public class PetsitterSearch {
 	private List<String> imgFile;
 	// 펫시터 전체 후기 갯수
 	private int reviewCount;
-	private boolean prefer;
+	private boolean bookmark;
 	
 	public PetsitterSearch() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public PetsitterSearch(String proPetsitter, String petsitterId, int boardCode, String boardTitle, String boardInfo,
-			int oneDayCareSprice, int oneDayCareMprice, int oneDayCareBprice, String boardAddress,
-			String boardAddressComment, String boardBlind, List<String> imgFile, int reviewCount, boolean prefer) {
-		super();
-		this.proPetsitter = proPetsitter;
-		this.petsitterId = petsitterId;
-		this.boardCode = boardCode;
-		this.boardTitle = boardTitle;
-		this.boardInfo = boardInfo;
-		this.oneDayCareSprice = oneDayCareSprice;
-		this.oneDayCareMprice = oneDayCareMprice;
-		this.oneDayCareBprice = oneDayCareBprice;
-		this.boardAddress = boardAddress;
-		this.boardAddressComment = boardAddressComment;
-		this.boardBlind = boardBlind;
-		this.imgFile = imgFile;
-		this.reviewCount = reviewCount;
-		this.prefer = prefer;
 	}
 
 	public String getProPetsitter() {
@@ -159,22 +139,21 @@ public class PetsitterSearch {
 		this.reviewCount = reviewCount;
 	}
 
-	public boolean isPrefer() {
-		return prefer;
+	public boolean isBookmark() {
+		return bookmark;
 	}
 
-	public void setPrefer(boolean prefer) {
-		this.prefer = prefer;
+	public void setBookmark(boolean bookmark) {
+		this.bookmark = bookmark;
 	}
 
-	@Override
-	public String toString() {
-		return "PetsitterSearch [proPetsitter=" + proPetsitter + ", petsitterId=" + petsitterId + ", boardCode="
-				+ boardCode + ", boardTitle=" + boardTitle + ", boardInfo=" + boardInfo + ", oneDayCareSprice="
-				+ oneDayCareSprice + ", oneDayCareMprice=" + oneDayCareMprice + ", oneDayCareBprice=" + oneDayCareBprice
-				+ ", boardAddress=" + boardAddress + ", boardAddressComment=" + boardAddressComment + ", boardBlind="
-				+ boardBlind + ", imgFile=" + imgFile + ", reviewCount=" + reviewCount + ", prefer=" + prefer + "]";
+	public void setPrefer(boolean flag) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	
+	
 
 	
 	

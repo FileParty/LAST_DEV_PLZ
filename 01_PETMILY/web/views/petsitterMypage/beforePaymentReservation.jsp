@@ -113,6 +113,8 @@ pageEncoding="UTF-8"%>
         color: grey;
         border-right: 1px solid white;
     }
+    
+
 
 </style>
 
@@ -120,45 +122,7 @@ pageEncoding="UTF-8"%>
 	        <div class="container">
 	            <form name="reFrm" method="post">
 		            <div class="row">
-		            	<div class="col-2 menu">
-		                    <div id="menu">
-		                        <ul type="none">
-		                            <li class="title">회원정보</li>
-		                            <hr class="hr-line"/>
-		                            <li class="content"><a href=""> - 회원정보 수정</a></li>
-		                            <li class="content"><a href=""> - 회원 탈퇴</a></li>
-		                            <br/>
-		                            
-		                            <li class="title">작성글</li>
-		                            <hr class="hr-line"/>
-		                            <li class="content"><a href=""> - 작성글 보기</a></li>
-		                            <li class="content"><a href=""> - 작성한 비밀 후기 보기</a></li>
-		        					</br>
-		                            
-		                            <li class="title">예약</li>
-		                            <hr class="hr-line"/>
-		                            <li class="content"><a href=""> - 예약 현황</a></li>
-		                            <li class="content"><a href=""> - 결제 전 예약</a></li>
-		                            <li class="content"><a href=""> - 결제 완료 예약</a></li>
-		                            <li class="content"><a href=""> - 내 예약 일정</a></li>
-		                            <li class="content"><a href=""> - 채팅</a></li>
-		                            <br/>
-		                            
-		                            <li class="title">정산</li>
-		                            <hr class="hr-line"/>
-		                            <li class="content"><a href=""> - 이번 달 정산 현황</a></li>
-		                            <li class="content"><a href=""> - 이전 정산 보기</a></li>
-		                            <br/>
-		                            
-		                            <li class="title">자격증</li>
-		                            <hr class="hr-line"/>
-		                            <li class="content"><a href=""> - 보유 자격증 목록</a></li>
-		                            <li class="content"><a href=""> - 자격증 추가</a></li>
-		                            <br/>
-		                            
-		                        </ul>
-		                    </div>
-		                </div>
+		            	<%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
 	            		<div class="vl"></div>
 		            	<div class="col-9" style="padding:0;">
 		                <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -180,7 +144,7 @@ pageEncoding="UTF-8"%>
 			                        <th class="read">비밀 후기 열람</th>
 			                        <th>요청 상세</th>
 			                        <th class="state">상태</th>
-			                        <th>채팅</th>
+			                        
 			                    </tr>
 			                    <%if(list!=null){ %>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
@@ -190,11 +154,21 @@ pageEncoding="UTF-8"%>
 			                    	<td class="ckDate"><%=pmr.getCheckInDate() %></td>
 			                    	<td class="ckDate"><%=pmr.getCheckOutDate() %></td>
 			                    	<td class="name"><%=pmr.getUserName() %></td>
-			                    	<td class="read"><div class="p-1"><button type="button" class="btn" >열람</button></div></td>
-			                    	<td><div class="p-1"><button id="secretReview" type="button" class="btn" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
-			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></div></td>
+			                    	<td class="read">
+			                    		<div class="p-1">
+			                    			<input type="hidden" name="rsCode" value="<%=pmr.getReservationCode()%>" />
+			                    			<button type="button" class="btn petProfile" >열람</button>
+			                    		</div>
+			                    	</td>
+			                    	<td><div class="p-1"><button class="btn secretReview" type="button" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
+			                    	<td>
+			                    		<div class="p-1">
+			                    			<input type="hidden" name="rsCode" value="<%=pmr.getReservationCode()%>" />
+			                    			<button type="button" class="btn requestDetail"> 상세 요청 확인</button>
+			                    		</div>
+			                    	</td>
 			                    	<td class="state"><%=pmr.getResType() %></td>
-			                    	<td><div class="p-1"><button type="button" class="btn">채팅</button></div></td>
+			                    	
 			                    </tr>
 			                 	<%} }%>
 			                </table>
@@ -305,17 +279,17 @@ pageEncoding="UTF-8"%>
 	}
 	$(function(){
 		
-		$("#secretReview").click((e)=>{
+		$(".secretReview").click((e)=>{
 			//console.log($(this).val());
 			$.ajax({
 				url:"<%=request.getContextPath()%>/petsitter/mypage/userReviewList",
 				data:{userId:$(e.target).val()},
 				error:function(){
 	  				alert("실패");
+	  				console.log($(this).val());
 	  			},
 	  			success:data=>{
 	  				$("#secretReviewModalBody").html(data);
-	  				console.log($(e.target).val());
 	  			}
 			});
 		});
@@ -323,21 +297,32 @@ pageEncoding="UTF-8"%>
 	
 	$(function(){
 		
-		$("#requestDetail").click((e)=>{
+		$(".requestDetail").click((e)=>{
 		
-			$.ajax({
-				url:"<%=request.getContextPath()%>/petsitter/mypage/requestDetail",
-				data:{requestDetail:$(e.target).val()},
-				error:function(){
-	  				alert("실패");
-	  			},
-	  			success:data=>{
-	  				$("#requestDetailModalBody").html(data);
-	  				//console.log($(this).val());
-	  			}
+			var rsCode = $(e.target).prev().val();
+			var url = "<%=request.getContextPath()%>/sitter/beforePaymentDetail?rsCode="+rsCode;
+			var status = "height=420px, width=600px, top=200px, left=500px";
+			
+			window.open(url, "_blank", status);
+			
 			});
+			
 		});
-	});
+
+	$(function(){
+		
+		$(".petProfile").click((e)=>{
+		
+			var rsCode = $(e.target).prev().val();
+			var url = "<%=request.getContextPath()%>/sitter/beforePaymentPetprofile?rsCode="+rsCode;
+			var status = "height=420px, width=600px, top=200px, left=500px";
+			
+			window.open(url, "_blank", status);
+			
+			});
+			
+		});
+	
 	
 	
 </script>

@@ -17,7 +17,7 @@ import com.petmily.user.model.vo.User;
 /**
  * Servlet implementation class PetsitterMypageBeforePaymentReservationServlet
  */
-@WebServlet("/petsitter/mypage/beforePaymentReservation")
+@WebServlet("/sitter/beforePaymentReservation")
 public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,18 +34,14 @@ public class PetsitterMypageBeforePaymentReservationServlet extends HttpServlet 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		// 로그인 되어있는 펫시터 아이디(임시)
-		
+	
 		HttpSession session = request.getSession();
-		User u=(User)session.getAttribute("loginUser");
+	    String sitterId = ((User)session.getAttribute("loginUser")).getUserId();
 		
-		String petsitterId=u.getUserId();
+		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(sitterId);
 		
-		List<PetsitterMypageReservation> list=new PetsitterMypageReservationService().selectBeforePaymentRerservarion(petsitterId);
-		
+
 		request.setAttribute("list", list);
-		
 		request.getRequestDispatcher("/views/petsitterMypage/beforePaymentReservation.jsp").forward(request, response);
 		
 	}

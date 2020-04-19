@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
       }
     .col-9{
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden;
         
     }
 

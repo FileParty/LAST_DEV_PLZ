@@ -21,7 +21,7 @@
       }
     .col-9{
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden;
     }
     .container{
         height: 100%;
@@ -38,6 +38,7 @@
     .row{
         padding: 0;
         margin: 0;
+         height: 100%;
     }
     .menu{
             width: 230px;
@@ -297,15 +298,12 @@ label.custom-file-label::after{
                         
                         </table>
                         <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+                      
                   </div>
               </div>
           </div>
     </section>
-    
-    <br><br><br><br><br><br>
+   
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

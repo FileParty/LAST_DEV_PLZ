@@ -34,12 +34,11 @@
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
 
         }
     #menu{
         width: 230px;
-        position : fixed;
     }
     ul{
         padding-inline-start:0;
@@ -676,4 +675,3 @@ $('.row4').slideToggle(100); //시간 부여
 	}).open();
 	}
 </script>
-<%@ include file="/views/common/footer.jsp" %>

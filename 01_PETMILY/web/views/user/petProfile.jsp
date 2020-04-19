@@ -41,7 +41,7 @@
     .container{
         height: 100%;
         padding: 0;
-        width: 1366px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         /* border: 1px solid red; */
@@ -322,8 +322,12 @@ label.custom-file-label::after{
                     	
             </div>
         </div>
+<%@ include file="/views/common/footer.jsp" %>
+</div>
     </section>
-
+    <div class="row">
+    
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
    
@@ -395,6 +399,5 @@ $('.row4').slideToggle(100); //시간 부여
 
 
 </script>
-
 
 

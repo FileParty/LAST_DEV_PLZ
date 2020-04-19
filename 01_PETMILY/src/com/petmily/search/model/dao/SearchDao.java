@@ -714,12 +714,12 @@ public class SearchDao {
 		
 	}
 	
-	public boolean findBookmark(Connection conn,String userId,String petsitterId) {
+	public boolean selectBookmark(Connection conn,String userId,String petsitterId) {
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
-		boolean flag=true;
+		boolean flag=false;
 		
 		String sql=prop.getProperty("findBookmark");
 		
@@ -732,8 +732,6 @@ public class SearchDao {
 			
 			if(rs.next()) {
 				flag=true;
-			}else {
-				flag=false;
 			}
 			
 		}catch(SQLException e) {

@@ -40,7 +40,9 @@ public class PetsitterMypageBeforePaymentDetailServlet extends HttpServlet {
 		int rsCode = Integer.parseInt(request.getParameter("rsCode"));
 		
 		List<PetsitterMypageDetail> list = new PetsitterMypageReservationService().selectBeforePaymentDetail(rsCode);
-		System.out.println("가져오는 값"+list);
+		
+		
+		//System.out.println("가져오는 값"+list);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/petsitterMypage/beforePaymentReservationDetail.jsp").forward(request, response);
 	}

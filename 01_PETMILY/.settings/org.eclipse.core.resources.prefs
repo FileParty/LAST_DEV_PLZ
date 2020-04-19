@@ -92,7 +92,6 @@ encoding//src/com/petmily/reservation/controller/UserRequestDetailsServlet.java=
 encoding//src/com/petmily/reservation/controller/UserReservationEndServlet.java=UTF-8
 encoding//src/com/petmily/reservation/controller/UserReservationEndsServlet.java=UTF-8
 encoding//src/com/petmily/reservation/controller/UserReservationRequestServlet.java=UTF-8
-encoding//src/com/petmily/reservation/controller/UserReservationSortServlet.java=UTF-8
 encoding//src/com/petmily/reservation/controller/UserReservationingServlet.java=UTF-8
 encoding//src/com/petmily/reservation/model/dao/ReservationDao.java=UTF-8
 encoding//src/com/petmily/reservation/model/vo/Chatting.java=UTF-8

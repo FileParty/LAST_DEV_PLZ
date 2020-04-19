@@ -148,6 +148,7 @@ public class ReservationDao {
 	}
 	
 	public PetReservation reservations(Connection conn,String id,PetReservation p) {
+		System.out.println("보드넘넘:"+p.getBoardNo());
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		List<String> list = new ArrayList<String>();
@@ -172,7 +173,7 @@ public class ReservationDao {
 		return p;
 	}
 	
-	public PetReservation requestDetail(Connection conn,String id) {
+	public PetReservation requestDetail(Connection conn,String id, int revCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetReservation pr = null;
@@ -181,6 +182,7 @@ public class ReservationDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, revCode);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -207,7 +209,7 @@ public class ReservationDao {
 		return pr;
 	}
 	
-	public PetReservation requestDetails(Connection conn,String id) {
+	public PetReservation requestDetails(Connection conn,String id,int revCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetReservation pr = null;
@@ -216,6 +218,7 @@ public class ReservationDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2, revCode);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -265,7 +268,7 @@ public class ReservationDao {
 		}
 		return pr;
 	}
-	
+
 	public boolean insertReservation(Connection conn, PetReservation pr) {
 		
 		PreparedStatement pstmt = null;
@@ -471,6 +474,7 @@ public class ReservationDao {
 	}
 	
 	public int endSitting(Connection conn,int code) {
+		System.out.println("DAO??"+code);
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			int result = 0;
@@ -481,8 +485,9 @@ public class ReservationDao {
 				rs=pstmt.executeQuery();
 				
 				rs.next();
-				result = rs.getInt(1);
 				
+				result = rs.getInt("COUNT(*)");
+				System.out.println("DAO??"+result);
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {

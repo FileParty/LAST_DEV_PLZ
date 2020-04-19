@@ -3,7 +3,7 @@ package com.petmily.board.model.vo;
 import java.util.List;
 
 public class PetSitterBoard {
-
+	
 	private int boardNo;
 	private String userId;
 	private String boardTitle;

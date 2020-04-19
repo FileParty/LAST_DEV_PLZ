@@ -31,7 +31,7 @@ hr{
 			<br/>
 			<li class="title">작성글</li>
 			<hr class="hr-line"/>
-			<li class="content"><a href="<%=request.getContextPath()%>/sitter/Detail"> - 작성글 보기</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/listBoard"> - 작성글 리스트</a></li>
 			<li class="content"><a href=""> - 작성한 비밀 후기 보기</a></li>
 			</br>
 			<li class="title">예약</li>

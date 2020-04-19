@@ -40,6 +40,19 @@ public class UserRequestCancelServlet extends HttpServlet {
 		}
 		int result = new ReservationService().requestCancel(as);
 		
+		String msg = "";
+		String loc = "";
+		if(result>0) {
+			msg="예약이 취소되었습니다.";
+			loc="/user/request";
+		}else {
+			msg="다시 시도해주세요.";
+			loc="/user/request";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	
 		
 		

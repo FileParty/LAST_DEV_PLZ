@@ -141,7 +141,7 @@ public  int addSale(Connection conn,String plus,PetSitterBoard pb,int boardNo) {
    return result;
 }
 
-public  int oldCare(Connection conn,String plus,PetSitterBoard pb,int boardNo) {
+public  int oldCare(Connection conn,String plus,int boardNo) {
 	   PreparedStatement pstmt = null;
 	   int result = 0;
 	   String sql =prop.getProperty("oldCare");
@@ -184,7 +184,7 @@ public  int showerOn(Connection conn,String plus,PetSitterBoard pb,int boardNo) 
 	   return result;
 	}
 
-public  int drug(Connection conn,String plus,PetSitterBoard pb,int boardNo) {
+public  int drug(Connection conn,String plus,int boardNo) {
 	   PreparedStatement pstmt = null;
 	   int result = 0;
 	   String sql = prop.getProperty("drug");
@@ -226,7 +226,9 @@ public  int pickUp(Connection conn,String plus,PetSitterBoard pb,int boardNo) {
 	   return result;
 	}
 
-public int defaultOption(Connection conn,String defaults,PetSitterBoard  pb,int boardNo) {
+public int defaultOption(Connection conn,String defaults,int boardNo) {
+	System.out.println("dao기본섭:" + boardNo);
+	System.out.println("dao기본섭:" + defaults);
    PreparedStatement pstmt = null;
    int result = 0;
    String sql = prop.getProperty("defaultOptionInsert");
@@ -235,6 +237,7 @@ public int defaultOption(Connection conn,String defaults,PetSitterBoard  pb,int 
       pstmt.setInt(1, boardNo);
       pstmt.setString(2, defaults);
       result=pstmt.executeUpdate();
+      System.out.println("dao res:" + result);
    }catch(SQLException e) {
       e.printStackTrace();
    }finally { 
@@ -243,8 +246,8 @@ public int defaultOption(Connection conn,String defaults,PetSitterBoard  pb,int 
    return result;
 }
 
-public PetSitterBoard boardDetail(Connection conn,String userId) {
-   System.out.println("보드 상세 들왔음");
+public PetSitterBoard boardDetail(Connection conn,String userId,int no) {
+   System.out.println("보드 상세 들왔음"+no);
    PreparedStatement pstmt = null;
    ResultSet rs = null;
    PetSitterBoard pb = null;
@@ -254,6 +257,7 @@ public PetSitterBoard boardDetail(Connection conn,String userId) {
    try { 
       pstmt=conn.prepareStatement(sql);
       pstmt.setString(1, userId);
+      pstmt.setInt(2, no);
       rs = pstmt.executeQuery();
       
      while(rs.next()) {
@@ -280,8 +284,9 @@ public PetSitterBoard boardDetail(Connection conn,String userId) {
    return pb;
 }
 
-public PetSitterBoard imgDetail(Connection conn, PetSitterBoard pb) {
-      
+public PetSitterBoard imgDetail(Connection conn, PetSitterBoard pb,int no) {
+	System.out.println("보드 상세 들왔음"+no);
+	System.out.println("보드 상세 들왔음"+pb.getBoardNo());
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       
@@ -290,7 +295,8 @@ public PetSitterBoard imgDetail(Connection conn, PetSitterBoard pb) {
       
       try { 
          pstmt=conn.prepareStatement(sql);
-         pstmt.setInt(1,pb.getBoardNo());
+         pstmt.setInt(1,no);
+         
          rs = pstmt.executeQuery();
          
          while(rs.next()) {
@@ -314,8 +320,9 @@ public PetSitterBoard imgDetail(Connection conn, PetSitterBoard pb) {
       return pb;
    }
 
-public PetSitterBoard defaultOptionDetail(Connection conn, PetSitterBoard pb) {
-      
+public PetSitterBoard defaultOptionDetail(Connection conn, PetSitterBoard pb,int no) {
+	System.out.println("보드 상세 들왔음"+no);
+	System.out.println("보드 상세 들왔음"+pb.getBoardNo());
       PreparedStatement pstmt = null;
       ResultSet rs = null;
     
@@ -324,7 +331,7 @@ public PetSitterBoard defaultOptionDetail(Connection conn, PetSitterBoard pb) {
       
       try { 
          pstmt=conn.prepareStatement(sql);
-         pstmt.setInt(1,pb.getBoardNo());
+         pstmt.setInt(1,no);
          rs = pstmt.executeQuery();
          
          while(rs.next()) {
@@ -343,8 +350,9 @@ public PetSitterBoard defaultOptionDetail(Connection conn, PetSitterBoard pb) {
       return pb;
    }
 
-public PetSitterBoard plusOptionDetail(Connection conn, PetSitterBoard pb) {
-      
+public PetSitterBoard plusOptionDetail(Connection conn, PetSitterBoard pb,int no) {
+	System.out.println("보드 상세 들왔음"+no);
+	System.out.println("보드 상세 들왔음"+pb.getBoardNo());
       PreparedStatement pstmt = null;
       ResultSet rs = null;
       
@@ -354,7 +362,7 @@ public PetSitterBoard plusOptionDetail(Connection conn, PetSitterBoard pb) {
       
       try { 
          pstmt=conn.prepareStatement(sql);
-         pstmt.setInt(1,pb.getBoardNo());
+         pstmt.setInt(1,no);
          
          rs = pstmt.executeQuery();
          
@@ -517,7 +525,67 @@ public PetSitterBoard defaultOptionUpdate(Connection conn, PetSitterBoard pb) {
     return pb;
  }
 
+public List<PetSitterBoard> selectList(Connection conn,String userId) {
+	PreparedStatement pstmt = null;
+	List<PetSitterBoard> list = new ArrayList<PetSitterBoard>();
+	ResultSet rs = null;
+	String sql = prop.getProperty("selectList");
+	PetSitterBoard pb = null;
+	
+	try {
+		pstmt= conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			pb = new PetSitterBoard();
+			pb.setBoardNo(rs.getInt("BOARD_CODE"));
+			pb.setBoardTitle(rs.getString("BOARD_TITLE"));
+			pb.setBoardInfo(rs.getString("BOARD_INFO"));
+			pb.setSmallPrice(rs.getInt("ONE_DAY_CARE_S_PRICE"));
+			pb.setMiddlePrice(rs.getInt("ONE_DAY_CARE_M_PRICE"));
+			pb.setBigPrice(rs.getInt("ONE_DAY_CARE_B_PRICE"));
+			pb.setBoardAddress(rs.getString("BOARD_ADDRESS"));
+			pb.setBoardNewType(rs.getString("BOARD_NEW_YN"));
+			list.add(pb);
+		}
+	}catch(SQLException e) {
+			e.printStackTrace();
+		}finally { 
+			close(rs);
+			close(pstmt);
+		}
+	return list;
+	}
 
-
+public int mainButton(Connection conn,String userId) {
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int result=0;
+	System.out.println("dAO 들옴");
+	String sql = prop.getProperty("mainButton");
+	
+	try {
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		rs.next();
+		result=rs.getInt(1);
+		
+		
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	}
+	return result;
 }
+}
+
+
+
+
    

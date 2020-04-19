@@ -1,3 +1,4 @@
+<%@page import="com.petmily.board.model.vo.PetSitterBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -7,6 +8,8 @@
 %> 
 
 <%@ include file="/views/common/header.jsp" %>
+
+
 <style>
    *{   
        
@@ -251,10 +254,7 @@ label.custom-file-label::after{
                     <li class="breadcrumb-item">마이페이지</li>
                     <li class="breadcrumb-item active">메인</li>
                 </ul>
-                    <div class="col-3" style= "margin-left: auto; margin-right: auto;">
-                        <br/>
-                        <button onclick="location.replace('<%=request.getContextPath()%>/sitter/write')" style="width: 200px; cursor: pointer;">글 작성하기</button>
-                    </div>
+                 
                     <table>
                         <tr>
                             <td class="sub-title" style="width: 100px;">신규 예약 요청: 0건<hr/></td>                            
@@ -315,6 +315,7 @@ label.custom-file-label::after{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
+
 
     
 function toggle1(){ //on/off하나의 버튼으로 가능.

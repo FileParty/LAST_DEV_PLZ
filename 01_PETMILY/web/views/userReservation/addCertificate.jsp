@@ -32,24 +32,19 @@
 	href="<%=request.getContextPath()%>/css/boardWrite2.css">
 <style>
 table {
-	border-radius: 5px;
+	
 	margin-left: auto;
 	margin-right: auto;
 	border-collapse: collapse;
-}
-
-td {
-	border-top: 1px solid grey;
-	border-bottom: 1px solid grey;
 }
 
 th {
 	width: 150px;
 	font-size: 12px;
 	text-align: center;
-	
+	background-color:lightgray;
 	color: grey;
-	border-right: 1px solid white;
+	
 }
 </style>
 </head>
@@ -73,7 +68,7 @@ th {
 
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">
-							<table id="inner">
+							<table id="inner" border="1" class="table table-hover">
 							
 						
 								<tr>
@@ -105,7 +100,7 @@ th {
 							
 						</div>
 					</div>
-							<button style="margin-left:400px;font-size:10px;height:25px;border-radius:15px;" onclick="addCertificate();">자격증 추가</button>
+							<button type="button" style="margin-left:400px;font-size:10px;height:25px;border-radius:15px;" onclick="addCertificate();">자격증 추가</button>
 				</div>
 			</div>
 		</div>
@@ -127,8 +122,9 @@ th {
 
 <script>
 	function addCertificate() {
-		window.open("<%=request.getContextPath()%>/views/userReservation/addCertificatePop.jsp","_blank","width=500,height=800");
+		window.open("<%=request.getContextPath()%>/views/userReservation/addCertificatePop.jsp","pop","width=500,height=800");
 	}
+
 </script>
 </body>
 </html>

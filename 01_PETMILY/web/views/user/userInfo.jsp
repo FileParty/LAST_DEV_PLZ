@@ -251,9 +251,9 @@ label.custom-file-label::after{
         <div class="container">
             <form action="<%=request.getContextPath()%>/user/petprofile/upload" method="post" onsubmit="return test();">
             <div class="row">
-                    
-    		<%@ include file="/views/user/userSideBar.jsp"  %>
-    	
+
+          <%@include file="/views/user/userSideBar.jsp" %>
+
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">

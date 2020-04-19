@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.petmily.board.service.BoardService2;
 import com.petmily.user.model.service.UserService;
 import com.petmily.user.model.vo.User;
 
@@ -38,7 +39,9 @@ public class UserInfoServlet extends HttpServlet {
 			String id = request.getParameter("userId");
 			
 			User u = new UserService().userSelect(id);
-			
+			int result = new BoardService2().mainButton(id);
+		     
+		    request.setAttribute("result", result);
 			request.setAttribute("user", u);
 			switch(u.getUserType()) {
 				case "일반" : request.getRequestDispatcher("/views/user/userInfo.jsp").forward(request, response); break;

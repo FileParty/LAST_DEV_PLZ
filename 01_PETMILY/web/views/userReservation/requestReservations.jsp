@@ -13,10 +13,14 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 <meta charset="UTF-8">
 <title>사용자 정보 페이지</title>
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 </head>
 <body>
-	<table>
-		
+	<table class="table table-hover" align=center;>
+		<%if(pr!=null) { %>
 			<tr>
 				<th>예약NO</th>
 				<td><%=pr.getReservationCode() %></td>
@@ -37,7 +41,7 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 					<td><%=pr.getCheckOut().substring(0,11) %></td>
 				</tr>
 				<tr>
-					<th>추가 요청 문의사항</th>
+					<th>요청 사항</th>
 					<%if(pr.getPlusQuestion()==null) { %>
 					<td>없음</td>
 					<%} else { %>
@@ -79,7 +83,7 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 					<td><%=pr.getPetBath() %></td>
 				</tr>
 				
-		
+		<%} %>
 	</table>
 	<button onclick="closePage();">확인</button>
 </body>
@@ -91,12 +95,13 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 		align-items:center;
 	}
 	table{
-		display:flex;
+		
+		justify-content:center;
 		flex-direction:column;
 		text-align:center;
 	}
 	table tr{
-		background-color:lightgray;
+		
 		board:1px solid black;
 	}
 	table th, table td{

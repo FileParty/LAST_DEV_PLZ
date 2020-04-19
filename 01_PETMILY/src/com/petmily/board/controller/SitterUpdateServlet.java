@@ -34,8 +34,9 @@ public class SitterUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-		System.out.println(userId);
-		PetSitterBoard pb = new BoardService2().boardDetail(userId);
+		
+		int no = Integer.parseInt(request.getParameter("no"));
+		PetSitterBoard pb = new BoardService2().boardDetail(userId,no);
 		request.setAttribute("pb", pb);
 		request.getRequestDispatcher("/views/board/boardUpdate.jsp").forward(request, response);
 	}

@@ -9,13 +9,17 @@ PetReservation pr = (PetReservation)request.getAttribute("pr");
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>사용자 정보 페이지</title>
+
+
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
 <body>
-	<table>
+	<table class="table table-hover">
 		
 			<tr>
 				<th>예약NO</th>
@@ -58,10 +62,11 @@ PetReservation pr = (PetReservation)request.getAttribute("pr");
 	table{
 		display:flex;
 		flex-direction:column;
-		text-align:center;
+		justify-content:center;
+		align-items:center;
 	}
 	table tr{
-		background-color:lightgray;
+	
 		board:1px solid black;
 	}
 	table th, table td{

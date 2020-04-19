@@ -41,7 +41,7 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		int maxSize = 1024*1024*10;
 		MultipartRequest mr = new MultipartRequest(request, path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		
-		//寃뚯떆�뙋�뀒�씠釉�
+		
 		String title =mr.getParameter("title");
 		String intro = mr.getParameter("introduce");
 		int small= 0;
@@ -82,19 +82,19 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		String comment = mr.getParameter("comment");
 		String[] pType = mr.getParameterValues("plusOption");
 		String[] dType = mr.getParameterValues("defaultOption");
+
 	
 		String str = "";
 		String file="";
 		List<String> list = new ArrayList();
 		List<String> plusO = new ArrayList<String>();
 		List<String> defaultO = new ArrayList<String>();
-		System.out.println(count);
+		
 		for(int i=0;i<count;i++) {
 			str="file"+(i+1);
 			file=mr.getFilesystemName(str);
 			list.add(file);
-			System.out.println(str);
-			System.out.println(file);
+			System.out.println("업뎃 : " +list.get(i));
 		}
 		for(String p : pType) {
 			plusO.add(p);
@@ -102,30 +102,13 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		for(String d : dType) {
 			defaultO.add(d);
 		}
-		System.out.println("�닔�젙 �셿猷� �뜲�씠�꽣 異쒕젰");
-		System.out.println(title);
-		System.out.println(intro);
-		System.out.println(address);
-		System.out.println(comment);
-		System.out.println(plusO);
-		System.out.println(defaultO);
-		System.out.println(list);
-		System.out.println(small);
-		System.out.println(middle);
-		System.out.println(big);
-		System.out.println(small1);
-		System.out.println(middle1);
-		System.out.println(big1);
-		System.out.println(oneWay);
-		System.out.println(allWay);
-		System.out.println(sale);
-		System.out.println(count);
 		
+	
 		
 		int boardNo = Integer.parseInt(mr.getParameter("no"));
 		HttpSession session = request.getSession();
 	    String userId = ((User)session.getAttribute("loginUser")).getUserId();
-	PetSitterBoard pb = new PetSitterBoard(boardNo,userId,title,intro,small,middle,big,address,comment,"N","N",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
+	    PetSitterBoard pb = new PetSitterBoard(boardNo,userId,title,intro,small,middle,big,address,comment,"N","N",small1,middle1,big1,oneWay,allWay,sale,list,defaultO,plusO);
 	
 		
 		int result = new BoardService2().boardInsert(pb);
@@ -133,14 +116,15 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		String msg = "";
 		String loc = "";
 		if(result>0) {
-			msg="寃뚯떆湲��씠 �닔�젙 �릺�뿀�뒿�땲�떎.";
-			request.getRequestDispatcher("/views/petsitterMypage/petSitterInfo.jsp").forward(request, response);
+			msg="게시글이 수정 되었습니다.";
+			loc="/views/petsitterMypage/petSitterInfo.jsp";
 		}else { 
-			msg="寃뚯떆湲� �닔�젙�쓣 �떎�뙣 �븯���뒿�땲�떎.";
-			loc="/views/common/msg.jsp";
-			request.getRequestDispatcher("views/common/msg.jsp").forward(request, response);
+			msg="게시글 수정에 실패 하였습니다.";
+			loc="/views/common/msg.jsp";			
 		}
-
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 

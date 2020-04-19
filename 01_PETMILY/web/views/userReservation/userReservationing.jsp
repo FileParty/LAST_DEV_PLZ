@@ -3,8 +3,10 @@
     
 <%@ page import="java.util.List,com.petmily.reservation.model.vo.PetReservation" %>
 <%@ include file="/views/common/header.jsp" %>
+
 <%
 List<PetReservation> list = (List)request.getAttribute("list");
+
 %>
 
 
@@ -133,7 +135,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 					<td style="height: 10px;"colspan="3">
 					<div class="row">
 						<h4 style="margin-left:50px;display:inline;text-align:center;">'<%=p.getBoardTitle()%>'</h4>
-						<input class="btn btn-outline-secondary"style="display:flex;border-radius:15px;font-size:13px;margin-left:200px;" type="button" value="추가 요금 결제" onclick="window.open('<%=request.getContextPath()%>/user/addPay?revNo=<%=p.getReservationCode()%>','_blank','width=300px,height=350px');">
+						
 					</div>
 					</td>
 		
@@ -156,7 +158,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 								<%} %>
 							</div>
 							<div class="col-lg-6 align-self-end">
-								<%if(p.getPlusType().contains("목욕가능")==true) { %>
+								<%if(p.getPlusType().equals("목욕가능")==true) { %>
 								<input style="display:inline;font-size:13px;margin:0px;"type="checkbox" value="목욕가능" checked disabled><p style="font-size:13px;display:inline;">목욕</p>
 								<%} else { %>
 								<input style="font-size:13px;display:inline;"type="checkbox" value=""><p style="font-size:13px;display:inline;">목욕</p>
@@ -181,7 +183,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 								<%} else { %>
 								<input style="display:inline;margin:0px;"type="checkbox"><p style="font-size:13px;display:inline;">추가 할인</p>
 								<%} %>
-								<input class="btn btn-outline-secondary" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail();">
+								<input class="btn btn-outline-secondary" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail('<%=p.getReservationCode()%>');">
 								</div>
 							</div>
 					
@@ -190,7 +192,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 				</tr>
 				<tr>
 					<td colspan="5">
-						<input onclick="endSitting(<%=p.getReservationCode() %>)" class="btn btn-outline-warning" style="font-size:13px;border-radius:20px;margin-left:670px;"type="button" value="펫 시팅 종료">
+						<input onclick="endSitting(<%=p.getReservationCode() %>)" id="end" class="btn btn-outline-warning" style="font-size:13px;border-radius:20px;margin-left:670px;"type="button" value="펫 시팅 종료">
 						</td>
 		
 				</tr>
@@ -209,17 +211,23 @@ List<PetReservation> list = (List)request.getAttribute("list");
     
     <script>
     
-    	function requestDetail() {
+    	function requestDetail(revCode) {
     		var popupX = (window.screen.width / 2) - (300 / 2);
-    		var popupY= (window.screen.height /2) - (350 / 2);
+    		var popupY= (window.screen.height /2) - (500 / 2);
 
     		
-    		window.open('<%=request.getContextPath()%>/user/requestDetails','_blank','height=350,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+    		window.open('<%=request.getContextPath()%>/user/requestDetails?revCode='+revCode,'_blank','height=600,width=400,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
     	}
     	
     	function endSitting(code) { 
+    		if(confirm("펫 시팅을 종료 하시겠습니까?")) {
     		location.replace('<%=request.getContextPath()%>/user/endSitting?code='+code);
+    		}else {
+    			location.replace('<%=request.getContextPath()%>/user/reservationing');	
+    		}
     	}
+    	
+    
     	
     	
     </script>

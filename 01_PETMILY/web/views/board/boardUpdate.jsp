@@ -4,25 +4,22 @@
     <%@ include file="/views/common/header.jsp" %>
     <% 
     PetSitterBoard pb = (PetSitterBoard)request.getAttribute("pb");
+    System.out.print("보드넘버"+pb.getBoardNo());
+    System.out.print("보드이미지"+pb.getBoardImages());
+    
     String plus ="";
     String basic ="";
     String img = "";
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+	if(pb.getPlus()!=null) {
+		for(int i=0;i<pb.getPlus().size();i++) {
+			plus+=pb.getPlus().get(i);
+		}
+	}
+	if(pb.getServiceTypes()!=null) {
+		for(int i=0;i<pb.getServiceTypes().size();i++) {
+			basic+=pb.getServiceTypes().get(i);
+		}
+	}
     %>
 <!DOCTYPE html>
 <html>
@@ -77,21 +74,24 @@
                         <tr>
                         
                             <td class="sub-title" style="width: 100px;">파일 첨부</td>
-                            <!-- <td class="sub-title" style="width: 100px;">파일 첨부</td> -->
+                            
                             <td colspan="1">
-                                <div class="input-group mb-3" style="width: 500px; height: 25px; margin-top: 10px;">
+                                <div class="input-group mb-3" style="width: 700px; height: 25px; margin-top: 10px;">
+                               <div class="row">
                                     <div class="files">
-                                       <input style="height:40px;" type="button" value="파일첨부" class="addFlie_"onclick="addFile();">
+                                       <button style="display:inline;margin:0px;height:20px;width:70px;" type="button" class="addFlie"onclick="addFile();">파일첨부</button>
                                      
                                     </div>
-                                    <div class="selectFile" style="position:absolute">
+                                   
+                                    <div class="selectFile" style="height:100%;">
                                       
                                      <input type="hidden"class="fileNo" name="count">
                                     </div>
-                                    </div>
-                                      
-                            </td>
                               
+                                   </div>
+                           
+                              </div>
+                              </td>
                         </tr>
                        
                         <tr>
@@ -238,7 +238,7 @@
                             <%if(pb.getBoardAddressContent()!=null) {%>
                             <td><input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다." value="<%=pb.getBoardAddressContent()%>"></td>
                         	<%}else { %>
-                        	<td>-</td>
+                        	<td><input type="text" name="comment" style="width: 600px" placeholder=" &nbsp;&nbsp;예 ) 혜화역 도보 10분내에 있습니다 / 건대 입구 cgv에서 10분 거리입니다." value="-"></td>
                         	<%} %>
                         </tr>
                      </table><!-- 펫 시터님 위치 -->
@@ -263,7 +263,7 @@
                                     <label for="myCheckbox3">실내 놀이</label>
                                     <span></span>
                                     <%}else { %>
-                                    <input id="myCheckbox3" name="defaultOption" type="checkbox" value="">
+                                    <input id="myCheckbox3" name="defaultOption" type="checkbox" value="실내놀이">
                                     <label for="myCheckbox3">실내 놀이</label>
                                     <span></span>
                                     <%} %>
@@ -444,8 +444,9 @@
 
 $(function () {
 	searchMap();
-	/* addFile().trigger('click'); */
+
 	})
+	
 	if(document.getElementById("myCheckbox8").checked==true) {
 		$(".row3").show();
 	}else { 
@@ -502,19 +503,11 @@ $(function(){
       })
    })
      
-    var onecare= document.getElementsByClassName("onecare");
+    
    var onecare2 = document.getElementsByClassName("onecare2");
    var shower = document.getElementsByClassName("shower");
    var pick = document.getElementsByClassName("pick");
 
-      $(onecare).change(function(){
-              
-        if(event.target.value<20000) {
-          $(event.target).val(event.target.min);
-        }else if(event.target.value>50000){
-            $(event.target).val(event.target.max);
-        }
-      });
 
       $(onecare2).change(function(){
               
@@ -543,98 +536,195 @@ $(function(){
         }
             });
 
-         function test() {
-                if(document.getElementById("myCheckbox2").checked==true && $("#onecare2").val().trim().length==0) {
-                    alert("추가비 할인액을 입력하세요.");
-                    return false;
-                }if(document.getElementBy2("myCheckbox6").checked==true && $(".shower").val().trim().length==0) {
-                    alert("목욕 비용을 입력하세요.");
-                    return false;
-                }if(document.getElementById("myCheckbox8").checked==true && $(".pick").val().trim().length==0) {
-                    alert("픽업 비용을 입력하세요.");
-                    return false;
-                }
-                
-                return true;
-         };
+      function test() {
+     	 
+          if($("#myCheckbox2")[0].checked==true && $("#onecare").val().trim().length==0) {
+              alert("추가비 할인액을 입력하세요.");
+              $("#onecare").focus();
+              return false;
+          }
+         
+           if($("#myCheckbox6")[0].checked==true && $("input[name=small1]").val().trim().length==0) {
+              alert("소형견 목욕 비용을 입력하세요."); 
+              $(".shower")[0].focus();
+              return false;
+          }if($("#myCheckbox6")[0].checked==true && $("input[name=middle1]").val().trim().length==0) {
+              alert("중형견 목욕 비용을 입력하세요.");
+              $(".shower")[1].focus();
+              return false;
+          }if($("#myCheckbox6")[0].checked==true && $("input[name=big1]").val().trim().length==0) {
+              alert("대형견 목욕 비용을 입력하세요.");
+              $(".shower")[2].focus();
+              return false;
+          }if($("#myCheckbox8")[0].checked==true && $("input[name=oneWay]").val().trim().length==0) {
+              alert("편도 픽업 비용을 입력하세요.");
+              $(".pick")[0].focus();
+              return false;
+          }if($("#myCheckbox8")[0].checked==true && $("input[name=allWay]").val().trim().length==0) {
+              alert("왕복 픽업 비용을 입력하세요.");
+              $(".pick")[1].focus();
+              return false;
+          }if($(".file").length<4) {
+            	 alert("파일을 4개 이상 첨부해주세요!");
+             	 $(".addFlie").focus();
+             	 return false;                
+          }
+          for(let i=0;i<6;i++) {
+          	if($("#file"+(i+1)).val()=="") {
+          		alert("파일을 첨부해주세요");
+          		$(".file")[i].focus();
+          		return false;
+          	}
+          }
+          if($("#myCheckbox3")[0].checked!=true && $("#myCheckbox4")[0].checked!=null) {
+        	  alert("기본제공 서비스를 선택해주세요.");
+        	  $("#myCheckbox3").focus();
+        	  return false;
+          }
+
+          return true;
+   };
          
          var num =1;
-         function addFile() {
-             
-             let file =$("<input>").attr({
-                 "type":"file",
-                 "name": "file"+num,
-                 "id":"file"+num
-                 
-             }).css({
-            	 "height":"40px",
-            	 "width":"200px"
-            	 
-            	 });
-             let label = $("<label>").attr({
-                 'for':'file'+num
-             
-             });
-             $(".fileNo").attr({
-                 "value":num
-             })
-             var s = $(".selectFile").append(file);
-             s.append(label);
-             s.append("<br>");
-               num++;
-         }
-	
+        if(num<7) {
 		<%for(int i=0;pb.getBoardImages()!=null&&i<pb.getBoardImages().size();i++) {%>
 		
          var files =$("<input>").attr({
              "type":"file",
              "name": "file"+num,
-             "id":"file"+num
-             
+             "id":"file"+num,
+             "class":"file"
+                    
          }).css({
         	 "height":"40px",
-        	 "width":"200px"
+        	 "width":"170px", 
+        	 "display":"inline",
+        	 
         	 
         	 });
          var labels = $("<label>").attr({
              'for':'file'+num
          
          });
+       
          $(".fileNo").attr({
              "value":num
          })
-         <%if(i>0) {%>
+		
+      
+        <% if(i==1) {%>
           var span = $("<span>").attr({
         	 "class":"imgs img"+<%=i+1%>
          }). css({
-        	 "top":"55px",
-        	 "left":"80px",
-        	 "height":"20px",
-        	 "width":"100px"
-         }).html("<%=pb.getBoardImages().get(i)%>");
-          
-         <%} else { %>
-         var span = $("<span>").attr({
-        	 "class":"imgs img"+<%=i+1%>
-         }).css({
         	 "top":"15px",
-        	 "left":"80px",
+        	 "left":"315px",
         	 "height":"20px",
-        	 "width":"100px"
+        	 "width":"90px"
          }).html("<%=pb.getBoardImages().get(i)%>");
-         <%}%>
+         
+          
+        <%}else if(i==2) {%>
+         var span = $("<span>").attr({
+       	 "class":"imgs img"+<%=i+1%>
+        }). css({
+       	 "top":"15px",
+       	 "left":"485px",
+       	 "height":"20px",
+       	 "width":"90px"
+        }).html("<%=pb.getBoardImages().get(i)%>");
+         
+        <%}else if(i==3) {%>
+        var span = $("<span>").attr({
+      	 "class":"imgs img"+<%=i+1%>
+       }). css({
+      	 "top":"55px",
+      	 "left":"145px",
+      	 "height":"20px",
+      	 "width":"90px"
+       }).html("<%=pb.getBoardImages().get(i)%>");
+        
+         <%}else if(i==4) {%>
+         var span = $("<span>").attr({
+          	 "class":"imgs img"+<%=i+1%>
+           }). css({
+          	 "top":"55px",
+          	 "left":"315px",
+          	 "height":"20px",
+          	 "width":"90px"
+           }).html("<%=pb.getBoardImages().get(i)%>");
+            
+          <%}else if(i==5) {%>
+          var span = $("<span>").attr({
+           	 "class":"imgs img"+<%=i+1%>
+            }). css({
+           	 "top":"55px",
+           	 "left":"485px",
+           	 "height":"20px",
+           	 "width":"90px"
+            }).html("<%=pb.getBoardImages().get(i)%>");
+             
+            <%}else { %>
+          var span = $("<span>").attr({
+         	 "class":"imgs img"+<%=i+1%>
+          }).css({
+         	 "top":"15px",
+         	 "left":"145px",
+         	 "height":"20px",
+         	 "width":"90px"
+          }).html("<%=pb.getBoardImages().get(i)%>");
+          <%}%>
+          
+          
+        
+        
+        
           
          var s = $(".selectFile").append(files);
          s.append(labels);
          s.append(span);
-         s.append("<br>");
+         if(num%3==0) {
+        	 s.append("<br>");
+         }
+       
+         
            
            $("#file"+<%=i+1%>).change(function() {
         	  $(".img"+<%=i+1%>).hide();
            })
           num++;
            <%}%>
+           }
+        
            
+          
+           function addFile() {
+               console.log(num);
+               if(num>=0 && num<7) {
+
+               var file =$("<input>").attr({
+                   "type":"file",
+                   "name": "file"+num,
+                   "id":"file"+num,
+                          
+               }).css({
+              	 "height":"40px",
+              	 "width":"170px", 
+              	 "display":"inline"
+              	 
+              	 });
+               var label = $("<label>").attr({
+                   'for':'file'+num  
+               });
+               var s = $(".selectFile").append(file);
+               s.append(label);
+               if(num%3==0) {
+              	 s.append("<br>");
+               }
+             
+               num++;
+           }
+  	
+        }
 		
 		
 
@@ -684,14 +774,6 @@ $(function(){
         	});  
         	 map.setDraggable(draggable);  
         	};
-        	
-        
-         
-        	
-  
-    
-    
-
 
 </script>
 </body>

@@ -33,7 +33,8 @@ public class UserRequestDetailsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-		PetReservation pr = new ReservationService().requestDetails(userId);
+	     int revCode = Integer.parseInt(request.getParameter("revCode"));
+		PetReservation pr = new ReservationService().requestDetails(userId,revCode);
 		request.setAttribute("revs", pr);
 		request.getRequestDispatcher("/views/userReservation/requestReservations.jsp").forward(request, response);
 	}

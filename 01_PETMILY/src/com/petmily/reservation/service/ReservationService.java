@@ -24,7 +24,7 @@ public class ReservationService {
 		  			list.set(i,dao.requestRevs(conn, id,list.get(i)));
 		  			
 		  }
-		  System.out.println("서비스:"+list);
+		  
 		  close(conn);
 		  return list;
 
@@ -44,26 +44,28 @@ public class ReservationService {
 	  public List<PetReservation> reservation(String id) {
 		  Connection conn = getConnection();
 		  List<PetReservation> list = dao.reservation(conn,id);
+		  System.out.println("서비스1:"+list);
 		  for(int i=0;i<list.size();i++) {
 			  list.set(i,dao.reservations(conn, id,list.get(i)));
+			  System.out.println("서비스2:"+list);
 		  }
-		  System.out.println("플러스"+list);
+		  
 		  
 		  close(conn);
 		 
 		  return list;
 	  }
 	  
-	  public PetReservation requestDetail(String id) {
+	  public PetReservation requestDetail(String id, int revCode) {
 		  Connection conn = getConnection();
-		  PetReservation pr = dao.requestDetail(conn,id);
+		  PetReservation pr = dao.requestDetail(conn,id,revCode);
 		  close(conn);
 		  return pr;
 	  }
 	  
-	  public PetReservation requestDetails(String id) {
+	  public PetReservation requestDetails(String id,int revCode) {
 		  Connection conn = getConnection();
-		  PetReservation pr = dao.requestDetails(conn,id);
+		  PetReservation pr = dao.requestDetails(conn,id,revCode);
 		  close(conn);
 		  return pr;
 	  }
@@ -117,7 +119,7 @@ public class ReservationService {
 		  			list.set(i,dao.reservationEnds(conn, id,list.get(i)));
 		  			
 		  }
-		  System.out.println("dao:"+list);
+		  
 		  close(conn);
 		  return list;
 	  }
@@ -132,17 +134,13 @@ public class ReservationService {
 	  public int endSitting(int code) {
 		  Connection conn = getConnection();
 		  int result = dao.endSitting(conn,code);
+		  System.out.println("1?"+result);
 		  if(result>0) {
-			  result = dao.endSitting2(conn, code);
-			  if(result>0) {
-				  commit(conn);
-			  }else {
-				  rollback(conn);
-			  }		 
+			  result = dao.endSitting2(conn, code);			  	 
 			  }else {
 				  rollback(conn);
 			  }
-
+		  	commit(conn);
 		  close(conn);
 		  return result;
 	  }

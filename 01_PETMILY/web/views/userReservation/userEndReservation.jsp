@@ -144,7 +144,6 @@
 							
 							<td><%=pr.getPrice() %></td> 
 							
-							<td><input type="button" id="chat" value="채팅"></td>
 	                    </tr>
 	                   
 	             <%} %>
@@ -171,9 +170,9 @@
 function requestCheck(code) {
 
 	var popupX = (window.screen.width / 2) - (300 / 2);
-	var popupY= (window.screen.height /2) - (200 / 2);
+	var popupY= (window.screen.height /2) - (400 / 2);
 	
-	window.open('<%=request.getContextPath()%>/user/endRev?no='+code,'_blank','height=200,width=280,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+	window.open('<%=request.getContextPath()%>/user/endRev?no='+code,'_blank','height=400,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 }
 
 

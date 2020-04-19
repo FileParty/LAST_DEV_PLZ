@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [슬기작업] -->
+<!-- 자바 메일을 이용한 메일 전송 로직 -->
+<dependency>
+    <groupid>javax.mail</groupid>
+    <artifactid>mail</artifactid>
+    <version>1.4.7</version>
+</dependency>

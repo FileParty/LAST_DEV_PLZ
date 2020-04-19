@@ -86,7 +86,7 @@ function attachSignin(element) {
              <br>
              
              <!-- id찾기, pw찾기, 회원가입 태그 -->
-             <a id="first_find_enroll" class="find_enroll" href="javascript:void(0);" onclick="findId();">아이디</a>
+             <a id="first_find_enroll" class="find_enroll" href="javascript:void(0);" onclick="findId();">아이디 찾기</a>
              <a class="find_enroll" href="javascript:void(0);" onclick="findPw();">비밀번호 찾기</a>
              <a class="find_enroll" href="javascript:void(0);" onclick="location.replace('<%=request.getContextPath()%>/join')">회원가입</a>
              

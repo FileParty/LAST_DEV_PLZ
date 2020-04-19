@@ -9,13 +9,13 @@
 	.menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
             height: 100%;
             
         }
     #menu{
         width: 230px;
-        position : fixed;
+        
         height: 100%;
     }
      .content{
@@ -50,8 +50,7 @@
                             
                             <li class="title">결제</li>
                             <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 결제 내역</a></li>
-                            <li class="content"><a href=""> - 추가 요금 내역</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/user/paymentHistory?userId=<%=u.getUserId()%>"> - 결제 내역</a></li>
                             <br/>
                             
                             

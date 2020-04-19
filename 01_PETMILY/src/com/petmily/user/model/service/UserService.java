@@ -60,7 +60,37 @@ public class UserService {
 		return user;
 	}
 	
-
+//	아이디 찾기 로직(SMTP)
+	public User searchUserEmail(String email) {
+		Connection conn = getConnection();
+		User user = dao.searchUserEmail(conn, email);
+		close(conn);
+		return user;
+	}
+	
+//	비밀번호 찾기 로직(SMTP)
+	public User searchUserEmail(String id, String email) {
+		Connection conn = getConnection();
+		User user = dao.searchUserEmail(conn, id, email);
+		close(conn);
+		return user;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	아이디 중복확인 로직
+>>>>>>> refs/heads/ysk
 	public boolean userIdDuplicate(String userId) {
 		Connection conn = getConnection();
 		boolean flag = dao.userIdDuplicate(conn, userId);

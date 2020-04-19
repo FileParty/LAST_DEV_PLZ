@@ -4,9 +4,6 @@
     
 <%@ page import="com.petmily.user.model.vo.User" %>
 
-<%
-	User u = (User)request.getAttribute("user");
-%>
 <%@ include file="/views/common/header.jsp" %>
 
 
@@ -116,43 +113,13 @@
         <div class="container">
             <form action="<%=request.getContextPath()%>/user/DeleteEnd" method="post" onsubmit="return test();">
             
+            <div class="row">
+            
+            <%@ include file="/views/user/userSideBar.jsp"  %>
+            
             <!-- form을 넘기기 위해 hidden 처리한 input을 만듦. -->
             <input type="hidden" id="userId" name="userId" value="<%= u.getUserId() %>" >
             
-            <div class="row">
-            <div class="col-2 menu">
-                    <div id="menu">
-                        <ul type="none">
-                            <li class="title">회원정보</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/BookMarkList?userId=<%=loginUser.getUserId()%>"> - 북마크</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review?userId=<%=loginUser.getUserId()%>"> - 작성 후기</a></li>
-                            <br/>
-        
-                            <li class="title">펫 프로필</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 펫 프로필</a></li>
-                            <br/>
-                            
-                            <li class="title">예약</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 종료된 예약</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
-                            <br/>
-                            
-                            <li class="title">결제</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 결제 내역</a></li>
-                            <li class="content"><a href=""> - 추가 요금 내역</a></li>
-                            <br/>
-                            
-                        </ul>
-                    </div>
-                </div>
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -173,7 +140,7 @@
                         <br/>
                         <div class="row" style="margin-left: 35%;">
                             <div style="margin-top:80px; margin-bottom: 100px;">
-                                <button class="btn" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview" type="button">예약 요청 삭제</button>
+                                <button class="btn" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview" type="button" onclick="alert('서비스 준비중입니다.');">예약 요청 삭제</button>
                                 <button class="btn" style="color:white; border: solid 1px black; background-color :black" class="btn1" type="submit">회원 탈퇴</button>
                             </div>
                         </div>

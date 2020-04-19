@@ -118,39 +118,9 @@ pageEncoding="UTF-8"%>
         <div class="container">
             <form action="<%=request.getContextPath()%>" method="post" onsubmit="return test();" enctype="multipart/form-data">
             <div class="row">
-            <div class="col-2 menu">
-                    <div id="menu">
-                        <ul type="none">
-                            <li class="title">회원정보</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/BookMarkList?userId=<%=loginUser.getUserId()%>"> - 북마크</a></li>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/Review?userId=<%=loginUser.getUserId()%>"> - 작성 후기</a></li>
-                            <br/>
-        
-                            <li class="title">펫 프로필</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href="<%=request.getContextPath()%>/user/petprofile?userId=<%=loginUser.getUserId()%>"> - 펫 프로필</a></li>
-                            <br/>
-                            
-                            <li class="title">예약</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 요청한 예약</a></li>
-                            <li class="content"><a href=""> - 진행중인 예약</a></li>
-                            <li class="content"><a href=""> - 종료된 예약</a></li>
-                            <li class="content"><a href=""> - 채팅</a></li>
-                            <br/>
-                            
-                            <li class="title">결제</li>
-                            <hr class="hr-line"/>
-                            <li class="content"><a href=""> - 결제 내역</a></li>
-                            <li class="content"><a href=""> - 추가 요금 내역</a></li>
-                            <br/>
-                            
-                        </ul>
-                    </div>
-                </div>
+            
+            <%@ include file="/views/user/userSideBar.jsp"  %>
+            
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">

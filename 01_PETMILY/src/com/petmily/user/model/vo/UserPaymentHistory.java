@@ -5,7 +5,7 @@ public class UserPaymentHistory {
 //	펫시터 예약테이블을 객체로 담아, 리스트로 띄울 것.
 	private String checkIn;
 	private String checkOut;
-	private String pstId;
+	private String name;
 	private int price;
 	private String endDate;
 	
@@ -13,11 +13,11 @@ public class UserPaymentHistory {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserPaymentHistory(String checkIn, String checkOut, String pstId, int price, String endDate) {
+	public UserPaymentHistory(String checkIn, String checkOut, String name, int price, String endDate) {
 		super();
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		this.pstId = pstId;
+		this.name = name;
 		this.price = price;
 		this.endDate = endDate;
 	}
@@ -38,12 +38,12 @@ public class UserPaymentHistory {
 		this.checkOut = checkOut;
 	}
 
-	public String getPstId() {
-		return pstId;
+	public String getName() {
+		return name;
 	}
 
-	public void setPstId(String pstId) {
-		this.pstId = pstId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getPrice() {
@@ -64,10 +64,8 @@ public class UserPaymentHistory {
 
 	@Override
 	public String toString() {
-		return "UserPaymentHistory [checkIn=" + checkIn + ", checkOut=" + checkOut + ", pstId=" + pstId + ", price="
+		return "UserPaymentHistory [checkIn=" + checkIn + ", checkOut=" + checkOut + ", name=" + name + ", price="
 				+ price + ", endDate=" + endDate + "]";
 	}
 
-	
-	
 }

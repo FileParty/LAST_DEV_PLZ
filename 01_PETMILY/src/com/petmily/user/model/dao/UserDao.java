@@ -30,7 +30,7 @@ public class UserDao {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}// UserDao() 기본생성자
 	
 	
 	public int insertUserTable(Connection conn, PetSitter2 pss) {
@@ -179,6 +179,86 @@ public class UserDao {
 		}
 		return user;
 	}
+	
+
+//	아이디찾기 로직(SMTP)
+	public User searchUserEmail(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		String sql = prop.getProperty("selectUserEmail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("USER_ID")); 
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY"));
+				user.setPhone(rs.getString("PHONE"));
+				user.setZipCode(rs.getString("ZIP_CODE"));
+				user.setAddress(rs.getString("ADDRESS")); 
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setGender(rs.getString("GENDER"));
+				user.setStatus(rs.getString("STATUS"));
+				user.setUserType(rs.getString("USER_TYPE"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return user;
+	}
+	
+//	비밀번호 로직(SMTP)
+	public User searchUserEmail(Connection conn, String id, String email) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		User user = null;
+		String sql = prop.getProperty("selectUserIdEmail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("USER_ID")); 
+				user.setPassword(rs.getString("PASSWORD"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserBirth(rs.getString("USER_BIRTH_DAY"));
+				user.setPhone(rs.getString("PHONE"));
+				user.setZipCode(rs.getString("ZIP_CODE"));
+				user.setAddress(rs.getString("ADDRESS")); 
+				user.setDetailAddress(rs.getString("DETAILED_ADDRESS"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setGender(rs.getString("GENDER"));
+				user.setStatus(rs.getString("STATUS"));
+				user.setUserType(rs.getString("USER_TYPE"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return user;
+	}
+	
+	
+	
+
 	
 	
 	
@@ -339,7 +419,7 @@ public class UserDao {
 			pstmt.setString(4, postNum);
 			pstmt.setString(5, address);
 			pstmt.setString(6, detailAddress);
-			pstmt.setString(7, id); 
+			pstmt.setString(7, id); // SQL 조건
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -355,7 +435,7 @@ public class UserDao {
 	public int userDelete(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("userDelete");
+		String sql = prop.getProperty("userDelete"); // SQL문은 업데이트로 수정처리함
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id); 
@@ -423,7 +503,7 @@ public class UserDao {
 			pstmt.setString(1, id);
 			rs= pstmt.executeQuery();
 			rs.next();
-			count= rs.getInt(1);
+			count= rs.getInt(1); // 첫번째 컬럼이라는 의미!
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -452,7 +532,7 @@ public class UserDao {
 				up = new UserPaymentHistory();
 				up.setCheckIn(rs.getString("checkin"));
 				up.setCheckOut(rs.getString("checkout"));
-				up.setPstId(rs.getString("pstid"));
+				up.setName(rs.getString("name"));
 				up.setPrice(rs.getInt("price"));
 				up.setEndDate(rs.getString("enddate"));
 				list.add(up);

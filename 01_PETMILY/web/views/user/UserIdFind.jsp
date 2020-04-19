@@ -31,9 +31,13 @@
 			padding-top: 50px;
 		}
 		
+		span#inputEmail {
+			margin-left: 80px;
+		}
+		
 		/* 이메일입력 input 설정 */
 		input#email {
-			width:150px; /* 가로설정 */
+			width:215px; /* 가로설정 */
 			height:30px; /* 세로설정 */
 			line-height:20px; /* 태그 내 글씨위치 설정 */
 			
@@ -41,7 +45,7 @@
 			border:1px solid rgb(182, 182, 182); /* 테두리  색상 설정  */
 			
 			padding-left:10px; /* 글씨 살짝 왼쪽에서 띄움 */
-			margin-left: 70px; /* 영역을 왼쪽에서 살짝 띄움 */
+			margin-left: 10px;
 		}
 		
 		/* 이메일선택 select문 설정 */
@@ -139,47 +143,37 @@
 		
 		<div id="divModal1" name="contentModal1">
 			<p>회원가입 시 작성한 이메일을 입력해 주세요</p> <br><br>
-			<input type="text" id="email" name="email"> @ 
-			<select id="email_select">
-				<option>직접입력</option>
-				<option value="naver.com">naver.com</option>
-				<option>여기엔 뭐 넣지</option>
-			</select>
-			<button id="send-btn" onclick="nextModal();">인증번호 전송</button> <!-- API랑 어떻게 이어야 하는 부분이죠?ㅋㅋ -->
+			<div id="emailDiv">
+				<span id="inputEmail">이메일 입력</span> 
+				<input type="text" id="email" name="email">
+				<button id="send-btn" onclick="smtpEmail();">인증번호 전송</button>
+			</div>
 		</div>
 		
-		
-		<!-- [아이디 찾기] 이메일 인증번호 입력 -->
-		<div id="contentModal2" name="contentModal2" style="display: none; margin-bottom: 100px;">
-			<p>인증번호 입력</p>
-			<input type="text" id="randomNum" name="randomNum" placeholder="인증번호 입력">
-			<button id="certification_Num">번호 인증</button>
-		</div>
 		
 		<br><br>
-		
-		<!-- 로그인 버튼을 눌렀을때, 자식윈도우의 아이디의 값이 부모 윈도우의 아이디 값으로 이동할 수 있게 설정한다.
-			(자바스크립트 기술 필요)
-		 -->
 		<hr style="margin-bottom: 30px;">
-		
-		<button id="send-login-btn">인증완료</button>
 	</article>
 </section>
 
 <!-- -------------------------------------------------------------------------------------------------------- -->
 
 <script>
-	function nextModal() {
-		let modal1 = document.getElementById("divModal1");
-		let ss = $("#divModal1");
-		console.log(ss);
-		let modal2 = document.getElementById("contentModal2");
-		console.log("modal1:"+modal1);
-		console.log("modal2:"+modal2);
+//	SMTP 함수 - 화면 전환과 동시에 SMTP 실행
+	function smtpEmail() {
+		let email = document.getElementById("email").value; // 이메일 값 가져오기
+		console.log("입력한 이메일값 넘어오는가? : "+email);
 		
-		modal1.style.display = "none";
-		modal2.style.display = "inline";
+		if(email==null || email.trim().length<4) {
+			console.log('if문이 찍혀요!');
+			alert('이메일을 입력하세요. (4글자 이상-이메일 포함)');
+			$("#email").focus();
+		}
+		else {
+			console.log('else문이 찍혀요!');
+			location.replace('<%=request.getContextPath()%>/smtpEmail?email='+email);		
+		}
+		
 	};
 </script>
 

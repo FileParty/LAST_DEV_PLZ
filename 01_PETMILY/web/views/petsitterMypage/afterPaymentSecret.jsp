@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>요청 상세 내용.</title>
+<title>비밀후기 작성</title>
 <style>
    table{
    		border: 1px solid grey;

@@ -8,7 +8,7 @@
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
@@ -56,7 +56,7 @@
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            /* height: 100%; */
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -566,7 +566,7 @@ label.custom-file-label::after{
         </form>
         </div>
     </section>
-
+<%@ include file="/views/common/footer.jsp" %>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
    

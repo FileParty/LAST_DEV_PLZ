@@ -36,7 +36,6 @@ public class PetSitterReviewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String id = request.getParameter("userId");
-		id = "petsitter1";
 		List<PetSitterReview> list=new PetSitterReviewService().selectPetSitterReviewList(id);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/sitter/sitterReview.jsp").forward(request, response);

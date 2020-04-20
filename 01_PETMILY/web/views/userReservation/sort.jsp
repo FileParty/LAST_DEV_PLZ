@@ -31,7 +31,7 @@
 	                    	
 	                    	<td><%=pr.getReservationCode() %></td> 
 	                    	
-	                    	<td><input type="checkbox" name="choose" value="<%=pr.getReservationCode()%>"></td>	                    	                    	
+	                    	<td><input type="checkbox" class="choose" name="choose" value="<%=pr.getReservationCode()%>"></td>	                    	                    	
 	                    	
 	                    	<td style="width:250px;"><%=pr.getCheckIn().substring(2,11)%></td>
 	                    	
@@ -54,5 +54,5 @@
     					
                     
                 </table>
-</body>
+            
 </html>

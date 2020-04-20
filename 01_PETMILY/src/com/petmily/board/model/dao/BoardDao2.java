@@ -525,7 +525,7 @@ public PetSitterBoard defaultOptionUpdate(Connection conn, PetSitterBoard pb) {
     return pb;
  }
 
-public List<PetSitterBoard> selectList(Connection conn,String userId) {
+public List<PetSitterBoard> selectList(Connection conn,String userId,int cPage,int numPerPage) {
 	PreparedStatement pstmt = null;
 	List<PetSitterBoard> list = new ArrayList<PetSitterBoard>();
 	ResultSet rs = null;
@@ -535,6 +535,8 @@ public List<PetSitterBoard> selectList(Connection conn,String userId) {
 	try {
 		pstmt= conn.prepareStatement(sql);
 		pstmt.setString(1, userId);
+		pstmt.setInt(2,(cPage-1)*numPerPage+1);
+		pstmt.setInt(3,cPage*numPerPage);
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
@@ -582,6 +584,29 @@ public int mainButton(Connection conn,String userId) {
 		close(pstmt);
 	}
 	return result;
+}
+
+public int boardCount(Connection conn,String userId) {
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	int count = 0;
+	String sql = prop.getProperty("boardCount");
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		rs = pstmt.executeQuery();
+		rs.next();
+		count = Integer.parseInt(rs.getString(1));
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(rs);
+		close(pstmt);
+	}
+	
+	
+	return count;
 }
 }
 

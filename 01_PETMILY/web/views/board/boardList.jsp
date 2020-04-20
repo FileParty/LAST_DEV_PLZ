@@ -6,15 +6,8 @@
 <%
 	List<PetSitterBoard> list = (List)request.getAttribute("list");
 	
+	
 	%>
-<!DOCTYPE html>
-<html>
-<head>
-
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -50,7 +43,7 @@ th {
 	}
 </style>
 </head>
-<body>
+
 	<section>
 
 		<div class="container">
@@ -69,7 +62,7 @@ th {
 					
 						
 						<button style="display:inline;margin-left:730px;"type="button" onclick="location.replace('<%=request.getContextPath()%>/sitter/write')">글 쓰기</button>
-				
+			
 
 					<div class="row3">
 						<div class="in-table d-flex justify-content-center">
@@ -113,6 +106,11 @@ th {
 								</tr>
 								<%} %>
 							</table>
+	
+			
+						</div>
+						<div style="letter-spacing:5px;"align=center>
+							<%=request.getAttribute("pageBar") %>
 						</div>
 					</div>
 
@@ -121,7 +119,7 @@ th {
 			</div>
 		</div>
 
-
+		
 	</section>
 
 
@@ -136,7 +134,6 @@ th {
 		crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
 
 <script>
 	function boardDetail(no,userId) {
@@ -146,8 +143,6 @@ th {
 		window.open('<%=request.getContextPath()%>/sitter/Detail?no='+no,'_blank','width=1000,height=800,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 	}
 	function boardUpdate(no) {
-		location.replace('<%=request.getContextPath()%>/sitter/update?no='+no);
+		location.replace('<%=request.getContextPath()%>/sitter/update2?no='+no);
 	}
 </script>
-</body>
-</html>

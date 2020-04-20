@@ -30,7 +30,7 @@ public class SitterCertificateDao {
 		}
 	}
 	
-	public List<PetSitterCertificate> selectCertificate(Connection conn,String id) {
+	public List<PetSitterCertificate> selectCertificate(Connection conn,String id,int cPage,int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetSitterCertificate pc = null;
@@ -40,6 +40,8 @@ public class SitterCertificateDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id); 
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3,cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -62,7 +64,7 @@ public class SitterCertificateDao {
 		}
 		return list;
 	}
-	public List<PetSitterCertificate> selectCertificate2(Connection conn,String id) {
+	public List<PetSitterCertificate> selectCertificate2(Connection conn,String id,int cPage,int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetSitterCertificate pc = null;
@@ -72,6 +74,8 @@ public class SitterCertificateDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id); 
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3,cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -116,6 +120,51 @@ public class SitterCertificateDao {
 			close(pstmt);
 		}
 		return result;
+		
+	}
+	
+	public int certificateCount(Connection conn,String userId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = prop.getProperty("certificateCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userId);			
+			rs = pstmt.executeQuery();
+			rs.next();
+			count = rs.getInt("COUNT(*)");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return count;
+		
+	}
+	
+	public int certificateCount2(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = prop.getProperty("certificateCount2");
+		
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,userId);
+			rs=pstmt.executeQuery();
+			
+			rs.next();
+			count = rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return count;
 		
 	}
 }

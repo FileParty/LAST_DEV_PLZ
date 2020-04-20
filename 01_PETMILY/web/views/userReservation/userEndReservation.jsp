@@ -4,6 +4,7 @@
 <%@ page import="java.util.List,com.petmily.reservation.model.vo.PetReservation" %>
 <%
 	List<PetReservation> list = (List)request.getAttribute("list");
+System.out.print("list"+list);
 %>    
     
 
@@ -122,7 +123,7 @@
                         <th>펫 시터 명</th>
                         <th>요청 상세</th>
                         <th>최종 결제 금액</th>
-                        <th>채팅 기록</th>
+                        <th>후기 작성</th>
                     </tr>
                     
                     <%for(PetReservation pr : list) {%>
@@ -140,18 +141,23 @@
 	                    	
 							<td style="	width:200px;"><%=pr.getSitterName() %></td>
 							
-							<td><input onclick="requestCheck(<%=pr.getReservationCode() %>)" type="button" id="request" value="상세 요청 확인"></td>
+							<td><input onclick="requestCheck('<%=pr.getReservationCode() %>')" type="button" id="request" value="상세 요청 확인"></td>
 							
 							<td><%=pr.getPrice() %></td> 
 							
+							<td><button type="button" onclick="review('<%=pr.getReservationCode()%>','<%=pr.getPetSitterId()%>');">작성</button></td>
 	                    </tr>
 	                   
 	             <%} %>
     					
                     
-                </table>             
+                </table>
+                   <div align=center>
+                   <%=request.getAttribute("pageBar") %>
+                   
+                </div>             
                     </div>
-                </div>
+                 
             </div>
         
         </div>
@@ -175,7 +181,14 @@ function requestCheck(code) {
 	window.open('<%=request.getContextPath()%>/user/endRev?no='+code,'_blank','height=400,width=300,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
 }
 
+function review (code,pId) { 
+	
 
+	var popupX = (window.screen.width / 2) - (500 / 2);
+	var popupY= (window.screen.height /2) - (400 / 2);
+	
+	window.open('<%=request.getContextPath()%>/user/review1?no='+code+'&pId='+pId,'_blank','height=400,width=500,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
+}
 
 
 </script>

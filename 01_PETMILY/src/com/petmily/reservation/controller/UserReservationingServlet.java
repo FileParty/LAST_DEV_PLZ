@@ -37,9 +37,12 @@ public class UserReservationingServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
+	     List<PetReservation> list = new ReservationService().reservation(userId);
+	     System.out.println("서블릿 -----"+list.size());
+	     for(int i=0;i<list.size();i++) {
+	     System.out.println("서블릿 -----"+list.get(i));
 	     
-		List<PetReservation> list = new ReservationService().reservation(userId);
-	
+		}
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/views/userReservation/userReservationing.jsp").forward(request, response);
 	}

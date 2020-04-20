@@ -576,7 +576,7 @@ $(function(){
           		return false;
           	}
           }
-          if($("#myCheckbox3")[0].checked!=true && $("#myCheckbox4")[0].checked!=null) {
+          if($("#myCheckbox3")[0].checked!=true && $("#myCheckbox4")[0].checked!=true) {
         	  alert("기본제공 서비스를 선택해주세요.");
         	  $("#myCheckbox3").focus();
         	  return false;

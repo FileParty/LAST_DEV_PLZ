@@ -6,7 +6,7 @@
 
 <%
 List<PetReservation> list = (List)request.getAttribute("list");
-
+System.out.println("진행예약 : " + list);
 %>
 
 
@@ -120,6 +120,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
                    <!-- 콘텐츠 영역 -->
                    
                    <% for(PetReservation p : list) { %>
+                   
                 <table border="1" class="table table-borderless">
 				<tr >
 					<td style="width300px; height:200px;" rowspan="2" colspan="2">
@@ -144,12 +145,24 @@ List<PetReservation> list = (List)request.getAttribute("list");
 					<td colspan="3">
 						<div class="row">
 							<div class="col-lg-6">
+							<%if(p.getPetName()!=null) {%>
 								<p>'<%=p.getPetName() %>'를 맡겼습니다.</p>
+								<%}else  {%>
+								<p>-</p>
+								<%} %>
 								<p style="margin:0px;font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;체크 인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 체크아웃</p>
+								<%if(p.getCheckIn()!=null) {%>
 								<input class="form-control form-control-sm" style="width:90px;height:20px;display:inline;"type="text" value="<%=p.getCheckIn().substring(0,11)%>">
+								<%} else { %>
+								<input class="form-control form-control-sm" style="width:90px;height:20px;display:inline;"type="text" value="-">
+								<%} %>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<%if(p.getCheckOut()!=null) {%>
 								<input class="form-control form-control-sm" style="width:90px;height:20px;display:inline;"type="text" value="<%=p.getCheckOut().substring(0,11)%>">
+								<%}else {  %>
+								<input class="form-control form-control-sm" style="width:90px;height:20px;display:inline;"type="text" value="-">
+								<%} %>
 								<br>
 								<%if(p.getPlusQuestion()!=null) {%>
 								<textarea class="form-control" cols="20" rows="2"><%=p.getPlusQuestion() %></textarea>
@@ -158,6 +171,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 								<%} %>
 							</div>
 							<div class="col-lg-6 align-self-end">
+							<%if(p.getPlusType()!=null) {%>
 								<%if(p.getPlusType().equals("목욕가능")==true) { %>
 								<input style="display:inline;font-size:13px;margin:0px;"type="checkbox" value="목욕가능" checked disabled><p style="font-size:13px;display:inline;">목욕</p>
 								<%} else { %>
@@ -183,6 +197,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 								<%} else { %>
 								<input style="display:inline;margin:0px;"type="checkbox"><p style="font-size:13px;display:inline;">추가 할인</p>
 								<%} %>
+								<%} %>
 								<input class="btn btn-outline-secondary" style="font-size:13px;border-radius:20px;margin-left:120px;margin-top:30px;height:30px;"type="button" value="상세 요청 확인" onclick="requestDetail('<%=p.getReservationCode()%>');">
 								</div>
 							</div>
@@ -197,6 +212,7 @@ List<PetReservation> list = (List)request.getAttribute("list");
 		
 				</tr>
 				</table>
+				
 				<%} %>
                     </div>
                 </div>

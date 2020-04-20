@@ -15,15 +15,15 @@ public class SitterCertificateService {
 	
 	private SitterCertificateDao dao = new SitterCertificateDao();
 	
-	public List<PetSitterCertificate> selectCertificate(String id) {
+	public List<PetSitterCertificate> selectCertificate(String id,int cPage,int numPerPage) {
 		Connection conn = getConnection();
-		List<PetSitterCertificate> list = dao.selectCertificate(conn,id);
+		List<PetSitterCertificate> list = dao.selectCertificate(conn,id,cPage,numPerPage);
 		 close(conn);
 		 return list;
 	}
-	public List<PetSitterCertificate> selectCertificate2(String id) {
+	public List<PetSitterCertificate> selectCertificate2(String id,int cPage,int numPerPage) {
 		Connection conn = getConnection();
-		List<PetSitterCertificate> list = dao.selectCertificate2(conn,id);
+		List<PetSitterCertificate> list = dao.selectCertificate2(conn,id,cPage,numPerPage);
 		 close(conn);
 		 return list;
 	}
@@ -35,6 +35,20 @@ public class SitterCertificateService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public int  certificateCount(String userId) {
+		Connection conn = getConnection();
+		int count = dao.certificateCount(conn,userId);
+		close(conn);
+		return count;
+	}
+	
+	public int  certificateCount2(String userId) {
+		Connection conn = getConnection();
+		int count = dao.certificateCount2(conn,userId);
+		close(conn);
+		return count;
 	}
 
 }

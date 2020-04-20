@@ -29,11 +29,10 @@ public class BeforeSitterApplyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//¸¸¾à ·Î±×ÀÎÀÌ µÇ¾îÀÖ´Ù¸é ·Î±×¾Æ¿ô ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä ¸Ş¼¼Áö ÈÄ ¸ŞÀÎÆäÀÌÁö·Î ÀÌµ¿
-		//·Î±×ÀÎÀÌ µÇ¾îÀÖÁö ¾ÊÀ» ¶§¿¡´Â Á¤»óÀûÀ¸·Î Æê½ÃÅÍ È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+		
 		HttpSession session=request.getSession();
 		if(session.getAttribute("loginUser")!=null) {
-			request.setAttribute("msg", "·Î±×¾Æ¿ô ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä");
+			request.setAttribute("msg", "ë¡œê·¸ì•„ì›ƒ í›„ ì´ìš©í•´ì£¼ì„¸ìš”.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {

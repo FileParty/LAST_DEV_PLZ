@@ -18,7 +18,7 @@ com.petmily.user.model.vo.PetSitter2" %>
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
@@ -29,8 +29,9 @@ com.petmily.user.model.vo.PetSitter2" %>
         height: 100%;
         padding: 0;
         width: 1366px;
-        margin-left: auto;
-        margin-right: auto;
+        margin : 0 auto;
+        /* margin-left: auto;
+        margin-right: auto; */
         /* border: 1px solid red; */
  
     }
@@ -49,7 +50,7 @@ com.petmily.user.model.vo.PetSitter2" %>
         }
     #menu{
         width: 230px;
-        position : fixed;
+        /* position : fixed; */
     }
     ul{
         padding-inline-start:0;
@@ -67,7 +68,7 @@ com.petmily.user.model.vo.PetSitter2" %>
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            /* height: 100%; */
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -78,8 +79,9 @@ com.petmily.user.model.vo.PetSitter2" %>
         /* z-index: 500px !important; */
         /* position: fixed; */
         height: 40px;
-        width: 100%;
+        width: 600px;
         border-radius: 0%;
+        margin-left:200px;
     }
     .breadcrumb-item{
         line-height: 16px;
@@ -91,9 +93,10 @@ com.petmily.user.model.vo.PetSitter2" %>
         }
     table{
         border-radius: 5px;
-        margin-left: 50px;
+        /* margin-left: 50px; */
         /* margin-top: 60px; */
         width:600px;
+        
     }
     td{
          width: 100px;
@@ -111,6 +114,7 @@ com.petmily.user.model.vo.PetSitter2" %>
 
     table{
         border-collapse: collapse;
+       	padding-left: 300px;
         
     }
 
@@ -166,10 +170,10 @@ com.petmily.user.model.vo.PetSitter2" %>
 .btn1{
 /* border: 3px solid #ffcc3383;
 background-color: #ffcc33; */
-    font-size: 12px;
-  width: 110px;
-  height: 35px;
-  border-radius: 20.5px;
+	font-size: 12px;
+	width: 110px;
+	height: 35px;
+	border-radius: 20.5px;
  
 }
 .btn1:hover{
@@ -177,13 +181,13 @@ background-color: #ffcc33; */
     background-color: #ffcc33;
 }
 button{
-    font-size: 12px;
-color: #ffcc33;
-  width: 100px;
-  height: 30px;
-  border-radius: 20.5px;
-  border: solid 1px #ffcc33;
-  background-color: white;
+	font-size: 12px;
+	color: #ffcc33;
+	width: 100px;
+	height: 30px;
+	border-radius: 20.5px;
+	border: solid 1px #ffcc33;
+	background-color: white;
 }
 
 button:hover{
@@ -289,7 +293,7 @@ label.custom-file-label::after{
                     <li class="breadcrumb-item active">회원 정보 수정</li>
                 </ul>
                    <!-- 콘텐츠 영역 -->
-                    <table style="margin-left: auto; margin-right:auto">
+                    <table style="margin-left: 200px;">
                     	<tr>  
                             <td class="sub-title">프로필 이미지</td> 
                             <td class="second-td"><%=pss.getSitterImg()%> </td>
@@ -449,7 +453,7 @@ label.custom-file-label::after{
                         <br/>
                         <br/>
                         <div>
-                        <button style="display:flex; margin-right: auto; margin-left: auto; color:white; border: solid 1px black; background-color :black; text-align: center;" type="submit">수정</button>
+                        <button style="display:flex; /* margin-right: auto; */ margin-left: 450px; color:white; border: solid 1px black; padding-left:33px; background-color :black; text-align: center;" type="submit">수정</button>
                         </div>
                         <br/>
                         <br/>

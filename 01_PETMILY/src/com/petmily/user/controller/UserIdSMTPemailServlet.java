@@ -51,11 +51,19 @@ public class UserIdSMTPemailServlet extends HttpServlet {
 //			[SMTP 작업 : 참고자료 https://loy124.tistory.com/182]
 //			자바메일 설정
 			String host = "smtp.naver.com"; // smtp 메일 설정
-			String user = "marungs@naver.com"; // 자신의 계정
-			String password = "heartful12"; // 자신의 패스워드
+			
+//			2020.04.20(월) 기록 -ysk작성
+//			현재 본인 네이버 계정이 노출되는 현상이 발생하여
+//			파일로 저장하여 불러오는 작업이 필요하기 때문에 우선 주석처리하여 본인 개인정보를 삭제처리함.
+//			GitHub에 본인이 수정된 작성 부분이 있기 때문에 조원들 중, 필요한 로직이 있을 경우
+//			해당 로직은 별도로 확인해야 함을 인지하도록 멘트를 남김.
+//			이에 대한 멘트는 비밀번호 SMTP 서블릿에서도 허용되는 멘트임.
+			
+			String user = ""; // 자신의 계정
+			String password = ""; // 자신의 패스워드
 			
 //			메일받을 주소
-			String to_email = "marungs@naver.com"; // 받는 이메일
+			String to_email = email; // 받는 이메일
 			
 			// SMTP 서버 정보를 설정한다.
 			Properties props = new Properties();

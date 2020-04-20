@@ -127,7 +127,7 @@ public class UserService {
 		return u;
 	}
 	
-<
+
 //	일반사용자 마이페이지 - 회원정보 수정 로직
 
 	public PetSitter2 sitterSelect(String id) {

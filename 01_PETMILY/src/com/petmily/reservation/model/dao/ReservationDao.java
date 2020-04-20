@@ -16,6 +16,8 @@ import java.util.Properties;
 import com.petmily.board.model.dao.BoardDao;
 import com.petmily.reservation.model.vo.PetReservation;
 import com.petmily.reservation.model.vo.ReservationPetCode;
+
+import oracle.jdbc.proxy.annotation.Pre;
 public class ReservationDao {
 	
 	private Properties prop = new Properties();
@@ -513,6 +515,35 @@ public class ReservationDao {
 		}
 		return result;
 }
+	
+	public boolean replyDelete(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("replyDelete");
+		
+		boolean result = false;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			if(pstmt.executeUpdate()>0)
+				result = true;
+			
+			System.out.println(result);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		
+		return result;
+		
+	}
 }
 
 

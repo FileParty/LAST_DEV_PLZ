@@ -145,4 +145,18 @@ public class ReservationService {
 		  return result;
 	  }
 	  
+	  public boolean replyDelete(int reviewNo) {
+		  Connection conn = getConnection();
+		  boolean result = dao.replyDelete(conn, reviewNo);
+		  
+		  if(result)
+			  commit(conn);
+		  else
+			  rollback(conn);
+		  
+		  close(conn);
+		  
+		  return result;
+	  }
+	  
 }

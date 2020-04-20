@@ -108,13 +108,13 @@
                                 </tr>
                                 <tr>
                                     <td>소형견</td>
-                                    <td><input name="small" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare"  step="5000" min='20000' max='50000' required></td>
+                                    <td><input name="small" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare"  step="5000" min='20000' max='50000'></td>
                                     
                                     
                                 </tr>
                                 <tr>
                                     <td>중형견</td>
-                                    <td><input name="middle" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare" step="5000" min='30000' max='50000' required></td>
+                                    <td><input name="middle" style="width: 150px; height: 25px; font-size: 12px;"type="number" class="form-control onecare" step="5000" min='30000' max='50000' ></td>
                                     
                                 </tr>
                                 <tr>
@@ -394,27 +394,22 @@ $(function(){
               
               if(event.target.value<5000) {
                 $(event.target).val(event.target.min);
-              }else if(event.target.value>20000){
-            $(event.target).val(event.target.max);
-        }
+              }
+            
             });
 
       $(shower).change(function(){
               
               if(event.target.value<1000) {
                 $(event.target).val(event.target.min);
-              }else if(event.target.value>5000){
-            $(event.target).val(event.target.max);
-        }
+              }
             });
             
       $(pick).change(function(){
               
               if(event.target.value<500) {
                 $(event.target).val(event.target.min);
-              }else if(event.target.value>10000){
-            $(event.target).val(event.target.max);
-        }
+              }
             });
 
    

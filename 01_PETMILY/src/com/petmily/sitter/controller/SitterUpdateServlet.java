@@ -38,7 +38,7 @@ public class SitterUpdateServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		else {
-			String id = request.getParameter("userId");
+//			String id = request.getParameter("userId");
 			
 			User u = new UserService().userSelect(id);
 			

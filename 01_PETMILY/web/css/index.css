@@ -140,6 +140,7 @@ section#Questions{
 	align-items: center;
 }
 section#Questions>h2{
+	text-align:center;
 	font-family: NotoSansKR;
   	font-size: 48px;
   	font-weight: 100;
@@ -147,10 +148,11 @@ section#Questions>h2{
 }
 
 div#questionsDiv{
+	margin:0 auto;
 	display:flex;
 	flex-direction:column;
 	justify-content:center;
-	width:700px;
+	width:1366px;
 	margin-bottom:100px;
 }
 

@@ -12,6 +12,18 @@
 		background-repeat:no-repeat;
 		opacity:0.7;
 	}
+	
+		div#mainImg{
+		margin: 0 auto;
+		
+	}
+	
+		div#questionsDiv>h2{
+		text-aling:center;
+		margin: 0 auto;
+		
+	}
+	
 </style>
 <section style="margin: 0 auto;">
 	<div id="mainText">

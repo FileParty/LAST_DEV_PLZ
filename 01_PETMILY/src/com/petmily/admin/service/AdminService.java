@@ -277,4 +277,18 @@ public class AdminService {
 		return count;
 	}
 
+	public int scAllCount() {
+		Connection conn = getConnection();
+		int count = dao.scAllCount(conn);
+		close(conn);
+		return count;
+	}
+
+	public int scDel(String del) {
+		Connection conn = getConnection();
+		int count = dao.scDel(conn,del);
+		close(conn);
+		return count;
+	}
+
 }

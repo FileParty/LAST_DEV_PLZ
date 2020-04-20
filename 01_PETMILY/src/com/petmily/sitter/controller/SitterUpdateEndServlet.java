@@ -45,23 +45,23 @@ public class SitterUpdateEndServlet extends HttpServlet {
 		
 		
 		
-//		�젙蹂� �닔�젙�븯湲� �쐞�빐 service濡� �뜲�씠�꽣瑜� 蹂대궦�떎(�븘�씠�뵒, �깉 鍮꾨�踰덊샇, �씠硫붿씪, �쑕���룿, �슦�렪踰덊샇, �룄濡쒕챸二쇱냼, �긽�꽭二쇱냼
+
 		int result= new UserService().sitterUpdateEnd(id, newPw, email, phone, postNum, address, detailAddress, bankName,accountNo,accountName,img);
 		
-//		�쓳�떟�럹�씠吏�
+
 		String msg = "";
 		String loc = "";
 		
-//		���옣�씠 �옒 �릺�뿀�뒗吏��뿉 ���븳 �븞�궡湲� 濡쒖쭅
+
 		if(result>0) {
 			msg = "회원정보 수정에 성공하였습니다.";
-			// �씪諛� �궗�슜�옄 留덉씠�럹�씠吏� - ���떆蹂대뱶 �솕硫댁쑝濡� �쟾�솚�븯�뒗 湲곕뒫�쓣 媛�吏� �꽌釉붾┸�쑝濡� �씠�룞�븯�뒗 留ㅽ븨媛�
-			loc = "/sitterInfo?userId="+id; 
+			
+			loc = "/common/Info?userId="+id; 
 		}
 		else {
 			msg = "회원정보 수정이 실패하였습니다.";
-			// �씪諛� �궗�슜�옄 留덉씠�럹�씠吏� - �쉶�썝�젙蹂� - �쉶�썝�젙蹂� �닔�젙 �솕硫댁쑝濡� �쟾�솚�븯�뒗 湲곕뒫�쓣 媛�吏� �꽌釉붾┸�쑝濡� �씠�룞�븯�뒗 留ㅽ븨媛�
-			loc = "/sitterUpdateInfo?userId="+id; 
+			
+			loc = "/sitter/Update?userId="+id; 
 		}
 		
 		request.setAttribute("msg", msg);

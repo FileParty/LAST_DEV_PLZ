@@ -652,9 +652,9 @@ public class UserDao {
 		String sql= prop.getProperty("sitterUpdate");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,bankName);
-			pstmt.setString(2,accountNo);
-			pstmt.setString(3,accountName);
+			pstmt.setString(1,accountName);
+			pstmt.setString(2,bankName);
+			pstmt.setString(3,accountNo);
 			pstmt.setString(4,img);
 			pstmt.setString(5,id);
 			result=pstmt.executeUpdate();

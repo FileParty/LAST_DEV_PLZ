@@ -23,7 +23,7 @@ hr{
 		<ul type="none">
 			<li class="title">회원정보</li>
 			<hr class="hr-line"/>
-			<li class="content"><a href="<%=request.getContextPath()%>/sitter/Update"> - 회원정보 수정</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/Update?userId=<%=u.getUserId()%>"> - 회원정보 수정</a></li>
 			<li class="content"><a href="<%=request.getContextPath()%>/sitter/Delete"> - 회원 탈퇴</a></li>
 			<br/>
 			<li class="title">작성글</li>

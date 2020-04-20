@@ -76,11 +76,7 @@ public class UserService {
 		return user;
 	}
 	
-	
-	
-//	---------------------- ㅆ
-	
-//	아이디 중복확인 로직
+
 	public boolean userIdDuplicate(String userId) {
 		Connection conn = getConnection();
 		boolean flag = dao.userIdDuplicate(conn, userId);

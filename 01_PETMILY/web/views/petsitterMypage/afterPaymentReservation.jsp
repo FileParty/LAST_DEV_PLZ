@@ -19,11 +19,11 @@ pageEncoding="UTF-8"%>
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section,form {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden;
         
     }
 
@@ -47,15 +47,11 @@ pageEncoding="UTF-8"%>
     .menu{
             width: 230px;
             /* border: 1px solid yellow; */
-            margin-top: 150px;
+            margin-top: 50px;
             height: 100%;
             
         }
-    #menu{
-        width: 230px;
-        position : fixed;
-        height: 100%;
-    }
+
     ul{
         padding-inline-start:0;
     }
@@ -72,7 +68,7 @@ pageEncoding="UTF-8"%>
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            height: 100%;
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -237,7 +233,7 @@ pageEncoding="UTF-8"%>
 
 	
 	function end(){
-		document.reFrm.action="<%=request.getContextPath()%>/sitter/extraEnd";
+		document.reFrm.action="<%=request.getContextPath()%>/sitter/end";
 	}
 
 	$(function(){

@@ -31,7 +31,7 @@
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
@@ -41,7 +41,7 @@
     .container{
         height: 100%;
         padding: 0;
-        width: 1366px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         /* border: 1px solid red; */
@@ -80,7 +80,7 @@
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            /* height: 100%; */
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -322,8 +322,12 @@ label.custom-file-label::after{
                     	
             </div>
         </div>
+</div>
     </section>
-
+<%@ include file="/views/common/footer.jsp" %>
+    <div class="row">
+    
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
    
@@ -395,6 +399,5 @@ $('.row4').slideToggle(100); //시간 부여
 
 
 </script>
-
 
 

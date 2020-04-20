@@ -38,7 +38,7 @@ hr{
 			<br/>
 			<li class="title">정산</li>
 			<hr class="hr-line"/>
-			<li class="content"><a href=""> - 이번 달 정산 현황</a></li>
+			<li class="content"><a href="<%=request.getContextPath()%>/sitter/calculator"> - 이번 달 정산 현황</a></li>
 			<li class="content"><a href="<%=request.getContextPath()%>/sitter/settled"> - 이전 정산 보기</a></li>
 			<br/>
 			<li class="title">자격증</li>

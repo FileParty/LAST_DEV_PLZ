@@ -18,11 +18,11 @@ pageEncoding="UTF-8"%>
         font-family: 'Noto Sans KR', sans-serif;
     }
     html, body,section,form {
-          height: 100%;
+          height: auto;
       }
     .col-9{
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden;
         
     }
 
@@ -43,21 +43,7 @@ pageEncoding="UTF-8"%>
         margin: 0;
         height: 100%;
     }
-    .menu{
-            width: 230px;
-            /* border: 1px solid yellow; */
-            margin-top: 150px;
-            height: 100%;
-            
-        }
-    #menu{
-        width: 230px;
-        position : fixed;
-        height: 100%;
-    }
-    ul{
-        padding-inline-start:0;
-    }
+
     .title{
         font-size: 14px;
     }
@@ -71,7 +57,7 @@ pageEncoding="UTF-8"%>
     .vl {   width: 1px;
             margin-top: 0px;
             border-left: 1px solid lightgrey;
-            height: 100%;
+            height: auto;
         }
     .breadcrumb .active {
         color: white;
@@ -100,6 +86,7 @@ pageEncoding="UTF-8"%>
         border-collapse: collapse;
  	}
     td{
+    	font-size: 12px;
         border-top: 1px solid grey;
         border-bottom: 1px solid grey;
 		text-align: center;
@@ -113,9 +100,9 @@ pageEncoding="UTF-8"%>
         color: grey;
         border-right: 1px solid white;
     }
-    
-
-
+    .col-2{
+    	margin-top:50px;
+    }
 </style>
 
 	    <section>
@@ -145,7 +132,7 @@ pageEncoding="UTF-8"%>
 			                        <th>요청 상세</th>
 			                        <th class="state">상태</th>
 			                    </tr>
-			                    <%if(list!=null){ %>
+								<%if(list!=null){ %>
 			                    <%for(PetsitterMypageReservation pmr:list){ %>
 			                    <tr>
 			                    	<td class="no"><%=count++ %></td>
@@ -166,10 +153,8 @@ pageEncoding="UTF-8"%>
 			                    			<button type="button" class="btn requestDetail"> 상세 요청 확인</button>
 			                    		</div>
 			                    	</td>
-			                    	<td class="read"><div class="p-1"><button type="button" class="btn" >열람</button></div></td>
-			                    	<td><div class="p-1"><button  type="button" class="btn secretReview" data-toggle="modal" data-target="#secretReviewModal" value=<%=pmr.getUserId() %>>열람</button></div></td>
-			                    	<td><div class="p-1"><button type="button" class="btn" id="requestDetail" class="btn" data-toggle="modal" data-target="#requestDetailModal" value=<%=pmr.getPlusQuestions() %> >상세 요청 확인</button></div></td>
 			                    	<td class="state"><%=pmr.getResType() %></td>
+			                    	
 			                    </tr>
 			                 	<%} }%>
 			                </table>

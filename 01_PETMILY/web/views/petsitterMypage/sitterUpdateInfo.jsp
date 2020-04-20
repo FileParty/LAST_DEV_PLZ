@@ -93,9 +93,10 @@ com.petmily.user.model.vo.PetSitter2" %>
         border-radius: 5px;
         margin-left: 50px;
         /* margin-top: 60px; */
+        width:600px;
     }
     td{
-        /* width: 100px; */
+         width: 100px;
         font-size: 12px;
         padding: 5px;
     }
@@ -243,8 +244,9 @@ label.custom-file-label::after{
             <input type="hidden" id="userId" name="userId" value="<%= loginUser.getUserId() %>" >
             
             <div class="row">
+            <%-- <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp"  %> --%>
                 <!-- 메뉴 영역 -->
-            <div class="col-2 menu">
+             <div class="col-2 menu">
                     <div id="menu">
                         <ul type="none">
                             <li class="title"><a href="<%=request.getContextPath()%>/sitterInfo">회원정보</a></li>
@@ -276,7 +278,7 @@ label.custom-file-label::after{
                             
                         </ul>
                     </div>
-                </div>
+                </div> 
             <div class="vl">
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">
@@ -319,8 +321,9 @@ label.custom-file-label::after{
                         </tr>
                         </div>
                         <tr>
+                        	<% String birthday = pss.getSitterBday();%>
                             <td class="sub-title">생년월일</td> 
-                            <td colspan="2" class="second-td"><%=pss.getSitterBday()%></td>
+                            <td colspan="2" class="second-td"><%=birthday.substring(0,11) %></td>
                         </tr>
                         <tr>
                             <td class="sub-title">성별</td> 

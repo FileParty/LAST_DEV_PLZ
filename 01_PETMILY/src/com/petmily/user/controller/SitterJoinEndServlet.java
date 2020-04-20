@@ -40,7 +40,7 @@ public class SitterJoinEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		if(!ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("msg", "±Û¾²±â ¿À·ù! [form:encType]");
+			request.setAttribute("msg", "íŒŒì¼ì—ëŸ¬!! [form:encType]");
 			request.setAttribute("loc", "/apply");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -15,6 +16,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.petmily.pet.model.vo.Pet;
 import com.petmily.pet.service.PetService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class PetProfileEditServlet
@@ -45,8 +47,8 @@ public class PetProfileEditServlet extends HttpServlet {
 			return;
 		}
 		
-		String id = (String)request.getAttribute("userId");
-		id = "sebin";
+		HttpSession session = request.getSession();
+	    String id = ((User)session.getAttribute("loginUser")).getUserId();
 		
 		
 		String path = getServletContext().getRealPath("/upload/pet/");

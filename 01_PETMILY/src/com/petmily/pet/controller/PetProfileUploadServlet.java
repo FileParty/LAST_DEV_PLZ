@@ -14,6 +14,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.petmily.pet.model.vo.Pet;
 import com.petmily.pet.service.PetService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class PetProfileServlet
@@ -37,8 +38,8 @@ public class PetProfileUploadServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		String id = (String)request.getAttribute("userId");
-		id = "sebin";
+		HttpSession session = request.getSession();
+	    String id = ((User)session.getAttribute("loginUser")).getUserId();
 		
 		String path = getServletContext().getRealPath("/upload/pet/");
 		int maxSize=1024*1024*10;

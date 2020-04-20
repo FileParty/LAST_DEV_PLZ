@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.petmily.pet.model.vo.Pet;
 import com.petmily.pet.service.PetService;
+import com.petmily.user.model.vo.User;
 
 /**
  * Servlet implementation class PetProfileDetailServlet
@@ -34,8 +36,8 @@ public class PetProfileDetailServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		String id = request.getParameter("userId");
-		id = "sebin";
+		HttpSession session = request.getSession();
+	    String id = ((User)session.getAttribute("loginUser")).getUserId();
 		
 		
 		Pet p = new PetService().petProfileDetail(id,no);

@@ -532,13 +532,15 @@
 			                    </div>
 		                    
 		   					<%} %>
+		   					<button style="margin-left:40px; margin-top:10px;" onclick="replyModify('<%=review.getUserReviewNo()%>', '<%=review.getReviewSend()%>')">답글수정</button>
+		   					<button id="reply_button_<%=review.getUserReviewNo()%>" style="margin-left:40px; margin-top:10px;" onclick="replySendDel('<%=review.getUserReviewNo()%>','<%=review.getReviewSend()%>')">답글삭제</button>
 		
 		                </div>
 		    
 		                    
 		                <div class="col-lg-9">
 		
-		                    <div style="overflow:hidden; width:100%; height: 100px; margin-top: 50px;"><%=review.getReviewSend()%></div>
+		                    <div id="replySend_<%=review.getUserReviewNo() %>" style="overflow:hidden; width:100%; height: 100px; margin-top: 50px;"><%=review.getReviewSend()%></div>
 		
 		                </div>
 		                
@@ -569,7 +571,7 @@
 		                		<textarea id="reply_con_<%=review.getUserReviewNo()%>" cols="68" rows="4" style=" margin-top: 20px; margin-left: 20px;"></textarea>
 		                	</div>
 		                	
-							<div id="replyIn2_<%=review.getUserReviewNo() %>" class="col-lg-2"><button id="reply_<%=review.getUserReviewNo() %>" style="margin-top: 20px;" onclick="replyUpdate('<%=review.getUserReviewNo()%>')">답글 입력</button></div>		                	
+							<div id="replyIn2_<%=review.getUserReviewNo() %>" class="col-lg-2"><button id="reply_<%=review.getUserReviewNo() %>" style="margin-top: 20px;" onclick="replyUpdate('<%=review.getUserReviewNo()%>', true, '<%=review.getReviewSend()%>')">답글 입력</button></div>		                	
 		                <%} %>
 		       		
 		       		<%} %>
@@ -1612,9 +1614,13 @@ function resulvation_complete(){
  	
 }
 
-function replyUpdate(reviewNo){
+var tempRe = 1;
+
+function replyUpdate(reviewNo, flag, Send){
 	
+	console.log(flag);
 	
+	console.log("성공");
 	
  	$.ajax({
 		type: "POST",
@@ -1625,6 +1631,7 @@ function replyUpdate(reviewNo){
 			
 			if(data=="t"){
 				
+				console.log("성공");
 				
 				
 				$("#reply_"+reviewNo).parent().attr("style", "display:none");
@@ -1635,38 +1642,48 @@ function replyUpdate(reviewNo){
 				
 				let codeT = "";
 				
-				codeT += "<div class='col-lg-1'></div>";
-					
-				codeT += "<div class='col-lg-2' style='height: 200px;'>";
-	
-				<%if(sitterT.getPetSitterImg()==null){ %>
+				if(flag==true){
 				
-					codeT += "<div class='review_profile' style='margin-left: auto;'>";
-					codeT += "<img src='<%=request.getContextPath() %>/img/profile/default.jpg' alt='' width='100%' height='100%'>";
-					codeT += "</div>";
-				
-				<%}else{ %>
+					codeT += "<div class='col-lg-1'></div>";
 						
-					codeT += "<div class='review_profile' style='margin-left: auto;'>";
-					codeT += "<img src='<%=request.getContextPath() %>/img/profile/<%=sitterT.getPetSitterImg() %>' alt='' width='100%' height='100%'>";
-					codeT += "</div>";
-	                    
-				<%} %>
-	
-				codeT += "</div>";	    
-				codeT += "<div class='col-lg-9'>";	
-				codeT += "<div style='overflow:hidden; width:100%; height: 100px; margin-top: 50px;'>" + document.getElementById("reply_con_" + reviewNo).value + "</div>";	
-				codeT += "</div>"
+					codeT += "<div class='col-lg-2' style='height: 200px;'>";
+		
+					<%if(sitterT.getPetSitterImg()==null){ %>
 					
-				console.log($("#replyIn1_"+reviewNo).prev().prev());
+						codeT += "<div class='review_profile' style='margin-left: auto;'>";
+						codeT += "<img id='reply_img_" + reviewNo + "' src='<%=request.getContextPath() %>/img/profile/default.jpg' alt='' width='100%' height='100%'>";
+						
+						codeT += "</div>";
+					
+					<%}else{ %>
+							
+						codeT += "<div class='review_profile' style='margin-left: auto;'>";
+						codeT += "<img id='reply_img_" + reviewNo + "' src='<%=request.getContextPath() %>/img/profile/<%=sitterT.getPetSitterImg() %>' alt='' width='100%' height='100%'>";
+						
+						codeT += "</div>";
+		                    
+					<%} %>
+			
+					codeT += "<button style='margin-left:40px; margin-top:10px;' onclick='replyModify(" + reviewNo + ", " + document.getElementById('reply_con_'+reviewNo).value + ")'>답글수정</button>";
+					codeT += "<button id='reply_button_" + reviewNo + "' style='margin-left:40px; margin-top:10px;' onclick='replySendDel(" + reviewNo + "," + Send + ")'>답글삭제</button>";
+					codeT += "</div>";	    
+					codeT += "<div class='col-lg-9' id='replySend_" + reviewNo + "'>";	
+					codeT += "<div style='overflow:hidden; width:100%; height: 100px; margin-top: 50px;'>" + document.getElementById("reply_con_" + reviewNo).value + "</div>";
+					
+					codeT += "</div>"
+					
+		                
+					$("#replyIn1_"+reviewNo).prev().prev().after(codeT);
 				
-				
-				
-				
-	                
-				$("#replyIn1_"+reviewNo).prev().prev().after(codeT);
-				
-				
+				}else{
+					codeT += "</div>";	    
+					codeT += "<div class='col-lg-9' id='del_con_"+reviewNo+"'>";	
+					codeT += "<div style='overflow:hidden; width:100%; height: 100px; margin-top: 50px;'>" + document.getElementById("reply_con_" + reviewNo).value + "</div>";	
+					codeT += "</div>"
+					
+					$("#replyIn1_"+reviewNo).prev().after(codeT);
+					
+				}
 				/* document.getElementById("reply_reCon_" + reviewNo).innerHTML = document.getElementById("reply_con_" + reviewNo).value; */
 				
 
@@ -1675,6 +1692,7 @@ function replyUpdate(reviewNo){
 				alert("답글입력에 실패하였습니다.");
 			}
 			
+			tempRe++;
 			
 		},
 		error: function(){
@@ -1981,6 +1999,86 @@ window.onload = function () {
 
 
 /*  */
+
+function replyModify(No,SendData){
+	document.getElementById("replySend_"+No).style.display = "none";
+	
+	$("#reply_"+No).parent().attr("style", "display:none");
+	if($("#reply_con_"+No)!=null)
+		$("#reply_con_"+No).parent().attr("style", "display:none");
+	$("#del_con_"+No).attr("style", "display:none");
+	
+	var tempC = "replyUpdate("+No+"," + false + "," + SendData + ")";
+	
+	console.log(tempC)
+	var codeR = "";
+	
+	codeR += "<div id='replyIn1_" + No + "' class='col-lg-7'>";
+	codeR += "<textarea id='reply_con_" + No + "' cols='68' rows='4' style=' margin-top: 20px; margin-left: 20px;'>"+ SendData +"</textarea>";
+	codeR += "</div>";
+	
+	codeR += "<div style='margin-left:90%' id='replyIn2_" + No + "' class='col-lg-2'><button id='reply_" + No + "' style='margin-top: 11px;' onclick='";
+	codeR += tempC;
+	codeR += "'>수정</button></div>";
+	
+	$("#replySend_"+No).after(codeR);
+	
+	
+}
+
+function replySendDel(No, Send){
+	
+		
+		
+		$.ajax({
+				type: "POST",
+				url: "<%=request.getContextPath()%>/replyDelete.do",
+				data: {"reviewNo": No},
+				success: function(data){
+					
+					var tttt="test";
+					
+					var tempC = "replyUpdate("+No+"," + true + "," + Send + ")";
+					
+					if(data=="t"){
+						$("#replySend_"+No).attr("style", "display:none");
+						$("#reply_button_"+No).parent().attr("style", "display:none");
+						$("#reply_button_"+No).parent().prev().attr("style", "display:none"); 
+						
+						var codeR = "";
+						var codeR2 = "";
+						
+						codeR2 += "<div class='col-lg-3'></div>"
+						
+						codeR += "<div id='replyIn1_" + No + "' class='col-lg-7'>";
+						codeR += "<textarea id='reply_con_" + No + "' cols='68' rows='4' style=' margin-top: 20px; margin-left: 20px;'></textarea>";
+						codeR += "</div>";
+						
+						codeR += "<div style='margin-left:90%' id='replyIn2_" + No + "' class='col-lg-2'><button id='reply_" + No + "' style='margin-top: 11px;' onclick='";
+						codeR += tempC;
+						codeR += "'>수정</button></div>";
+						
+						$("#replySend_"+No).parent().prev().after(codeR2);
+						
+						$("#replySend_"+No).after(codeR);
+						
+					}else{
+						alert("삭제실패");
+					}
+					
+					
+				},
+				error: function(){
+					// jsp의 전역변수
+					
+					alert("삭제실패2");			        
+			        
+				}
+			});
+	     
+	
+	
+}
 
 </script>
 

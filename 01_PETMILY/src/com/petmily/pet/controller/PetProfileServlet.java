@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.petmily.pet.model.vo.Pet;
 import com.petmily.pet.service.PetService;
 import com.petmily.user.model.service.UserService;
+import com.petmily.user.model.vo.User;
 import com.petmily.user.model.vo.UserBookMarkBoard;
 
 /**
@@ -36,7 +37,7 @@ public class PetProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 			
-		HttpSession session = request.getSession();
+	
 		
 //		if(session.getAttribute("loginUser")==null) {
 ////			잘못된 접근 처리
@@ -45,8 +46,8 @@ public class PetProfileServlet extends HttpServlet {
 //			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 //		}
 //		else {
-			String id = request.getParameter("userId");
-			id = "sebin";
+		HttpSession session = request.getSession();
+	    String id = ((User)session.getAttribute("loginUser")).getUserId();
 			System.out.println("회원정보수정 화면으로 이동하기 위해 확인하는 id 값 : "+id);
 //			
 ////			DB에서 id와 동일한 정보를 가져온다

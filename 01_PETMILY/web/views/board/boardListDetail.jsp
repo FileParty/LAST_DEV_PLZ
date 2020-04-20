@@ -168,7 +168,7 @@
             <div class="col-lg-6 main_content_01">
 
 				
-                <button id="bline_process" class="btn btn-secondary button_radius" style="margin-left: 70%;">블라인드 처리</button>
+                <!-- <button id="bline_process" class="btn btn-secondary button_radius" style="margin-left: 70%;">블라인드 처리</button> -->
 
             </div>
 

@@ -86,6 +86,7 @@
         border-radius: 5px;
         margin-left: 50px;
         margin-top: 60px;
+        
     }
     td{
         /* width: 100px; */
@@ -360,8 +361,8 @@ label.custom-file-label::after{
         </div>
     </section>
 	
-	<br><br><br><br><br><br><br><br><br>
-
+	<br><br><br><br><br><br><br><br>
+	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
    

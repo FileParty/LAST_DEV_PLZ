@@ -102,7 +102,7 @@
     padding-bottom: 20px;
     font-size: 12px;
     border-radius: 25px;
-	width: 100px;
+	width: 130px;
 	height: 30px;
  }
 
@@ -111,14 +111,14 @@
 <!-- 회원탈퇴 화면 -->
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath()%>/user/DeleteEnd" method="post" onsubmit="return test();">
+            <form action="<%=request.getContextPath()%>/sitter/DeleteEnd" method="post" onsubmit="return test();">
             
             <div class="row">
             
-            <%@ include file="/views/user/userSideBar.jsp"  %>
+            <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp"  %>
             
             <!-- form을 넘기기 위해 hidden 처리한 input을 만듦. -->
-            <input type="hidden" id="userId" name="userId" value="<%= loginUser.getUserId() %>" >
+            <input type="hidden" id="sitterId" name="sitterId" value="<%= loginUser.getUserId() %>" >
             
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
@@ -140,7 +140,7 @@
                         <br/>
                         <div class="row" style="margin-left: 35%;">
                             <div style="margin-top:80px; margin-bottom: 100px;">
-                                <button class="btn" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview" type="button" onclick="alert('서비스 준비중입니다.');">예약 요청 삭제</button>
+                                <button class="btn" style="color:white; border: solid 1px #666666; background-color :#666666; margin-right:10px;" class="btn1 preview" type="button" onclick="alert('서비스 준비중입니다.');">작성글 블라인드 처리</button>
                                 <button class="btn" style="color:white; border: solid 1px black; background-color :black" class="btn1" type="submit">회원 탈퇴</button>
                             </div>
                         </div>

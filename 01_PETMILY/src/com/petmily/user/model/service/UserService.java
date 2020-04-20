@@ -127,7 +127,20 @@ public class UserService {
 		return u;
 	}
 	
+
 //	일반사용자 마이페이지 - 회원정보 수정 로직
+
+	public PetSitter2 sitterSelect(String id) {
+		Connection conn = getConnection();
+		
+		PetSitter2 pss= dao.sitterSelect(conn, id);
+		
+		close(conn);
+		return pss;
+	}
+	
+
+
 	public int userUpdate(String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		Connection conn = getConnection();
 		int result = dao.userUpdate(conn, id, newPw, email, phone, postNum, address, detailAddress);
@@ -158,8 +171,25 @@ public class UserService {
 		return result;
 	}
 	
+
 	
 //	일반사용자 마이페이지 - 북마크 리스트 로직
+
+	public int sitterDelete(String id) {
+		Connection conn = getConnection();
+		int result = dao.sitterDelete(conn, id);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
 	public List<UserBookMarkBoard> userBookMarkList(String id, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<UserBookMarkBoard> list = dao.userBookMarkBoard(conn, id, cPage, numPerPage);

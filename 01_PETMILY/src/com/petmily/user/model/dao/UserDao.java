@@ -405,6 +405,43 @@ public class UserDao {
 		return u;
 	}
 	
+	public PetSitter2 sitterSelect(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PetSitter2 pss = null;
+		String sql = prop.getProperty("duplicateSitter");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pss = new PetSitter2();
+				pss.setPetsitterId(rs.getString("USER_ID"));
+				pss.setSitterName(rs.getString("USER_NAME"));
+				pss.setSitterBday(rs.getString("USER_BIRTH_DAY"));
+				pss.setSitterPhone(rs.getString("PHONE"));
+				pss.setPostCode(rs.getString("ZIP_CODE"));
+				pss.setSitterAddress(rs.getString("ADDRESS"));
+				pss.setAddressDetail(rs.getString("DETAILED_ADDRESS"));
+				pss.setSitterEmail(rs.getString("EMAIL"));
+				pss.setSitterGender(rs.getString("GENDER"));
+				pss.setBankName(rs.getString("BANK_NAME"));
+				pss.setAccountNo(rs.getString("ACCOUNT_NUMBER"));
+				pss.setAccountOwner(rs.getString("ACCOUNT_NAME"));
+				pss.setSitterImg(rs.getString("PET_SITTER_IMG"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pss;
+	}
+	
 	
 //
 	public int userUpdate(Connection conn, String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
@@ -438,7 +475,7 @@ public class UserDao {
 		String sql = prop.getProperty("userDelete"); // SQL문은 업데이트로 수정처리함
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id); 
+			pstmt.setString(1, id.trim()); 
 			result = pstmt.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -450,6 +487,24 @@ public class UserDao {
 		return result;
 	}
 	
+	
+	public int sitterDelete(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("sitterDelete"); // SQL문은 업데이트로 수정처리함
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id); 
+			result = pstmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public List<UserBookMarkBoard> userBookMarkBoard(Connection conn, String id, int cPage, int numPerPage) {
 		PreparedStatement pstmt = null;

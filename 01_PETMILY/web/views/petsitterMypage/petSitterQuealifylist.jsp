@@ -237,10 +237,6 @@
 	</div>
 </section>         
 
-<<<<<<< HEAD
-<br><br><br><br>   
-=======
-<br><br><br><br>   
->>>>>>> refs/remotes/origin/mh
+<br><br><br><br>
 
 <%@ include file="/views/common/footer.jsp" %>

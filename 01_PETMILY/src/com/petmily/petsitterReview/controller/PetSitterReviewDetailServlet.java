@@ -33,7 +33,6 @@ public class PetSitterReviewDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("userId");
-		id = "petsitter1";
 		int no = Integer.parseInt(request.getParameter("no"));
 		PetSitterReview psr =new PetSitterReviewService().selectPetSitterReviewDetail(no);
 		request.setAttribute("psr", psr);

@@ -307,9 +307,9 @@ label.custom-file-label::after{
                             <td class="none">
                                 <select name="weight" aria-placeholder="무게" style="width: 150px; font-size: 12px;" required>
 					     
-                                    <option value="소형견">7kg 미만</option>
-                                    <option value="중형견">7kg-14kg</option>
-                                    <option value="대형견">15kg 이상</option>
+                                    <option value="소형">7kg 미만</option>
+                                    <option value="중형">7kg-14kg</option>
+                                    <option value="대형">15kg 이상</option>
                                 </select>
                             </td>
                         </tr>

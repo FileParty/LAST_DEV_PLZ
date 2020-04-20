@@ -29,11 +29,11 @@ public class BeforeSitterApplyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//¸¸¾à ·Î±×ÀÎÀÌ µÇ¾îÀÖ´Ù¸é ·Î±×¾Æ¿ô ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä ¸Ş¼¼Áö ÈÄ ¸ŞÀÎÆäÀÌÁö·Î ÀÌµ¿
-		//·Î±×ÀÎÀÌ µÇ¾îÀÖÁö ¾ÊÀ» ¶§¿¡´Â Á¤»óÀûÀ¸·Î Æê½ÃÅÍ È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½Î±×¾Æ¿ï¿½ ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+		//ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 		HttpSession session=request.getSession();
 		if(session.getAttribute("loginUser")!=null) {
-			request.setAttribute("msg", "·Î±×¾Æ¿ô ÈÄ ÀÌ¿ëÇØÁÖ¼¼¿ä");
+			request.setAttribute("msg", "ë¡œê·¸ì•„ì›ƒì„ í•´ì£¼ì„¸ìš”!");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {

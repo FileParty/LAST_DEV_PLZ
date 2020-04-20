@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
- <%@page  import="com.petmily.user.model.vo.User"  %>
+ <%-- <%@page  import="com.petmily.user.model.vo.User"  %>
 <%
 	User u = (User)session.getAttribute("loginUser");
-%> 
+%>  --%>
 
 <%@ include file="/views/common/header.jsp" %>
 
@@ -244,7 +244,41 @@ label.custom-file-label::after{
     <section>
         <div class="container">
             <div class="row">
-               <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>
+              <%--  <%@ include file="/views/petsitterMypage/petSitterSideBar.jsp" %>  --%>
+                    <!-- 메뉴 영역 -->
+            <div class="col-2 menu">
+                    <div id="menu">
+                        <ul type="none">
+                            <li class="title"><a href="<%=request.getContextPath()%>/sitterInfo">회원정보</a></li>
+                            <hr class="hr-line"/>
+                            <li class="content"><a href="<%=request.getContextPath()%>/sitter/Update?userId=<%=loginUser.getUserId()%>"> - 회원정보 수정</a></li>
+                            <li class="content"><a href="<%=request.getContextPath()%>/sitter/Delete?userId=<%=loginUser.getUserId()%>"> - 회원 탈퇴</a></li>
+                            <li class="content"><a href=""> - 북마크</a></li>
+                            <li class="content"><a href=""> - 작성 후기</a></li>
+                            <br/>
+        
+                            <li class="title">펫 프로필</li>
+                            <hr class="hr-line"/>
+                            <li class="content"><a href=""> - 펫 프로필</a></li>
+                            <br/>
+                            
+                            <li class="title">예약</li>
+                            <hr class="hr-line"/>
+                            <li class="content"><a href=""> - 요청한 예약</a></li>
+                            <li class="content"><a href=""> - 진행중인 예약</a></li>
+                            <li class="content"><a href=""> - 종료된 예약</a></li>
+                            <li class="content"><a href=""> - 채팅</a></li>
+                            <br/>
+                            
+                            <li class="title">결제</li>
+                            <hr class="hr-line"/>
+                            <li class="content"><a href=""> - 결제 내역</a></li>
+                            <li class="content"><a href=""> - 추가 요금 내역</a></li>
+                            <br/>
+                            
+                        </ul>
+                    </div>
+                </div> 
             <div class="vl"></div>
             <div class="col-9" style="padding:0;">
                 <div class="row top-div" style="height: 200px;overflow: hidden;">

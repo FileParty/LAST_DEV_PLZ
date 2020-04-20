@@ -131,6 +131,15 @@ public class UserService {
 		return u;
 	}
 	
+	public PetSitter2 sitterSelect(String id) {
+		Connection conn = getConnection();
+		
+		PetSitter2 pss= dao.sitterSelect(conn, id);
+		
+		close(conn);
+		return pss;
+	}
+	
 
 	public int userUpdate(String id, String newPw, String email, String phone, String postNum, String address, String detailAddress) {
 		Connection conn = getConnection();
@@ -162,7 +171,19 @@ public class UserService {
 		return result;
 	}
 	
-	
+	public int sitterDelete(String id) {
+		Connection conn = getConnection();
+		int result = dao.sitterDelete(conn, id);
+		
+		if(result > 0) {
+			commit(conn);
+		}
+		else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 	public List<UserBookMarkBoard> userBookMarkList(String id, int cPage, int numPerPage) {
 		Connection conn = getConnection();

@@ -29,9 +29,9 @@ public class SitterDeleteEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		회원정보 삭제하는 로직
-		String id = request.getParameter("userId"); // 유저 아이디
-		
-//		회원탈퇴하기 위한 service 연결
+		String id = request.getParameter("sitterId"); // 유저 아이디
+		id=id.replace(" ","");
+//		회원탈퇴하기 위한 service 연결s
 		int result = new UserService().userDelete(id); // 결과값 int형
 		
 //		응답페이지 구성
@@ -48,13 +48,14 @@ public class SitterDeleteEndServlet extends HttpServlet {
 //			회원탈퇴 실패
 			msg = "회원탈퇴 처리가 실패되었습니다.";
 //			회원탈퇴 화면으로 보낸다
-			loc = "/sitter/Delete?userId="+id; // 유저아이디와 반드시 같이 보낸다
+			loc = "/sitter/Delete?sitterId="+id; // 유저아이디와 반드시 같이 보낸다
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

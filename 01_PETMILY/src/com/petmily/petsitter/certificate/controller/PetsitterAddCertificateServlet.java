@@ -40,8 +40,48 @@ public class PetsitterAddCertificateServlet extends HttpServlet {
 		 HttpSession session = request.getSession();
 	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
 	    
-	     List<PetSitterCertificate> list = new  SitterCertificateService().selectCertificate2(userId);
+	     
+	     int cPage;
+			try {
+				cPage=Integer.parseInt(request.getParameter("cPage"));
+			}catch(NumberFormatException e) {
+				cPage=1;
+			}
+			
+			int numPerPage=5;		
+
+			List<PetSitterCertificate> list = new  SitterCertificateService().selectCertificate2(userId,cPage,numPerPage);
+			int totalData = new SitterCertificateService().certificateCount2(userId);
+			int totalPage=(int)Math.ceil((double)totalData/numPerPage);
+			
+			String pageBar="";
+			int pageBarSize=5;
+			int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+			int pageEnd=pageNo+pageBarSize-1;
+			
+			if(pageNo==1) {
+				pageBar+="<span>[이전]</span>";
+			}else {
+				pageBar+="<a href='" + request.getContextPath() + "/sitter/AddCertificate?cPage="+(pageNo-1)+"'>[이전]</a>";
+			}
+			
+			while(!(pageNo>pageEnd||pageNo>totalPage)) {
+				if(pageNo==cPage) {
+					pageBar+="<span>"+pageNo+"</span>";
+				}else {
+					pageBar+="<a href='"+ request.getContextPath() + "/sitter/AddCertificate?cPage="+pageNo+"'>"+pageNo+"</a>";
+				}
+				pageNo++;
+			}
+			
+			if(pageNo>totalPage) {
+				pageBar+="<span>[다음]</span>";
+			}else {
+				pageBar+="<a href='"+ request.getContextPath() + "/sitter/AddCertificate?cPage="+pageNo+"'>[다음]</a>";
+			}
+	     
 		request.setAttribute("pc", list);
+		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/userReservation/addCertificate.jsp").forward(request, response);
 	}
 

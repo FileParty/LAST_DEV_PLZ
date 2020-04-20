@@ -1,29 +1,25 @@
 <%@page import="com.petmily.reservation.model.vo.PetReservation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.petmily.admin.model.vo.ApplyUserData, 
- com.petmily.admin.model.vo.User,com.petmily.admin.model.vo.AdminPetsitter" %>
+
 <% 
 PetReservation pr = (PetReservation)request.getAttribute("revs");
 
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>사용자 정보 페이지</title>
+
+
 <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-</head>
+
 <body>
 	<table class="table table-hover" align=center;>
-		<%if(pr!=null) { %>
+		
 			<tr>
 				<th>예약NO</th>
-				<td><%=pr.getReservationCode() %></td>
+				<td><%=pr.getReservationCode()%></td>
 			</tr>
 			<tr>
 				<th>예약자 ID</th>
@@ -49,8 +45,13 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 					<%} %>
 				</tr>
 				<tr>
+				
 					<th>입금일자</th>
+					<%if(pr.getPriceEndDate()!=null) {%>
 					<td><%=pr.getPriceEndDate().substring(0,11) %></td>
+					<%}else {  %>
+					<td>-</td>
+					<%} %>
 				</tr>
 				<tr>
 					<th>합계 금액</th>
@@ -83,7 +84,7 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 					<td><%=pr.getPetBath() %></td>
 				</tr>
 				
-		<%} %>
+		
 	</table>
 	<button onclick="closePage();">확인</button>
 </body>
@@ -111,12 +112,13 @@ PetReservation pr = (PetReservation)request.getAttribute("revs");
 		resize:none
 	}
 </style>
+
 <script>
 	function closePage(){
 		window.close();
 	}
 </script>
-</html>
+
 
 
 

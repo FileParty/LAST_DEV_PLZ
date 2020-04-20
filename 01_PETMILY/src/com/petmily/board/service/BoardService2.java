@@ -102,10 +102,10 @@ public class BoardService2 {
 	      return pb;
    }
    
-   public List<PetSitterBoard> selectList(String userId) {
+   public List<PetSitterBoard> selectList(String userId,int cPage,int numPerPage) {
 	   
 	   Connection conn = getConnection();
-	   List<PetSitterBoard> list = dao.selectList(conn,userId);
+	   List<PetSitterBoard> list = dao.selectList(conn,userId,cPage,numPerPage);
 	   close(conn);
 	   return list;
    }
@@ -115,6 +115,13 @@ public class BoardService2 {
 	   int result = dao.mainButton(conn, userId);
 	   close(conn);
 	   return result;
+   }
+   
+   public int boardCount(String userId) {
+	   Connection conn = getConnection();
+	   int count = dao.boardCount(conn,userId);
+	   close(conn);
+	   return count;
    }
    
    

@@ -17,9 +17,10 @@ public class ReservationService {
 	
 	  private ReservationDao dao = new ReservationDao();
 	  
-	  public List<PetReservation> requestRev(String id) {
+	  public List<PetReservation> requestRev(String id,int cPage,int numPerPage) {
+		  //요청예약리스트 가져오기
 		  Connection conn = getConnection();
-		  List<PetReservation> list = dao.requestRev(conn,id);
+		  List<PetReservation> list = dao.requestRev(conn,id,cPage,numPerPage);
 		  for(int i=0;i<list.size();i++){
 		  			list.set(i,dao.requestRevs(conn, id,list.get(i)));
 		  			
@@ -31,6 +32,7 @@ public class ReservationService {
 	  }
 	  
 	  public int requestCancel(int[] as) {
+		  //요청취소
 		  Connection conn = getConnection();
 		  int result = 0;
 		  for(int i=0;i<as.length;i++) {
@@ -44,10 +46,12 @@ public class ReservationService {
 	  public List<PetReservation> reservation(String id) {
 		  Connection conn = getConnection();
 		  List<PetReservation> list = dao.reservation(conn,id);
-		  System.out.println("서비스1:"+list);
+		
+		  
 		  for(int i=0;i<list.size();i++) {
-			  list.set(i,dao.reservations(conn, id,list.get(i)));
-			  System.out.println("서비스2:"+list);
+			  list.set(i,dao.reservations(conn, id,list.get(i)));	
+			  
+		
 		  }
 		  
 		  
@@ -66,6 +70,7 @@ public class ReservationService {
 	  public PetReservation requestDetails(String id,int revCode) {
 		  Connection conn = getConnection();
 		  PetReservation pr = dao.requestDetails(conn,id,revCode);
+		  
 		  close(conn);
 		  return pr;
 	  }
@@ -112,9 +117,9 @@ public class ReservationService {
 		  
 	  }
 	  
-	  public List<PetReservation> reservationEnd(String id) {
+	  public List<PetReservation> reservationEnd(String id,int cPage,int numPerPage) {
 		  Connection conn = getConnection();
-		  List<PetReservation> list = dao.reservationEnd(conn,id);
+		  List<PetReservation> list = dao.reservationEnd(conn,id,cPage,numPerPage);
 		  for(int i=0;i<list.size();i++){
 		  			list.set(i,dao.reservationEnds(conn, id,list.get(i)));
 		  			
@@ -134,13 +139,35 @@ public class ReservationService {
 	  public int endSitting(int code) {
 		  Connection conn = getConnection();
 		  int result = dao.endSitting(conn,code);
-		  System.out.println("1?"+result);
+		  
 		  if(result>0) {
 			  result = dao.endSitting2(conn, code);			  	 
 			  }else {
 				  rollback(conn);
 			  }
 		  	commit(conn);
+		  close(conn);
+		  return result;
+	  }
+	  
+	  public int requestCount(String userId) {
+		  Connection conn =getConnection();
+		  int count = dao.requestCount(conn,userId);
+		  close(conn);
+		  return count;
+	  }
+	  public int requestCount2(String userId) {
+		  Connection conn =getConnection();
+		  int count = dao.requestCount2(conn,userId);
+		  close(conn);
+		  return count;
+	  }
+	  
+	  public int reviewInsert(int no,String text,int star,String pId,String userId) {
+		  Connection conn = getConnection();
+		  int result = dao.reviewInsert(conn,no,text,star,pId,userId);
+		  if(result>0) commit(conn);
+		  else rollback(conn);
 		  close(conn);
 		  return result;
 	  }

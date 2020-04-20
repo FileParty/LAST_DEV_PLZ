@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%-- <%@page  import="com.petmily.user.model.vo.User"  %>
-<%
-	User u = (User)session.getAttribute("loginUser");
-%> --%>
+
 
 <style>
 #menu{

@@ -99,9 +99,16 @@ th {
 							</table>
 							
 						</div>
+					
 					</div>
 							<button type="button" style="margin-left:400px;font-size:10px;height:25px;border-radius:15px;" onclick="addCertificate();">자격증 추가</button>
+							<br>
+							<br>
+							<div style="margin-left:50px;letter-spacing:5px;"align=center>
+							<%=request.getAttribute("pageBar") %>
+							</div>
 				</div>
+				
 			</div>
 		</div>
 	</section>

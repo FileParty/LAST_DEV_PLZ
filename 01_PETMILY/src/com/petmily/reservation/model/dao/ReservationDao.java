@@ -16,6 +16,8 @@ import java.util.Properties;
 import com.petmily.board.model.dao.BoardDao;
 import com.petmily.reservation.model.vo.PetReservation;
 import com.petmily.reservation.model.vo.ReservationPetCode;
+
+import oracle.jdbc.proxy.annotation.Pre;
 public class ReservationDao {
 	
 	private Properties prop = new Properties();
@@ -30,7 +32,7 @@ public class ReservationDao {
 		}
 	}
 	
-	public List<PetReservation> requestRev(Connection conn,String id) {
+	public List<PetReservation> requestRev(Connection conn,String id,int cPage,int numPerPage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		PetReservation pr = null;
@@ -40,7 +42,8 @@ public class ReservationDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
-			
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3,cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -115,6 +118,8 @@ public class ReservationDao {
 	}
 	
 	public List<PetReservation> reservation(Connection conn,String id) {
+		
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetReservation pr = null;
@@ -137,6 +142,7 @@ public class ReservationDao {
 				pr.setCheckOut(rs.getString("CHECKOUT_DATE"));
 				list.add(pr);
 			}
+			System.out.println("dao11111안찍히면죽인다 ㄹㅇ"+list);
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -147,10 +153,12 @@ public class ReservationDao {
 		return list;
 	}
 	
-	public PetReservation reservations(Connection conn,String id,PetReservation p) {
-		System.out.println("보드넘넘:"+p.getBoardNo());
+	public PetReservation reservations(Connection conn,String id,PetReservation p ) {
+		System.out.println("보드넘버"+p.getBoardNo());
+		System.out.println("예약넘버"+p.getReservationCode());
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
+		
 		List<String> list = new ArrayList<String>();
 		String sql = prop.getProperty("reservations");
 		try {
@@ -159,11 +167,14 @@ public class ReservationDao {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
+				
+				
 				p.setBoardTitle(rs.getString("BOARD_TITLE"));
 				list.add(rs.getString("PLUS_SERVICE_VALUES"));
 				p.setPlusType(list);
 			}
-			System.out.println(p);
+				System.out.println("dao pp" + p);
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -181,8 +192,8 @@ public class ReservationDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setInt(2, revCode);
+			
+			pstmt.setInt(1, revCode);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -210,6 +221,9 @@ public class ReservationDao {
 	}
 	
 	public PetReservation requestDetails(Connection conn,String id,int revCode) {
+		
+		System.out.println("아이디:"+id);
+		System.out.println("예약번호:"+revCode);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		PetReservation pr = null;
@@ -235,6 +249,7 @@ public class ReservationDao {
 				pr.setPetMedication(rs.getString("PET_MDEICATION"));
 				pr.setPetPickup(rs.getString("PET_PICK_UP"));
 			}
+			System.out.println("daooooo" + pr);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -388,7 +403,7 @@ public class ReservationDao {
 		
 	}
 	
-	public List<PetReservation> reservationEnd(Connection conn,String id) {
+	public List<PetReservation> reservationEnd(Connection conn,String id,int cPage,int numPerPage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<PetReservation> list = new ArrayList<PetReservation>();
@@ -398,10 +413,13 @@ public class ReservationDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setInt(2,(cPage-1)*numPerPage+1);
+			pstmt.setInt(3,cPage*numPerPage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
 				pr = new PetReservation();
+				pr.setPetSitterId(rs.getString("PET_SETTER_ID"));
 				pr.setReservationCode(rs.getInt("RCODE"));
 				pr.setCheckIn(rs.getString("CIN"));
 				pr.setCheckOut(rs.getString("COUT"));
@@ -423,6 +441,7 @@ public class ReservationDao {
 	public PetReservation reservationEnds(Connection conn,String id,PetReservation p) {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
+		
 		String sql = prop.getProperty("reservationEnds");
 		
 		try {
@@ -433,8 +452,7 @@ public class ReservationDao {
 			while(rs.next()) {
 				p.setBoardNo(rs.getInt("BCODE"));
 				p.setBoardTitle(rs.getString("BTITLE"));
-				p.setSitterName(rs.getString("UNAME"));
-				
+				p.setSitterName(rs.getString("UNAME"));				
 			}
 	}catch(SQLException e) {
 		e.printStackTrace();
@@ -458,6 +476,7 @@ public class ReservationDao {
 			
 			while(rs.next()) {
 				pr = new PetReservation();
+				pr.setPetSitterId(rs.getString("PET_SETTER_ID"));
 				pr.setReservationCode(rs.getInt("RESERVATION_CODE"));
 				pr.setCheckIn(rs.getString("CHECKIN_DATE"));
 				pr.setCheckOut(rs.getString("CHECKOUT_DATE"));
@@ -513,6 +532,68 @@ public class ReservationDao {
 		}
 		return result;
 }
+	
+	public int requestCount(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = prop.getProperty("requestCount");
+		
+		try { 
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		
+		close(rs);
+		close(pstmt);
+	}
+		return count;
+}
+	
+	public int requestCount2(Connection conn,String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		String sql = prop.getProperty("requestCount2");
+		
+		try { 
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		
+		close(rs);
+		close(pstmt);
+	}
+		return count;
+}
+	
+	public int reviewInsert(Connection conn,int no,String text,int star,String pId,String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("reviewInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userId);
+			pstmt.setInt(2, no);
+			pstmt.setString(3, pId);
+			pstmt.setString(4, text);
+			pstmt.setInt(5, star);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }
 
 

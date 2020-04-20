@@ -155,7 +155,7 @@
 							
 							<td style="width:400px;"><%=pr.getBoardTitle() %></td>
 							
-							<td><input style="border-radius:20px;font-size:13px;"class="btn btn-outline-secondary" style="width:100px;"onclick="requestCheck('<%=pr.getReservationCode() %>')" type="button" id="request" value="상세 요청 확인"></td>
+							<td><input style="border-radius:20px;font-size:13px;"class="btn btn-outline-secondary cho" style="width:100px;"onclick="requestCheck('<%=pr.getReservationCode() %>')" type="button" id="request" value="상세 요청 확인"></td>
 							<td><%=pr.getResType() %></td> 
 							
 							<td><%=pr.getPrice() %></td> 
@@ -172,8 +172,14 @@
              
                 
 							<input style="margin-left:400px;"type="submit" value="요청 취소" >
-
+						
+							<br>
+							<br>
+							<div style="margin-left:20px;"align=center>
+								<%=request.getAttribute("pageBar") %>
+							</div>
             </div>
+            
        	</div>
        </form>
     </section>
@@ -188,14 +194,16 @@
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
-function requestCheck(revCode) {
+var revCode = 0;
+ function requestCheck(revCode) {
 
 	var popupX = (window.screen.width / 2) - (500 / 2);
 	var popupY= (window.screen.height /2) - (650 / 2);
 	
 	window.open('<%=request.getContextPath()%>/user/requestDetail?revCode='+revCode,'_blank','height=650,width=500,left='+popupX+',top='+popupY+',screenX='+popupX+',screenY='+popupY);
-} 
+}  
+
+
 
 function cancel() {
 	if(confirm("요청을 취소하시겠습니까?")) {		
@@ -219,11 +227,11 @@ $("#btn").click(function(){
 	success:function(data) {
 		$("#enrollTB").hide();
 		$("#btn").hide();
-		$("#btn1").show();
+		$("#btn1").show();		
+		$("#tt").html(data);	
 		
-		$("#tt").html(data);			
-	}	
-})
+		}		
+		})
 })
 
 $("#btn2").click(function(){
@@ -306,5 +314,7 @@ $("#btn5").click(function(){
 
 
 </script>
+<%@ include file="/views/common/footer.jsp" %>
 </html>
+
 

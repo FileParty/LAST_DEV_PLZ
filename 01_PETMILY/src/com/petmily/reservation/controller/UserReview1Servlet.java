@@ -6,23 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.petmily.reservation.model.vo.PetReservation;
-import com.petmily.reservation.service.ReservationService;
-import com.petmily.user.model.vo.User;
 
 /**
- * Servlet implementation class UserRequestDetailsServlet
+ * Servlet implementation class UserReview2Servlet
  */
-@WebServlet("/user/requestDetails")
-public class UserRequestDetailsServlet extends HttpServlet {
+@WebServlet("/user/review1")
+public class UserReview1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserRequestDetailsServlet() {
+    public UserReview1Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +26,13 @@ public class UserRequestDetailsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-	     String userId = ((User)session.getAttribute("loginUser")).getUserId();
-	     int revCode = Integer.parseInt(request.getParameter("revCode"));
-		PetReservation pr = new ReservationService().requestDetails(userId,revCode);
-		System.out.println("상세에에ㅔ에" + pr);
-		request.setAttribute("revs", pr);
-		request.getRequestDispatcher("/views/userReservation/requestReservations.jsp").forward(request, response);
+		
+		int no = Integer.parseInt(request.getParameter("no"));
+		String pId = request.getParameter("pId");
+		
+		request.setAttribute("no", no);
+		request.setAttribute("pId", pId);
+		request.getRequestDispatcher("/views/userReservation/userReview.jsp").forward(request, response);
 	}
 
 	/**

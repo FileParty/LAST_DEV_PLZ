@@ -99,6 +99,9 @@ th {
 								<%} %>
 							</table>
 						</div>
+						<div align=center>
+						<%=request.getAttribute("pageBar") %>
+						</div>
 					</div>
 
 

@@ -44,6 +44,7 @@ public class UserUpdateEndServlet extends HttpServlet {
 		
 //		정보 수정하기 위해 service로 데이터를 보낸다(아이디, 새 비밀번호, 이메일, 휴대폰, 우편번호, 도로명주소, 상세주소
 		int result = new UserService().userUpdate(id, newPw, email, phone, postNum, address, detailAddress);
+		System.out.println("result : "+result);
 		
 		String msg = "";
 		String loc = "";

@@ -229,7 +229,7 @@ label.custom-file-label::after{
 
     <section>
         <div class="container">
-            <form action="<%=request.getContextPath()%>/user/UpdateEnd" method="post" onsubmit="return test();">
+            <form action="<%=request.getContextPath()%>/user/UpdateEnd?userId=<%= loginUser.getUserId() %>" method="post" onsubmit="return test();">
             
             
             <div class="row">

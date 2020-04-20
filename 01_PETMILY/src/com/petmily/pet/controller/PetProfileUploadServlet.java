@@ -104,7 +104,7 @@ public class PetProfileUploadServlet extends HttpServlet {
 				petSeparationTxt,petUrine,petUrineTxt, petIndoor,petIndoorTxt,
 				petHowling,petHowlingTxt,heartDisease,vaccine,corona,kennel,
 				hospitalName,hospitalPhone,hospitalZip,hospitalAddress
-				,detail,petImg,registration);
+				,petImg,registration,detail);
 		
 		
 		int result = new PetService().petprofileinsert(pet,id);

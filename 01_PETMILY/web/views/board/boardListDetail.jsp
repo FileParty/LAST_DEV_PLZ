@@ -43,6 +43,8 @@
 	int dogC = 0;
 	boolean oldDog = false;
 	boolean receipt = false;
+	boolean posFlag = false;
+	int salePrice = 0;
 	
 	
 	/* ---- 슬기 ↓ 연관 jsp : userInfo.jsp */
@@ -344,8 +346,16 @@
                     
                     <table id="price_discription">
                         <tr>
-                            <td>반려동물추가비</td>
-                            <td style="text-align: right;">10,000원 할인</td>
+                            <td>반려동물추가할인</td>
+                            <%for(PlusOptionService pos : pOServiceList) {%>
+                            	<%if(pos.getPlusOptionType().equals("추가할인")) salePrice = pos.getSalePrice();%>
+                            <%} %>
+                            
+                            <%if(posFlag) {%>
+                            	<td style="text-align: right;"><%=salePrice %>원 할인</td>
+                           	<%}else{ %>
+                           		<td style="text-align: right;">제공하지 않음</td>
+                           	<%} %>
                         </tr>
                         <tr><td></td></tr>
                         <tr><td></td></tr>
@@ -495,7 +505,7 @@
 	                        	<td>
 	                        		<!-- userId 계정 탈퇴 시 다른 테이블에 해당 값 다 없애는거 설정바꿔야댐 -->
 	                        		<%if(review.getUserId()!=null){%>
-		                        		<%=review.getUserId().substring(0,4) %>****<br><%=review.getReviewDate() %>
+		                        		<%=review.getUserId().substring(0,4) %>****<br><%=review.getReviewDate() %><br>평점: <%=review.getReviewStar() %>
 		                        	<%} %>
 	                        	</td>
 	                        	
@@ -1341,11 +1351,15 @@ function receipt(){
 			document.getElementById("pos_sale").style.display = "table-row";
 		if(document.getElementById("t_sale")!=null){
 			document.getElementById("t_sale").innerHTML = "추가할인 * " + (big+middle+small-1);
-			document.getElementById("p_sale").innerHTML = numberWithCommas(((big+middle+small)-1)*10000) + "원";
+			
+				document.getElementById("p_sale").innerHTML = numberWithCommas(((big+middle+small)-1)*<%=salePrice%>) + "원";
 		}
 	}
-	
-	document.getElementById("total_price").innerHTML = numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
+	<%if(salePrice!=0){%>
+		document.getElementById("total_price").innerHTML = numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
+	<%} else{%>
+		document.getElementById("total_price").innerHTML = numberWithCommas(((weightPrice + pickupPrice + bathPrice) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
+	<%}%>
 			
 	
 		
@@ -1412,7 +1426,7 @@ select_end.onclick = function(){
     	alert("반려견을 선택해주세요");
     	return;
     }
-    else if(!isNaN(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000))    
+    else if(!isNaN(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>))    
     		* dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value)))){
 	    $("#section_end2").attr("style", "display:flex; z-index:999;");
 	    
@@ -1448,14 +1462,14 @@ select_end.onclick = function(){
     			payment_content += " 픽업(편도)";
     	}
 
-   	payment_content += " / 합계금액: " + numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
+   	payment_content += " / 합계금액: " + numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
 
    	
    	
    	
     document.getElementById("reservation_end_con").innerHTML=payment_content;
     
-    document.getElementById("re_end_price").innerHTML = numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
+    document.getElementById("re_end_price").innerHTML = numberWithCommas(((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value))) + "원";
 }
 
 <%}%>
@@ -1497,7 +1511,7 @@ function checkInC(){
 var reservation_end_close = document.getElementsByClassName("close")[3];
 
 <%if(userId!="null"){%>
-var price = ((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value));
+var price = ((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value));
 <%} else{%>
 var price = 0;
 <%}%>
@@ -1763,7 +1777,7 @@ function payment(){
   	    pg: "inicis",
   	    pay_method: "card",
   	    merchant_uid: 'petMily_' + new Date().getTime(),
-  	    name: "결제테스트_펫시터예약(실제금액: "+((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value)) +")",
+  	    name: "결제테스트_펫시터예약(실제금액: "+((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value)) +")",
   	    amount: 100,
   	    buyer_email: "<%=uInfoT.getEmail()%>",
   	    buyer_name: "<%=uInfoT.getUserName()%>",
@@ -1777,7 +1791,7 @@ function payment(){
 	  			url: "<%=request.getContextPath()%>/insertReservation.do",
 	  			data: {"sitterId": "<%=sitterT.getPetSitterId()%>", "boardCode": <%=boardT.getBoardNo()%>,
 	  				"checkIn": document.getElementById('checkIn').value, "checkOut": document.getElementById('checkOut').value,
-	  				"plusQuestions": document.getElementById('plusQuestions').value, "price": ((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*10000)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value)),
+	  				"plusQuestions": document.getElementById('plusQuestions').value, "price": ((weightPrice + pickupPrice + bathPrice-(((big+middle+small)-1)*<%=salePrice%>)) * dateDiff(document.getElementById("checkOut").value, document.getElementById("checkIn").value)),
 	  				"medicine": medicine, "pickup": pickup, "petBathTexts": petBathTexts,
 	  				"petCodes": petCodes, "petSizes": petSizes, "petBaths": petBaths},
 	  			success: function(data){

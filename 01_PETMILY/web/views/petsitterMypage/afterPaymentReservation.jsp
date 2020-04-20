@@ -233,7 +233,7 @@ pageEncoding="UTF-8"%>
 
 	
 	function end(){
-		document.reFrm.action="<%=request.getContextPath()%>/sitter/extraEnd";
+		document.reFrm.action="<%=request.getContextPath()%>/sitter/end";
 	}
 
 	$(function(){

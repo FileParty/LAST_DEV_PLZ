@@ -134,6 +134,7 @@
 			alert('인증번호가 없거나 같지 않습니다.');
 			$("#randomNum").focus();
 			span.innerHTML="*인증번호가 일치하지 않습니다.";
+			span.style.color='red';
 		}
 		else { // 만약 인증번호가 같다면?
 			span.innerHTML="*인증번호가 일치합니다.";

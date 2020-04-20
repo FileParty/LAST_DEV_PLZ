@@ -54,8 +54,10 @@ public class UserBookMarkListServlet extends HttpServlet {
 			int numPerPage=5;
 			
 //			-------
-			String id = request.getParameter("userId");
-			System.out.println("북마크로직 이동하기 위해 확인하는 id 값 : "+id);
+//			String id = request.getParameter("userId");
+			User u = (User)session.getAttribute("loginUser");
+			String id = u.getUserId();
+			System.out.println("북마크로직 이동하기 위해 확인하는 id 값 : "+u);
 			
 //			DB에서 id와 동일한 정보를 가져온다(페이징 처리하는 변수도 같이 보내기)
 			List<UserBookMarkBoard> list = new UserService().userBookMarkList(id, cPage, numPerPage); // 서비스1
@@ -83,7 +85,7 @@ public class UserBookMarkListServlet extends HttpServlet {
 			else {
 				pageBar+= "<a href='"
 						+ request.getContextPath()
-						+ "/userBookMarkList?cPage="
+						+ "/user/BookMarkList?cPage="
 						+ (pageNo-1)
 						+ "'>[ 이전 ]</a>";
 			}
@@ -94,11 +96,7 @@ public class UserBookMarkListServlet extends HttpServlet {
 					pageBar+= "<span style='margin-left: 10px; margin-right: 10px;'>"+pageNo+"</span>";
 				}
 				else {
-					pageBar+= "<a href='"
-							+ request.getContextPath()
-							+ "/userBookMarkList?cPage="
-							+ pageNo
-							+ "'>"+pageNo+"</a>";
+					pageBar+= "<a href='" + request.getContextPath() + "/user/BookMarkList?cPage=" + pageNo + "'>"+pageNo+"</a>";
 				}
 				pageNo++;
 			}
@@ -110,7 +108,7 @@ public class UserBookMarkListServlet extends HttpServlet {
 			else {
 				pageBar+= "<a href='"
 						+ request.getContextPath()
-						+ "/userBookMarkList?cPage="
+						+ "/user/BookMarkList?cPage="
 						+ pageNo
 						+ "'>[ 다음 ]</a>";
 			}

@@ -139,12 +139,18 @@
 		// 인증번호가 맞는지 확인하는 로직
 		if( randomNum==null || !(randomNum=='<%=temp%>') ) { // 만약, 인증번호가 맞지 않다면?
 			alert('인증번호가 없거나 같지 않습니다.');
+			let success = document.getElementById("success");
 			$("#randomNum").focus();
+			success.innerHTML='인증번호가 일치하지 않습니다.';
+			success.style.display='inline';
+			success.style.color='red';
 			
 		}
 		else { // 만약 인증번호가 같다면?
 			let success = document.getElementById("success");
+			success.innerHTML='인증번호가 일치합니다.';
 			success.style.display='inline';
+			success.style.color='green';
 			
 			document.getElementById("hiddenInput").value = "통과했어요!";
 		}

@@ -2,13 +2,12 @@ package com.petmily.search.service;
 
 import static com.petmily.common.JDBCTemplate.close;
 import static com.petmily.common.JDBCTemplate.commit;
-import static com.petmily.common.JDBCTemplate.rollback;
 import static com.petmily.common.JDBCTemplate.getConnection;
+import static com.petmily.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
-import com.petmily.reviewPetsitter.model.vo.ReviewPetsitter;
 import com.petmily.search.model.dao.SearchDao;
 import com.petmily.search.model.vo.PetsitterSearch;
 
@@ -31,7 +30,7 @@ public class SearchService {
 			for(PetsitterSearch ps:list) {
 				
 				boolean flag=dao.selectBookmark(conn,ps.getPetsitterId(),userId);
-				ps.setPrefer(flag);
+				ps.setBookmark(flag);
 			}
 		}
 

@@ -714,7 +714,7 @@ public class SearchDao {
 		
 	}
 	
-	public boolean selectBookmark(Connection conn,String userId,String petsitterId) {
+	public boolean selectBookmark(Connection conn,String petsitterId,String userId) {
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

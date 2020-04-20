@@ -27,6 +27,7 @@ public class PetsitterSearch {
 	private String boardBlind;
 	// 펫시터 정보 블라인드 여부
 	private List<String> imgFile;
+	
 	// 펫시터 전체 후기 갯수
 	private int reviewCount;
 	private boolean bookmark;
@@ -147,14 +148,10 @@ public class PetsitterSearch {
 		this.bookmark = bookmark;
 	}
 
-	public void setPrefer(boolean flag) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
+	    
 	
 	
-
 	
 	
 }

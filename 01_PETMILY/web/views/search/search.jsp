@@ -97,22 +97,30 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				  <!-- Indicators -->
 						<ul class="carousel-indicators">
 						
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#demo" data-slide-to="0" class="active"></li>
 							<%if(ps.getImgFile().size()>=1){ %>
 							
 							<% for(int i=1;i<ps.getImgFile().size();i++){ %>
 							
-							<li data-target="#myCarousel" data-slide-to="<%=i %>"></li>
+								<li data-target="#demo" data-slide-to="<%=i %>"></li>
 							<%} }%>
 						</ul>
 				  
 				  <!-- The slideshow -->
 				  <div class="carousel-inner">
+				  
 				  <% //if(ps.getImgFile()!=null){
-				  	for(String img : ps.getImgFile()) {%>
-				  	
-				  		<% if(ps.getImgFile()!=null){ %>
-					    <div class="carousel-item active">
+				  	for(int i=0; i<ps.getImgFile().size();i++) {
+				  		String img=ps.getImgFile().get(i);
+				  	%>
+				  		
+				  		<% if(ps.getImgFile()!=null){ 
+				  			if(i==0){
+				  		%>
+					    		<div class="carousel-item active">
+					    	<%} else{%>
+					    		<div class="carousel-item">
+					    	<%} %>
 					      <img src="<%=request.getContextPath()%>/upload/board/<%=img %>" alt="" width="320" height="210">
 					    </div>
 				     <%}else {%>
@@ -131,8 +139,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 				  </a>
 				  
 				  
-				  
-				  
 				</div>
                 
               </div>
@@ -148,11 +154,13 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
                   
                   <%if(loginUser==null||loginUser.getUserType().equals("일반")){ %>
                   	  <h2 class="ml-auto" id=<%=ps.getPetsitterId() %> >
-                  		
+                  		<%if(ps.isBookmark()==false){ %>
                 		<i class="far fa-heart bookmark"  ></i>
-                		
+                	<%}else{%>
+                		<i class="fas fa-heart bookmark"  ></i>
+					<% }%>                	
                   	</h2>
-                  <% } %>
+                   <%}%>
                 </div>
                 <div class="mt-3">
                   <p class="h6"><%=ps.getBoardTitle() %></p>

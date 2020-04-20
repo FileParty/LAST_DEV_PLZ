@@ -49,13 +49,20 @@ public class PetsitterSearchServlet extends HttpServlet {
 		int numPerPage=3;
 		
 		
-		
 		HttpSession session = request.getSession();
-		User u=(User)session.getAttribute("loginUser");
+		String userId="";
 		
-		String userId=u.getUserId();
+		if(null!=session.getAttribute("loginUser")) {
+			
+			User u=(User)session.getAttribute("loginUser");
+			userId=u.getUserId();
+		
+		}else {
+			userId="";
+		}		
 		
 		List<PetsitterSearch> list=new SearchService().selectSearch(cPage,numPerPage,userId);
+		
 		//new SearchService().checkBookMark(list,userId);
 		
 		// 사용자가 원하는 페이지(데이터)를 볼 수 있게 버튼을 만든다 -> pageBar
